@@ -38,6 +38,30 @@ function readOptionalTags(value: unknown, fileName: string): string[] | undefine
   return value;
 }
 
+function readOptionalStringList(value: unknown, fieldName: string, fileName: string): string[] | undefined {
+  if (value === undefined) return undefined;
+  if (!Array.isArray(value) || value.some((entry) => typeof entry !== 'string')) {
+    throw new Error(`Personnage invalide dans ${fileName}: le champ "${fieldName}" doit être une liste de chaînes.`);
+  }
+
+  return value;
+}
+
+function readOptionalIdentity(value: unknown, fileName: string): Personnage['identity'] {
+  if (value === undefined) return undefined;
+  if (!isRecord(value)) {
+    throw new Error(`Personnage invalide dans ${fileName}: le champ "identity" doit être un objet.`);
+  }
+
+  return {
+    aliases: readOptionalStringList(value.aliases, 'identity.aliases', fileName),
+    nature: readOptionalString(value.nature, 'identity.nature', fileName),
+    origin: readOptionalString(value.origin, 'identity.origin', fileName),
+    status: readOptionalString(value.status, 'identity.status', fileName),
+    era: readOptionalString(value.era, 'identity.era', fileName),
+  };
+}
+
 function readPublicationStatus(value: unknown, fileName: string): Personnage['publicationStatus'] {
   if (value !== 'draft' && value !== 'published') {
     throw new Error(
@@ -64,6 +88,7 @@ function parsePersonnage(rawValue: unknown, fileName: string): RawPersonnage {
     tags: readOptionalTags(rawValue.tags, fileName),
     themeKey: readOptionalString(rawValue.themeKey, 'themeKey', fileName),
     publicationStatus: readPublicationStatus(rawValue.publicationStatus, fileName),
+    identity: readOptionalIdentity(rawValue.identity, fileName),
   };
 }
 

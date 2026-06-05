@@ -6,4 +6,11 @@ export type Personnage = {
   tags?: string[];
   themeKey?: string;
   publicationStatus: 'draft' | 'published';
+  identity?: {
+    aliases?: string[];
+    nature?: string;
+    origin?: string;
+    status?: string;
+    era?: string;
+  };
 };

@@ -78,6 +78,7 @@
   grid-template-rows: 1fr auto;
   grid-template-areas:
     'intro summary'
+    'identity identity'
     'future future';
   gap: clamp(2rem, 7vw, 7rem);
   width: min(78rem, 100%);
@@ -179,6 +180,55 @@
   opacity: 0.42;
 }
 
+.identity {
+  grid-area: identity;
+  width: min(58rem, 100%);
+  margin-top: clamp(1rem, 4vh, 2.5rem);
+}
+
+.identityTitle {
+  margin: 0 0 1rem;
+  color: var(--character-accent, var(--accent));
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: var(--character-label-spacing, 0.22em);
+  text-transform: uppercase;
+}
+
+.identityList {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0;
+  margin: 0;
+  border-top: 1px solid var(--character-border, var(--border));
+}
+
+.identityItem {
+  min-width: 0;
+  border-right: 1px solid var(--character-border, var(--border));
+  padding: 1rem clamp(0.8rem, 2vw, 1.25rem) 0.8rem 0;
+}
+
+.identityItem:last-child {
+  border-right: 0;
+}
+
+.identityItem dt {
+  margin: 0 0 0.45rem;
+  color: var(--character-muted, var(--muted));
+  font-size: 0.72rem;
+  letter-spacing: calc(var(--character-label-spacing, 0.22em) * 0.5);
+  text-transform: uppercase;
+}
+
+.identityItem dd {
+  margin: 0;
+  color: var(--character-text, var(--text));
+  font-size: clamp(0.95rem, 1.5vw, 1.08rem);
+  line-height: var(--character-body-line-height, 1.8);
+  overflow-wrap: break-word;
+}
+
 :global(.personnage-theme-page[data-character-theme='feu-timide']) .content {
   grid-template-columns: minmax(0, 0.92fr) minmax(18rem, 0.78fr);
 }
@@ -266,6 +316,7 @@
     grid-template-areas:
       'intro'
       'summary'
+      'identity'
       'future';
     gap: 2.5rem;
     padding-top: 7.5rem;
@@ -287,6 +338,15 @@
   .futureSpace {
     min-height: 5rem;
   }
+
+  .identityList {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .identityItem {
+    border-right: 0;
+    border-bottom: 1px solid var(--character-border, var(--border));
+  }
 }
 
 @media (max-width: 520px) {
@@ -298,6 +358,10 @@
 
   .role {
     letter-spacing: min(var(--character-label-spacing, 0.22em), 0.22em);
+  }
+
+  .identityList {
+    grid-template-columns: 1fr;
   }
 }
 
