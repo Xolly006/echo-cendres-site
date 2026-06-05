@@ -11,6 +11,9 @@
 * L’ajout futur d’une entité ne doit pas nécessiter de copier-coller une page entière.
 * La page d’accueil est la première priorité.
 * Noah servira plus tard de premier personnage test, mais il ne doit pas encore être intégré.
+* Les personnages en `publicationStatus: "published"` sont visibles publiquement.
+* Les personnages en `publicationStatus: "draft"` restent invisibles dans `/personnages` et retournent une 404 sur leur route publique.
+* Les routes publiques des personnages utilisent le format `/personnages/[slug]`.
 
 ## Décisions techniques provisoires
 
@@ -19,3 +22,5 @@
 * Aucun CMS ni base de données au début.
 * Aucune nouvelle dépendance sans justification et validation.
 * Les sections peuvent rester vides pendant la construction du squelette.
+* Les fiches personnages seront lues depuis des fichiers JSON dans `src/content/personnages/`.
+* Le slug d’un personnage est dérivé du nom de son fichier JSON.

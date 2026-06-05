@@ -2,18 +2,15 @@
 
 ## Étape actuelle
 
-Examiner la page d’accueil existante sans la modifier.
+Préparer le moteur personnages minimal sans ajouter de personnage réel ou fictif.
 
 ## Tâches immédiates
 
-1. Lire `README.md`.
-2. Lire `src/app/page.tsx`.
-3. Lire `src/app/globals.css`.
-4. Lire les composants utilisés par la page d’accueil.
-5. Expliquer la structure actuelle de la page.
-6. Identifier les forces, limites et problèmes.
-7. Proposer un plan limité d’amélioration de la page d’accueil.
-8. Ne modifier aucun fichier avant validation du créateur.
+1. Vérifier le rendu vide de `/personnages`.
+2. Vérifier qu’un slug inexistant retourne une 404.
+3. Préparer un exemple de format JSON non canonique dans la documentation si nécessaire.
+4. Attendre validation du créateur avant d’ajouter le premier personnage réel.
+5. Intégrer Noah plus tard comme première fiche test validée.
 
 ## Hors périmètre pour le moment
 
@@ -23,3 +20,5 @@ Examiner la page d’accueil existante sans la modifier.
 * Ajouter une base de données.
 * Ajouter une bibliothèque d’animation.
 * Modifier les pages de sections.
+* Développer les thèmes visuels des personnages.
+* Ajouter relations, lieux ou événements associés.

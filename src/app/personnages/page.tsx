@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { getAllPersonnages } from '@/lib/personnages';
 
 export default async function Page() {
@@ -20,11 +21,11 @@ export default async function Page() {
         ) : (
           <div className="personnage-grid" aria-label="Liste des personnages">
             {personnages.map((personnage) => (
-              <article className="personnage-card" key={personnage.slug}>
+              <Link className="personnage-card" href={`/personnages/${personnage.slug}`} key={personnage.slug}>
                 <p className="section-card__eyebrow">{personnage.role ?? 'Personnage'}</p>
                 <h2>{personnage.nom}</h2>
                 <p>{personnage.resumeCourt}</p>
-              </article>
+              </Link>
             ))}
           </div>
         )}

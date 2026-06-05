@@ -424,6 +424,44 @@ a {
   line-height: 1.65;
 }
 
+.personnage-detail {
+  width: min(48rem, 100%);
+  margin: 0 auto;
+  border: 1px solid var(--border);
+  border-radius: 1.2rem;
+  padding: clamp(1.4rem, 5vw, 3rem);
+  background: var(--surface);
+  box-shadow: 0 24px 90px var(--shadow);
+}
+
+.personnage-detail h1 {
+  margin: 0;
+  font-family: var(--font-title);
+  font-size: clamp(2.6rem, 8vw, 5.4rem);
+}
+
+.personnage-detail > p:not(.eyebrow) {
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1.6rem 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tag-list li {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.35rem 0.7rem;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
 @keyframes titleReveal {
   from {
     opacity: 0;

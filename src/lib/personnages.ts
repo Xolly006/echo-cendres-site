@@ -88,10 +88,27 @@ async function readPersonnageFile(fileName: string): Promise<Personnage> {
   }
 }
 
-export async function getAllPersonnages(): Promise<Personnage[]> {
+async function readAllPersonnages(): Promise<Personnage[]> {
   const fileNames = await readdir(personnagesDirectory);
   const jsonFileNames = fileNames.filter((fileName) => fileName.endsWith('.json'));
   const personnages = await Promise.all(jsonFileNames.map((fileName) => readPersonnageFile(fileName)));
 
   return personnages.sort((a, b) => a.nom.localeCompare(b.nom, 'fr'));
+}
+
+export async function getAllPersonnages(): Promise<Personnage[]> {
+  const personnages = await readAllPersonnages();
+
+  return personnages.filter((personnage) => personnage.publicationStatus === 'published');
+}
+
+export async function getPublishedPersonnageBySlug(slug: string): Promise<Personnage | null> {
+  const personnages = await readAllPersonnages();
+  const personnage = personnages.find((entry) => entry.slug === slug);
+
+  if (!personnage || personnage.publicationStatus !== 'published') {
+    return null;
+  }
+
+  return personnage;
 }
