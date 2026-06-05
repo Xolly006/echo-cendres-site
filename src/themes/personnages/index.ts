@@ -1,8 +1,12 @@
 import type { PersonnageTheme } from '@/types/personnage-theme';
 import { defaultPersonnageTheme } from './default';
+import { feuTimideTheme } from './feu-timide';
+import { videOppressantTheme } from './vide-oppressant';
 
 const personnageThemes: Record<string, PersonnageTheme> = {
   [defaultPersonnageTheme.key]: defaultPersonnageTheme,
+  [feuTimideTheme.key]: feuTimideTheme,
+  [videOppressantTheme.key]: videOppressantTheme,
 };
 
 export function getPersonnageTheme(themeKey?: string): PersonnageTheme {
