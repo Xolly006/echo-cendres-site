@@ -14,6 +14,8 @@
 * Les personnages en `publicationStatus: "published"` sont visibles publiquement.
 * Les personnages en `publicationStatus: "draft"` restent invisibles dans `/personnages` et retournent une 404 sur leur route publique.
 * Les routes publiques des personnages utilisent le format `/personnages/[slug]`.
+* Le thème d’un personnage et la composition de sa page sont deux systèmes séparés.
+* Un `themeKey` absent ou inconnu doit utiliser le thème `default`.
 
 ## Décisions techniques provisoires
 
@@ -24,3 +26,5 @@
 * Les sections peuvent rester vides pendant la construction du squelette.
 * Les fiches personnages seront lues depuis des fichiers JSON dans `src/content/personnages/`.
 * Le slug d’un personnage est dérivé du nom de son fichier JSON.
+* Les thèmes personnages sont gérés dans un registre artistique limité sous `src/themes/personnages/`.
+* La première fondation des thèmes applique uniquement des variables CSS côté serveur, sans effet animé.

@@ -26,6 +26,7 @@ Les différentes entités seront ajoutées progressivement. Le squelette doit pe
 * Pages de sections initiales présentes.
 * Fondation du moteur personnages présente.
 * Route dynamique publique `/personnages/[slug]` présente pour les futurs personnages publiés.
+* Fondation du moteur de thèmes personnages présente avec résolution de `themeKey` et fallback `default`.
 * Aucun personnage intégré pour le moment.
 * Carte, chronologie et système de thèmes avancé non encore développés.
 
@@ -39,4 +40,4 @@ Les différentes entités seront ajoutées progressivement. Le squelette doit pe
 
 ## Priorité actuelle
 
-Stabiliser le moteur personnages minimal sans ajouter de lore, puis intégrer plus tard les premières fiches validées.
+Stabiliser séparément le moteur personnages, le moteur de thèmes et les futures compositions avant d’intégrer des fiches validées.

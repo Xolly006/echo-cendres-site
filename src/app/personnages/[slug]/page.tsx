@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import type { CSSProperties } from 'react';
 import { getAllPersonnages, getPublishedPersonnageBySlug } from '@/lib/personnages';
+import { getPersonnageTheme } from '@/themes/personnages';
 
 type PersonnagePageProps = {
   params: Promise<{
@@ -24,8 +26,20 @@ export default async function Page({ params }: PersonnagePageProps) {
     notFound();
   }
 
+  const theme = getPersonnageTheme(personnage.themeKey);
+  const themeStyle = {
+    '--character-bg': theme.palette.background,
+    '--character-text': theme.palette.text,
+    '--character-muted': theme.palette.muted,
+    '--character-accent': theme.palette.accent,
+    '--character-surface': theme.palette.surface,
+    '--character-border': theme.palette.border,
+    '--character-title-font': theme.typography?.titleFamily,
+    '--character-body-font': theme.typography?.bodyFamily,
+  } as CSSProperties;
+
   return (
-    <main className="directory-page">
+    <main className="directory-page personnage-theme-page" data-character-theme={theme.key} style={themeStyle}>
       <article className="personnage-detail" aria-labelledby="personnage-title">
         <p className="eyebrow">{personnage.role ?? 'Personnage'}</p>
         <h1 id="personnage-title">{personnage.nom}</h1>
