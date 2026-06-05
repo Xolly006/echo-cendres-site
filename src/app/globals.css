@@ -358,6 +358,72 @@ a {
   color: var(--text);
 }
 
+.directory-page {
+  min-height: 100vh;
+  padding: 8rem clamp(1rem, 5vw, 5rem) 4rem;
+}
+
+.directory-panel {
+  width: min(72rem, 100%);
+  margin: 0 auto;
+}
+
+.directory-panel h1 {
+  margin: 0;
+  font-family: var(--font-title);
+  font-size: clamp(2.6rem, 8vw, 5.4rem);
+}
+
+.directory-panel > p {
+  max-width: 48rem;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+.empty-state {
+  display: grid;
+  gap: 0.4rem;
+  margin-top: 2rem;
+  border: 1px solid var(--border);
+  border-radius: 1.2rem;
+  padding: clamp(1.2rem, 4vw, 2rem);
+  background: var(--surface);
+  box-shadow: 0 24px 90px var(--shadow);
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.empty-state strong {
+  color: var(--text);
+}
+
+.personnage-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.personnage-card {
+  min-height: 14rem;
+  border: 1px solid var(--border);
+  border-radius: 1.2rem;
+  padding: 1.2rem;
+  background: var(--surface);
+  box-shadow: 0 20px 80px var(--shadow);
+}
+
+.personnage-card h2 {
+  margin: 0.65rem 0 0;
+  font-family: var(--font-title);
+  font-size: 1.8rem;
+}
+
+.personnage-card p:last-child {
+  color: var(--muted);
+  line-height: 1.65;
+}
+
 @keyframes titleReveal {
   from {
     opacity: 0;
@@ -394,7 +460,8 @@ a {
 }
 
 @media (max-width: 960px) {
-  .section-grid {
+  .section-grid,
+  .personnage-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
@@ -418,7 +485,8 @@ a {
     justify-content: flex-start;
   }
 
-  .section-grid {
+  .section-grid,
+  .personnage-grid {
     grid-template-columns: 1fr;
   }
 }
