@@ -29,7 +29,8 @@ Les différentes entités seront ajoutées progressivement. Le squelette doit pe
 * Fondation du moteur de thèmes personnages présente avec résolution de `themeKey` et fallback `default`.
 * Première section structurée optionnelle des fiches personnages présente : identité générale.
 * Les personnages sont maintenant stockés dans un dossier par personnage avec `data.json`.
-* Le moteur détecte optionnellement `histoire.mdx` via `hasNarrative`, sans rendu MDX pour le moment.
+* Le moteur détecte optionnellement `histoire.mdx` via `hasNarrative`.
+* Rendu narratif MDX serveur présent pour les fiches personnages via un registre d’imports MDX généré automatiquement.
 * Aucun personnage intégré pour le moment.
 * Carte, chronologie et système de thèmes avancé non encore développés.
 
@@ -40,7 +41,7 @@ Les différentes entités seront ajoutées progressivement. Le squelette doit pe
 * TypeScript
 * CSS
 * Canvas natif pour certaines particules
-* `@next/mdx` est présent, mais le rendu narratif MDX des personnages n’est pas encore implémenté.
+* `@next/mdx` pour le rendu MDX serveur des récits personnages.
 
 ## Priorité actuelle
 

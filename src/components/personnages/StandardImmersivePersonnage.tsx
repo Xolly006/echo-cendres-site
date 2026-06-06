@@ -1,9 +1,11 @@
 import Link from 'next/link';
+import type { ReactNode } from 'react';
 import type { Personnage } from '@/types/personnage';
 import styles from './StandardImmersivePersonnage.module.css';
 
 type StandardImmersivePersonnageProps = {
   personnage: Personnage;
+  narrative?: ReactNode;
 };
 
 const identityLabels = {
@@ -14,7 +16,7 @@ const identityLabels = {
   era: 'Époque',
 };
 
-export function StandardImmersivePersonnage({ personnage }: StandardImmersivePersonnageProps) {
+export function StandardImmersivePersonnage({ personnage, narrative }: StandardImmersivePersonnageProps) {
   const identityItems = personnage.identity
     ? [
         personnage.identity.aliases && personnage.identity.aliases.length > 0
@@ -74,6 +76,8 @@ export function StandardImmersivePersonnage({ personnage }: StandardImmersivePer
             </dl>
           </section>
         ) : null}
+
+        {narrative ? <div className={styles.narrative}>{narrative}</div> : null}
 
         <div className={styles.futureSpace} aria-hidden="true" />
       </div>

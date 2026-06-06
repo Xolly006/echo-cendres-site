@@ -1,7 +1,9 @@
 import { notFound } from 'next/navigation';
 import type { CSSProperties } from 'react';
+import { PersonnageNarrative } from '@/components/personnages/PersonnageNarrative';
 import { StandardImmersivePersonnage } from '@/components/personnages/StandardImmersivePersonnage';
-import { getAllPersonnages, getPublishedPersonnageBySlug } from '@/lib/personnages';
+import { loadPersonnageNarrative } from '@/content/personnages/narrative-registry';
+import { getAllPersonnages, getPublishedPersonnageBySlug, validatePersonnageNarrativeSource } from '@/lib/personnages';
 import { getPersonnageTheme } from '@/themes/personnages';
 
 type PersonnagePageProps = {
@@ -9,6 +11,8 @@ type PersonnagePageProps = {
     slug: string;
   }>;
 };
+
+export const dynamicParams = false;
 
 export async function generateStaticParams() {
   const personnages = await getAllPersonnages();
@@ -27,6 +31,9 @@ export default async function Page({ params }: PersonnagePageProps) {
   }
 
   const theme = getPersonnageTheme(personnage.themeKey);
+  const NarrativeContent = personnage.hasNarrative && (await validatePersonnageNarrativeSource(personnage.slug))
+    ? await loadPersonnageNarrative(personnage.slug)
+    : null;
   const themeStyle = {
     '--character-bg': theme.palette.background,
     '--character-text': theme.palette.text,
@@ -44,7 +51,10 @@ export default async function Page({ params }: PersonnagePageProps) {
 
   return (
     <main className="directory-page personnage-theme-page" data-character-theme={theme.key} style={themeStyle}>
-      <StandardImmersivePersonnage personnage={personnage} />
+      <StandardImmersivePersonnage
+        personnage={personnage}
+        narrative={NarrativeContent ? <PersonnageNarrative Content={NarrativeContent} /> : null}
+      />
     </main>
   );
 }

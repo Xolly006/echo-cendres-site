@@ -19,9 +19,34 @@ src/content/personnages/slug-du-personnage/
   histoire.mdx
 ```
 
-Pour le moment, le moteur détecte seulement la présence de `histoire.mdx` via `hasNarrative`. Il ne charge pas, ne compile pas et n’affiche pas encore le contenu MDX.
+Le moteur détecte la présence de `histoire.mdx` via `hasNarrative`. Le rendu narratif valide d’abord le contenu côté serveur, puis importe le fichier MDX local avec `@next/mdx` et l’affiche sous les sections structurées de la fiche.
 
-`@next/mdx` est présent dans `package.json`, et `next.config.mjs` inclut `md` et `mdx` dans `pageExtensions`. Le rendu dynamique d’un récit local associé à un slug reste à implémenter et à vérifier séparément avec la version actuelle de Next.js.
+`@next/mdx` est configuré dans `next.config.mjs`. Le fichier `src/mdx-components.tsx` fournit la convention globale requise par Next, et les récits personnages utilisent une liste locale de composants contrôlés.
+
+Le registre d’imports MDX `src/content/personnages/narrative-registry.ts` est généré automatiquement par `scripts/generate-personnage-narratives.mjs`. Il ne doit jamais être modifié à la main. Ce registre peut être vide, ce qui permet au projet de fonctionner même si aucun personnage ne possède encore de récit.
+
+## Récit MDX autorisé
+
+Pour cette première version, `histoire.mdx` doit rester simple. Sont autorisés :
+
+* titres `#`, `##`, `###` ;
+* paragraphes ;
+* listes ;
+* emphase Markdown ;
+* citations ;
+* séparateurs ;
+* liens Markdown ordinaires.
+
+Sont interdits pour le moment :
+
+* imports MDX ;
+* exports MDX ;
+* composants JSX ;
+* HTML brut ;
+* expressions JavaScript entre accolades ;
+* liens `javascript:`, `data:` ou `file:` ;
+* liens internes `[[...]]` ;
+* relations, magie, médias ou audio.
 
 Aucun personnage canonique n’est intégré à cette étape.
 

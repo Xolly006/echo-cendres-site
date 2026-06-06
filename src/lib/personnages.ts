@@ -9,6 +9,17 @@ type RawPersonnage = Omit<Personnage, 'slug' | 'hasNarrative'> & {
 
 const personnagesDirectory = path.join(process.cwd(), 'src/content/personnages');
 
+function resolvePersonnagePath(slug: string, fileName: string): string {
+  const resolvedPath = path.resolve(personnagesDirectory, slug, fileName);
+  const safeRoot = path.resolve(personnagesDirectory) + path.sep;
+
+  if (!resolvedPath.startsWith(safeRoot)) {
+    throw new Error(`Chemin de personnage invalide pour le slug "${slug}".`);
+  }
+
+  return resolvedPath;
+}
+
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null && !Array.isArray(value);
 }
@@ -163,4 +174,43 @@ export async function getPublishedPersonnageBySlug(slug: string): Promise<Person
   }
 
   return personnage;
+}
+
+export async function getPersonnageNarrativeSource(slug: string): Promise<string | null> {
+  const narrativePath = resolvePersonnagePath(slug, 'histoire.mdx');
+
+  try {
+    return await readFile(narrativePath, 'utf8');
+  } catch (error) {
+    if (error instanceof Error && 'code' in error && error.code === 'ENOENT') {
+      return null;
+    }
+
+    throw new Error(`Impossible de lire le récit du personnage "${slug}".`);
+  }
+}
+
+export async function validatePersonnageNarrativeSource(slug: string): Promise<boolean> {
+  const narrativeSource = await getPersonnageNarrativeSource(slug);
+
+  if (!narrativeSource) {
+    return false;
+  }
+
+  const forbiddenPatterns = [
+    { pattern: /^\s*import\s/m, label: 'imports MDX' },
+    { pattern: /^\s*export\s/m, label: 'exports MDX' },
+    { pattern: /<\/?[A-Za-z][A-Za-z0-9-]*(\s|>|\/)/, label: 'HTML ou JSX brut' },
+    { pattern: /{[^}]*}/, label: 'expressions JavaScript' },
+    { pattern: /\]\(\s*(?:javascript|data|file):/i, label: 'liens à protocole dangereux' },
+    { pattern: /<\s*(?:javascript|data|file):/i, label: 'autoliens à protocole dangereux' },
+  ];
+
+  for (const { pattern, label } of forbiddenPatterns) {
+    if (pattern.test(narrativeSource)) {
+      throw new Error(`Récit MDX non autorisé pour "${slug}": ${label} désactivés dans cette première version.`);
+    }
+  }
+
+  return true;
 }

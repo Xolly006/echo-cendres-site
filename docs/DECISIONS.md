@@ -29,5 +29,10 @@
 * Les thèmes personnages sont gérés dans un registre artistique limité sous `src/themes/personnages/`.
 * La première fondation des thèmes applique uniquement des variables CSS côté serveur, sans effet animé.
 * Un récit long pourra être placé dans `src/content/personnages/[slug]/histoire.mdx`.
-* La présence de `histoire.mdx` est détectée par `hasNarrative`, mais le rendu MDX n’est pas encore implémenté.
-* `@next/mdx` est présent dans `package.json`; `next.config.mjs` accepte `md` et `mdx` dans `pageExtensions`, mais la stratégie de chargement dynamique associée au slug doit être validée plus tard.
+* La présence de `histoire.mdx` est détectée par `hasNarrative`.
+* Le rendu narratif MDX des personnages utilise `@next/mdx` et des imports dynamiques locaux côté serveur.
+* Les imports MDX des récits personnages passent par un registre généré automatiquement, jamais maintenu manuellement.
+* Le projet doit fonctionner même si aucun `histoire.mdx` n’existe.
+* Les récits MDX autorisent seulement Markdown simple, citations, séparateurs et liens ordinaires pour le moment.
+* Les imports, exports, composants JSX, HTML brut, expressions JavaScript et liens à protocole dangereux dans les récits MDX sont interdits dans cette première version.
+* `@next/mdx` est configuré dans `next.config.mjs`; `src/mdx-components.tsx` fournit la convention globale requise par Next.

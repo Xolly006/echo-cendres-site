@@ -79,6 +79,7 @@
   grid-template-areas:
     'intro summary'
     'identity identity'
+    'narrative narrative'
     'future future';
   gap: clamp(2rem, 7vw, 7rem);
   width: min(78rem, 100%);
@@ -178,6 +179,10 @@
   min-height: clamp(7rem, 18vh, 14rem);
   border-top: 1px solid var(--character-border, var(--border));
   opacity: 0.42;
+}
+
+.narrative {
+  grid-area: narrative;
 }
 
 .identity {
@@ -317,6 +322,7 @@
       'intro'
       'summary'
       'identity'
+      'narrative'
       'future';
     gap: 2.5rem;
     padding-top: 7.5rem;

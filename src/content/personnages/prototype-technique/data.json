@@ -1,0 +1,15 @@
+{
+  "nom": "Prototype Technique",
+  "resumeCourt": "Entrée temporaire utilisée uniquement pour vérifier le fonctionnement du moteur de fiches personnages.",
+  "role": "Test du moteur",
+  "tags": ["test", "temporaire"],
+  "themeKey": "vide-oppressant",
+  "publicationStatus": "draft",
+  "identity": {
+  "aliases": ["Prototype"],
+  "nature": "Entrée technique",
+  "origin": "Test local",
+  "status": "Temporaire",
+  "era": "Prototype"
+  }
+}
