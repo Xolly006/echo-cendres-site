@@ -11,6 +11,10 @@ export type PersonnageTheme = {
   typography?: {
     titleFamily?: string;
     bodyFamily?: string;
+    titleWeight?: string;
+    titleSpacing?: string;
+    bodyLineHeight?: string;
+    labelSpacing?: string;
   };
   atmosphere?: {
     backgroundKind?: 'none' | 'mist' | 'embers' | 'void' | 'crystal' | 'stars';

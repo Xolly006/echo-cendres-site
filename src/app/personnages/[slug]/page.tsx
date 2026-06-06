@@ -1,6 +1,6 @@
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import type { CSSProperties } from 'react';
+import { StandardImmersivePersonnage } from '@/components/personnages/StandardImmersivePersonnage';
 import { getAllPersonnages, getPublishedPersonnageBySlug } from '@/lib/personnages';
 import { getPersonnageTheme } from '@/themes/personnages';
 
@@ -36,25 +36,15 @@ export default async function Page({ params }: PersonnagePageProps) {
     '--character-border': theme.palette.border,
     '--character-title-font': theme.typography?.titleFamily,
     '--character-body-font': theme.typography?.bodyFamily,
+    '--character-title-weight': theme.typography?.titleWeight,
+    '--character-title-spacing': theme.typography?.titleSpacing,
+    '--character-body-line-height': theme.typography?.bodyLineHeight,
+    '--character-label-spacing': theme.typography?.labelSpacing,
   } as CSSProperties;
 
   return (
     <main className="directory-page personnage-theme-page" data-character-theme={theme.key} style={themeStyle}>
-      <article className="personnage-detail" aria-labelledby="personnage-title">
-        <p className="eyebrow">{personnage.role ?? 'Personnage'}</p>
-        <h1 id="personnage-title">{personnage.nom}</h1>
-        <p>{personnage.resumeCourt}</p>
-
-        {personnage.tags && personnage.tags.length > 0 ? (
-          <ul className="tag-list" aria-label="Tags du personnage">
-            {personnage.tags.map((tag) => (
-              <li key={tag}>{tag}</li>
-            ))}
-          </ul>
-        ) : null}
-
-        <Link className="ghost-link" href="/personnages">Retour aux personnages</Link>
-      </article>
+      <StandardImmersivePersonnage personnage={personnage} />
     </main>
   );
 }

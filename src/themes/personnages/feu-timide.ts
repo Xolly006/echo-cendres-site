@@ -13,6 +13,10 @@ export const feuTimideTheme: PersonnageTheme = {
   typography: {
     titleFamily: "Georgia, 'Times New Roman', serif",
     bodyFamily: "Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+    titleWeight: '500',
+    titleSpacing: '0.018em',
+    bodyLineHeight: '1.82',
+    labelSpacing: '0.16em',
   },
   atmosphere: {
     backgroundKind: 'embers',
