@@ -2,9 +2,28 @@
 
 Ce dossier est la source unique de vérité des futures fiches personnages.
 
-Chaque personnage sera ajouté plus tard sous forme de fichier JSON. Le slug public sera dérivé automatiquement du nom du fichier, donc le contenu JSON ne doit pas contenir de champ `slug`.
+Chaque personnage doit posséder son propre dossier. Le slug public est dérivé automatiquement du nom du dossier, donc le contenu JSON ne doit pas contenir de champ `slug`.
 
-Aucun personnage réel ou fictif n’est intégré à cette étape.
+Structure attendue :
+
+```txt
+src/content/personnages/slug-du-personnage/
+  data.json
+```
+
+Un récit long pourra être ajouté plus tard dans le même dossier :
+
+```txt
+src/content/personnages/slug-du-personnage/
+  data.json
+  histoire.mdx
+```
+
+Pour le moment, le moteur détecte seulement la présence de `histoire.mdx` via `hasNarrative`. Il ne charge pas, ne compile pas et n’affiche pas encore le contenu MDX.
+
+`@next/mdx` est présent dans `package.json`, et `next.config.mjs` inclut `md` et `mdx` dans `pageExtensions`. Le rendu dynamique d’un récit local associé à un slug reste à implémenter et à vérifier séparément avec la version actuelle de Next.js.
+
+Aucun personnage canonique n’est intégré à cette étape.
 
 ## Identité générale optionnelle
 

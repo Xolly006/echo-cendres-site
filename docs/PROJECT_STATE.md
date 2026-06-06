@@ -28,6 +28,8 @@ Les différentes entités seront ajoutées progressivement. Le squelette doit pe
 * Route dynamique publique `/personnages/[slug]` présente pour les futurs personnages publiés.
 * Fondation du moteur de thèmes personnages présente avec résolution de `themeKey` et fallback `default`.
 * Première section structurée optionnelle des fiches personnages présente : identité générale.
+* Les personnages sont maintenant stockés dans un dossier par personnage avec `data.json`.
+* Le moteur détecte optionnellement `histoire.mdx` via `hasNarrative`, sans rendu MDX pour le moment.
 * Aucun personnage intégré pour le moment.
 * Carte, chronologie et système de thèmes avancé non encore développés.
 
@@ -38,6 +40,7 @@ Les différentes entités seront ajoutées progressivement. Le squelette doit pe
 * TypeScript
 * CSS
 * Canvas natif pour certaines particules
+* `@next/mdx` est présent, mais le rendu narratif MDX des personnages n’est pas encore implémenté.
 
 ## Priorité actuelle
 

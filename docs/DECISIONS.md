@@ -24,7 +24,10 @@
 * Aucun CMS ni base de données au début.
 * Aucune nouvelle dépendance sans justification et validation.
 * Les sections peuvent rester vides pendant la construction du squelette.
-* Les fiches personnages seront lues depuis des fichiers JSON dans `src/content/personnages/`.
-* Le slug d’un personnage est dérivé du nom de son fichier JSON.
+* Les fiches personnages seront lues depuis `src/content/personnages/[slug]/data.json`.
+* Le slug d’un personnage est dérivé du nom de son dossier.
 * Les thèmes personnages sont gérés dans un registre artistique limité sous `src/themes/personnages/`.
 * La première fondation des thèmes applique uniquement des variables CSS côté serveur, sans effet animé.
+* Un récit long pourra être placé dans `src/content/personnages/[slug]/histoire.mdx`.
+* La présence de `histoire.mdx` est détectée par `hasNarrative`, mais le rendu MDX n’est pas encore implémenté.
+* `@next/mdx` est présent dans `package.json`; `next.config.mjs` accepte `md` et `mdx` dans `pageExtensions`, mais la stratégie de chargement dynamique associée au slug doit être validée plus tard.

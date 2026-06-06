@@ -1,9 +1,10 @@
-import { readdir, readFile } from 'node:fs/promises';
+import { access, readdir, readFile } from 'node:fs/promises';
 import path from 'node:path';
 import type { Personnage } from '@/types/personnage';
 
-type RawPersonnage = Omit<Personnage, 'slug'> & {
+type RawPersonnage = Omit<Personnage, 'slug' | 'hasNarrative'> & {
   slug?: never;
+  hasNarrative?: never;
 };
 
 const personnagesDirectory = path.join(process.cwd(), 'src/content/personnages');
@@ -81,6 +82,10 @@ function parsePersonnage(rawValue: unknown, fileName: string): RawPersonnage {
     throw new Error(`Personnage invalide dans ${fileName}: le slug est dérivé du nom du fichier JSON.`);
   }
 
+  if ('hasNarrative' in rawValue) {
+    throw new Error(`Personnage invalide dans ${fileName}: le champ "hasNarrative" est calculé automatiquement.`);
+  }
+
   return {
     nom: readRequiredString(rawValue.nom, 'nom', fileName),
     resumeCourt: readRequiredString(rawValue.resumeCourt, 'resumeCourt', fileName),
@@ -92,21 +97,43 @@ function parsePersonnage(rawValue: unknown, fileName: string): RawPersonnage {
   };
 }
 
-async function readPersonnageFile(fileName: string): Promise<Personnage> {
-  const filePath = path.join(personnagesDirectory, fileName);
-  const slug = path.basename(fileName, '.json');
-  const fileContent = await readFile(filePath, 'utf8');
+async function fileExists(filePath: string): Promise<boolean> {
+  try {
+    await access(filePath);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+async function readPersonnageDirectory(directoryName: string): Promise<Personnage> {
+  const directoryPath = path.join(personnagesDirectory, directoryName);
+  const filePath = path.join(directoryPath, 'data.json');
+  const narrativePath = path.join(directoryPath, 'histoire.mdx');
+  const slug = directoryName;
+  let fileContent = '';
 
   try {
-    const parsed = parsePersonnage(JSON.parse(fileContent), fileName);
+    fileContent = await readFile(filePath, 'utf8');
+  } catch (error) {
+    if (error instanceof Error && 'code' in error && error.code === 'ENOENT') {
+      throw new Error(`Personnage invalide dans ${directoryName}: le fichier "data.json" est obligatoire.`);
+    }
+
+    throw error;
+  }
+
+  try {
+    const parsed = parsePersonnage(JSON.parse(fileContent), `${directoryName}/data.json`);
 
     return {
       slug,
+      hasNarrative: await fileExists(narrativePath),
       ...parsed,
     };
   } catch (error) {
     if (error instanceof SyntaxError) {
-      throw new Error(`JSON invalide dans ${fileName}: ${error.message}`);
+      throw new Error(`JSON invalide dans ${directoryName}/data.json: ${error.message}`);
     }
 
     throw error;
@@ -114,9 +141,9 @@ async function readPersonnageFile(fileName: string): Promise<Personnage> {
 }
 
 async function readAllPersonnages(): Promise<Personnage[]> {
-  const fileNames = await readdir(personnagesDirectory);
-  const jsonFileNames = fileNames.filter((fileName) => fileName.endsWith('.json'));
-  const personnages = await Promise.all(jsonFileNames.map((fileName) => readPersonnageFile(fileName)));
+  const entries = await readdir(personnagesDirectory, { withFileTypes: true });
+  const directoryNames = entries.filter((entry) => entry.isDirectory()).map((entry) => entry.name);
+  const personnages = await Promise.all(directoryNames.map((directoryName) => readPersonnageDirectory(directoryName)));
 
   return personnages.sort((a, b) => a.nom.localeCompare(b.nom, 'fr'));
 }
