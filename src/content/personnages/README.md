@@ -67,3 +67,31 @@ Une fiche peut contenir un bloc `identity` pour les informations courtes et stru
 ```
 
 Tous les champs sont optionnels. La section identité ne s’affiche pas si aucune information n’est fournie.
+
+## Checklist avant publication
+
+Un personnage peut passer de `draft` à `published` seulement si les points suivants sont validés :
+
+* `data.json` est valide.
+* `publicationStatus` est volontairement changé en `"published"`.
+* `themeKey` existe et correspond au personnage.
+* Le résumé court est clair.
+* Le rôle est compréhensible.
+* Les tags sont pertinents.
+* L’identité minimale est remplie si le bloc `identity` existe.
+* `histoire.mdx` existe si le personnage a besoin d’un récit long.
+* Le récit MDX ne contient pas d’import, d’export, de JSX, de HTML brut ou d’expression JavaScript.
+* Les informations douteuses ne sont pas présentées comme canon.
+* Les collisions de noms ont été vérifiées.
+* Le thème visuel a été testé localement.
+* La page fonctionne en largeur normale.
+* La page fonctionne en largeur intermédiaire avec VS Code à côté.
+* La page reste lisible sur mobile.
+* Le récit reste lisible malgré les effets d’ambiance et les particules.
+* `npm run build` passe.
+* Le personnage a été remis en `draft` si le test local en `published` n’était que temporaire.
+* Le passage définitif en `published` fait l’objet d’un commit dédié.
+
+Les signatures visuelles spécifiques ne sont pas obligatoires pour publier une V1. Par exemple, Kael l’Éclipsé peut rester en `draft` ou passer plus tard en `published` sans attendre son futur titre qui s’efface, ses effets de non-reconnaissance ou toute autre signature exceptionnelle.
+
+Les signatures visuelles sont une amélioration future, pas un prérequis de publication.
