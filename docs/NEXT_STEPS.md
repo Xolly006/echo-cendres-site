@@ -2,23 +2,28 @@
 
 ## Étape actuelle
 
-Stabiliser la première fiche personnage réelle en `draft` et décider de la suite après Kael V1.
+Stabiliser les premières fiches personnages réelles en `draft` et décider de la suite après Kael V1 et Varros V1.
 
 ## Tâches immédiates
 
 1. Relire Kael l’Éclipsé V1 en `draft`.
-2. Vérifier la section “Magie” de Kael : Concept, Domaine, Artefact, Ancre, Capacités et Limites.
-3. Préparer plus tard les premiers `links` seulement après validation des slugs cibles.
-4. Repousser l’affichage public et la résolution des liens à une étape dédiée.
-5. Vérifier si la fiche Kael doit être légèrement améliorée avant toute publication.
-6. Confirmer que `themeKey: "vide-oppressant"` reste le bon choix pour Kael.
-7. Garder Kael en `publicationStatus: "draft"` jusqu’à validation explicite du créateur.
-8. Choisir la prochaine décision après Kael V1 :
+2. Relire Varros le Fléau V1 en `draft`.
+3. Vérifier la section “Magie” de Kael : Concept, Domaine, Artefact, Ancre, Capacités et Limites.
+4. Vérifier la section “Magie” de Varros : Concept, Domaine, Ancre, Capacités et Limites.
+5. Préparer plus tard les premiers `links` seulement après validation des slugs cibles.
+6. Repousser l’affichage public et la résolution des liens à une étape dédiée.
+7. Vérifier si les fiches Kael ou Varros doivent être légèrement améliorées avant toute publication.
+8. Confirmer que `themeKey: "vide-oppressant"` reste le bon choix pour Kael.
+9. Confirmer que `themeKey: "default"` reste acceptable pour Varros V1.
+10. Envisager plus tard un thème de famille comme `titan-maudit` uniquement si plusieurs personnages partagent cette ambiance.
+11. Garder Kael et Varros en `publicationStatus: "draft"` jusqu’à validation explicite du créateur.
+12. Choisir la prochaine décision après Kael V1 et Varros V1 :
    * améliorer légèrement la fiche Kael si nécessaire ;
-   * préparer un deuxième personnage en `draft` ;
+   * améliorer légèrement la fiche Varros si nécessaire ;
+   * préparer un troisième personnage en `draft` ;
    * documenter une méthode de validation avant publication.
-9. Garder les récits MDX limités au Markdown simple, sans imports, HTML brut ni JavaScript arbitraire.
-10. Intégrer Noah plus tard comme fiche test validée si le créateur confirme ce choix.
+13. Garder les récits MDX limités au Markdown simple, sans imports, HTML brut ni JavaScript arbitraire.
+14. Intégrer Noah plus tard comme fiche test validée si le créateur confirme ce choix.
 
 ## Hors périmètre pour le moment
 
@@ -85,3 +90,16 @@ Kael ne doit recevoir aucune signature visuelle spécifique maintenant. Les pist
 * effets de non-reconnaissance.
 
 Ces effets devront attendre le système séparé de signatures visuelles propres aux personnages majeurs.
+
+### Pistes futures pour Varros le Fléau
+
+Varros ne doit recevoir aucune signature visuelle spécifique maintenant. Les pistes suivantes restent futures :
+
+* bras gauche noirci ou marqué de runes rouges ;
+* chaînes brisées ;
+* larme gelée ;
+* posture de titan fatigué;
+* Ambiance violente.
+
+
+Ces effets devront attendre le système séparé de signatures visuelles propres aux personnages majeurs. Le thème `default` reste acceptable pour sa V1, et un futur thème de famille comme `titan-maudit` ou équivalent ne devra être envisagé que si plusieurs personnages peuvent réellement le partager.
