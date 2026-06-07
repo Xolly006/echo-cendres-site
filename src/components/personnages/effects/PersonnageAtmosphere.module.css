@@ -1,0 +1,206 @@
+.atmosphere {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.depth,
+.localGlow,
+.farGlow,
+.traceOne,
+.traceTwo,
+.grain {
+  position: absolute;
+  display: block;
+  pointer-events: none;
+}
+
+.depth {
+  inset: 0;
+  background:
+    radial-gradient(circle at 22% 24%, color-mix(in srgb, var(--character-accent, var(--accent)) 8%, transparent), transparent 34%),
+    linear-gradient(145deg, color-mix(in srgb, var(--character-bg, #000) 84%, transparent), transparent 52%);
+  opacity: 0.3;
+}
+
+.localGlow {
+  width: min(32rem, 68vw);
+  aspect-ratio: 1;
+  left: clamp(-8rem, -8vw, -2rem);
+  top: clamp(8rem, 16vh, 13rem);
+  border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--character-accent, var(--accent)) 20%, transparent), transparent 68%);
+  filter: blur(12px);
+  opacity: 0.22;
+}
+
+.farGlow {
+  width: min(42rem, 80vw);
+  aspect-ratio: 1;
+  right: -14rem;
+  bottom: -10rem;
+  border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--character-muted, var(--muted)) 11%, transparent), transparent 72%);
+  opacity: 0.16;
+}
+
+.traceOne,
+.traceTwo {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--character-border, var(--border)) 80%, transparent), transparent);
+  opacity: 0.32;
+}
+
+.traceOne {
+  left: 8%;
+  right: 18%;
+  top: 31%;
+}
+
+.traceTwo {
+  left: 18%;
+  right: 8%;
+  bottom: 24%;
+}
+
+.grain {
+  inset: 0;
+  opacity: 0;
+}
+
+.atmosphere[data-background-kind='embers'] .depth {
+  background:
+    radial-gradient(circle at 18% 34%, rgba(201, 121, 63, 0.18), transparent 30%),
+    radial-gradient(circle at 62% 72%, rgba(119, 48, 31, 0.1), transparent 34%),
+    linear-gradient(135deg, rgba(16, 7, 5, 0.52), transparent 56%);
+  opacity: 0.72;
+}
+
+.atmosphere[data-background-kind='embers'] .localGlow {
+  left: clamp(-6rem, -5vw, -1rem);
+  top: clamp(10rem, 23vh, 17rem);
+  background:
+    radial-gradient(circle, rgba(230, 132, 62, 0.24), rgba(140, 58, 36, 0.1) 38%, transparent 68%);
+  opacity: 0.68;
+  animation: timidEmberPulse 9s ease-in-out infinite;
+}
+
+.atmosphere[data-background-kind='embers'] .farGlow {
+  right: 12%;
+  bottom: 9%;
+  width: min(26rem, 58vw);
+  background: radial-gradient(circle, rgba(201, 121, 63, 0.1), transparent 70%);
+  opacity: 0.42;
+}
+
+.atmosphere[data-background-kind='embers'] .traceOne {
+  top: 44%;
+  opacity: 0.2;
+}
+
+.atmosphere[data-particle-kind='embers'] .grain {
+  opacity: 0.35;
+  background:
+    radial-gradient(circle at 16% 42%, rgba(244, 175, 95, 0.34) 0 1px, transparent 2px),
+    radial-gradient(circle at 46% 62%, rgba(201, 121, 63, 0.24) 0 1px, transparent 2px),
+    radial-gradient(circle at 78% 36%, rgba(244, 175, 95, 0.22) 0 1px, transparent 2px);
+  animation: emberSpecks 16s ease-in-out infinite;
+}
+
+.atmosphere[data-background-kind='void'] .depth {
+  background:
+    radial-gradient(circle at 50% -6%, rgba(126, 135, 144, 0.1), transparent 34%),
+    radial-gradient(circle at 88% 78%, rgba(111, 119, 132, 0.08), transparent 32%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.18), rgba(3, 4, 7, 0.66));
+  opacity: 0.86;
+}
+
+.atmosphere[data-background-kind='void'] .localGlow {
+  left: 48%;
+  top: -28%;
+  transform: translateX(-50%);
+  width: min(44rem, 76vw);
+  background: radial-gradient(circle, rgba(126, 135, 144, 0.08), transparent 72%);
+  opacity: 0.48;
+  filter: blur(18px);
+}
+
+.atmosphere[data-background-kind='void'] .farGlow {
+  right: -18%;
+  bottom: 16%;
+  background: radial-gradient(circle, rgba(111, 119, 132, 0.055), transparent 76%);
+  opacity: 0.34;
+}
+
+.atmosphere[data-background-kind='void'] .traceOne,
+.atmosphere[data-background-kind='void'] .traceTwo {
+  background: linear-gradient(90deg, transparent, rgba(174, 188, 202, 0.16), transparent);
+  opacity: 0.36;
+}
+
+.atmosphere[data-background-kind='void'] .traceOne {
+  left: 24%;
+  right: 12%;
+  top: 28%;
+}
+
+.atmosphere[data-background-kind='void'] .traceTwo {
+  left: 10%;
+  right: 34%;
+  bottom: 34%;
+  opacity: 0.18;
+}
+
+.atmosphere[data-intensity='medium'] {
+  filter: saturate(1.08) contrast(1.04);
+}
+
+.atmosphere[data-intensity='medium'][data-particle-kind='embers'] .grain {
+  opacity: 0.42;
+}
+
+@keyframes timidEmberPulse {
+  0%, 100% {
+    opacity: 0.52;
+    transform: scale(0.985);
+  }
+  50% {
+    opacity: 0.72;
+    transform: scale(1.025);
+  }
+}
+
+@keyframes emberSpecks {
+  0%, 100% {
+    opacity: 0.2;
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    opacity: 0.38;
+    transform: translate3d(0, -0.7rem, 0);
+  }
+}
+
+@media (max-width: 720px) {
+  .localGlow,
+  .farGlow {
+    width: min(24rem, 78vw);
+  }
+
+  .traceTwo {
+    display: none;
+  }
+
+  .atmosphere[data-particle-kind='embers'] .grain {
+    opacity: 0.18;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .localGlow,
+  .grain {
+    animation: none;
+  }
+}

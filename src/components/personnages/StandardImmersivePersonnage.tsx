@@ -1,10 +1,13 @@
 import Link from 'next/link';
 import type { ReactNode } from 'react';
+import { PersonnageAtmosphere } from '@/components/personnages/effects/PersonnageAtmosphere';
+import type { PersonnageTheme } from '@/types/personnage-theme';
 import type { Personnage } from '@/types/personnage';
 import styles from './StandardImmersivePersonnage.module.css';
 
 type StandardImmersivePersonnageProps = {
   personnage: Personnage;
+  atmosphere?: PersonnageTheme['atmosphere'];
   narrative?: ReactNode;
 };
 
@@ -16,7 +19,7 @@ const identityLabels = {
   era: 'Époque',
 };
 
-export function StandardImmersivePersonnage({ personnage, narrative }: StandardImmersivePersonnageProps) {
+export function StandardImmersivePersonnage({ atmosphere, personnage, narrative }: StandardImmersivePersonnageProps) {
   const identityItems = personnage.identity
     ? [
         personnage.identity.aliases && personnage.identity.aliases.length > 0
@@ -31,6 +34,8 @@ export function StandardImmersivePersonnage({ personnage, narrative }: StandardI
 
   return (
     <section className={styles.scene} aria-labelledby="personnage-title">
+      <PersonnageAtmosphere atmosphere={atmosphere} />
+
       <div className={styles.backdrop} aria-hidden="true">
         <span className={styles.glowOne} />
         <span className={styles.glowTwo} />

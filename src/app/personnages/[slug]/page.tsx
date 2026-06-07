@@ -52,6 +52,7 @@ export default async function Page({ params }: PersonnagePageProps) {
   return (
     <main className="directory-page personnage-theme-page" data-character-theme={theme.key} style={themeStyle}>
       <StandardImmersivePersonnage
+        atmosphere={theme.atmosphere}
         personnage={personnage}
         narrative={NarrativeContent ? <PersonnageNarrative Content={NarrativeContent} /> : null}
       />
