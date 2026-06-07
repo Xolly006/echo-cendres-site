@@ -81,6 +81,7 @@
   grid-template-areas:
     'intro summary'
     'identity identity'
+    'magic magic'
     'narrative narrative'
     'future future';
   gap: clamp(2rem, 7vw, 7rem);
@@ -187,13 +188,19 @@
   grid-area: narrative;
 }
 
+.magic {
+  grid-area: magic;
+  width: min(64rem, 100%);
+}
+
 .identity {
   grid-area: identity;
   width: min(58rem, 100%);
   margin-top: clamp(1rem, 4vh, 2.5rem);
 }
 
-.identityTitle {
+.identityTitle,
+.magicTitle {
   margin: 0 0 1rem;
   color: var(--character-accent, var(--accent));
   font-size: 0.76rem;
@@ -202,12 +209,34 @@
   text-transform: uppercase;
 }
 
+.magicList {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0;
+  margin: 0;
+  border-top: 1px solid var(--character-border, var(--border));
+}
+
 .identityList {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 0;
   margin: 0;
   border-top: 1px solid var(--character-border, var(--border));
+}
+
+.magicItem {
+  min-width: 0;
+  border-bottom: 1px solid var(--character-border, var(--border));
+  padding: 1.05rem clamp(1rem, 2.4vw, 1.7rem) 1rem 0;
+}
+
+.magicItem:nth-child(odd) {
+  border-right: 1px solid var(--character-border, var(--border));
+}
+
+.magicItem:nth-child(even) {
+  padding-left: clamp(1rem, 2.4vw, 1.7rem);
 }
 
 .identityItem {
@@ -228,12 +257,53 @@
   text-transform: uppercase;
 }
 
+.magicItem dt {
+  margin: 0 0 0.5rem;
+  color: var(--character-muted, var(--muted));
+  font-size: 0.72rem;
+  letter-spacing: calc(var(--character-label-spacing, 0.22em) * 0.5);
+  text-transform: uppercase;
+}
+
 .identityItem dd {
   margin: 0;
   color: var(--character-text, var(--text));
   font-size: clamp(0.95rem, 1.5vw, 1.08rem);
   line-height: var(--character-body-line-height, 1.8);
   overflow-wrap: break-word;
+}
+
+.magicItem dd {
+  margin: 0;
+  color: var(--character-text, var(--text));
+  font-size: clamp(0.95rem, 1.5vw, 1.08rem);
+  line-height: var(--character-body-line-height, 1.8);
+  overflow-wrap: break-word;
+}
+
+.magicItem p {
+  margin: 0;
+}
+
+.magicItem ul {
+  display: grid;
+  gap: 0.45rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.magicItem li {
+  position: relative;
+  padding-left: 1rem;
+}
+
+.magicItem li::before {
+  position: absolute;
+  left: 0;
+  color: var(--character-accent, var(--accent));
+  content: '—';
+  opacity: 0.72;
 }
 
 :global(.personnage-theme-page[data-character-theme='feu-timide']) .content {
@@ -324,6 +394,7 @@
       'intro'
       'summary'
       'identity'
+      'magic'
       'narrative'
       'future';
     gap: clamp(2.25rem, 6vw, 4rem);
@@ -366,9 +437,20 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .magicList {
+    grid-template-columns: 1fr;
+  }
+
   .identityItem {
     border-right: 0;
     border-bottom: 1px solid var(--character-border, var(--border));
+  }
+
+  .magicItem,
+  .magicItem:nth-child(odd),
+  .magicItem:nth-child(even) {
+    border-right: 0;
+    padding-left: 0;
   }
 }
 

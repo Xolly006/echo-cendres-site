@@ -68,6 +68,12 @@ Une fiche peut contenir un bloc `identity` pour les informations courtes et stru
 
 Tous les champs sont optionnels. La section identité ne s’affiche pas si aucune information n’est fournie.
 
+## Magie optionnelle
+
+Une fiche peut contenir un bloc `magic` pour les informations structurées de pouvoir : concept, Domaine, artefact, Ancre, capacités et limites.
+
+Ce bloc est optionnel. Les champs manquants ne doivent pas produire de section vide. Le récit long, les explications détaillées et les scènes doivent rester dans `histoire.mdx`.
+
 ## Checklist avant publication
 
 Un personnage peut passer de `draft` à `published` seulement si les points suivants sont validés :

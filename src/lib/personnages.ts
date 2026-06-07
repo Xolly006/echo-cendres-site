@@ -74,6 +74,22 @@ function readOptionalIdentity(value: unknown, fileName: string): Personnage['ide
   };
 }
 
+function readOptionalMagic(value: unknown, fileName: string): Personnage['magic'] {
+  if (value === undefined) return undefined;
+  if (!isRecord(value)) {
+    throw new Error(`Personnage invalide dans ${fileName}: le champ "magic" doit être un objet.`);
+  }
+
+  return {
+    concept: readOptionalString(value.concept, 'magic.concept', fileName),
+    domain: readOptionalString(value.domain, 'magic.domain', fileName),
+    artifact: readOptionalString(value.artifact, 'magic.artifact', fileName),
+    anchor: readOptionalString(value.anchor, 'magic.anchor', fileName),
+    abilities: readOptionalStringList(value.abilities, 'magic.abilities', fileName),
+    limits: readOptionalStringList(value.limits, 'magic.limits', fileName),
+  };
+}
+
 function readPublicationStatus(value: unknown, fileName: string): Personnage['publicationStatus'] {
   if (value !== 'draft' && value !== 'published') {
     throw new Error(
@@ -105,6 +121,7 @@ function parsePersonnage(rawValue: unknown, fileName: string): RawPersonnage {
     themeKey: readOptionalString(rawValue.themeKey, 'themeKey', fileName),
     publicationStatus: readPublicationStatus(rawValue.publicationStatus, fileName),
     identity: readOptionalIdentity(rawValue.identity, fileName),
+    magic: readOptionalMagic(rawValue.magic, fileName),
   };
 }
 

@@ -12,12 +12,27 @@ type StandardImmersivePersonnageProps = {
   narrative?: ReactNode;
 };
 
+type MagicItem = {
+  label: string;
+  value?: string;
+  values?: string[];
+};
+
 const identityLabels = {
   aliases: 'Alias',
   nature: 'Nature',
   origin: 'Origine',
   status: 'Statut',
   era: 'Époque',
+};
+
+const magicLabels = {
+  concept: 'Concept',
+  domain: 'Domaine',
+  artifact: 'Artefact',
+  anchor: 'Ancre',
+  abilities: 'Capacités',
+  limits: 'Limites',
 };
 
 export function StandardImmersivePersonnage({ atmosphere, personnage, narrative }: StandardImmersivePersonnageProps) {
@@ -32,6 +47,22 @@ export function StandardImmersivePersonnage({ atmosphere, personnage, narrative 
         personnage.identity.era ? { label: identityLabels.era, value: personnage.identity.era } : null,
       ].filter((item): item is { label: string; value: string } => item !== null)
     : [];
+
+  const magicCandidates: Array<MagicItem | null> = personnage.magic
+    ? [
+        personnage.magic.concept ? { label: magicLabels.concept, value: personnage.magic.concept } : null,
+        personnage.magic.domain ? { label: magicLabels.domain, value: personnage.magic.domain } : null,
+        personnage.magic.artifact ? { label: magicLabels.artifact, value: personnage.magic.artifact } : null,
+        personnage.magic.anchor ? { label: magicLabels.anchor, value: personnage.magic.anchor } : null,
+        personnage.magic.abilities && personnage.magic.abilities.length > 0
+          ? { label: magicLabels.abilities, values: personnage.magic.abilities }
+          : null,
+        personnage.magic.limits && personnage.magic.limits.length > 0
+          ? { label: magicLabels.limits, values: personnage.magic.limits }
+          : null,
+      ]
+    : [];
+  const magicItems = magicCandidates.filter((item): item is MagicItem => item !== null);
 
   return (
     <section className={styles.scene} aria-labelledby="personnage-title">
@@ -78,6 +109,31 @@ export function StandardImmersivePersonnage({ atmosphere, personnage, narrative 
                 <div className={styles.identityItem} key={item.label}>
                   <dt>{item.label}</dt>
                   <dd>{item.value}</dd>
+                </div>
+              ))}
+            </dl>
+          </section>
+        ) : null}
+
+        {magicItems.length > 0 ? (
+          <section className={styles.magic} aria-labelledby="personnage-magic-title">
+            <h2 id="personnage-magic-title" className={styles.magicTitle}>
+              Magie
+            </h2>
+            <dl className={styles.magicList}>
+              {magicItems.map((item) => (
+                <div className={styles.magicItem} key={item.label}>
+                  <dt>{item.label}</dt>
+                  <dd>
+                    {item.value ? <p>{item.value}</p> : null}
+                    {item.values ? (
+                      <ul>
+                        {item.values.map((value) => (
+                          <li key={value}>{value}</li>
+                        ))}
+                      </ul>
+                    ) : null}
+                  </dd>
                 </div>
               ))}
             </dl>

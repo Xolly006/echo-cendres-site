@@ -25,5 +25,20 @@
     "origin": "Enfant illégitime d’une lignée royale, enfermé dès la naissance",
     "status": "Actif — Conseil des Sept Héritiers",
     "era": "Présent narratif"
+  },
+  "magic": {
+    "concept": "Inexistence / Non-existence",
+    "domain": "La Chambre Anéchoïque — privation sensorielle totale dans un noir absolu",
+    "artifact": "Le Voile d’Ombre — cape vivante liée à l’invisibilité conceptuelle",
+    "anchor": "Une ombre sans contour, une forme qui n’a pas de nom",
+    "abilities": [
+      "Efface sa présence de la trame de la réalité",
+      "Force le cerveau à refuser d’admettre qu’il est là",
+      "Frappe comme une absence que la perception ne parvient pas à nommer"
+    ],
+    "limits": [
+      "Son pouvoir ne doit pas être réduit à une invisibilité classique",
+      "Les détails tactiques avancés restent à développer plus tard"
+    ]
   }
 }

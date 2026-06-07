@@ -14,4 +14,12 @@ export type Personnage = {
     status?: string;
     era?: string;
   };
+  magic?: {
+    concept?: string;
+    domain?: string;
+    artifact?: string;
+    anchor?: string;
+    abilities?: string[];
+    limits?: string[];
+  };
 };
