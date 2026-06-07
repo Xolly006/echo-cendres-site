@@ -90,6 +90,22 @@ function readOptionalMagic(value: unknown, fileName: string): Personnage['magic'
   };
 }
 
+function readOptionalLinks(value: unknown, fileName: string): Personnage['links'] {
+  if (value === undefined) return undefined;
+  if (!isRecord(value)) {
+    throw new Error(`Personnage invalide dans ${fileName}: le champ "links" doit être un objet.`);
+  }
+
+  return {
+    characters: readOptionalStringList(value.characters, 'links.characters', fileName),
+    factions: readOptionalStringList(value.factions, 'links.factions', fileName),
+    events: readOptionalStringList(value.events, 'links.events', fileName),
+    places: readOptionalStringList(value.places, 'links.places', fileName),
+    artifacts: readOptionalStringList(value.artifacts, 'links.artifacts', fileName),
+    concepts: readOptionalStringList(value.concepts, 'links.concepts', fileName),
+  };
+}
+
 function readPublicationStatus(value: unknown, fileName: string): Personnage['publicationStatus'] {
   if (value !== 'draft' && value !== 'published') {
     throw new Error(
@@ -122,6 +138,7 @@ function parsePersonnage(rawValue: unknown, fileName: string): RawPersonnage {
     publicationStatus: readPublicationStatus(rawValue.publicationStatus, fileName),
     identity: readOptionalIdentity(rawValue.identity, fileName),
     magic: readOptionalMagic(rawValue.magic, fileName),
+    links: readOptionalLinks(rawValue.links, fileName),
   };
 }
 

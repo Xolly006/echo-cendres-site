@@ -22,4 +22,12 @@ export type Personnage = {
     abilities?: string[];
     limits?: string[];
   };
+  links?: {
+    characters?: string[];
+    factions?: string[];
+    events?: string[];
+    places?: string[];
+    artifacts?: string[];
+    concepts?: string[];
+  };
 };

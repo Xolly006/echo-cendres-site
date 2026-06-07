@@ -74,6 +74,14 @@ Une fiche peut contenir un bloc `magic` pour les informations structurées de po
 
 Ce bloc est optionnel. Les champs manquants ne doivent pas produire de section vide. Le récit long, les explications détaillées et les scènes doivent rester dans `histoire.mdx`.
 
+## Liens optionnels
+
+Une fiche pourra contenir un bloc `links` pour préparer les futures relations vers personnages, factions, événements, lieux, artefacts et concepts.
+
+Ce bloc est optionnel. Il doit contenir seulement des identifiants ou slugs stables, pas d’explications longues. Les explications restent dans `histoire.mdx`.
+
+Ne pas ajouter de liens tant que les slugs cibles ne sont pas validés. L’affichage et la résolution des liens viendront plus tard.
+
 ## Checklist avant publication
 
 Un personnage peut passer de `draft` à `published` seulement si les points suivants sont validés :
