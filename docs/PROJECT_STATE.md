@@ -28,12 +28,17 @@ Les différentes entités seront ajoutées progressivement. Le squelette doit pe
 * Route dynamique publique `/personnages/[slug]` présente pour les futurs personnages publiés.
 * Fondation du moteur de thèmes personnages présente avec résolution de `themeKey` et fallback `default`.
 * Première section structurée optionnelle des fiches personnages présente : identité générale.
+* Le modèle personnage possède maintenant un champ optionnel `magic`.
+* La page personnage affiche une section conditionnelle “Magie” si `magic` existe.
+* Un personnage sans `magic` continue de fonctionner sans section vide.
 * Les personnages sont maintenant stockés dans un dossier par personnage avec `data.json`.
 * Le moteur détecte optionnellement `histoire.mdx` via `hasNarrative`.
 * Rendu narratif MDX serveur présent pour les fiches personnages via un registre d’imports MDX généré automatiquement.
 * Kael l’Éclipsé existe comme premier personnage réel en `draft`.
 * La fiche de Kael se trouve dans `src/content/personnages/kael-eclipse/` et contient `data.json` et `histoire.mdx`.
 * Kael utilise `publicationStatus: "draft"` et `themeKey: "vide-oppressant"`.
+* Kael utilise `magic` pour structurer son Concept, son Domaine, son Artefact, son Ancre, ses Capacités et ses Limites.
+* La section “Magie” ne remplace pas `histoire.mdx` : elle sert aux informations structurées, tandis que le récit long reste dans le MDX.
 * Le thème `vide-oppressant` fonctionne bien visuellement pour Kael : la page affiche l’introduction immersive, la section identité, le récit MDX et une ambiance froide et distante.
 * Le test local de Kael a été fait temporairement en `published`, puis la fiche a été remise en `draft`.
 * Carte, chronologie et système de thèmes avancé non encore développés.
@@ -49,4 +54,4 @@ Les différentes entités seront ajoutées progressivement. Le squelette doit pe
 
 ## Priorité actuelle
 
-Stabiliser séparément le moteur personnages, les sections structurées optionnelles, le moteur de thèmes et les futures compositions avant d’intégrer des fiches validées.
+Stabiliser séparément le moteur personnages, les sections structurées optionnelles, le moteur de thèmes et les futures compositions avant d’intégrer des fiches validées. Les signatures visuelles spécifiques restent hors périmètre pour le moment.
