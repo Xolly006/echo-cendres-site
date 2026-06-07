@@ -1,0 +1,49 @@
+{
+  "nom": "Varros le Fléau",
+  "publicationStatus": "draft",
+  "themeKey": "default",
+  "resumeCourt": "Ancien fermier géant et pacifiste, Varros fut forcé de tuer dans des arènes pour sauver une famille déjà morte. Il rejoignit l’Arquet pour éteindre sa conscience, mais la malédiction décupla sa force sans faire taire son esprit : il reste prisonnier d’un corps de titan berserker qui tue pendant que l’homme doux en lui supplie que cela s’arrête.",
+  "role": "Héritier de l’Arquet — Commandant des Marteaux de l’Aube",
+  "tags": [
+    "arquet",
+    "héritier",
+    "titan",
+    "guerrier",
+    "pacifiste",
+    "malédiction",
+    "violence-forcée",
+    "berserker",
+    "marteaux-aube",
+    "tragique"
+  ],
+  "identity": {
+    "aliases": [
+      "Le Titan",
+      "Le Pacifiste Maudit",
+      "Le Guerrier pacifiste maudit",
+      "Le Briseur de Siège"
+    ],
+    "nature": "Humain Marqué — Héritier de l’Arquet",
+    "origin": "Ancien fermier géant, origine géographique à préciser",
+    "status": "Actif — Héritier de l’Arquet",
+    "era": "Présent narratif"
+  },
+  "magic": {
+    "concept": "Violence Pure / Malédiction berserker de l’Arquet",
+    "domain": "Force physique surhumaine et perte de contrôle subie",
+    "anchor": "Chaînes brisées — symbole de la liberté qu’il a toujours voulue sans jamais l’obtenir",
+    "abilities": [
+      "Force brute colossale amplifiée par l’Arquet",
+      "Bras gauche indestructible capable d’écraser des sorts magiques",
+      "Résistance physique hors norme",
+      "Impacts capables de ravager le terrain",
+      "Activation de runes rouges liées à l’Ancre"
+    ],
+    "limits": [
+      "La Bête prend le contrôle indépendamment de sa volonté",
+      "Sa conscience reste intacte malgré la violence imposée",
+      "Son bras gauche peut saigner face à certaines failles biologiques",
+      "Sa force n’est pas absolue face à l’adaptation prolongée"
+    ]
+  }
+}
