@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import type { ReactNode } from 'react';
 import { PersonnageAtmosphere } from '@/components/personnages/effects/PersonnageAtmosphere';
+import { PersonnageParticles } from '@/components/personnages/effects/PersonnageParticles';
 import type { PersonnageTheme } from '@/types/personnage-theme';
 import type { Personnage } from '@/types/personnage';
 import styles from './StandardImmersivePersonnage.module.css';
@@ -35,6 +36,7 @@ export function StandardImmersivePersonnage({ atmosphere, personnage, narrative 
   return (
     <section className={styles.scene} aria-labelledby="personnage-title">
       <PersonnageAtmosphere atmosphere={atmosphere} />
+      <PersonnageParticles atmosphere={atmosphere} />
 
       <div className={styles.backdrop} aria-hidden="true">
         <span className={styles.glowOne} />
