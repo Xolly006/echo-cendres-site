@@ -31,7 +31,11 @@ Les différentes entités seront ajoutées progressivement. Le squelette doit pe
 * Les personnages sont maintenant stockés dans un dossier par personnage avec `data.json`.
 * Le moteur détecte optionnellement `histoire.mdx` via `hasNarrative`.
 * Rendu narratif MDX serveur présent pour les fiches personnages via un registre d’imports MDX généré automatiquement.
-* Aucun personnage intégré pour le moment.
+* Kael l’Éclipsé existe comme premier personnage réel en `draft`.
+* La fiche de Kael se trouve dans `src/content/personnages/kael-eclipse/` et contient `data.json` et `histoire.mdx`.
+* Kael utilise `publicationStatus: "draft"` et `themeKey: "vide-oppressant"`.
+* Le thème `vide-oppressant` fonctionne bien visuellement pour Kael : la page affiche l’introduction immersive, la section identité, le récit MDX et une ambiance froide et distante.
+* Le test local de Kael a été fait temporairement en `published`, puis la fiche a été remise en `draft`.
 * Carte, chronologie et système de thèmes avancé non encore développés.
 
 ## Technologies actuelles

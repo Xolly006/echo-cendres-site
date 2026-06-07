@@ -2,21 +2,20 @@
 
 ## Étape actuelle
 
-Stabiliser la séparation entre données personnage, thème visuel et future composition de page.
+Stabiliser la première fiche personnage réelle en `draft` et décider de la suite après Kael V1.
 
 ## Tâches immédiates
 
-1. Vérifier le rendu vide de `/personnages`.
-2. Vérifier qu’un slug inexistant retourne une 404.
-3. Vérifier que `themeKey` absent ou inconnu utilise le thème `default`.
-4. Vérifier que la section `identity` reste invisible quand elle est absente.
-5. Vérifier que le moteur lit `src/content/personnages/[slug]/data.json`.
-6. Vérifier que `hasNarrative` reflète la présence de `histoire.mdx`.
-7. Vérifier que le récit MDX serveur s’affiche seulement lorsqu’il existe.
-8. Vérifier que le projet compile aussi quand aucun `histoire.mdx` n’existe.
-9. Garder les récits MDX limités au Markdown simple, sans imports, HTML brut ni JavaScript arbitraire.
-10. Attendre validation du créateur avant d’ajouter le premier personnage réel.
-11. Intégrer Noah plus tard comme première fiche test validée.
+1. Relire Kael l’Éclipsé V1 en `draft`.
+2. Vérifier si la fiche Kael doit être légèrement améliorée avant toute publication.
+3. Confirmer que `themeKey: "vide-oppressant"` reste le bon choix pour Kael.
+4. Garder Kael en `publicationStatus: "draft"` jusqu’à validation explicite du créateur.
+5. Choisir la prochaine décision après Kael V1 :
+   * améliorer légèrement la fiche Kael si nécessaire ;
+   * préparer un deuxième personnage en `draft` ;
+   * documenter une méthode de validation avant publication.
+6. Garder les récits MDX limités au Markdown simple, sans imports, HTML brut ni JavaScript arbitraire.
+7. Intégrer Noah plus tard comme fiche test validée si le créateur confirme ce choix.
 
 ## Hors périmètre pour le moment
 
@@ -71,3 +70,14 @@ Cette signature pourra combiner :
 Cette étape ne doit pas être développée maintenant. Elle dépend d’abord de la stabilisation des thèmes standard, du moteur d’atmosphère, des particules légères et des premières fiches personnages réelles.
 
 Les effets spécifiques à un personnage devront rester séparés de l’atmosphère standard afin d’éviter de rendre le projet ingérable. L’atmosphère standard doit rester réutilisable, tandis que les signatures exceptionnelles devront être ajoutées plus tard dans un système distinct et contrôlé.
+
+### Pistes futures pour Kael l’Éclipsé
+
+Kael ne doit recevoir aucune signature visuelle spécifique maintenant. Les pistes suivantes restent futures :
+
+* titre qui s’efface ;
+* présence mal reconnue par la page ;
+* bouton ou élément oublié par l’interface ;
+* effets de non-reconnaissance.
+
+Ces effets devront attendre le système séparé de signatures visuelles propres aux personnages majeurs.
