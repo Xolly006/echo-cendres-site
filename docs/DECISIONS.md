@@ -51,3 +51,23 @@
 * Les signatures visuelles propres aux personnages majeurs viendront plus tard dans un système séparé.
 * Une nouvelle valeur de `particleKind` ne doit pas être ajoutée sans besoin narratif clair.
 * Un effet ne doit pas être ajouté simplement parce qu’il est visuellement amusant ou spectaculaire.
+
+## Recette d’ambiance des futurs personnages
+
+* Un thème personnage représente une famille sensorielle, pas un personnage unique.
+* Un personnage doit d’abord utiliser un thème existant si celui-ci correspond suffisamment à son émotion dominante, son rôle narratif ou sa présence magique.
+* Un nouveau thème ne doit être créé que si plusieurs personnages pourraient théoriquement l’utiliser.
+* Les effets uniques propres à un personnage majeur doivent attendre le futur système de signatures visuelles.
+* Les signatures visuelles spécifiques doivent rester séparées des thèmes standard, de `PersonnageAtmosphere` et de `PersonnageParticles`.
+* Claude peut servir à extraire et organiser des informations depuis Magic.txt, mais le créateur doit toujours valider ce qui est canonique.
+
+Workflow d’ajout d’un personnage :
+
+1. Extraire les informations depuis Magic.txt.
+2. Trier les informations entre canon, à vérifier, contradictoire et proposition.
+3. Faire valider le contenu par le créateur.
+4. Choisir un thème existant ou justifier la création future d’un thème réutilisable.
+5. Créer `data.json` en `draft`.
+6. Créer `histoire.mdx`.
+7. Tester localement la fiche personnage.
+8. Commit/push après validation.
