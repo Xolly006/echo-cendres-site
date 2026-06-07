@@ -8,15 +8,17 @@ Stabiliser la première fiche personnage réelle en `draft` et décider de la su
 
 1. Relire Kael l’Éclipsé V1 en `draft`.
 2. Vérifier la section “Magie” de Kael : Concept, Domaine, Artefact, Ancre, Capacités et Limites.
-3. Vérifier si la fiche Kael doit être légèrement améliorée avant toute publication.
-4. Confirmer que `themeKey: "vide-oppressant"` reste le bon choix pour Kael.
-5. Garder Kael en `publicationStatus: "draft"` jusqu’à validation explicite du créateur.
-6. Choisir la prochaine décision après Kael V1 :
+3. Préparer plus tard les premiers `links` seulement après validation des slugs cibles.
+4. Repousser l’affichage public et la résolution des liens à une étape dédiée.
+5. Vérifier si la fiche Kael doit être légèrement améliorée avant toute publication.
+6. Confirmer que `themeKey: "vide-oppressant"` reste le bon choix pour Kael.
+7. Garder Kael en `publicationStatus: "draft"` jusqu’à validation explicite du créateur.
+8. Choisir la prochaine décision après Kael V1 :
    * améliorer légèrement la fiche Kael si nécessaire ;
    * préparer un deuxième personnage en `draft` ;
    * documenter une méthode de validation avant publication.
-7. Garder les récits MDX limités au Markdown simple, sans imports, HTML brut ni JavaScript arbitraire.
-8. Intégrer Noah plus tard comme fiche test validée si le créateur confirme ce choix.
+9. Garder les récits MDX limités au Markdown simple, sans imports, HTML brut ni JavaScript arbitraire.
+10. Intégrer Noah plus tard comme fiche test validée si le créateur confirme ce choix.
 
 ## Hors périmètre pour le moment
 
@@ -30,6 +32,7 @@ Stabiliser la première fiche personnage réelle en `draft` et décider de la su
 * Ajouter des effets animés liés aux thèmes.
 * Ajouter des composants narratifs spéciaux, la magie, les relations ou les événements.
 * Ajouter relations, lieux ou événements associés.
+* Afficher ou résoudre publiquement les `links`.
 
 ## Backlog futur : IA experte du Livre-Monde
 

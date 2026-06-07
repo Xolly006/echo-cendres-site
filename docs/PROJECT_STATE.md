@@ -31,6 +31,10 @@ Les différentes entités seront ajoutées progressivement. Le squelette doit pe
 * Le modèle personnage possède maintenant un champ optionnel `magic`.
 * La page personnage affiche une section conditionnelle “Magie” si `magic` existe.
 * Un personnage sans `magic` continue de fonctionner sans section vide.
+* Le modèle personnage possède maintenant un champ optionnel `links`.
+* `links` prépare les futures relations vers personnages, factions, événements, lieux, artefacts et concepts.
+* Les liens sont validés comme des listes de chaînes, mais les slugs ne sont pas encore résolus.
+* Aucune section visuelle “Liens” n’est affichée pour le moment.
 * Les personnages sont maintenant stockés dans un dossier par personnage avec `data.json`.
 * Le moteur détecte optionnellement `histoire.mdx` via `hasNarrative`.
 * Rendu narratif MDX serveur présent pour les fiches personnages via un registre d’imports MDX généré automatiquement.
@@ -38,6 +42,7 @@ Les différentes entités seront ajoutées progressivement. Le squelette doit pe
 * La fiche de Kael se trouve dans `src/content/personnages/kael-eclipse/` et contient `data.json` et `histoire.mdx`.
 * Kael utilise `publicationStatus: "draft"` et `themeKey: "vide-oppressant"`.
 * Kael utilise `magic` pour structurer son Concept, son Domaine, son Artefact, son Ancre, ses Capacités et ses Limites.
+* Kael ne possède pas encore de `links`.
 * La section “Magie” ne remplace pas `histoire.mdx` : elle sert aux informations structurées, tandis que le récit long reste dans le MDX.
 * Le thème `vide-oppressant` fonctionne bien visuellement pour Kael : la page affiche l’introduction immersive, la section identité, le récit MDX et une ambiance froide et distante.
 * Le test local de Kael a été fait temporairement en `published`, puis la fiche a été remise en `draft`.
