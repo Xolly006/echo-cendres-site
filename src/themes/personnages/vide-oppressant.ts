@@ -20,7 +20,7 @@ export const videOppressantTheme: PersonnageTheme = {
   },
   atmosphere: {
     backgroundKind: 'void',
-    particleKind: 'none',
+    particleKind: 'dust',
     intensity: 'low',
   },
 };

@@ -8,7 +8,10 @@ type PersonnageParticlesProps = {
   atmosphere?: PersonnageTheme['atmosphere'];
 };
 
-type EmberParticle = {
+type SupportedParticleKind = 'embers' | 'dust';
+
+type PersonnageParticle = {
+  kind: SupportedParticleKind;
   x: number;
   y: number;
   radius: number;
@@ -31,11 +34,12 @@ const canvasStyle: CSSProperties = {
   pointerEvents: 'none',
 };
 
-function createEmber(width: number, height: number): EmberParticle {
+function createEmber(width: number, height: number): PersonnageParticle {
   const radius = 0.65 + Math.random() * 1.25;
   const nearIntro = Math.random() < 0.62;
 
   return {
+    kind: 'embers',
     x: nearIntro ? width * (0.08 + Math.random() * 0.5) : Math.random() * width,
     y: nearIntro ? height * (0.14 + Math.random() * 0.46) : Math.random() * height,
     radius,
@@ -50,10 +54,39 @@ function createEmber(width: number, height: number): EmberParticle {
   };
 }
 
-function getEmberCount(width: number, intensity: 'low' | 'medium') {
+function createDust(width: number, height: number): PersonnageParticle {
+  const radius = 0.55 + Math.random() * 1.05;
+
+  return {
+    kind: 'dust',
+    x: Math.random() * width,
+    y: height * (0.06 + Math.random() * 0.72),
+    radius,
+    glow: radius * (1.8 + Math.random() * 1.8),
+    speedX: -0.012 + Math.random() * 0.024,
+    speedY: -0.006 + Math.random() * 0.018,
+    drift: Math.random() * Math.PI * 2,
+    driftSpeed: 0.0012 + Math.random() * 0.0024,
+    flicker: Math.random() * Math.PI * 2,
+    flickerSpeed: 0.004 + Math.random() * 0.006,
+    opacity: 0.045 + Math.random() * 0.075,
+  };
+}
+
+function getParticleCount(width: number, intensity: 'low' | 'medium', particleKind: SupportedParticleKind) {
+  if (particleKind === 'dust') {
+    if (width < 540) return intensity === 'medium' ? 6 : 4;
+    if (width < 900) return intensity === 'medium' ? 10 : 7;
+    return intensity === 'medium' ? 14 : 10;
+  }
+
   if (width < 540) return intensity === 'medium' ? 12 : 8;
   if (width < 900) return intensity === 'medium' ? 22 : 16;
   return intensity === 'medium' ? 34 : 26;
+}
+
+function createParticle(width: number, height: number, particleKind: SupportedParticleKind) {
+  return particleKind === 'dust' ? createDust(width, height) : createEmber(width, height);
 }
 
 export function PersonnageParticles({ atmosphere }: PersonnageParticlesProps) {
@@ -62,7 +95,7 @@ export function PersonnageParticles({ atmosphere }: PersonnageParticlesProps) {
   const intensity = atmosphere?.intensity ?? 'low';
 
   useEffect(() => {
-    if (particleKind !== 'embers') return;
+    if (particleKind !== 'embers' && particleKind !== 'dust') return;
 
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reducedMotion) return;
@@ -76,7 +109,7 @@ export function PersonnageParticles({ atmosphere }: PersonnageParticlesProps) {
     let animationFrame = 0;
     let resizeTimeout = 0;
     let isPaused = false;
-    let particles: EmberParticle[] = [];
+    let particles: PersonnageParticle[] = [];
     let width = 0;
     let height = 0;
 
@@ -91,7 +124,9 @@ export function PersonnageParticles({ atmosphere }: PersonnageParticlesProps) {
       canvas.width = Math.floor(width * pixelRatio);
       canvas.height = Math.floor(height * pixelRatio);
       context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
-      particles = Array.from({ length: getEmberCount(width, intensity) }, () => createEmber(width, height));
+      particles = Array.from({ length: getParticleCount(width, intensity, particleKind) }, () =>
+        createParticle(width, height, particleKind),
+      );
     };
 
     const scheduleResize = () => {
@@ -107,37 +142,56 @@ export function PersonnageParticles({ atmosphere }: PersonnageParticlesProps) {
       for (const particle of particles) {
         particle.drift += particle.driftSpeed;
         particle.flicker += particle.flickerSpeed;
-        particle.x += particle.speedX + Math.sin(particle.drift) * 0.055;
-        particle.y += particle.speedY + Math.cos(particle.drift) * 0.018;
+        const driftScale = particle.kind === 'dust' ? 0.018 : 0.055;
+        const verticalDrift = particle.kind === 'dust' ? 0.006 : 0.018;
+        particle.x += particle.speedX + Math.sin(particle.drift) * driftScale;
+        particle.y += particle.speedY + Math.cos(particle.drift) * verticalDrift;
 
         if (particle.y < -16) {
           particle.y = height + 16;
-          particle.x = Math.random() < 0.62 ? width * (0.08 + Math.random() * 0.5) : Math.random() * width;
+          particle.x =
+            particle.kind === 'embers' && Math.random() < 0.62
+              ? width * (0.08 + Math.random() * 0.5)
+              : Math.random() * width;
+        }
+
+        if (particle.y > height + 16) {
+          particle.y = -16;
+          particle.x = Math.random() * width;
         }
 
         if (particle.x < -16) particle.x = width + 16;
         if (particle.x > width + 16) particle.x = -16;
 
-        const flickerOpacity = Math.max(0.08, particle.opacity + Math.sin(particle.flicker) * 0.045);
-        const gradient = context.createRadialGradient(
-          particle.x,
-          particle.y,
-          0,
-          particle.x,
-          particle.y,
-          particle.glow,
-        );
+        if (particle.kind === 'dust') {
+          const dustOpacity = Math.max(0.025, particle.opacity + Math.sin(particle.flicker) * 0.018);
 
-        gradient.addColorStop(0, `rgba(248, 176, 96, ${flickerOpacity})`);
-        gradient.addColorStop(0.36, `rgba(196, 88, 47, ${flickerOpacity * 0.38})`);
-        gradient.addColorStop(1, 'rgba(28, 16, 12, 0)');
+          context.fillStyle = `rgba(174, 188, 202, ${dustOpacity})`;
+          context.beginPath();
+          context.ellipse(particle.x, particle.y, particle.radius * 1.35, particle.radius * 0.7, 0, 0, Math.PI * 2);
+          context.fill();
+        } else {
+          const flickerOpacity = Math.max(0.08, particle.opacity + Math.sin(particle.flicker) * 0.045);
+          const gradient = context.createRadialGradient(
+            particle.x,
+            particle.y,
+            0,
+            particle.x,
+            particle.y,
+            particle.glow,
+          );
 
-        context.globalCompositeOperation = 'lighter';
-        context.fillStyle = gradient;
-        context.beginPath();
-        context.arc(particle.x, particle.y, particle.glow, 0, Math.PI * 2);
-        context.fill();
-        context.globalCompositeOperation = 'source-over';
+          gradient.addColorStop(0, `rgba(248, 176, 96, ${flickerOpacity})`);
+          gradient.addColorStop(0.36, `rgba(196, 88, 47, ${flickerOpacity * 0.38})`);
+          gradient.addColorStop(1, 'rgba(28, 16, 12, 0)');
+
+          context.globalCompositeOperation = 'lighter';
+          context.fillStyle = gradient;
+          context.beginPath();
+          context.arc(particle.x, particle.y, particle.glow, 0, Math.PI * 2);
+          context.fill();
+          context.globalCompositeOperation = 'source-over';
+        }
       }
 
       animationFrame = requestAnimationFrame(draw);
@@ -175,7 +229,7 @@ export function PersonnageParticles({ atmosphere }: PersonnageParticlesProps) {
     };
   }, [intensity, particleKind]);
 
-  if (particleKind !== 'embers') {
+  if (particleKind !== 'embers' && particleKind !== 'dust') {
     return null;
   }
 
