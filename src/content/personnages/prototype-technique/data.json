@@ -3,7 +3,7 @@
   "resumeCourt": "Entrée temporaire utilisée uniquement pour vérifier le fonctionnement du moteur de fiches personnages.",
   "role": "Test du moteur",
   "tags": ["test", "temporaire"],
-  "themeKey": "vide-oppressant",
+  "themeKey": "feu-timide",
   "publicationStatus": "draft",
   "identity": {
   "aliases": ["Prototype"],
