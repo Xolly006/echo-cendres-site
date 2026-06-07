@@ -53,6 +53,13 @@ Les différentes entités seront ajoutées progressivement. Le squelette doit pe
 * Le rendu V1 de Varros avec le thème `default` est acceptable.
 * Le test local de Varros a été fait temporairement en `published`, puis la fiche doit rester en `draft`.
 * Un futur thème de famille, par exemple `titan-maudit` ou équivalent, pourra être envisagé plus tard si plusieurs personnages partagent cette ambiance.
+* Elias existe comme troisième personnage réel en `draft`.
+* La fiche d’Elias se trouve dans `src/content/personnages/elias-pilier-sacre/` et contient `data.json` et `histoire.mdx`.
+* Elias utilise `publicationStatus: "draft"` et `themeKey: "default"`.
+* Elias teste un profil très différent de Kael et Varros : Sacré, foi construite, Métatron, espoir et lumière.
+* Elias a été corrigé après création : le champ `magic.artifact` lié au sceptre a été supprimé, le tag vague `pilier` a été remplacé par `pilier-existence`, le tag précis `pilier-sacre` est conservé, et sa nature précise qu’il est humain, hôte et réceptacle de Métatron, pas Métatron lui-même.
+* Le rendu visuel V1 d’Elias avec le thème `default` reste acceptable provisoirement.
+* Un futur thème de famille, par exemple `foi-sans-dieu`, `lumiere-construite`, `sacre-fissure` ou équivalent, pourra être envisagé plus tard si plusieurs personnages partagent cette ambiance.
 * Carte, chronologie et système de thèmes avancé non encore développés.
 
 ## Technologies actuelles
