@@ -1,0 +1,54 @@
+{
+  "nom": "Elias",
+  "publicationStatus": "draft",
+  "themeKey": "default",
+  "resumeCourt": "Orphelin désigné Successeur à neuf ans, Elias est le Pilier du Sacré et l’hôte de Métatron, un Archange qu’il maintient à distance pour empêcher une extinction de masse. Il a vu le ciel vide avant Darian, mais n’a pas abandonné : sa foi n’est pas une soumission à l’institution, c’est une construction tournée vers l’humanité, l’espoir et la lumière qui persiste après la nuit.",
+  "role": "Pilier du Sacré — Hôte de Métatron — Commandant des Paladins de l’Aube",
+  "tags": [
+    "pilier",
+    "sacré",
+    "métatron",
+    "celestia",
+    "foi",
+    "espoir",
+    "lumière",
+    "retenue",
+    "sacrifice",
+    "orphelin",
+    "hôte",
+    "cage-dorée"
+  ],
+  "identity": {
+    "aliases": [
+      "Le Saint Vivant",
+      "Le Saint",
+      "Le Croyant",
+      "Le Pilier du Sacré"
+    ],
+    "nature": "Humain — Hôte de Métatron — descendant de la lignée d’Elian",
+    "origin": "Orphelin élevé dans un monastère",
+    "status": "Actif — en lutte quotidienne contre Métatron",
+    "era": "Présent narratif"
+  },
+  "magic": {
+    "concept": "L’Ordre / Le Sacré",
+    "domain": "Gloria Sanctus — L’Horizon des Promesses / Gloria Sanctus — Purgatoire",
+    "artifact": "Sceptre fusionné à la chair lors de l’Ascension",
+    "abilities": [
+      "Lumière Divine, Jugement et Barrières Absolues",
+      "Synchronisation avec Métatron maintenue volontairement à 50%",
+      "Manipulation d’équations sacrées et d’effets gravitationnels via Métatron",
+      "Voix de Dieu : colonnes de lumière orbitale via Métatron",
+      "Feu sacré purificateur",
+      "Domaine de l’Horizon des Promesses : le mensonge y devient impossible"
+    ],
+    "limits": [
+      "Au-delà de 50% de synchronisation, Métatron risque de prendre le contrôle",
+      "Métatron peut effacer l’imparfait sans discernement, alliés inclus",
+      "Elias perd progressivement son humanité en contenant Métatron",
+      "Sa foi personnelle ne doit pas être confondue avec la doctrine de Celestia",
+      "Les actions de Métatron dans son corps ne sont pas toujours la volonté d’Elias",
+      "Sa mort pourrait libérer Métatron sans hôte"
+    ]
+  }
+}
