@@ -54,3 +54,20 @@ Contraintes à conserver pour cette future étape :
 * elle pourra commencer en mode privé/admin avant d’être ouverte aux visiteurs ;
 * une architecture de type RAG pourra être étudiée ;
 * FastAPI ou une API route Next.js pourront être étudiés plus tard, sans décision technique définitive pour le moment.
+
+## Backlog futur : signatures visuelles des personnages
+
+Chaque personnage majeur pourra plus tard posséder une signature visuelle propre, au-delà du thème standard partagé par les fiches personnages.
+
+Cette signature pourra combiner :
+
+* arrière-plan spécifique ;
+* atmosphère dédiée ;
+* particules légères ;
+* motifs graphiques ;
+* effets narratifs ;
+* interactions spéciales.
+
+Cette étape ne doit pas être développée maintenant. Elle dépend d’abord de la stabilisation des thèmes standard, du moteur d’atmosphère, des particules légères et des premières fiches personnages réelles.
+
+Les effets spécifiques à un personnage devront rester séparés de l’atmosphère standard afin d’éviter de rendre le projet ingérable. L’atmosphère standard doit rester réutilisable, tandis que les signatures exceptionnelles devront être ajoutées plus tard dans un système distinct et contrôlé.
