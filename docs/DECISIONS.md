@@ -36,3 +36,18 @@
 * Les récits MDX autorisent seulement Markdown simple, citations, séparateurs et liens ordinaires pour le moment.
 * Les imports, exports, composants JSX, HTML brut, expressions JavaScript et liens à protocole dangereux dans les récits MDX sont interdits dans cette première version.
 * `@next/mdx` est configuré dans `next.config.mjs`; `src/mdx-components.tsx` fournit la convention globale requise par Next.
+
+## Règles du système d’ambiance des personnages
+
+* `backgroundKind` sert à choisir l’ambiance de fond d’une fiche personnage : chaleur, vide, brume, cristal, étoiles ou autre direction visuelle prévue.
+* `particleKind` sert uniquement aux particules décoratives légères.
+* `intensity` doit rester limitée à `low` ou `medium`.
+* Le thème `default` doit rester sobre et sans particules visibles.
+* Le thème `feu-timide` utilise `particleKind: "embers"` pour des braises discrètes.
+* Le thème `vide-oppressant` utilise `particleKind: "dust"` pour une poussière froide très rare.
+* Les particules ne doivent jamais gêner la lecture du récit MDX.
+* Les effets doivent rester décoratifs, désactivables ou allégés selon le contexte.
+* Les interactions spéciales, comme un titre qui se disloque ou un bouton qui fuit, ne doivent pas être placées dans `PersonnageAtmosphere` ou `PersonnageParticles`.
+* Les signatures visuelles propres aux personnages majeurs viendront plus tard dans un système séparé.
+* Une nouvelle valeur de `particleKind` ne doit pas être ajoutée sans besoin narratif clair.
+* Un effet ne doit pas être ajouté simplement parce qu’il est visuellement amusant ou spectaculaire.
