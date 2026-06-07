@@ -5,18 +5,19 @@
   "resumeCourt": "Orphelin désigné Successeur à neuf ans, Elias est le Pilier du Sacré et l’hôte de Métatron, un Archange qu’il maintient à distance pour empêcher une extinction de masse. Il a vu le ciel vide avant Darian, mais n’a pas abandonné : sa foi n’est pas une soumission à l’institution, c’est une construction tournée vers l’humanité, l’espoir et la lumière qui persiste après la nuit.",
   "role": "Pilier du Sacré — Hôte de Métatron — Commandant des Paladins de l’Aube",
   "tags": [
-    "pilier",
-    "sacré",
-    "métatron",
+    "pilier-existence",
+    "pilier-sacre",
+    "sacre",
+    "hote-metatron",
+    "metatron",
     "celestia",
-    "foi",
+    "foi-construite",
     "espoir",
-    "lumière",
+    "lumiere",
     "retenue",
     "sacrifice",
     "orphelin",
-    "hôte",
-    "cage-dorée"
+    "cage-doree"
   ],
   "identity": {
     "aliases": [
@@ -25,7 +26,7 @@
       "Le Croyant",
       "Le Pilier du Sacré"
     ],
-    "nature": "Humain — Hôte de Métatron — descendant de la lignée d’Elian",
+    "nature": "Humain — hôte et réceptacle de Métatron — descendant de la lignée d’Elian",
     "origin": "Orphelin élevé dans un monastère",
     "status": "Actif — en lutte quotidienne contre Métatron",
     "era": "Présent narratif"
@@ -33,7 +34,6 @@
   "magic": {
     "concept": "L’Ordre / Le Sacré",
     "domain": "Gloria Sanctus — L’Horizon des Promesses / Gloria Sanctus — Purgatoire",
-    "artifact": "Sceptre fusionné à la chair lors de l’Ascension",
     "abilities": [
       "Lumière Divine, Jugement et Barrières Absolues",
       "Synchronisation avec Métatron maintenue volontairement à 50%",
