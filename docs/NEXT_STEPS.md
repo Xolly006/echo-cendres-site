@@ -2,7 +2,7 @@
 
 ## Étape actuelle
 
-Stabiliser les premières fiches personnages réelles en `draft` et décider de la suite après Kael V1, Varros V1, Elias V1 et Ysolde V1.
+Stabiliser les premières fiches personnages réelles en `draft` et décider de la suite après Kael V1, Varros V1, Elias V1, Ysolde V1 et Amara V1.
 
 ## Tâches immédiates
 
@@ -10,29 +10,33 @@ Stabiliser les premières fiches personnages réelles en `draft` et décider de 
 2. Relire Varros le Fléau V1 en `draft`.
 3. Relire Elias V1 en `draft`.
 4. Relire Ysolde la Sauvage V1 en `draft`.
-5. Vérifier la section “Magie” de Kael : Concept, Domaine, Artefact, Ancre, Capacités et Limites.
-6. Vérifier la section “Magie” de Varros : Concept, Domaine, Ancre, Capacités et Limites.
-7. Vérifier la section “Magie” d’Elias : Concept, Domaine, Capacités et Limites, sans champ Artefact pour le moment.
-8. Vérifier la section “Magie” de Ysolde : Concept, Domaine, Capacités et Limites, sans artefact confirmé pour cette V1.
-9. Préparer plus tard les premiers `links` seulement après validation des slugs cibles.
-10. Repousser l’affichage public et la résolution des liens à une étape dédiée.
-11. Vérifier si les fiches Kael, Varros, Elias ou Ysolde doivent être légèrement améliorées avant toute publication.
-12. Confirmer que `themeKey: "vide-oppressant"` reste le bon choix pour Kael.
-13. Confirmer que `themeKey: "default"` reste acceptable pour Varros V1.
-14. Confirmer que `themeKey: "default"` reste acceptable provisoirement pour Elias V1.
-15. Confirmer que `themeKey: "vie-sauvage"` reste le bon choix pour Ysolde V1.
-16. Envisager plus tard un thème de famille comme `titan-maudit` uniquement si plusieurs personnages partagent cette ambiance.
-17. Envisager plus tard un thème de famille comme `foi-sans-dieu`, `lumiere-construite`, `sacre-fissure` ou équivalent uniquement si plusieurs personnages partagent cette ambiance.
-18. Garder Kael, Varros, Elias et Ysolde en `publicationStatus: "draft"` jusqu’à validation explicite du créateur.
-19. Choisir la prochaine décision après Kael V1, Varros V1, Elias V1 et Ysolde V1 :
+5. Relire Amara V1 en `draft`.
+6. Vérifier la section “Magie” de Kael : Concept, Domaine, Artefact, Ancre, Capacités et Limites.
+7. Vérifier la section “Magie” de Varros : Concept, Domaine, Ancre, Capacités et Limites.
+8. Vérifier la section “Magie” d’Elias : Concept, Domaine, Capacités et Limites, sans champ Artefact pour le moment.
+9. Vérifier la section “Magie” de Ysolde : Concept, Domaine, Capacités et Limites, sans artefact confirmé pour cette V1.
+10. Vérifier la section “Magie” d’Amara : Concept, Domaine, Capacités et Limites, sans artefact confirmé pour cette V1.
+11. Préparer plus tard les premiers `links` seulement après validation des slugs cibles.
+12. Repousser l’affichage public et la résolution des liens à une étape dédiée.
+13. Vérifier si les fiches Kael, Varros, Elias, Ysolde ou Amara doivent être légèrement améliorées avant toute publication.
+14. Confirmer que `themeKey: "vide-oppressant"` reste le bon choix pour Kael.
+15. Confirmer que `themeKey: "default"` reste acceptable pour Varros V1.
+16. Confirmer que `themeKey: "default"` reste acceptable provisoirement pour Elias V1.
+17. Confirmer que `themeKey: "vie-sauvage"` reste le bon choix pour Ysolde V1.
+18. Confirmer que `themeKey: "amour-douleur"` reste le bon choix pour Amara V1.
+19. Envisager plus tard un thème de famille comme `titan-maudit` uniquement si plusieurs personnages partagent cette ambiance.
+20. Envisager plus tard un thème de famille comme `foi-sans-dieu`, `lumiere-construite`, `sacre-fissure` ou équivalent uniquement si plusieurs personnages partagent cette ambiance.
+21. Garder Kael, Varros, Elias, Ysolde et Amara en `publicationStatus: "draft"` jusqu’à validation explicite du créateur.
+22. Choisir la prochaine décision après Kael V1, Varros V1, Elias V1, Ysolde V1 et Amara V1 :
    * améliorer légèrement la fiche Kael si nécessaire ;
    * améliorer légèrement la fiche Varros si nécessaire ;
    * améliorer légèrement la fiche Elias si nécessaire ;
    * améliorer légèrement la fiche Ysolde si nécessaire ;
-   * préparer un cinquième personnage en `draft` ;
+   * améliorer légèrement la fiche Amara si nécessaire ;
+   * préparer un sixième personnage en `draft` ;
    * documenter une méthode de validation avant publication.
-20. Garder les récits MDX limités au Markdown simple, sans imports, HTML brut ni JavaScript arbitraire.
-21. Intégrer Noah plus tard comme fiche test validée si le créateur confirme ce choix.
+23. Garder les récits MDX limités au Markdown simple, sans imports, HTML brut ni JavaScript arbitraire.
+24. Intégrer Noah plus tard comme fiche test validée si le créateur confirme ce choix.
 
 ## Hors périmètre pour le moment
 
@@ -142,3 +146,19 @@ Ysolde ne doit recevoir aucune signature visuelle spécifique maintenant. Les pi
 * éventuelle famille de thèmes liée aux forêts vivantes.
 
 Ces effets devront attendre le système séparé de signatures visuelles propres aux personnages majeurs ou les futurs moteurs de relations et de lieux. Le thème `vie-sauvage` est une famille standard réutilisable pour la Vie, la biomasse, les forêts conscientes, la nature sacrée et le cycle naturel ; il ne doit pas être traité comme un thème uniquement réservé à Ysolde.
+
+### Pistes futures pour Amara
+
+Amara ne doit recevoir aucune signature visuelle spécifique maintenant. Les pistes suivantes restent futures :
+
+* page évoquant une lettre d’amour ancienne ;
+* halo doux ;
+* vieux papier ;
+* rose fané ;
+* or discret ;
+* particules ou pétales très sobres plus tard, si nécessaire ;
+* aucune esthétique rose bonbon ;
+* aucune typographie cursive globale pour l’instant ;
+* aucune signature visuelle unique codée maintenant.
+
+Ces effets devront attendre le système séparé de signatures visuelles propres aux personnages majeurs. Le thème `amour-douleur` est une famille standard réutilisable pour l’amour sacrificiel, l’empathie, le lien, l’Agapè, la protection douloureuse, la tendresse tragique et la douleur partagée ; il ne doit pas être traité comme un thème uniquement réservé à Amara.

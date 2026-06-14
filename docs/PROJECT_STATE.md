@@ -68,6 +68,14 @@ Les différentes entités seront ajoutées progressivement. Le squelette doit pe
 * Ysolde teste un profil très différent de Kael, Varros et Elias : Vie, biomasse, cycle naturel, forêt consciente et tristesse organique.
 * Ysolde teste une ambiance plus organique, végétale et sacrée sans passer par une signature visuelle unique.
 * La V1 de Ysolde reste sobre : pas de romance développée, pas d’artefact confirmé, pas de RACINE, pas d’Elara et pas de prophétie complète.
+* Le thème standard `amour-douleur` existe maintenant pour les personnages liés à l’amour sacrificiel, à l’empathie, au lien, à l’Agapè, à la protection douloureuse, à la tendresse tragique et à la douleur partagée.
+* `amour-douleur` est une famille réutilisable : ce thème ne doit pas être considéré comme réservé uniquement à Amara.
+* Amara existe comme cinquième personnage réel en `draft`.
+* La fiche d’Amara se trouve dans `src/content/personnages/amara-mere-douleurs/` et contient `data.json` et `histoire.mdx`.
+* Amara utilise `publicationStatus: "draft"` et `themeKey: "amour-douleur"`.
+* Amara est un électron libre : elle n’appartient ni à l’Arquet ni aux Piliers, et elle enrichit la catégorie des personnages hors institution.
+* Amara est liée au Concept `LIEN / Amour / Agapè`, dirige un orphelinat neutre au milieu d’un champ de bataille, et porte les surnoms `La Mère des Douleurs` et `L’Intouchable par empathie`.
+* La magie d’Amara repose sur l’empathie sacrificielle, le transfert de blessures, le partage de la violence et son Domaine absolu `Le Mariage des Âmes`.
 * Carte, chronologie et système de thèmes avancé non encore développés.
 
 ## Technologies actuelles

@@ -68,6 +68,12 @@ Famille liée à la forêt profonde, à la biomasse, à la nature sacrée, au cy
 
 Elle est actuellement utilisée par Ysolde la Sauvage, mais elle reste réutilisable pour d’autres entités liées à la Vie, aux forêts conscientes ou à la nature ancienne.
 
+### `amour-douleur`
+
+Famille liée à l’amour sacrificiel, à l’empathie, au lien, à l’Agapè, à la protection douloureuse, à la tendresse tragique et à la douleur partagée.
+
+Elle est actuellement utilisée par Amara, mais elle reste réutilisable pour d’autres entités liées à l’amour sincère mais non naïf, à la protection par empathie ou à la douleur portée pour autrui.
+
 ## Signatures futures par personnage
 
 ### Kael l’Éclipsé
@@ -129,6 +135,24 @@ Signature future possible :
 * sensation de forêt consciente ;
 * chamanisme, cycle naturel, deuil organique ;
 * végétation ancienne, vivante, sacrée mais pas féerique.
+
+À ne pas coder maintenant.
+
+### Amara
+
+Famille actuelle : `amour-douleur`.
+
+Signature future possible :
+
+* page évoquant une lettre d’amour ancienne ;
+* halo doux ;
+* vieux papier ;
+* rose fané ;
+* or discret ;
+* particules ou pétales très sobres plus tard, si nécessaire ;
+* aucune esthétique rose bonbon ;
+* aucune typographie cursive globale pour l’instant ;
+* aucune signature visuelle unique codée maintenant.
 
 À ne pas coder maintenant.
 
