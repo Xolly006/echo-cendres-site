@@ -12,6 +12,7 @@ export const personnageNarrativeLoaders: Record<string, PersonnageNarrativeLoade
   'kael-eclipse': async () => (await import('@/content/personnages/kael-eclipse/histoire.mdx')).default as PersonnageNarrativeComponent,
   'prototype-technique': async () => (await import('@/content/personnages/prototype-technique/histoire.mdx')).default as PersonnageNarrativeComponent,
   'varros-fleau': async () => (await import('@/content/personnages/varros-fleau/histoire.mdx')).default as PersonnageNarrativeComponent,
+  'ysolde-sauvage': async () => (await import('@/content/personnages/ysolde-sauvage/histoire.mdx')).default as PersonnageNarrativeComponent,
 };
 
 export async function loadPersonnageNarrative(slug: string): Promise<PersonnageNarrativeComponent | null> {

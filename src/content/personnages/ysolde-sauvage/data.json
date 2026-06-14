@@ -1,0 +1,50 @@
+{
+  "nom": "Ysolde la Sauvage",
+  "publicationStatus": "draft",
+  "themeKey": "vie-sauvage",
+  "resumeCourt": "Chamane recluse et Pilier de la Vie, Ysolde incarne la Biomasse, la Nature et le Cycle naturel. Elle ressent la mort des forêts, la douleur des animaux et porte la Vie sans naïveté : face à Dayu, elle ne triomphe pas, elle met fin à une négation de la mort en pleurant celle qu’elle doit arrêter.",
+  "role": "Pilier de la Vie — Gardienne de Silvareth",
+  "tags": [
+    "pilier-existence",
+    "pilier-vie",
+    "vie",
+    "biomasse",
+    "nature",
+    "cycle-naturel",
+    "silvareth",
+    "chamane",
+    "regeneration",
+    "evolution",
+    "chimeres",
+    "dayu",
+    "ibuki"
+  ],
+  "identity": {
+    "aliases": [
+      "La Sauvage",
+      "Le Pilier de la Vie",
+      "La Chamane de Silvareth"
+    ],
+    "nature": "Humaine — Pilier de la Vie",
+    "origin": "Chamane d’une tribu reculée",
+    "status": "Active — Pilier en fonction",
+    "era": "Présent narratif"
+  },
+  "magic": {
+    "concept": "La Biomasse / La Nature / Le Cycle naturel",
+    "domain": "Silvareth — écosystème conscient et territoire vivant",
+    "abilities": [
+      "Régénération absolue",
+      "Contrôle de l’évolution et du vieillissement végétal",
+      "Création de chimères défensives",
+      "Vision de Pilier capable de lire la vérité profonde d’un être",
+      "Coupure de liens magiques maintenant artificiellement la vie"
+    ],
+    "limits": [
+      "Elle ressent la mort des forêts et la douleur des animaux",
+      "Elle refuse souvent d’aider les humains civilisés qu’elle juge destructeurs",
+      "Sa magie respecte le Cycle naturel et ne doit pas être réduite à un soin confortable",
+      "Couper un lien magique vital peut sauver le cycle, mais brise aussi ceux qui s’y accrochent"
+    ]
+  }
+}
