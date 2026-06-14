@@ -8,6 +8,7 @@ export type PersonnageNarrativeComponent = ComponentType<{ components?: MDXCompo
 export type PersonnageNarrativeLoader = () => Promise<PersonnageNarrativeComponent>;
 
 export const personnageNarrativeLoaders: Record<string, PersonnageNarrativeLoader> = {
+  'amara-mere-douleurs': async () => (await import('@/content/personnages/amara-mere-douleurs/histoire.mdx')).default as PersonnageNarrativeComponent,
   'elias-pilier-sacre': async () => (await import('@/content/personnages/elias-pilier-sacre/histoire.mdx')).default as PersonnageNarrativeComponent,
   'kael-eclipse': async () => (await import('@/content/personnages/kael-eclipse/histoire.mdx')).default as PersonnageNarrativeComponent,
   'prototype-technique': async () => (await import('@/content/personnages/prototype-technique/histoire.mdx')).default as PersonnageNarrativeComponent,

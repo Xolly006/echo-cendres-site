@@ -1,0 +1,48 @@
+{
+  "nom": "Amara",
+  "publicationStatus": "draft",
+  "themeKey": "amour-douleur",
+  "resumeCourt": "Électron libre née sous le choc du Concept LIEN, Amara incarne un amour sacrificiel si vaste qu’il rend la violence presque impossible. À la tête d’un orphelinat neutre au milieu des guerres, elle protège sans appartenir ni à l’Arquet ni aux Piliers : sa tendresse n’est pas une faiblesse, c’est une douleur partagée.",
+  "role": "La Mère des Douleurs — Gardienne d’un orphelinat neutre",
+  "tags": [
+    "electron-libre",
+    "anomalie",
+    "amour",
+    "lien",
+    "agape",
+    "empathie",
+    "protection",
+    "douleur-partagee",
+    "orphelinat",
+    "mere-des-douleurs",
+    "mariage-des-ames"
+  ],
+  "identity": {
+    "aliases": [
+      "La Mère des Douleurs",
+      "L’Intouchable par empathie"
+    ],
+    "nature": "Humaine percutée à la naissance par le Concept LIEN",
+    "origin": "Née non-mage, fusionnée avec un fragment du Concept LIEN grâce à son empathie",
+    "status": "Active — électron libre",
+    "era": "Présent narratif"
+  },
+  "magic": {
+    "concept": "Amour / LIEN / Agapè",
+    "domain": "Le Mariage des Âmes — domaine d’empathie absolue",
+    "abilities": [
+      "Ressent physiquement les émotions et la douleur des autres",
+      "Perçoit l’intention de tuer avant qu’un coup ne parte",
+      "Peut apaiser une foule par sa seule présence",
+      "Transfère sur son propre corps les blessures d’autrui",
+      "Partage les dégâts dans son Domaine absolu",
+      "Rend la violence contre elle presque impossible par empathie partagée"
+    ],
+    "limits": [
+      "Sa magie repose sur le sacrifice de soi et l’absorption de la douleur",
+      "Elle ne peut pas mourir tant qu’elle a quelqu’un à protéger",
+      "Le seul vrai contre est le refus de se battre",
+      "Elle n’est pas un Pilier et ne doit pas être institutionnalisée dans le système des Piliers"
+    ]
+  }
+}
