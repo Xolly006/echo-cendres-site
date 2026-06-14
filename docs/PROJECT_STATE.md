@@ -60,6 +60,14 @@ Les différentes entités seront ajoutées progressivement. Le squelette doit pe
 * Elias a été corrigé après création : le champ `magic.artifact` lié au sceptre a été supprimé, le tag vague `pilier` a été remplacé par `pilier-existence`, le tag précis `pilier-sacre` est conservé, et sa nature précise qu’il est humain, hôte et réceptacle de Métatron, pas Métatron lui-même.
 * Le rendu visuel V1 d’Elias avec le thème `default` reste acceptable provisoirement.
 * Un futur thème de famille, par exemple `foi-sans-dieu`, `lumiere-construite`, `sacre-fissure` ou équivalent, pourra être envisagé plus tard si plusieurs personnages partagent cette ambiance.
+* Le thème standard `vie-sauvage` existe maintenant pour les personnages liés à la Vie, à la biomasse, aux forêts conscientes, à la nature sacrée ou au cycle naturel.
+* `vie-sauvage` est une famille réutilisable : ce thème ne doit pas être considéré comme réservé uniquement à Ysolde.
+* Ysolde la Sauvage existe comme quatrième personnage réel en `draft`.
+* La fiche de Ysolde se trouve dans `src/content/personnages/ysolde-sauvage/` et contient `data.json` et `histoire.mdx`.
+* Ysolde utilise `publicationStatus: "draft"` et `themeKey: "vie-sauvage"`.
+* Ysolde teste un profil très différent de Kael, Varros et Elias : Vie, biomasse, cycle naturel, forêt consciente et tristesse organique.
+* Ysolde teste une ambiance plus organique, végétale et sacrée sans passer par une signature visuelle unique.
+* La V1 de Ysolde reste sobre : pas de romance développée, pas d’artefact confirmé, pas de RACINE, pas d’Elara et pas de prophétie complète.
 * Carte, chronologie et système de thèmes avancé non encore développés.
 
 ## Technologies actuelles

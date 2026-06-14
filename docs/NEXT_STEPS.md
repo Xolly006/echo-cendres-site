@@ -2,33 +2,37 @@
 
 ## Étape actuelle
 
-Stabiliser les premières fiches personnages réelles en `draft` et décider de la suite après Kael V1, Varros V1 et Elias V1.
+Stabiliser les premières fiches personnages réelles en `draft` et décider de la suite après Kael V1, Varros V1, Elias V1 et Ysolde V1.
 
 ## Tâches immédiates
 
 1. Relire Kael l’Éclipsé V1 en `draft`.
 2. Relire Varros le Fléau V1 en `draft`.
 3. Relire Elias V1 en `draft`.
-4. Vérifier la section “Magie” de Kael : Concept, Domaine, Artefact, Ancre, Capacités et Limites.
-5. Vérifier la section “Magie” de Varros : Concept, Domaine, Ancre, Capacités et Limites.
-6. Vérifier la section “Magie” d’Elias : Concept, Domaine, Capacités et Limites, sans champ Artefact pour le moment.
-7. Préparer plus tard les premiers `links` seulement après validation des slugs cibles.
-8. Repousser l’affichage public et la résolution des liens à une étape dédiée.
-9. Vérifier si les fiches Kael, Varros ou Elias doivent être légèrement améliorées avant toute publication.
-10. Confirmer que `themeKey: "vide-oppressant"` reste le bon choix pour Kael.
-11. Confirmer que `themeKey: "default"` reste acceptable pour Varros V1.
-12. Confirmer que `themeKey: "default"` reste acceptable provisoirement pour Elias V1.
-13. Envisager plus tard un thème de famille comme `titan-maudit` uniquement si plusieurs personnages partagent cette ambiance.
-14. Envisager plus tard un thème de famille comme `foi-sans-dieu`, `lumiere-construite`, `sacre-fissure` ou équivalent uniquement si plusieurs personnages partagent cette ambiance.
-15. Garder Kael, Varros et Elias en `publicationStatus: "draft"` jusqu’à validation explicite du créateur.
-16. Choisir la prochaine décision après Kael V1, Varros V1 et Elias V1 :
+4. Relire Ysolde la Sauvage V1 en `draft`.
+5. Vérifier la section “Magie” de Kael : Concept, Domaine, Artefact, Ancre, Capacités et Limites.
+6. Vérifier la section “Magie” de Varros : Concept, Domaine, Ancre, Capacités et Limites.
+7. Vérifier la section “Magie” d’Elias : Concept, Domaine, Capacités et Limites, sans champ Artefact pour le moment.
+8. Vérifier la section “Magie” de Ysolde : Concept, Domaine, Capacités et Limites, sans artefact confirmé pour cette V1.
+9. Préparer plus tard les premiers `links` seulement après validation des slugs cibles.
+10. Repousser l’affichage public et la résolution des liens à une étape dédiée.
+11. Vérifier si les fiches Kael, Varros, Elias ou Ysolde doivent être légèrement améliorées avant toute publication.
+12. Confirmer que `themeKey: "vide-oppressant"` reste le bon choix pour Kael.
+13. Confirmer que `themeKey: "default"` reste acceptable pour Varros V1.
+14. Confirmer que `themeKey: "default"` reste acceptable provisoirement pour Elias V1.
+15. Confirmer que `themeKey: "vie-sauvage"` reste le bon choix pour Ysolde V1.
+16. Envisager plus tard un thème de famille comme `titan-maudit` uniquement si plusieurs personnages partagent cette ambiance.
+17. Envisager plus tard un thème de famille comme `foi-sans-dieu`, `lumiere-construite`, `sacre-fissure` ou équivalent uniquement si plusieurs personnages partagent cette ambiance.
+18. Garder Kael, Varros, Elias et Ysolde en `publicationStatus: "draft"` jusqu’à validation explicite du créateur.
+19. Choisir la prochaine décision après Kael V1, Varros V1, Elias V1 et Ysolde V1 :
    * améliorer légèrement la fiche Kael si nécessaire ;
    * améliorer légèrement la fiche Varros si nécessaire ;
    * améliorer légèrement la fiche Elias si nécessaire ;
-   * préparer un quatrième personnage en `draft` ;
+   * améliorer légèrement la fiche Ysolde si nécessaire ;
+   * préparer un cinquième personnage en `draft` ;
    * documenter une méthode de validation avant publication.
-17. Garder les récits MDX limités au Markdown simple, sans imports, HTML brut ni JavaScript arbitraire.
-18. Intégrer Noah plus tard comme fiche test validée si le créateur confirme ce choix.
+20. Garder les récits MDX limités au Markdown simple, sans imports, HTML brut ni JavaScript arbitraire.
+21. Intégrer Noah plus tard comme fiche test validée si le créateur confirme ce choix.
 
 ## Hors périmètre pour le moment
 
@@ -119,3 +123,20 @@ Elias ne doit recevoir aucune signature visuelle spécifique maintenant. Les pis
 * présence de Métatron comme contrainte, pas comme identité d’Elias.
 
 Ces effets devront attendre le système séparé de signatures visuelles propres aux personnages majeurs. Le thème `default` reste acceptable provisoirement pour sa V1, et un futur thème de famille comme `foi-sans-dieu`, `lumiere-construite`, `sacre-fissure` ou équivalent ne devra être envisagé que si plusieurs personnages peuvent réellement le partager.
+
+### Pistes futures pour Ysolde la Sauvage
+
+Ysolde ne doit recevoir aucune signature visuelle spécifique maintenant. Les pistes suivantes restent futures :
+
+* signature visuelle de forêt consciente ;
+* aura verte et dorée ;
+* présence de racines discrètes ;
+* lianes sobres sur les bords de page ;
+* brume verte sombre ;
+* texture légère de mousse ou d’écorce ;
+* sensation de végétation ancienne, chamanique et vivante ;
+* liens futurs avec Dayu et Ibuki ;
+* éventuelle page lieu pour Silvareth ;
+* éventuelle famille de thèmes liée aux forêts vivantes.
+
+Ces effets devront attendre le système séparé de signatures visuelles propres aux personnages majeurs ou les futurs moteurs de relations et de lieux. Le thème `vie-sauvage` est une famille standard réutilisable pour la Vie, la biomasse, les forêts conscientes, la nature sacrée et le cycle naturel ; il ne doit pas être traité comme un thème uniquement réservé à Ysolde.
