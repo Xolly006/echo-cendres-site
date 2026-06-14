@@ -163,6 +163,63 @@
   opacity: 0.24;
 }
 
+.atmosphere[data-background-kind='mist'] .depth {
+  background:
+    radial-gradient(circle at 18% 18%, rgba(87, 124, 80, 0.18), transparent 30%),
+    radial-gradient(circle at 76% 16%, rgba(194, 168, 93, 0.09), transparent 26%),
+    radial-gradient(circle at 48% 72%, rgba(34, 81, 55, 0.2), transparent 42%),
+    linear-gradient(180deg, rgba(3, 15, 10, 0.58), rgba(2, 8, 6, 0.84));
+  opacity: 0.88;
+}
+
+.atmosphere[data-background-kind='mist'] .localGlow {
+  left: clamp(-4rem, -3vw, -0.5rem);
+  top: clamp(8rem, 18vh, 15rem);
+  width: min(42rem, 76vw);
+  background:
+    radial-gradient(circle, rgba(98, 130, 82, 0.2), rgba(40, 82, 56, 0.1) 42%, transparent 74%);
+  filter: blur(16px);
+  opacity: 0.58;
+  animation: livingMistBreath 18s ease-in-out infinite;
+}
+
+.atmosphere[data-background-kind='mist'] .farGlow {
+  right: -12%;
+  bottom: 0;
+  width: min(48rem, 84vw);
+  background:
+    radial-gradient(circle, rgba(194, 168, 93, 0.09), rgba(45, 82, 51, 0.08) 44%, transparent 76%);
+  opacity: 0.38;
+}
+
+.atmosphere[data-background-kind='mist'] .traceOne,
+.atmosphere[data-background-kind='mist'] .traceTwo {
+  background:
+    linear-gradient(90deg, transparent, rgba(190, 176, 105, 0.2), rgba(93, 129, 84, 0.18), transparent);
+}
+
+.atmosphere[data-background-kind='mist'] .traceOne {
+  left: 10%;
+  right: 24%;
+  top: 34%;
+  opacity: 0.3;
+}
+
+.atmosphere[data-background-kind='mist'] .traceTwo {
+  left: 24%;
+  right: 10%;
+  bottom: 25%;
+  opacity: 0.2;
+}
+
+.atmosphere[data-background-kind='mist'] .grain {
+  opacity: 0.18;
+  background:
+    radial-gradient(circle at 18% 40%, rgba(164, 185, 139, 0.18) 0 1px, transparent 2px),
+    radial-gradient(circle at 42% 62%, rgba(194, 168, 93, 0.12) 0 1px, transparent 2px),
+    radial-gradient(circle at 68% 34%, rgba(126, 154, 101, 0.14) 0 1px, transparent 2px);
+}
+
 .atmosphere[data-intensity='medium'] {
   filter: saturate(1.08) contrast(1.04);
 }
@@ -193,6 +250,17 @@
   }
 }
 
+@keyframes livingMistBreath {
+  0%, 100% {
+    opacity: 0.46;
+    transform: translate3d(0, 0, 0) scale(0.99);
+  }
+  50% {
+    opacity: 0.62;
+    transform: translate3d(0.6rem, -0.35rem, 0) scale(1.025);
+  }
+}
+
 @media (max-width: 720px) {
   .localGlow,
   .farGlow {
@@ -214,6 +282,14 @@
 
   .atmosphere[data-background-kind='void'] .depth {
     opacity: 0.78;
+  }
+
+  .atmosphere[data-background-kind='mist'] .localGlow {
+    opacity: 0.38;
+  }
+
+  .atmosphere[data-background-kind='mist'] .depth {
+    opacity: 0.72;
   }
 }
 
