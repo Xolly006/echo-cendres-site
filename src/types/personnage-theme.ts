@@ -17,7 +17,7 @@ export type PersonnageTheme = {
     labelSpacing?: string;
   };
   atmosphere?: {
-    backgroundKind?: 'none' | 'mist' | 'embers' | 'void' | 'crystal' | 'stars';
+    backgroundKind?: 'none' | 'mist' | 'embers' | 'void' | 'crystal' | 'stars' | 'tender';
     particleKind?: 'none' | 'ash' | 'embers' | 'dust' | 'stars';
     intensity?: 'low' | 'medium';
   };

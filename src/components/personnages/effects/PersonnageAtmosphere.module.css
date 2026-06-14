@@ -220,6 +220,64 @@
     radial-gradient(circle at 68% 34%, rgba(126, 154, 101, 0.14) 0 1px, transparent 2px);
 }
 
+.atmosphere[data-background-kind='tender'] .depth {
+  background:
+    radial-gradient(circle at 20% 18%, rgba(183, 119, 130, 0.15), transparent 30%),
+    radial-gradient(circle at 70% 22%, rgba(203, 169, 102, 0.1), transparent 28%),
+    radial-gradient(circle at 42% 78%, rgba(82, 29, 36, 0.18), transparent 40%),
+    linear-gradient(180deg, rgba(28, 15, 15, 0.52), rgba(12, 7, 8, 0.82));
+  opacity: 0.86;
+}
+
+.atmosphere[data-background-kind='tender'] .localGlow {
+  left: clamp(-3rem, -2vw, 0.5rem);
+  top: clamp(7rem, 16vh, 13rem);
+  width: min(39rem, 74vw);
+  background:
+    radial-gradient(circle, rgba(183, 119, 130, 0.22), rgba(122, 55, 61, 0.11) 42%, transparent 74%);
+  filter: blur(15px);
+  opacity: 0.55;
+  animation: tenderPaperGlow 20s ease-in-out infinite;
+}
+
+.atmosphere[data-background-kind='tender'] .farGlow {
+  right: -10%;
+  bottom: 4%;
+  width: min(45rem, 80vw);
+  background:
+    radial-gradient(circle, rgba(203, 169, 102, 0.11), rgba(75, 38, 34, 0.08) 44%, transparent 78%);
+  opacity: 0.36;
+}
+
+.atmosphere[data-background-kind='tender'] .traceOne,
+.atmosphere[data-background-kind='tender'] .traceTwo {
+  background:
+    linear-gradient(90deg, transparent, rgba(205, 157, 139, 0.2), rgba(183, 119, 130, 0.14), transparent);
+}
+
+.atmosphere[data-background-kind='tender'] .traceOne {
+  left: 9%;
+  right: 20%;
+  top: 35%;
+  opacity: 0.28;
+}
+
+.atmosphere[data-background-kind='tender'] .traceTwo {
+  left: 20%;
+  right: 12%;
+  bottom: 27%;
+  opacity: 0.2;
+}
+
+.atmosphere[data-background-kind='tender'] .grain {
+  opacity: 0.2;
+  background:
+    radial-gradient(circle at 16% 38%, rgba(231, 196, 160, 0.13) 0 1px, transparent 2px),
+    radial-gradient(circle at 36% 56%, rgba(183, 119, 130, 0.13) 0 1px, transparent 2px),
+    radial-gradient(circle at 62% 34%, rgba(203, 169, 102, 0.12) 0 1px, transparent 2px),
+    radial-gradient(ellipse at 78% 66%, rgba(89, 28, 39, 0.16) 0 1px, transparent 3px);
+}
+
 .atmosphere[data-intensity='medium'] {
   filter: saturate(1.08) contrast(1.04);
 }
@@ -261,6 +319,17 @@
   }
 }
 
+@keyframes tenderPaperGlow {
+  0%, 100% {
+    opacity: 0.44;
+    transform: translate3d(0, 0, 0) scale(0.995);
+  }
+  50% {
+    opacity: 0.58;
+    transform: translate3d(0.35rem, -0.25rem, 0) scale(1.018);
+  }
+}
+
 @media (max-width: 720px) {
   .localGlow,
   .farGlow {
@@ -289,6 +358,14 @@
   }
 
   .atmosphere[data-background-kind='mist'] .depth {
+    opacity: 0.72;
+  }
+
+  .atmosphere[data-background-kind='tender'] .localGlow {
+    opacity: 0.36;
+  }
+
+  .atmosphere[data-background-kind='tender'] .depth {
     opacity: 0.72;
   }
 }
