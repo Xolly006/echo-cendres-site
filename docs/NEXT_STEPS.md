@@ -89,6 +89,8 @@ Cette étape ne doit pas être développée maintenant. Elle dépend d’abord d
 
 Les effets spécifiques à un personnage devront rester séparés de l’atmosphère standard afin d’éviter de rendre le projet ingérable. L’atmosphère standard doit rester réutilisable, tandis que les signatures exceptionnelles devront être ajoutées plus tard dans un système distinct et contrôlé.
 
+Le document `docs/SIGNATURES_VISUELLES_PERSONNAGES.md` sert maintenant de référence de direction artistique pour distinguer familles de thèmes, signatures visuelles spécifiques et backlog à ne pas coder tout de suite.
+
 ### Pistes futures pour Kael l’Éclipsé
 
 Kael ne doit recevoir aucune signature visuelle spécifique maintenant. Les pistes suivantes restent futures :
