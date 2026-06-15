@@ -404,6 +404,45 @@ a {
   color: var(--text);
 }
 
+.directory-note {
+  max-width: 56rem;
+  margin-top: 1.5rem;
+  border-left: 3px solid color-mix(in srgb, var(--accent) 76%, var(--border));
+  padding: 1rem 1.1rem;
+  background: rgba(255, 255, 255, 0.035);
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+.faction-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.faction-card {
+  min-height: 15rem;
+  border: 1px solid var(--border);
+  border-radius: 1.2rem;
+  padding: 1.2rem;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.014)),
+    var(--surface);
+  box-shadow: 0 20px 80px var(--shadow);
+}
+
+.faction-card h2 {
+  margin: 0.65rem 0 0;
+  font-family: var(--font-title);
+  font-size: clamp(1.6rem, 3vw, 2.25rem);
+}
+
+.faction-card p:last-child {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
 .personnage-filters {
   display: flex;
   flex-wrap: wrap;
@@ -610,7 +649,8 @@ a {
 
 @media (max-width: 960px) {
   .section-grid,
-  .personnage-grid {
+  .personnage-grid,
+  .faction-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
@@ -635,7 +675,8 @@ a {
   }
 
   .section-grid,
-  .personnage-grid {
+  .personnage-grid,
+  .faction-grid {
     grid-template-columns: 1fr;
   }
 }
