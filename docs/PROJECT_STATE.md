@@ -43,6 +43,10 @@ Les différentes entités seront ajoutées progressivement. Le squelette doit pe
 * La page `/personnages` continue d’utiliser la logique publique existante : seuls les personnages en `publicationStatus: "published"` sont affichés.
 * Les personnages en `draft` restent protégés et invisibles en production, y compris avec les filtres actifs.
 * Les filtres préparent le futur catalogue sans publier les fiches réelles.
+* La page `/personnages` possède maintenant un état vide propre : si aucun personnage publié n’existe, elle indique que les archives personnages sont en cours de stabilisation.
+* Les filtres restent visibles même quand aucun personnage n’est affiché.
+* Si un filtre actif ne retourne aucun résultat, un message adapté est affiché avec un lien permettant de revenir au filtre `Tous`.
+* Cet état vide stabilise le moteur personnages sans rendre les fiches en `draft` visibles.
 * Kael l’Éclipsé existe comme premier personnage réel en `draft`.
 * La fiche de Kael se trouve dans `src/content/personnages/kael-eclipse/` et contient `data.json` et `histoire.mdx`.
 * Kael utilise `publicationStatus: "draft"` et `themeKey: "vide-oppressant"`.
