@@ -80,12 +80,20 @@ export default async function Page({ searchParams }: PageProps) {
         {personnages.length === 0 ? (
           <div className="empty-state">
             <strong>Aucune fiche personnage publiée pour le moment.</strong>
-            <span>Les premières entrées apparaîtront ici dès que leurs fichiers JSON auront été ajoutés et validés.</span>
+            <span>
+              Les archives personnages sont en cours de stabilisation. Les fiches en brouillon restent invisibles tant
+              qu’elles ne sont pas validées pour publication.
+            </span>
           </div>
         ) : filteredPersonnages.length === 0 ? (
           <div className="empty-state">
             <strong>Aucune fiche publiée dans la catégorie “{activeLabel}”.</strong>
             <span>Les personnages en brouillon restent masqués tant qu’ils ne sont pas explicitement publiés.</span>
+            {activeCategory !== 'tous' ? (
+              <Link className="empty-state__action" href="/personnages">
+                Revenir à Tous
+              </Link>
+            ) : null}
           </div>
         ) : (
           <div className="personnage-grid" aria-label="Liste des personnages">

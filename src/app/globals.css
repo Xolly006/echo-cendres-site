@@ -397,6 +397,13 @@ a {
   color: var(--text);
 }
 
+.empty-state__action {
+  width: fit-content;
+  margin-top: 0.45rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--accent) 60%, transparent);
+  color: var(--text);
+}
+
 .personnage-filters {
   display: flex;
   flex-wrap: wrap;
