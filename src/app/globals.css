@@ -397,6 +397,29 @@ a {
   color: var(--text);
 }
 
+.personnage-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-top: 1.5rem;
+}
+
+.personnage-filter {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.55rem 0.85rem;
+  background: rgba(255, 255, 255, 0.035);
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1;
+}
+
+.personnage-filter[data-active='true'] {
+  border-color: color-mix(in srgb, var(--accent) 58%, var(--border));
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: var(--text);
+}
+
 .personnage-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
