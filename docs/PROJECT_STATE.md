@@ -63,6 +63,11 @@ Les différentes entités seront ajoutées progressivement. Le squelette doit pe
 * Cette page sert de point d’entrée futur pour structurer la magie du Livre-Monde.
 * Aucun modèle `Magic`, aucun dossier `src/content/magie` et aucun lien dynamique entre personnages, Concepts et systèmes magiques n’existent encore.
 * La navigation globale possédait déjà un lien vers `/magie`, donc elle n’a pas été modifiée pour cette étape.
+* La page `/carte` existe maintenant et remplace le placeholder générique initial.
+* `/carte` prépare la future section Atlas du Livre-Monde.
+* Elle présente sobrement plusieurs couches futures : Monde physique, Abîme, plans célestes / Celestia, lieux vivants et zones sacrées, et futur atlas interactif.
+* Aucun modèle `Lieu`, aucun dossier `src/content/lieux`, aucune carte SVG interactive, aucun système de coordonnées et aucun lien dynamique entre lieux, personnages, factions ou événements n’existent encore.
+* La navigation globale possédait déjà un lien vers `/carte`, donc elle n’a pas été modifiée pour cette étape.
 * Kael l’Éclipsé existe comme premier personnage réel en `draft`.
 * La fiche de Kael se trouve dans `src/content/personnages/kael-eclipse/` et contient `data.json` et `histoire.mdx`.
 * Kael utilise `publicationStatus: "draft"` et `themeKey: "vide-oppressant"`.
@@ -101,7 +106,7 @@ Les différentes entités seront ajoutées progressivement. Le squelette doit pe
 * Amara est un électron libre : elle n’appartient ni à l’Arquet ni aux Piliers, et elle enrichit la catégorie des personnages hors institution.
 * Amara est liée au Concept `LIEN / Amour / Agapè`, dirige un orphelinat neutre au milieu d’un champ de bataille, et porte les surnoms `La Mère des Douleurs` et `L’Intouchable par empathie`.
 * La magie d’Amara repose sur l’empathie sacrificielle, le transfert de blessures, le partage de la violence et son Domaine absolu `Le Mariage des Âmes`.
-* Carte, chronologie, moteur de factions structuré, moteur de magie structuré et système de thèmes avancé non encore développés.
+* Chronologie, moteur de lieux structuré, moteur de factions structuré, moteur de magie structuré et système de thèmes avancé non encore développés.
 
 ## Technologies actuelles
 

@@ -30,6 +30,7 @@ src/content/personnages/[slug]/
 * preview interne des drafts via `/personnages/preview` ;
 * page `/factions` placeholder pour les grandes forces du Livre-Monde ;
 * page `/magie` placeholder pour les grands axes magiques ;
+* page `/carte` placeholder pour le futur Atlas du Livre-Monde ;
 * documentation de direction artistique dans `docs/SIGNATURES_VISUELLES_PERSONNAGES.md`.
 
 La page publique `/personnages` utilise seulement les personnages en `publicationStatus: "published"`. Les drafts restent invisibles publiquement.
@@ -37,6 +38,8 @@ La page publique `/personnages` utilise seulement les personnages en `publicatio
 La page `/factions` existe comme point d’entrée statique. Elle présente L’Arquet, les Piliers de l’Existence, les Électrons libres / Anomalies et les autres forces à documenter plus tard. Elle ne crée pas encore de modèle `Faction`, de dossier `src/content/factions` ou de liens dynamiques.
 
 La page `/magie` existe comme point d’entrée statique. Elle présente Concepts, Éveils, Domaines, Arquet / Piliers / anomalies et magie comme force narrative. Elle ne crée pas encore de modèle `Magic`, de dossier `src/content/magie` ou de liens dynamiques entre personnages, Concepts et systèmes magiques.
+
+La page `/carte` existe comme point d’entrée statique pour le futur Atlas. Elle présente Monde physique, Abîme, plans célestes / Celestia, lieux vivants et zones sacrées, et futur atlas interactif. Elle ne crée pas encore de modèle `Lieu`, de dossier `src/content/lieux`, de carte SVG interactive, de système de coordonnées ou de liens dynamiques.
 
 ## 3. Personnages réels actuellement en draft
 
@@ -237,7 +240,8 @@ Pistes possibles, à traiter une par une :
 * améliorer la navigation catalogue ;
 * enrichir prudemment la page Factions sans créer de modèle avant validation ;
 * enrichir prudemment la page Magie sans créer de modèle avant validation ;
-* préparer les pages Chronologie ou Carte ;
+* enrichir prudemment la page Carte sans créer de modèle avant validation ;
+* préparer la page Chronologie ;
 * ajouter les premiers liens internes seulement après validation des slugs ;
 * continuer les personnages par petits lots ;
 * éviter de bloquer tout le projet sur les fiches personnages.
