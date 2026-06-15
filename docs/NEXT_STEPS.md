@@ -33,16 +33,21 @@ Stabiliser les premières fiches personnages réelles en `draft` et décider de 
 25. Créer un modèle de données `Faction` seulement quand les catégories et les slugs seront validés.
 26. Relier les personnages aux factions seulement après validation des slugs et des catégories.
 27. Éviter de figer trop tôt toute la géopolitique du monde.
-28. Vérifier si les fiches Kael, Varros, Elias, Ysolde ou Amara doivent être légèrement améliorées avant toute publication.
-29. Confirmer que `themeKey: "vide-oppressant"` reste le bon choix pour Kael.
-30. Confirmer que `themeKey: "default"` reste acceptable pour Varros V1.
-31. Confirmer que `themeKey: "default"` reste acceptable provisoirement pour Elias V1.
-32. Confirmer que `themeKey: "vie-sauvage"` reste le bon choix pour Ysolde V1.
-33. Confirmer que `themeKey: "amour-douleur"` reste le bon choix pour Amara V1.
-34. Envisager plus tard un thème de famille comme `titan-maudit` uniquement si plusieurs personnages partagent cette ambiance.
-35. Envisager plus tard un thème de famille comme `foi-sans-dieu`, `lumiere-construite`, `sacre-fissure` ou équivalent uniquement si plusieurs personnages partagent cette ambiance.
-36. Garder Kael, Varros, Elias, Ysolde et Amara en `publicationStatus: "draft"` jusqu’à validation explicite du créateur.
-37. Choisir la prochaine décision après Kael V1, Varros V1, Elias V1, Ysolde V1 et Amara V1 :
+28. Extraire plus tard les Concepts confirmés depuis le lore, sans figer toute la cosmologie.
+29. Distinguer plus tard Concepts, Domaines, Éveils et systèmes d’origine.
+30. Créer un modèle de données magique seulement quand la structure sera stabilisée.
+31. Relier les personnages aux Concepts seulement après validation des slugs et des catégories.
+32. Éviter de figer trop tôt toute la cosmologie.
+33. Vérifier si les fiches Kael, Varros, Elias, Ysolde ou Amara doivent être légèrement améliorées avant toute publication.
+34. Confirmer que `themeKey: "vide-oppressant"` reste le bon choix pour Kael.
+35. Confirmer que `themeKey: "default"` reste acceptable pour Varros V1.
+36. Confirmer que `themeKey: "default"` reste acceptable provisoirement pour Elias V1.
+37. Confirmer que `themeKey: "vie-sauvage"` reste le bon choix pour Ysolde V1.
+38. Confirmer que `themeKey: "amour-douleur"` reste le bon choix pour Amara V1.
+39. Envisager plus tard un thème de famille comme `titan-maudit` uniquement si plusieurs personnages partagent cette ambiance.
+40. Envisager plus tard un thème de famille comme `foi-sans-dieu`, `lumiere-construite`, `sacre-fissure` ou équivalent uniquement si plusieurs personnages partagent cette ambiance.
+41. Garder Kael, Varros, Elias, Ysolde et Amara en `publicationStatus: "draft"` jusqu’à validation explicite du créateur.
+42. Choisir la prochaine décision après Kael V1, Varros V1, Elias V1, Ysolde V1 et Amara V1 :
    * améliorer légèrement la fiche Kael si nécessaire ;
    * améliorer légèrement la fiche Varros si nécessaire ;
    * améliorer légèrement la fiche Elias si nécessaire ;
@@ -50,8 +55,8 @@ Stabiliser les premières fiches personnages réelles en `draft` et décider de 
    * améliorer légèrement la fiche Amara si nécessaire ;
    * préparer un sixième personnage en `draft` ;
    * documenter une méthode de validation avant publication.
-38. Garder les récits MDX limités au Markdown simple, sans imports, HTML brut ni JavaScript arbitraire.
-39. Intégrer Noah plus tard comme fiche test validée si le créateur confirme ce choix.
+43. Garder les récits MDX limités au Markdown simple, sans imports, HTML brut ni JavaScript arbitraire.
+44. Intégrer Noah plus tard comme fiche test validée si le créateur confirme ce choix.
 
 ## Hors périmètre pour le moment
 
@@ -64,6 +69,8 @@ Stabiliser les premières fiches personnages réelles en `draft` et décider de 
 * Développer les compositions standard, scène ou exceptionnelle.
 * Créer un modèle de données `Faction`.
 * Créer `src/content/factions`.
+* Créer un modèle de données magique.
+* Créer `src/content/magie`.
 * Ajouter des effets animés liés aux thèmes.
 * Ajouter des composants narratifs spéciaux, la magie, les relations ou les événements.
 * Ajouter relations, lieux ou événements associés.
