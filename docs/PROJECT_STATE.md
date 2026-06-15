@@ -38,6 +38,11 @@ Les différentes entités seront ajoutées progressivement. Le squelette doit pe
 * Les personnages sont maintenant stockés dans un dossier par personnage avec `data.json`.
 * Le moteur détecte optionnellement `histoire.mdx` via `hasNarrative`.
 * Rendu narratif MDX serveur présent pour les fiches personnages via un registre d’imports MDX généré automatiquement.
+* La page `/personnages` possède maintenant une première version de filtres de catalogue : Tous, Arquet, Piliers et Électrons libres.
+* Ces filtres s’appuient sur les tags existants des personnages : `arquet`, `pilier`, `electron-libre` ou `anomalie`.
+* La page `/personnages` continue d’utiliser la logique publique existante : seuls les personnages en `publicationStatus: "published"` sont affichés.
+* Les personnages en `draft` restent protégés et invisibles en production, y compris avec les filtres actifs.
+* Les filtres préparent le futur catalogue sans publier les fiches réelles.
 * Kael l’Éclipsé existe comme premier personnage réel en `draft`.
 * La fiche de Kael se trouve dans `src/content/personnages/kael-eclipse/` et contient `data.json` et `histoire.mdx`.
 * Kael utilise `publicationStatus: "draft"` et `themeKey: "vide-oppressant"`.
