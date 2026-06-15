@@ -199,6 +199,10 @@ export async function getAllPersonnages(): Promise<Personnage[]> {
   return personnages.filter((personnage) => personnage.publicationStatus === 'published');
 }
 
+export async function getAllPersonnagesForPreview(): Promise<Personnage[]> {
+  return readAllPersonnages();
+}
+
 export async function getPublishedPersonnageBySlug(slug: string): Promise<Personnage | null> {
   const personnages = await readAllPersonnages();
   const personnage = personnages.find((entry) => entry.slug === slug);
@@ -208,6 +212,12 @@ export async function getPublishedPersonnageBySlug(slug: string): Promise<Person
   }
 
   return personnage;
+}
+
+export async function getPersonnageForPreviewBySlug(slug: string): Promise<Personnage | null> {
+  const personnages = await readAllPersonnages();
+
+  return personnages.find((entry) => entry.slug === slug) ?? null;
 }
 
 export async function getPersonnageNarrativeSource(slug: string): Promise<string | null> {
