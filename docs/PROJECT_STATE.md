@@ -53,6 +53,11 @@ Les différentes entités seront ajoutées progressivement. Le squelette doit pe
 * En production, les routes preview affichent un état indisponible et ne lisent pas les personnages en `draft`.
 * Les pages publiques `/personnages` et `/personnages/[slug]` conservent leur logique publique : les personnages en `draft` restent invisibles en production.
 * Le mode preview remplace le besoin de passer temporairement une fiche en `published` pour la tester visuellement.
+* La page `/factions` existe maintenant et remplace le placeholder générique initial.
+* `/factions` présente sobrement les grandes familles ou forces actuelles : L’Arquet, les Piliers de l’Existence, les Électrons libres / Anomalies, et d’autres forces à documenter plus tard.
+* Cette page sert de point d’entrée futur pour structurer les grandes forces du Livre-Monde.
+* Aucun modèle `Faction`, aucun dossier `src/content/factions` et aucun lien dynamique entre personnages et factions n’existent encore.
+* La navigation globale possédait déjà un lien vers `/factions`, donc elle n’a pas été modifiée pour cette étape.
 * Kael l’Éclipsé existe comme premier personnage réel en `draft`.
 * La fiche de Kael se trouve dans `src/content/personnages/kael-eclipse/` et contient `data.json` et `histoire.mdx`.
 * Kael utilise `publicationStatus: "draft"` et `themeKey: "vide-oppressant"`.
@@ -91,7 +96,7 @@ Les différentes entités seront ajoutées progressivement. Le squelette doit pe
 * Amara est un électron libre : elle n’appartient ni à l’Arquet ni aux Piliers, et elle enrichit la catégorie des personnages hors institution.
 * Amara est liée au Concept `LIEN / Amour / Agapè`, dirige un orphelinat neutre au milieu d’un champ de bataille, et porte les surnoms `La Mère des Douleurs` et `L’Intouchable par empathie`.
 * La magie d’Amara repose sur l’empathie sacrificielle, le transfert de blessures, le partage de la violence et son Domaine absolu `Le Mariage des Âmes`.
-* Carte, chronologie et système de thèmes avancé non encore développés.
+* Carte, chronologie, moteur de factions structuré et système de thèmes avancé non encore développés.
 
 ## Technologies actuelles
 
