@@ -20,20 +20,24 @@ Stabiliser les premières fiches personnages réelles en `draft` et décider de 
 12. Repousser l’affichage public et la résolution des liens à une étape dédiée.
 13. Garder les filtres de `/personnages` basés sur les tags tant que cela suffit.
 14. Améliorer progressivement la navigation catalogue sans créer de nouveaux champs trop tôt.
-15. Prévoir plus tard un mode de prévisualisation interne pour tester les drafts sans les publier.
-16. Enrichir les filtres avec d’autres catégories uniquement si les tags ne suffisent plus.
-17. Garder les signatures visuelles spécifiques hors périmètre pour le moment.
-18. Ne pas créer de nouveaux champs de données tant que les tags suffisent.
-19. Vérifier si les fiches Kael, Varros, Elias, Ysolde ou Amara doivent être légèrement améliorées avant toute publication.
-20. Confirmer que `themeKey: "vide-oppressant"` reste le bon choix pour Kael.
-21. Confirmer que `themeKey: "default"` reste acceptable pour Varros V1.
-22. Confirmer que `themeKey: "default"` reste acceptable provisoirement pour Elias V1.
-23. Confirmer que `themeKey: "vie-sauvage"` reste le bon choix pour Ysolde V1.
-24. Confirmer que `themeKey: "amour-douleur"` reste le bon choix pour Amara V1.
-25. Envisager plus tard un thème de famille comme `titan-maudit` uniquement si plusieurs personnages partagent cette ambiance.
-26. Envisager plus tard un thème de famille comme `foi-sans-dieu`, `lumiere-construite`, `sacre-fissure` ou équivalent uniquement si plusieurs personnages partagent cette ambiance.
-27. Garder Kael, Varros, Elias, Ysolde et Amara en `publicationStatus: "draft"` jusqu’à validation explicite du créateur.
-28. Choisir la prochaine décision après Kael V1, Varros V1, Elias V1, Ysolde V1 et Amara V1 :
+15. Améliorer l’ergonomie de la preview interne seulement si nécessaire.
+16. Ajouter plus tard des filtres ou badges dans la preview si le nombre de drafts augmente.
+17. Ne pas transformer la preview en vrai back-office pour le moment.
+18. Garder la preview strictement séparée de la navigation publique.
+19. Continuer à utiliser `publicationStatus: "draft"` comme protection principale.
+20. Enrichir les filtres publics avec d’autres catégories uniquement si les tags ne suffisent plus.
+21. Garder les signatures visuelles spécifiques hors périmètre pour le moment.
+22. Ne pas créer de nouveaux champs de données tant que les tags suffisent.
+23. Vérifier si les fiches Kael, Varros, Elias, Ysolde ou Amara doivent être légèrement améliorées avant toute publication.
+24. Confirmer que `themeKey: "vide-oppressant"` reste le bon choix pour Kael.
+25. Confirmer que `themeKey: "default"` reste acceptable pour Varros V1.
+26. Confirmer que `themeKey: "default"` reste acceptable provisoirement pour Elias V1.
+27. Confirmer que `themeKey: "vie-sauvage"` reste le bon choix pour Ysolde V1.
+28. Confirmer que `themeKey: "amour-douleur"` reste le bon choix pour Amara V1.
+29. Envisager plus tard un thème de famille comme `titan-maudit` uniquement si plusieurs personnages partagent cette ambiance.
+30. Envisager plus tard un thème de famille comme `foi-sans-dieu`, `lumiere-construite`, `sacre-fissure` ou équivalent uniquement si plusieurs personnages partagent cette ambiance.
+31. Garder Kael, Varros, Elias, Ysolde et Amara en `publicationStatus: "draft"` jusqu’à validation explicite du créateur.
+32. Choisir la prochaine décision après Kael V1, Varros V1, Elias V1, Ysolde V1 et Amara V1 :
    * améliorer légèrement la fiche Kael si nécessaire ;
    * améliorer légèrement la fiche Varros si nécessaire ;
    * améliorer légèrement la fiche Elias si nécessaire ;
@@ -41,8 +45,8 @@ Stabiliser les premières fiches personnages réelles en `draft` et décider de 
    * améliorer légèrement la fiche Amara si nécessaire ;
    * préparer un sixième personnage en `draft` ;
    * documenter une méthode de validation avant publication.
-29. Garder les récits MDX limités au Markdown simple, sans imports, HTML brut ni JavaScript arbitraire.
-30. Intégrer Noah plus tard comme fiche test validée si le créateur confirme ce choix.
+33. Garder les récits MDX limités au Markdown simple, sans imports, HTML brut ni JavaScript arbitraire.
+34. Intégrer Noah plus tard comme fiche test validée si le créateur confirme ce choix.
 
 ## Hors périmètre pour le moment
 

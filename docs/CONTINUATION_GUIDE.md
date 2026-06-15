@@ -56,17 +56,18 @@ Ne pas mettre tout le lore brut dans GitHub. Intégrer seulement les information
 
 ## 4. Tester un personnage en local
 
-Pour tester une fiche publique :
+Pour tester une fiche sans la publier :
 
-1. Passer temporairement `publicationStatus` à `"published"`.
+1. Garder `publicationStatus` à `"draft"`.
 2. Lancer `node scripts/generate-personnage-narratives.mjs`.
 3. Lancer `npm run dev`.
-4. Ouvrir `/personnages/[slug]`.
-5. Vérifier le rendu, le thème, l’identité, la magie et le récit.
-6. Remettre `publicationStatus` à `"draft"`.
-7. Restaurer tout fichier temporaire si nécessaire.
+4. Ouvrir `/personnages/preview`.
+5. Ouvrir ensuite `/personnages/preview/[slug]`.
+6. Vérifier le rendu, le thème, l’identité, la magie et le récit.
 
-Ne jamais commit un passage temporaire en `published`.
+Le mode preview est réservé au développement local. En production, les routes `/personnages/preview` et `/personnages/preview/[slug]` affichent un état indisponible et ne lisent pas les fiches en brouillon.
+
+Ne jamais passer un personnage temporairement en `published` uniquement pour le tester visuellement. La route publique `/personnages` et les fiches publiques `/personnages/[slug]` doivent rester séparées de la preview.
 
 ## 5. Checklist avant publication
 

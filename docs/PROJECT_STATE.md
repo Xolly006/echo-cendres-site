@@ -47,6 +47,12 @@ Les différentes entités seront ajoutées progressivement. Le squelette doit pe
 * Les filtres restent visibles même quand aucun personnage n’est affiché.
 * Si un filtre actif ne retourne aucun résultat, un message adapté est affiché avec un lien permettant de revenir au filtre `Tous`.
 * Cet état vide stabilise le moteur personnages sans rendre les fiches en `draft` visibles.
+* Une route interne `/personnages/preview` existe maintenant pour le développement local.
+* `/personnages/preview` liste localement les personnages en `draft` et en `published`.
+* `/personnages/preview/[slug]` permet de prévisualiser une fiche complète sans modifier `publicationStatus`.
+* En production, les routes preview affichent un état indisponible et ne lisent pas les personnages en `draft`.
+* Les pages publiques `/personnages` et `/personnages/[slug]` conservent leur logique publique : les personnages en `draft` restent invisibles en production.
+* Le mode preview remplace le besoin de passer temporairement une fiche en `published` pour la tester visuellement.
 * Kael l’Éclipsé existe comme premier personnage réel en `draft`.
 * La fiche de Kael se trouve dans `src/content/personnages/kael-eclipse/` et contient `data.json` et `histoire.mdx`.
 * Kael utilise `publicationStatus: "draft"` et `themeKey: "vide-oppressant"`.
