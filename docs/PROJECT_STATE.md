@@ -68,6 +68,11 @@ Les différentes entités seront ajoutées progressivement. Le squelette doit pe
 * Elle présente sobrement plusieurs couches futures : Monde physique, Abîme, plans célestes / Celestia, lieux vivants et zones sacrées, et futur atlas interactif.
 * Aucun modèle `Lieu`, aucun dossier `src/content/lieux`, aucune carte SVG interactive, aucun système de coordonnées et aucun lien dynamique entre lieux, personnages, factions ou événements n’existent encore.
 * La navigation globale possédait déjà un lien vers `/carte`, donc elle n’a pas été modifiée pour cette étape.
+* La page `/chronologie` existe maintenant et remplace le placeholder générique initial.
+* `/chronologie` prépare la future section Chronologie du Livre-Monde.
+* Elle présente sobrement plusieurs axes temporels futurs : Âges anciens, Âges des ruptures, Ère actuelle et Chronologie future.
+* Aucun modèle `Evenement`, aucun dossier `src/content/evenements`, aucun moteur de chronologie dynamique et aucun lien dynamique entre événements, personnages, lieux ou factions n’existent encore.
+* La navigation globale possédait déjà un lien vers `/chronologie`, donc elle n’a pas été modifiée pour cette étape.
 * Kael l’Éclipsé existe comme premier personnage réel en `draft`.
 * La fiche de Kael se trouve dans `src/content/personnages/kael-eclipse/` et contient `data.json` et `histoire.mdx`.
 * Kael utilise `publicationStatus: "draft"` et `themeKey: "vide-oppressant"`.
@@ -106,7 +111,7 @@ Les différentes entités seront ajoutées progressivement. Le squelette doit pe
 * Amara est un électron libre : elle n’appartient ni à l’Arquet ni aux Piliers, et elle enrichit la catégorie des personnages hors institution.
 * Amara est liée au Concept `LIEN / Amour / Agapè`, dirige un orphelinat neutre au milieu d’un champ de bataille, et porte les surnoms `La Mère des Douleurs` et `L’Intouchable par empathie`.
 * La magie d’Amara repose sur l’empathie sacrificielle, le transfert de blessures, le partage de la violence et son Domaine absolu `Le Mariage des Âmes`.
-* Chronologie, moteur de lieux structuré, moteur de factions structuré, moteur de magie structuré et système de thèmes avancé non encore développés.
+* Moteur de chronologie structuré, moteur d’événements structuré, moteur de lieux structuré, moteur de factions structuré, moteur de magie structuré et système de thèmes avancé non encore développés.
 
 ## Technologies actuelles
 
