@@ -73,6 +73,18 @@ Les différentes entités seront ajoutées progressivement. Le squelette doit pe
 * Elle présente sobrement plusieurs axes temporels futurs : Âges anciens, Âges des ruptures, Ère actuelle et Chronologie future.
 * Aucun modèle `Evenement`, aucun dossier `src/content/evenements`, aucun moteur de chronologie dynamique et aucun lien dynamique entre événements, personnages, lieux ou factions n’existent encore.
 * La navigation globale possédait déjà un lien vers `/chronologie`, donc elle n’a pas été modifiée pour cette étape.
+* La page `/evenements` existe maintenant et remplace le placeholder générique initial.
+* `/evenements` prépare la future section Événements du Livre-Monde.
+* Elle présente sobrement plusieurs types d’événements futurs : événements fondateurs, guerres et ruptures, scellements et catastrophes, rencontres majeures, et événements encore à valider.
+* Aucun modèle `Evenement`, aucun dossier `src/content/evenements`, aucune page dynamique `/evenements/[slug]`, aucun moteur d’événements et aucun lien dynamique entre événements, personnages, lieux ou factions n’existent encore.
+* La page `/evenements` sert de point d’entrée futur pour structurer les événements du Livre-Monde.
+* La page `/archives` existe maintenant et remplace le placeholder générique initial.
+* `/archives` prépare la future section Archives du Livre-Monde.
+* Elle servira plus tard à conserver anciennes versions, propositions IA non validées, contradictions et points à vérifier, scènes potentielles et contenus retirés.
+* Une information archivée n’est pas forcément fausse, mais elle n’est pas automatiquement canon public.
+* Les archives ne remplacent pas les fiches publiées, et le canon reste sous contrôle humain.
+* Aucun modèle `Archive`, aucun dossier `src/content/archives`, aucun moteur d’archives dynamique et aucun lien dynamique entre archives, personnages, lieux, factions ou événements n’existent encore.
+* Aucun contenu existant n’a été déplacé vers les archives.
 * Kael l’Éclipsé existe comme premier personnage réel en `draft`.
 * La fiche de Kael se trouve dans `src/content/personnages/kael-eclipse/` et contient `data.json` et `histoire.mdx`.
 * Kael utilise `publicationStatus: "draft"` et `themeKey: "vide-oppressant"`.

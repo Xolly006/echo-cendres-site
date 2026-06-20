@@ -50,16 +50,21 @@ Stabiliser les premières fiches personnages réelles en `draft` et décider de 
 42. Ajouter des pages événement dédiées plus tard.
 43. Relier les événements aux personnages, lieux et factions seulement après validation des slugs.
 44. Éviter de figer trop tôt toute l’histoire du monde.
-45. Vérifier si les fiches Kael, Varros, Elias, Ysolde ou Amara doivent être légèrement améliorées avant toute publication.
-46. Confirmer que `themeKey: "vide-oppressant"` reste le bon choix pour Kael.
-47. Confirmer que `themeKey: "default"` reste acceptable pour Varros V1.
-48. Confirmer que `themeKey: "default"` reste acceptable provisoirement pour Elias V1.
-49. Confirmer que `themeKey: "vie-sauvage"` reste le bon choix pour Ysolde V1.
-50. Confirmer que `themeKey: "amour-douleur"` reste le bon choix pour Amara V1.
-51. Envisager plus tard un thème de famille comme `titan-maudit` uniquement si plusieurs personnages partagent cette ambiance.
-52. Envisager plus tard un thème de famille comme `foi-sans-dieu`, `lumiere-construite`, `sacre-fissure` ou équivalent uniquement si plusieurs personnages partagent cette ambiance.
-53. Garder Kael, Varros, Elias, Ysolde et Amara en `publicationStatus: "draft"` jusqu’à validation explicite du créateur.
-54. Choisir la prochaine décision après Kael V1, Varros V1, Elias V1, Ysolde V1 et Amara V1 :
+45. Créer plus tard des pages `/evenements/[slug]`.
+46. Définir plus tard un modèle `Archive`.
+47. Créer plus tard `src/content/archives`.
+48. Distinguer proprement canon public, anciennes versions, propositions IA, contradictions et scènes potentielles.
+49. Éviter de figer trop tôt toute l’histoire du monde ou tout le système d’archives.
+50. Vérifier si les fiches Kael, Varros, Elias, Ysolde ou Amara doivent être légèrement améliorées avant toute publication.
+51. Confirmer que `themeKey: "vide-oppressant"` reste le bon choix pour Kael.
+52. Confirmer que `themeKey: "default"` reste acceptable pour Varros V1.
+53. Confirmer que `themeKey: "default"` reste acceptable provisoirement pour Elias V1.
+54. Confirmer que `themeKey: "vie-sauvage"` reste le bon choix pour Ysolde V1.
+55. Confirmer que `themeKey: "amour-douleur"` reste le bon choix pour Amara V1.
+56. Envisager plus tard un thème de famille comme `titan-maudit` uniquement si plusieurs personnages partagent cette ambiance.
+57. Envisager plus tard un thème de famille comme `foi-sans-dieu`, `lumiere-construite`, `sacre-fissure` ou équivalent uniquement si plusieurs personnages partagent cette ambiance.
+58. Garder Kael, Varros, Elias, Ysolde et Amara en `publicationStatus: "draft"` jusqu’à validation explicite du créateur.
+59. Choisir la prochaine décision après Kael V1, Varros V1, Elias V1, Ysolde V1 et Amara V1 :
    * améliorer légèrement la fiche Kael si nécessaire ;
    * améliorer légèrement la fiche Varros si nécessaire ;
    * améliorer légèrement la fiche Elias si nécessaire ;
@@ -67,8 +72,8 @@ Stabiliser les premières fiches personnages réelles en `draft` et décider de 
    * améliorer légèrement la fiche Amara si nécessaire ;
    * préparer un sixième personnage en `draft` ;
    * documenter une méthode de validation avant publication.
-55. Garder les récits MDX limités au Markdown simple, sans imports, HTML brut ni JavaScript arbitraire.
-56. Intégrer Noah plus tard comme fiche test validée si le créateur confirme ce choix.
+60. Garder les récits MDX limités au Markdown simple, sans imports, HTML brut ni JavaScript arbitraire.
+61. Intégrer Noah plus tard comme fiche test validée si le créateur confirme ce choix.
 
 ## Hors périmètre pour le moment
 
@@ -90,6 +95,10 @@ Stabiliser les premières fiches personnages réelles en `draft` et décider de 
 * Créer un modèle de données `Evenement`.
 * Créer `src/content/evenements`.
 * Créer des pages événement dédiées.
+* Créer une route dynamique `/evenements/[slug]`.
+* Créer un modèle de données `Archive`.
+* Créer `src/content/archives`.
+* Créer un moteur d’archives dynamique.
 * Ajouter des effets animés liés aux thèmes.
 * Ajouter des composants narratifs spéciaux, la magie, les relations ou les événements.
 * Ajouter relations, lieux ou événements associés.
