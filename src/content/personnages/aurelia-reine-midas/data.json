@@ -1,0 +1,50 @@
+{
+  "nom": "Aurélia",
+  "publicationStatus": "draft",
+  "themeKey": "or-maudit",
+  "resumeCourt": "Aurélia, Reine Midas, est une héritière maudite capable de changer ce qu’elle touche en or. Trésorière et source financière majeure de l’Arquet, elle sert l’organisation parce que son Ancre lui permet de contrôler sa malédiction et de toucher sans tuer.",
+  "role": "Héritière de l’Arquet — Trésorière et Reine Midas",
+  "tags": [
+    "arquet",
+    "héritier",
+    "transmutation",
+    "or",
+    "argent",
+    "flux-argent",
+    "or-maudit",
+    "midas",
+    "malédiction",
+    "finance",
+    "toucher-maudit"
+  ],
+  "identity": {
+    "aliases": [
+      "Reine Midas",
+      "Banquière maudite"
+    ],
+    "nature": "Humaine maudite liée à la transmutation de l’or et de l’argent",
+    "origin": "Fille du Roi Midas légendaire",
+    "status": "Active au sein de l’Arquet",
+    "era": "Présent narratif"
+  },
+  "magic": {
+    "concept": "Transmutation / Valeur / Or maudit",
+    "domain": "Transmutation de l’or et de l’argent",
+    "artifact": "Gants de Soie Noire enchantés",
+    "anchor": "Couronne fondue en or liquide",
+    "abilities": [
+      "Transforme ce qu’elle touche en or",
+      "Contrôle partiellement la transmutation grâce à l’Ancre de l’Arquet",
+      "Façonne l’or en armes, piques ou surfaces",
+      "Manipule l’argent comme un flux conducteur et tranchant",
+      "Utilise sa richesse et sa magie comme leviers politiques"
+    ],
+    "limits": [
+      "Sans l’Ancre, la malédiction reprend le dessus",
+      "Le contact humain reste son point faible émotionnel",
+      "Son contrôle dépend de sa concentration",
+      "Elle sert l’Arquet pour conserver le droit de toucher sans tuer",
+      "Sa quête de contrôle ne doit pas être confondue avec une guérison"
+    ]
+  }
+}
