@@ -1,0 +1,50 @@
+{
+  "nom": "Soryn la Voilée",
+  "publicationStatus": "draft",
+  "themeKey": "masque-voile",
+  "resumeCourt": "Soryn la Voilée est une héritière de l’Arquet sans tragédie fondatrice, ancienne artiste lassée du réel, qui utilise les masques, le doute et les illusions tangibles pour repeindre le monde à sa manière.",
+  "role": "Héritière n°2 de l’Arquet — Maîtresse des illusions et des réseaux d’espionnage",
+  "tags": [
+    "arquet",
+    "héritier",
+    "illusion",
+    "mensonge",
+    "masque",
+    "porcelaine",
+    "espionnage",
+    "doute",
+    "cauchemar",
+    "pure-evil"
+  ],
+  "identity": {
+    "aliases": [
+      "La Mère des Masques",
+      "L’Illusionniste"
+    ],
+    "nature": "Humaine liée au Mensonge incarné et aux illusions psychosomatiques",
+    "origin": "Ancienne artiste et peintre de génie, entrée dans l’Arquet par dégoût du réel",
+    "status": "Active au sein de l’Arquet",
+    "era": "Présent narratif"
+  },
+  "magic": {
+    "concept": "Mensonge incarné / Illusion psychosomatique",
+    "domain": "Le Théâtre des Cauchemars",
+    "artifact": "Masques de porcelaine changeants",
+    "anchor": "Masque brisé",
+    "abilities": [
+      "Crée des illusions visuelles",
+      "Trompe les sens et la perception",
+      "Utilise le doute comme arme stratégique",
+      "Rend certaines illusions tangibles grâce à l’Ancre de l’Arquet",
+      "Provoque des réactions psychosomatiques chez ses victimes",
+      "Dirige des réseaux d’espions et d’informateurs"
+    ],
+    "limits": [
+      "Sa puissance brute reste faible comparée à d’autres Héritiers",
+      "Son pouvoir dépend de la perception, de la croyance et de l’ancrage sensoriel de la cible",
+      "Son pouvoir peut être contourné par des êtres ou situations qui échappent à la perception classique",
+      "Certains contre-pouvoirs liés au silence, à l’absence de signature ou à la rupture des illusions devront être développés plus tard",
+      "Ses failles exactes ne doivent pas être détaillées dans cette première fiche"
+    ]
+  }
+}
