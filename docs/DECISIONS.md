@@ -60,6 +60,11 @@
 * Exception contrôlée : `or-maudit` sert actuellement surtout à Aurélia / Reine Midas comme signature quasi personnelle de personnage vitrine.
 * `or-maudit` ne deviendra une famille réutilisable que si un autre personnage partage plus tard une esthétique de richesse froide, trésor maudit, or ancien, argent froid et métal précieux oppressant.
 * La direction artistique complète d’Aurélia reste à travailler plus tard ; aucun système d’image, portrait ou asset visuel n’est décidé pour le moment.
+* Soryn la Voilée est une femme dans la fiche actuelle : utiliser le féminin pour elle dans la documentation et les futures fiches.
+* Les alternances masculin/féminin du document source concernant Soryn ne sont pas retenues pour cette première fiche.
+* Exception contrôlée : `masque-voile` sert actuellement surtout à Soryn comme signature quasi personnelle de personnage majeur ou vitrine.
+* `masque-voile` ne deviendra une famille réutilisable que si un autre personnage partage plus tard une esthétique de masques, illusions, miroirs, théâtre fermé ou mensonge élégant.
+* `masque-voile` doit rester différencié de `vide-oppressant` : Soryn doit évoquer la scène, le masque, le mensonge et le théâtre psychologique, pas seulement le vide froid.
 * Les effets uniques propres à un personnage majeur doivent attendre le futur système de signatures visuelles.
 * Les signatures visuelles spécifiques doivent rester séparées des thèmes standard, de `PersonnageAtmosphere` et de `PersonnageParticles`.
 * Claude peut servir à extraire et organiser des informations depuis Magic.txt, mais le créateur doit toujours valider ce qui est canonique.

@@ -63,12 +63,15 @@ Personnages réels intégrés en brouillon :
 * Ysolde la Sauvage — `ysolde-sauvage` — `vie-sauvage`
 * Amara — `amara-mere-douleurs` — `amour-douleur`
 * Aurélia / Reine Midas — `aurelia-reine-midas` — `or-maudit`
+* Soryn la Voilée — `soryn-la-voilee` — `masque-voile`
 
 Tous doivent rester en `publicationStatus: "draft"` jusqu’à validation explicite du créateur.
 
 Kael l’Éclipsé sert maintenant de premier personnage vitrine narratif en preview. Son récit `src/content/personnages/kael-eclipse/histoire.mdx` a été enrichi autour de l’enfant sans nom, du vœu accordé, de la Non-existence et de ce qu’il reste de lui. Le texte insiste sur une présence refusée par le monde, la perception et la mémoire, sans ajouter de pouvoir majeur, d’art martial, de technique avancée ou de détail tactique nouveau. Kael reste en `draft` et doit être relu via `/personnages/preview/kael-eclipse`.
 
 Aurélia / Reine Midas sert de deuxième personnage vitrine, avec une ambiance opposée à Kael : richesse froide, trésor maudit, cage de verre, toucher impossible et dette envers l’Arquet. Sa fiche se trouve dans `src/content/personnages/aurelia-reine-midas/`, avec `data.json` et `histoire.mdx`, et se prévisualise localement via `/personnages/preview/aurelia-reine-midas`. Le registre narratif a été régénéré automatiquement pour inclure son récit MDX.
+
+Soryn la Voilée est une femme et doit être traitée au féminin dans la documentation et les futures fiches. Sa fiche se trouve dans `src/content/personnages/soryn-la-voilee/`, avec `data.json` et `histoire.mdx`, et se prévisualise localement via `/personnages/preview/soryn-la-voilee`. Elle sert de personnage Arquet lié au Mensonge incarné, aux masques, aux illusions, au doute et aux réseaux d’espionnage. Le thème `masque-voile` a été ajusté pour évoquer le théâtre psychologique plutôt que le vide froid de Kael.
 
 ## 4. Thèmes disponibles
 
@@ -79,10 +82,11 @@ Thèmes personnages disponibles :
 * `vie-sauvage`
 * `amour-douleur`
 * `or-maudit`
+* `masque-voile`
 
 Ces thèmes sont des familles sensorielles réutilisables. Ils ne sont pas des signatures uniques réservées à un seul personnage.
 
-Ne pas créer un thème pour chaque personnage. Un nouveau thème doit être justifié par une famille réutilisable, pas par un effet ponctuel. `or-maudit` sert actuellement surtout à Aurélia et peut rester une signature quasi personnelle tant que la direction artistique complète n’est pas stabilisée ; il ne doit devenir une famille réutilisable que si un autre personnage partage une esthétique proche.
+Ne pas créer un thème pour chaque personnage. Un nouveau thème doit être justifié par une famille réutilisable, pas par un effet ponctuel. `or-maudit` sert actuellement surtout à Aurélia et peut rester une signature quasi personnelle tant que la direction artistique complète n’est pas stabilisée ; il ne doit devenir une famille réutilisable que si un autre personnage partage une esthétique proche. `masque-voile` sert actuellement surtout à Soryn et peut rester une signature quasi personnelle ; il ne doit devenir une famille réutilisable que si un autre personnage partage une esthétique de masques, illusions, miroirs ou théâtre froid.
 
 ## 5. Règles absolues
 
@@ -233,6 +237,7 @@ grep -n "publicationStatus" src/content/personnages/elias-pilier-sacre/data.json
 grep -n "publicationStatus" src/content/personnages/ysolde-sauvage/data.json
 grep -n "publicationStatus" src/content/personnages/amara-mere-douleurs/data.json
 grep -n "publicationStatus" src/content/personnages/aurelia-reine-midas/data.json
+grep -n "publicationStatus" src/content/personnages/soryn-la-voilee/data.json
 ```
 
 Tous ces personnages doivent rester en `"draft"` tant que le créateur n’a pas demandé explicitement leur publication.
@@ -258,6 +263,7 @@ Pistes possibles, à traiter une par une :
 * stabiliser la preview interne ;
 * tester le rendu amélioré avec Kael via `/personnages/preview/kael-eclipse` ;
 * relire Aurélia via `/personnages/preview/aurelia-reine-midas` ;
+* relire Soryn via `/personnages/preview/soryn-la-voilee` ;
 * améliorer progressivement le confort de lecture des récits MDX ;
 * améliorer la navigation catalogue ;
 * enrichir prudemment la page Factions sans créer de modèle avant validation ;

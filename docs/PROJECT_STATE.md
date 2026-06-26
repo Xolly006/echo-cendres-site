@@ -149,6 +149,19 @@ Les différentes entités seront ajoutées progressivement. Le squelette doit pe
 * Aurélia est visible uniquement via la preview interne locale `/personnages/preview/aurelia-reine-midas` tant qu’elle reste en `draft`.
 * Aurélia ne doit pas être publiée tant que le créateur ne valide pas explicitement sa fiche.
 * Le registre narratif `src/content/personnages/narrative-registry.ts` a été régénéré automatiquement pour inclure le récit MDX d’Aurélia.
+* Le thème standard ou quasi-signature `masque-voile` existe maintenant pour une ambiance de théâtre fermé, masque de porcelaine, voile noir, mensonge, illusion, gris miroir, argent froid et rouge rideau sombre.
+* `masque-voile` sert actuellement surtout à Soryn la Voilée. Il pourra devenir une famille réutilisable seulement si un autre personnage partage plus tard une esthétique liée aux masques, aux illusions ou aux miroirs.
+* Le thème `masque-voile` a été ajusté pour ne pas ressembler trop au thème `vide-oppressant` de Kael : Soryn doit évoquer la scène, le masque, le mensonge et le théâtre psychologique, pas seulement le vide froid.
+* Aucun système d’image, portrait ou asset visuel n’a été ajouté avec `masque-voile`.
+* Soryn la Voilée existe comme septième personnage réel en `draft`.
+* La fiche de Soryn se trouve dans `src/content/personnages/soryn-la-voilee/` et contient `data.json` et `histoire.mdx`.
+* Soryn utilise `publicationStatus: "draft"` et `themeKey: "masque-voile"`.
+* Soryn est une femme. Le féminin doit être utilisé pour elle dans la documentation et les futures fiches ; les alternances masculin/féminin du document source ne sont pas retenues pour la fiche actuelle.
+* Soryn est La Mère des Masques, L’Illusionniste, Héritière n°2 de l’Arquet, liée au Mensonge incarné, ancienne artiste et peintre de génie, sans tragédie fondatrice, maîtresse des illusions, du doute, des masques et des réseaux d’espionnage.
+* Son récit MDX développe sobrement l’artiste qui méprisait le réel, la Mère des Masques, l’Ancre du masque brisé, le Cauchemar Éveillé, le Théâtre des Cauchemars et celle qui repeint le monde.
+* Soryn est visible uniquement via la preview interne locale `/personnages/preview/soryn-la-voilee` tant qu’elle reste en `draft`.
+* Soryn ne doit pas être publiée tant que le créateur ne valide pas explicitement sa fiche.
+* Le registre narratif `src/content/personnages/narrative-registry.ts` a été régénéré automatiquement pour inclure le récit MDX de Soryn.
 * Moteur de chronologie structuré, moteur d’événements structuré, moteur de lieux structuré, moteur de factions structuré, moteur de magie structuré et système de thèmes avancé non encore développés.
 
 ## Technologies actuelles

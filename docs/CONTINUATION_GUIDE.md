@@ -23,7 +23,7 @@ Le projet possède aussi :
 * des particules légères ;
 * une section Identité ;
 * une section Magie ;
-* plusieurs personnages réels en `draft`, dont Kael l’Éclipsé et Aurélia / Reine Midas comme personnages vitrines de preview.
+* plusieurs personnages réels en `draft`, dont Kael l’Éclipsé, Aurélia / Reine Midas et Soryn la Voilée comme repères de preview.
 
 ## 2. Commandes importantes
 
@@ -97,6 +97,7 @@ Exemples d’idées futures :
 
 * Kael qui s’efface ;
 * Aurélia avec cage de verre, gants noirs, couronne fondue et métal précieux oppressant ;
+* Soryn avec rideau sombre, miroir fissuré, masque de porcelaine et théâtre fermé ;
 * Azazel avec une interface capricieuse ;
 * Helia/Nyx avec un contraste jour-nuit ;
 * Ashren avec un grésillement visuel.
@@ -107,7 +108,7 @@ Ces idées ne sont pas perdues. Elles doivent attendre le futur système de sign
 
 1. Finir et relire cette documentation de continuation.
 2. Ajouter éventuellement `links` ou une première base de relations.
-3. Relire les personnages vitrines en preview, notamment Kael et Aurélia.
+3. Relire les personnages vitrines ou repères en preview, notamment Kael, Aurélia et Soryn.
 4. Préparer un nouveau personnage en `draft` seulement après validation du besoin.
 5. Réfléchir seulement ensuite aux signatures visuelles spécifiques.
 
