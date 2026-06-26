@@ -25,6 +25,7 @@ src/content/personnages/[slug]/
 * registre narratif généré par `scripts/generate-personnage-narratives.mjs` ;
 * rendu MDX serveur via `@next/mdx` ;
 * thèmes personnages via `themeKey` ;
+* fiches détail personnage plus lisibles via `StandardImmersivePersonnage` ;
 * filtres de catalogue sur `/personnages` ;
 * état vide propre du catalogue ;
 * preview interne des drafts via `/personnages/preview` ;
@@ -37,6 +38,8 @@ src/content/personnages/[slug]/
 * documentation de direction artistique dans `docs/SIGNATURES_VISUELLES_PERSONNAGES.md`.
 
 La page publique `/personnages` utilise seulement les personnages en `publicationStatus: "published"`. Les drafts restent invisibles publiquement.
+
+Les fiches détail personnage utilisent `StandardImmersivePersonnage`. Le rendu met mieux en valeur le nom, le rôle, le résumé court, les blocs Identité et Magie, puis le récit MDX. En preview locale, une fiche affiche un badge de statut comme `Preview draft`, un retour vers `/personnages/preview` et une bannière intégrée au thème actif. Les routes publiques continuent de masquer les drafts.
 
 La page `/factions` existe comme point d’entrée statique. Elle présente L’Arquet, les Piliers de l’Existence, les Électrons libres / Anomalies et les autres forces à documenter plus tard. Elle ne crée pas encore de modèle `Faction`, de dossier `src/content/factions` ou de liens dynamiques.
 
@@ -246,6 +249,8 @@ Ne pas supposer que la nouvelle IA connaît l’historique précédent. Tout ce 
 Pistes possibles, à traiter une par une :
 
 * stabiliser la preview interne ;
+* tester le rendu amélioré avec Kael via `/personnages/preview/kael-eclipse` ;
+* améliorer progressivement le confort de lecture des récits MDX ;
 * améliorer la navigation catalogue ;
 * enrichir prudemment la page Factions sans créer de modèle avant validation ;
 * enrichir prudemment la page Magie sans créer de modèle avant validation ;

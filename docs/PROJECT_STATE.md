@@ -53,6 +53,14 @@ Les différentes entités seront ajoutées progressivement. Le squelette doit pe
 * En production, les routes preview affichent un état indisponible et ne lisent pas les personnages en `draft`.
 * Les pages publiques `/personnages` et `/personnages/[slug]` conservent leur logique publique : les personnages en `draft` restent invisibles en production.
 * Le mode preview remplace le besoin de passer temporairement une fiche en `published` pour la tester visuellement.
+* Les fiches personnage ont maintenant un rendu plus lisible et plus immersif via `StandardImmersivePersonnage`.
+* Le nom, le rôle et le résumé court sont mieux mis en valeur dans l’introduction de la fiche.
+* Les blocs Identité et Magie sont mieux hiérarchisés.
+* La section récit est mieux séparée dans le flux de lecture.
+* La preview d’une fiche affiche clairement un badge de statut, par exemple `Preview draft`.
+* Une fiche preview possède un retour direct vers `/personnages/preview`.
+* La bannière preview est mieux intégrée au thème actif.
+* Les routes publiques continuent de masquer les personnages en `draft`, tandis que les routes preview restent réservées à la lecture locale ou interne.
 * La page `/factions` existe maintenant et remplace le placeholder générique initial.
 * `/factions` présente sobrement les grandes familles ou forces actuelles : L’Arquet, les Piliers de l’Existence, les Électrons libres / Anomalies, et d’autres forces à documenter plus tard.
 * Cette page sert de point d’entrée futur pour structurer les grandes forces du Livre-Monde.
