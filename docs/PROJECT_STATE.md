@@ -137,6 +137,18 @@ Les différentes entités seront ajoutées progressivement. Le squelette doit pe
 * Amara est un électron libre : elle n’appartient ni à l’Arquet ni aux Piliers, et elle enrichit la catégorie des personnages hors institution.
 * Amara est liée au Concept `LIEN / Amour / Agapè`, dirige un orphelinat neutre au milieu d’un champ de bataille, et porte les surnoms `La Mère des Douleurs` et `L’Intouchable par empathie`.
 * La magie d’Amara repose sur l’empathie sacrificielle, le transfert de blessures, le partage de la violence et son Domaine absolu `Le Mariage des Âmes`.
+* Le thème standard ou quasi-signature `or-maudit` existe maintenant pour une ambiance de richesse froide, trésor maudit, cage précieuse, noir profond, or ancien, touches d’argent froid et ivoire discret.
+* `or-maudit` sert actuellement surtout à Aurélia / Reine Midas. Il pourra devenir une famille réutilisable seulement si un autre personnage partage plus tard une esthétique proche.
+* Aucun système d’image, portrait ou asset visuel n’a été ajouté avec `or-maudit`.
+* Aurélia / Reine Midas existe comme sixième personnage réel en `draft`.
+* La fiche d’Aurélia se trouve dans `src/content/personnages/aurelia-reine-midas/` et contient `data.json` et `histoire.mdx`.
+* Aurélia utilise `publicationStatus: "draft"` et `themeKey: "or-maudit"`.
+* Aurélia est Reine Midas, Banquière maudite, Héritière de l’Arquet, trésorière et source financière majeure de l’organisation.
+* Aurélia est la fille du Roi Midas légendaire, liée à une malédiction de transmutation de l’or, au Flux d’Argent et à l’Arquet qui lui permet de contrôler partiellement sa malédiction et de toucher sans tuer.
+* Son récit MDX développe sobrement la fille du roi d’or, la cage de verre, le premier contact avec Midas, l’Ancre de l’Arquet, la Banquière maudite et ce que vaut une main.
+* Aurélia est visible uniquement via la preview interne locale `/personnages/preview/aurelia-reine-midas` tant qu’elle reste en `draft`.
+* Aurélia ne doit pas être publiée tant que le créateur ne valide pas explicitement sa fiche.
+* Le registre narratif `src/content/personnages/narrative-registry.ts` a été régénéré automatiquement pour inclure le récit MDX d’Aurélia.
 * Moteur de chronologie structuré, moteur d’événements structuré, moteur de lieux structuré, moteur de factions structuré, moteur de magie structuré et système de thèmes avancé non encore développés.
 
 ## Technologies actuelles

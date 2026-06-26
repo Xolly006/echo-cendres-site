@@ -23,7 +23,7 @@ Le projet possède aussi :
 * des particules légères ;
 * une section Identité ;
 * une section Magie ;
-* Kael l’Éclipsé comme premier personnage réel en `draft`.
+* plusieurs personnages réels en `draft`, dont Kael l’Éclipsé et Aurélia / Reine Midas comme personnages vitrines de preview.
 
 ## 2. Commandes importantes
 
@@ -96,6 +96,7 @@ Les idées de signatures visuelles doivent rester dans le backlog, un carnet ou 
 Exemples d’idées futures :
 
 * Kael qui s’efface ;
+* Aurélia avec cage de verre, gants noirs, couronne fondue et métal précieux oppressant ;
 * Azazel avec une interface capricieuse ;
 * Helia/Nyx avec un contraste jour-nuit ;
 * Ashren avec un grésillement visuel.
@@ -106,8 +107,8 @@ Ces idées ne sont pas perdues. Elles doivent attendre le futur système de sign
 
 1. Finir et relire cette documentation de continuation.
 2. Ajouter éventuellement `links` ou une première base de relations.
-3. Préparer un deuxième personnage en `draft`.
-4. Enrichir Kael plus tard si nécessaire.
+3. Relire les personnages vitrines en preview, notamment Kael et Aurélia.
+4. Préparer un nouveau personnage en `draft` seulement après validation du besoin.
 5. Réfléchir seulement ensuite aux signatures visuelles spécifiques.
 
 ## 9. Erreurs à éviter

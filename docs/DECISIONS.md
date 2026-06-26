@@ -57,6 +57,9 @@
 * Un thème personnage représente une famille sensorielle, pas un personnage unique.
 * Un personnage doit d’abord utiliser un thème existant si celui-ci correspond suffisamment à son émotion dominante, son rôle narratif ou sa présence magique.
 * Un nouveau thème ne doit être créé que si plusieurs personnages pourraient théoriquement l’utiliser.
+* Exception contrôlée : `or-maudit` sert actuellement surtout à Aurélia / Reine Midas comme signature quasi personnelle de personnage vitrine.
+* `or-maudit` ne deviendra une famille réutilisable que si un autre personnage partage plus tard une esthétique de richesse froide, trésor maudit, or ancien, argent froid et métal précieux oppressant.
+* La direction artistique complète d’Aurélia reste à travailler plus tard ; aucun système d’image, portrait ou asset visuel n’est décidé pour le moment.
 * Les effets uniques propres à un personnage majeur doivent attendre le futur système de signatures visuelles.
 * Les signatures visuelles spécifiques doivent rester séparées des thèmes standard, de `PersonnageAtmosphere` et de `PersonnageParticles`.
 * Claude peut servir à extraire et organiser des informations depuis Magic.txt, mais le créateur doit toujours valider ce qui est canonique.
