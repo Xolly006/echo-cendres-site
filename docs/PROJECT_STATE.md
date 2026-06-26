@@ -100,6 +100,12 @@ Les différentes entités seront ajoutées progressivement. Le squelette doit pe
 * Kael ne possède pas encore de `links`.
 * La section “Magie” ne remplace pas `histoire.mdx` : elle sert aux informations structurées, tandis que le récit long reste dans le MDX.
 * Le thème `vide-oppressant` fonctionne bien visuellement pour Kael : la page affiche l’introduction immersive, la section identité, le récit MDX et une ambiance froide et distante.
+* Le récit MDX de Kael dans `src/content/personnages/kael-eclipse/histoire.mdx` a été enrichi pour servir de premier test de personnage vitrine en preview.
+* Ce récit développe sobrement l’enfant sans nom, le vœu accordé, la Non-existence et ce qu’il reste de Kael.
+* Il renforce son concept d’Inexistence / Non-existence en rappelant que Kael n’est pas simplement invisible : sa présence est refusée par le monde, la perception et la mémoire.
+* La seconde passe narrative a affiné le ton pour le rendre plus froid, plus sobre et plus cohérent avec le personnage.
+* Aucun nouveau pouvoir majeur, art martial, technique avancée ou détail tactique nouveau n’a été ajouté pour le moment.
+* Kael reste destiné à la preview interne locale via `/personnages/preview/kael-eclipse` tant qu’il est en `publicationStatus: "draft"`.
 * Le test local de Kael a été fait temporairement en `published`, puis la fiche a été remise en `draft`.
 * Varros le Fléau existe comme deuxième personnage réel en `draft`.
 * La fiche de Varros se trouve dans `src/content/personnages/varros-fleau/` et contient `data.json` et `histoire.mdx`.

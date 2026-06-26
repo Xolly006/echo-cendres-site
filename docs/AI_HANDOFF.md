@@ -65,6 +65,8 @@ Personnages réels intégrés en brouillon :
 
 Tous doivent rester en `publicationStatus: "draft"` jusqu’à validation explicite du créateur.
 
+Kael l’Éclipsé sert maintenant de premier personnage vitrine narratif en preview. Son récit `src/content/personnages/kael-eclipse/histoire.mdx` a été enrichi autour de l’enfant sans nom, du vœu accordé, de la Non-existence et de ce qu’il reste de lui. Le texte insiste sur une présence refusée par le monde, la perception et la mémoire, sans ajouter de pouvoir majeur, d’art martial, de technique avancée ou de détail tactique nouveau. Kael reste en `draft` et doit être relu via `/personnages/preview/kael-eclipse`.
+
 ## 4. Thèmes disponibles
 
 Thèmes personnages disponibles :
