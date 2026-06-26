@@ -18,6 +18,37 @@ Une famille de thème définit surtout :
 
 Elle ne doit pas être créée pour un seul personnage si l’idée ne peut pas être réutilisée ailleurs.
 
+Un thème ne doit pas être seulement une couleur. Il peut porter :
+
+* palette ;
+* typographie ;
+* fond ;
+* texture ;
+* particules ;
+* transition ;
+* intensité ;
+* comportements optionnels ;
+* ambiance générale.
+
+## Évolution future possible
+
+Le moteur utilise actuellement `themeKey`. Ne pas modifier les données maintenant, mais garder cette direction comme référence future :
+
+* `themeKey` : clé actuelle utilisée par le moteur.
+* `themeFamily` : famille sensorielle générale.
+* `visualVariant` : variante visuelle propre à une entité.
+* `signature` : détail unique réservé aux personnages vitrines ou majeurs.
+
+La logique retenue :
+
+* les personnages secondaires ou proches esthétiquement peuvent partager une famille de thème ;
+* les personnages majeurs ou vitrines peuvent avoir une variante ou une signature propre ;
+* une famille de thème donne une grammaire visuelle commune ;
+* une variante différencie un personnage dans cette famille ;
+* une signature ajoute un détail unique, seulement si nécessaire.
+
+Ne pas coder ce système maintenant. Le document sert seulement à éviter le refactor prématuré et les thèmes multipliés trop vite.
+
 ## Signature visuelle spécifique
 
 Une signature visuelle spécifique appartient à un personnage majeur. Elle peut être plus identifiable qu’un thème standard, mais elle doit rester lisible et contrôlée.
@@ -73,6 +104,46 @@ Elle est actuellement utilisée par Ysolde la Sauvage, mais elle reste réutilis
 Famille liée à l’amour sacrificiel, à l’empathie, au lien, à l’Agapè, à la protection douloureuse, à la tendresse tragique et à la douleur partagée.
 
 Elle est actuellement utilisée par Amara, mais elle reste réutilisable pour d’autres entités liées à l’amour sincère mais non naïf, à la protection par empathie ou à la douleur portée pour autrui.
+
+### `or-maudit`
+
+Thème actuellement surtout lié à Aurélia / Reine Midas.
+
+Il porte l’or ancien, l’argent froid, la cage de verre, les gants noirs, le trésor maudit et le métal précieux oppressant.
+
+Il peut rester une signature quasi personnelle. Il ne doit devenir une famille réutilisable que si un autre personnage partage réellement cette esthétique.
+
+### `masque-voile`
+
+Thème actuellement surtout lié à Soryn la Voilée.
+
+Il porte le théâtre fermé, le rideau bordeaux, la porcelaine, le miroir fissuré, le mensonge élégant, le masque et l’illusion.
+
+Il peut rester une signature quasi personnelle. Il ne doit devenir une famille réutilisable que si un autre personnage partage réellement une esthétique de masques, illusions ou miroirs.
+
+## Exemples de familles et variantes
+
+### Vide / Néant
+
+Même famille possible, mais variantes différentes :
+
+* Kael : fumée froide, contours absents, effacement, non-existence ;
+* Nihil plus tard : néant cosmique, silence final, blanc mort, effacement absolu ;
+* Neihem plus tard : histoire morte, poussière d’archives, nécromancie du passé.
+
+### Or / Malédiction
+
+* Aurélia : or ancien, argent froid, cage de verre, gants noirs, trésor maudit ;
+* Astharoth plus tard pourrait partager une famille proche seulement si son esthétique le justifie, avec une variante différente.
+
+### Masque / Illusion
+
+* Soryn : théâtre fermé, rideau bordeaux, porcelaine, miroir fissuré, mensonge élégant.
+
+### Lumière brisée / Sacré
+
+* Elias : lumière retenue, foi humaine, vitrail fissuré ;
+* Métatron ou Célestine plus tard : géométrie angélique, ordre inhumain, blanc dangereux.
 
 ## Signatures futures par personnage
 
@@ -182,3 +253,8 @@ Ne pas ajouter une signature si :
 * Créer plus tard des signatures pour les personnages majeurs seulement.
 * Commencer par documenter les intentions avant de coder.
 * Tester chaque signature avec un seul personnage avant de la généraliser.
+* Créer plus tard `visualVariant` seulement si le besoin se confirme.
+* Créer plus tard une couche `signature` pour les personnages vitrines.
+* Tester les thèmes sur plusieurs fiches preview avant tout changement structurel.
+* Garder les images, portraits et assets visuels hors périmètre tant qu’un système propre n’est pas décidé.
+* Garder la page d’accueil V2 “Livre-Monde vivant” comme chantier séparé.

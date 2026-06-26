@@ -120,4 +120,6 @@ Ces idées ne sont pas perdues. Elles doivent attendre le futur système de sign
 * Ne pas publier un personnage par accident.
 * Ne pas créer un thème pour chaque personnage.
 * Ne pas mélanger thème standard et signature visuelle spéciale.
+* Ne pas coder `themeFamily`, `visualVariant` ou `signature` avant que le besoin soit confirmé sur plusieurs fiches preview.
+* Ne pas ajouter d’image, portrait ou asset visuel sans système propre décidé.
 * Ne pas mettre tout le lore brut dans GitHub.

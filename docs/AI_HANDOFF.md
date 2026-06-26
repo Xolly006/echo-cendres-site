@@ -88,6 +88,8 @@ Ces thèmes sont des familles sensorielles réutilisables. Ils ne sont pas des s
 
 Ne pas créer un thème pour chaque personnage. Un nouveau thème doit être justifié par une famille réutilisable, pas par un effet ponctuel. `or-maudit` sert actuellement surtout à Aurélia et peut rester une signature quasi personnelle tant que la direction artistique complète n’est pas stabilisée ; il ne doit devenir une famille réutilisable que si un autre personnage partage une esthétique proche. `masque-voile` sert actuellement surtout à Soryn et peut rester une signature quasi personnelle ; il ne doit devenir une famille réutilisable que si un autre personnage partage une esthétique de masques, illusions, miroirs ou théâtre froid.
 
+Décision future documentée : le moteur utilise actuellement `themeKey`, mais une évolution possible est `themeFamily + visualVariant + signature`. Ne pas coder cette évolution maintenant. Une famille donne une grammaire visuelle commune, une variante différencie une entité dans cette famille, et une signature ajoute un détail unique réservé aux personnages vitrines ou majeurs. Tester les thèmes sur plusieurs fiches preview avant tout changement structurel.
+
 ## 5. Règles absolues
 
 * Ne jamais changer un `publicationStatus` sans demande explicite.

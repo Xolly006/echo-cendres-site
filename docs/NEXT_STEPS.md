@@ -36,64 +36,70 @@ Stabiliser les premières fiches personnages réelles en `draft` et décider de 
 28. Travailler plus tard l’idée de cage de verre, gants noirs, couronne fondue et métal précieux oppressant.
 29. Développer éventuellement plus tard des motifs visuels de rideau, miroir fissuré, masque de porcelaine ou théâtre fermé pour Soryn.
 30. Ne pas ajouter de portrait ou d’image tant qu’un système d’assets propre n’est pas décidé.
-31. Documenter plus tard le futur système `themeFamily + visualVariant + signature` avant de le coder.
-32. Réserver les thèmes très spécifiques aux personnages vitrines ou majeurs.
-33. Éviter de créer un thème unique pour chaque personnage sans nécessité.
-34. Ajuster plus tard le style de combat ou les arts martiaux de Kael seulement si le créateur valide ces éléments.
-35. Enrichir les techniques de Kael uniquement après validation humaine.
-36. Garder les détails tactiques avancés de Kael pour une passe future.
-37. Éviter de surcharger le `data.json` de Kael trop tôt.
-38. Améliorer progressivement le confort de lecture des récits MDX si nécessaire.
-39. Ajouter ensuite de nouveaux personnages `draft` un par un ou par petits lots.
-40. Éviter de publier les drafts trop tôt.
-41. Garder la page d’accueil V2 comme chantier séparé, sans la mélanger avec les fiches personnage.
-42. Améliorer l’ergonomie de la preview interne seulement si nécessaire.
-43. Ajouter plus tard des filtres ou badges dans la preview si le nombre de drafts augmente.
-44. Ne pas transformer la preview en vrai back-office pour le moment.
-45. Garder la preview strictement séparée de la navigation publique.
-46. Continuer à utiliser `publicationStatus: "draft"` comme protection principale.
-47. Enrichir les filtres publics avec d’autres catégories uniquement si les tags ne suffisent plus.
-48. Garder les signatures visuelles spécifiques hors périmètre pour le moment.
-49. Ne pas créer de nouveaux champs de données tant que les tags suffisent.
-50. Extraire plus tard les factions confirmées depuis le lore, sans créer de modèle tant que la structure n’est pas stabilisée.
-51. Distinguer plus tard les groupes confirmés, ambigus, proposés ou obsolètes avant toute publication encyclopédique.
-52. Créer un modèle de données `Faction` seulement quand les catégories et les slugs seront validés.
-53. Relier les personnages aux factions seulement après validation des slugs et des catégories.
-54. Éviter de figer trop tôt toute la géopolitique du monde.
-55. Extraire plus tard les Concepts confirmés depuis le lore, sans figer toute la cosmologie.
-56. Distinguer plus tard Concepts, Domaines, Éveils et systèmes d’origine.
-57. Créer un modèle de données magique seulement quand la structure sera stabilisée.
-58. Relier les personnages aux Concepts seulement après validation des slugs et des catégories.
-59. Éviter de figer trop tôt toute la cosmologie.
-60. Définir plus tard un modèle de données pour les lieux.
-61. Distinguer plus tard les lieux physiques, spirituels, dimensionnels et symboliques.
-62. Créer une carte SVG stylisée seulement quand la géographie sera suffisamment stabilisée.
-63. Ajouter des points cliquables plus tard, après validation des lieux et des slugs.
-64. Préparer des couches dimensionnelles pour le Monde physique, l’Abîme et Celestia.
-65. Éviter de figer trop tôt toute la géographie ou la cosmologie spatiale.
-66. Définir plus tard un modèle de données pour les événements.
-67. Distinguer plus tard les âges, périodes, ruptures, guerres, scellements et transitions majeures.
-68. Créer `src/content/evenements` seulement quand la structure sera stabilisée.
-69. Ajouter des pages événement dédiées plus tard.
-70. Relier les événements aux personnages, lieux et factions seulement après validation des slugs.
-71. Éviter de figer trop tôt toute l’histoire du monde.
-72. Créer plus tard des pages `/evenements/[slug]`.
-73. Définir plus tard un modèle `Archive`.
-74. Créer plus tard `src/content/archives`.
-75. Distinguer proprement canon public, anciennes versions, propositions IA, contradictions et scènes potentielles.
-76. Éviter de figer trop tôt toute l’histoire du monde ou tout le système d’archives.
-77. Vérifier si les fiches Kael, Varros, Elias, Ysolde, Amara, Aurélia ou Soryn doivent être légèrement améliorées avant toute publication.
-78. Confirmer que `themeKey: "vide-oppressant"` reste le bon choix pour Kael.
-79. Confirmer que `themeKey: "default"` reste acceptable pour Varros V1.
-80. Confirmer que `themeKey: "default"` reste acceptable provisoirement pour Elias V1.
-81. Confirmer que `themeKey: "vie-sauvage"` reste le bon choix pour Ysolde V1.
-82. Confirmer que `themeKey: "amour-douleur"` reste le bon choix pour Amara V1.
-83. Confirmer que `themeKey: "or-maudit"` reste le bon choix pour Aurélia V1.
-84. Confirmer que `themeKey: "masque-voile"` reste le bon choix pour Soryn V1.
-85. Envisager plus tard un thème de famille comme `titan-maudit` uniquement si plusieurs personnages partagent cette ambiance.
-86. Envisager plus tard un thème de famille comme `foi-sans-dieu`, `lumiere-construite`, `sacre-fissure` ou équivalent uniquement si plusieurs personnages partagent cette ambiance.
-87. Garder Kael, Varros, Elias, Ysolde, Amara, Aurélia et Soryn en `publicationStatus: "draft"` jusqu’à validation explicite du créateur.
-88. Choisir la prochaine décision après Kael V1, Varros V1, Elias V1, Ysolde V1, Amara V1, Aurélia V1 et Soryn V1 :
+31. Utiliser la décision documentée `themeKey / themeFamily / visualVariant / signature` comme référence future, sans la coder maintenant.
+32. Créer plus tard un champ `visualVariant` seulement si le besoin se confirme.
+33. Créer plus tard une couche `signature` pour les personnages vitrines seulement si elle améliore la lecture.
+34. Différencier progressivement les personnages majeurs sans casser le moteur actuel.
+35. Documenter les familles visuelles avant de les multiplier.
+36. Éviter le refactor prématuré du moteur de thèmes.
+37. Tester les thèmes sur plusieurs fiches preview avant tout changement structurel.
+38. Réserver les thèmes très spécifiques aux personnages vitrines ou majeurs.
+39. Éviter de créer un thème unique pour chaque personnage sans nécessité.
+40. Ajuster plus tard le style de combat ou les arts martiaux de Kael seulement si le créateur valide ces éléments.
+41. Enrichir les techniques de Kael uniquement après validation humaine.
+42. Garder les détails tactiques avancés de Kael pour une passe future.
+43. Éviter de surcharger le `data.json` de Kael trop tôt.
+44. Améliorer progressivement le confort de lecture des récits MDX si nécessaire.
+45. Ajouter ensuite de nouveaux personnages `draft` un par un ou par petits lots.
+46. Éviter de publier les drafts trop tôt.
+47. Garder la page d’accueil V2 comme chantier séparé, sans la mélanger avec les fiches personnage.
+48. Améliorer l’ergonomie de la preview interne seulement si nécessaire.
+49. Ajouter plus tard des filtres ou badges dans la preview si le nombre de drafts augmente.
+50. Ne pas transformer la preview en vrai back-office pour le moment.
+51. Garder la preview strictement séparée de la navigation publique.
+52. Continuer à utiliser `publicationStatus: "draft"` comme protection principale.
+53. Enrichir les filtres publics avec d’autres catégories uniquement si les tags ne suffisent plus.
+54. Garder les signatures visuelles spécifiques hors périmètre pour le moment.
+55. Ne pas créer de nouveaux champs de données tant que les tags suffisent.
+56. Extraire plus tard les factions confirmées depuis le lore, sans créer de modèle tant que la structure n’est pas stabilisée.
+57. Distinguer plus tard les groupes confirmés, ambigus, proposés ou obsolètes avant toute publication encyclopédique.
+58. Créer un modèle de données `Faction` seulement quand les catégories et les slugs seront validés.
+59. Relier les personnages aux factions seulement après validation des slugs et des catégories.
+60. Éviter de figer trop tôt toute la géopolitique du monde.
+61. Extraire plus tard les Concepts confirmés depuis le lore, sans figer toute la cosmologie.
+62. Distinguer plus tard Concepts, Domaines, Éveils et systèmes d’origine.
+63. Créer un modèle de données magique seulement quand la structure sera stabilisée.
+64. Relier les personnages aux Concepts seulement après validation des slugs et des catégories.
+65. Éviter de figer trop tôt toute la cosmologie.
+66. Définir plus tard un modèle de données pour les lieux.
+67. Distinguer plus tard les lieux physiques, spirituels, dimensionnels et symboliques.
+68. Créer une carte SVG stylisée seulement quand la géographie sera suffisamment stabilisée.
+69. Ajouter des points cliquables plus tard, après validation des lieux et des slugs.
+70. Préparer des couches dimensionnelles pour le Monde physique, l’Abîme et Celestia.
+71. Éviter de figer trop tôt toute la géographie ou la cosmologie spatiale.
+72. Définir plus tard un modèle de données pour les événements.
+73. Distinguer plus tard les âges, périodes, ruptures, guerres, scellements et transitions majeures.
+74. Créer `src/content/evenements` seulement quand la structure sera stabilisée.
+75. Ajouter des pages événement dédiées plus tard.
+76. Relier les événements aux personnages, lieux et factions seulement après validation des slugs.
+77. Éviter de figer trop tôt toute l’histoire du monde.
+78. Créer plus tard des pages `/evenements/[slug]`.
+79. Définir plus tard un modèle `Archive`.
+80. Créer plus tard `src/content/archives`.
+81. Distinguer proprement canon public, anciennes versions, propositions IA, contradictions et scènes potentielles.
+82. Éviter de figer trop tôt toute l’histoire du monde ou tout le système d’archives.
+83. Vérifier si les fiches Kael, Varros, Elias, Ysolde, Amara, Aurélia ou Soryn doivent être légèrement améliorées avant toute publication.
+84. Confirmer que `themeKey: "vide-oppressant"` reste le bon choix pour Kael.
+85. Confirmer que `themeKey: "default"` reste acceptable pour Varros V1.
+86. Confirmer que `themeKey: "default"` reste acceptable provisoirement pour Elias V1.
+87. Confirmer que `themeKey: "vie-sauvage"` reste le bon choix pour Ysolde V1.
+88. Confirmer que `themeKey: "amour-douleur"` reste le bon choix pour Amara V1.
+89. Confirmer que `themeKey: "or-maudit"` reste le bon choix pour Aurélia V1.
+90. Confirmer que `themeKey: "masque-voile"` reste le bon choix pour Soryn V1.
+91. Envisager plus tard un thème de famille comme `titan-maudit` uniquement si plusieurs personnages partagent cette ambiance.
+92. Envisager plus tard un thème de famille comme `foi-sans-dieu`, `lumiere-construite`, `sacre-fissure` ou équivalent uniquement si plusieurs personnages partagent cette ambiance.
+93. Garder Kael, Varros, Elias, Ysolde, Amara, Aurélia et Soryn en `publicationStatus: "draft"` jusqu’à validation explicite du créateur.
+94. Choisir la prochaine décision après Kael V1, Varros V1, Elias V1, Ysolde V1, Amara V1, Aurélia V1 et Soryn V1 :
    * améliorer légèrement la fiche Kael si nécessaire ;
    * améliorer légèrement la fiche Varros si nécessaire ;
    * améliorer légèrement la fiche Elias si nécessaire ;
@@ -103,8 +109,8 @@ Stabiliser les premières fiches personnages réelles en `draft` et décider de 
    * améliorer légèrement la fiche Soryn si nécessaire ;
    * préparer un huitième personnage en `draft` ;
    * documenter une méthode de validation avant publication.
-89. Garder les récits MDX limités au Markdown simple, sans imports, HTML brut ni JavaScript arbitraire.
-90. Intégrer Noah plus tard comme fiche test validée si le créateur confirme ce choix.
+95. Garder les récits MDX limités au Markdown simple, sans imports, HTML brut ni JavaScript arbitraire.
+96. Intégrer Noah plus tard comme fiche test validée si le créateur confirme ce choix.
 
 ## Hors périmètre pour le moment
 

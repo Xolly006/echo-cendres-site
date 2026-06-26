@@ -162,6 +162,8 @@ Les différentes entités seront ajoutées progressivement. Le squelette doit pe
 * Soryn est visible uniquement via la preview interne locale `/personnages/preview/soryn-la-voilee` tant qu’elle reste en `draft`.
 * Soryn ne doit pas être publiée tant que le créateur ne valide pas explicitement sa fiche.
 * Le registre narratif `src/content/personnages/narrative-registry.ts` a été régénéré automatiquement pour inclure le récit MDX de Soryn.
+* Une décision d’architecture visuelle future est documentée : le moteur utilise actuellement `themeKey`, mais une évolution possible serait `themeFamily + visualVariant + signature`.
+* Cette évolution n’est pas codée maintenant. Elle sert seulement de garde-fou pour éviter qu’un thème soit réduit à une couleur, qu’un thème unique soit créé pour chaque personnage mineur ou que plusieurs personnages majeurs se ressemblent trop.
 * Moteur de chronologie structuré, moteur d’événements structuré, moteur de lieux structuré, moteur de factions structuré, moteur de magie structuré et système de thèmes avancé non encore développés.
 
 ## Technologies actuelles

@@ -55,6 +55,7 @@
 ## Recette d’ambiance des futurs personnages
 
 * Un thème personnage représente une famille sensorielle, pas un personnage unique.
+* Un thème ne doit pas être seulement une couleur : il peut porter palette, typographie, fond, texture, particules, transition, intensité, comportements optionnels et ambiance générale.
 * Un personnage doit d’abord utiliser un thème existant si celui-ci correspond suffisamment à son émotion dominante, son rôle narratif ou sa présence magique.
 * Un nouveau thème ne doit être créé que si plusieurs personnages pourraient théoriquement l’utiliser.
 * Exception contrôlée : `or-maudit` sert actuellement surtout à Aurélia / Reine Midas comme signature quasi personnelle de personnage vitrine.
@@ -68,6 +69,41 @@
 * Les effets uniques propres à un personnage majeur doivent attendre le futur système de signatures visuelles.
 * Les signatures visuelles spécifiques doivent rester séparées des thèmes standard, de `PersonnageAtmosphere` et de `PersonnageParticles`.
 * Claude peut servir à extraire et organiser des informations depuis Magic.txt, mais le créateur doit toujours valider ce qui est canonique.
+
+## Évolution future des thèmes personnages
+
+Le moteur utilise actuellement `themeKey`. Aucun nouveau champ ne doit être ajouté maintenant, mais une évolution future possible est documentée :
+
+* `themeKey` : clé actuelle utilisée par le moteur.
+* `themeFamily` : famille sensorielle générale.
+* `visualVariant` : variante visuelle propre à une entité dans une même famille.
+* `signature` : détail unique réservé aux personnages vitrines ou majeurs.
+
+La logique retenue :
+
+* les personnages secondaires ou proches esthétiquement peuvent partager une famille de thème ;
+* les personnages majeurs ou vitrines peuvent avoir une variante ou une signature propre ;
+* une famille de thème donne une grammaire visuelle commune ;
+* une variante différencie un personnage dans cette famille ;
+* une signature ajoute un détail unique, seulement si nécessaire.
+
+Exemples à garder en tête :
+
+* Vide / Néant : Kael pourrait porter fumée froide, contours absents et non-existence ; Nihil pourrait porter néant cosmique, silence final et blanc mort ; Neihem pourrait porter histoire morte, poussière d’archives et nécromancie du passé.
+* Or / Malédiction : Aurélia porte or ancien, argent froid, cage de verre, gants noirs et trésor maudit ; Astharoth ne devrait partager une famille proche que si son esthétique le justifie, avec une variante différente.
+* Masque / Illusion : Soryn porte théâtre fermé, rideau bordeaux, porcelaine, miroir fissuré et mensonge élégant.
+* Lumière brisée / Sacré : Elias pourrait porter lumière retenue, foi humaine et vitrail fissuré ; Métatron ou Célestine pourraient porter géométrie angélique, ordre inhumain et blanc dangereux.
+
+Contraintes :
+
+* `or-maudit` sert actuellement surtout à Aurélia et peut rester une signature quasi personnelle.
+* `masque-voile` sert actuellement surtout à Soryn et peut rester une signature quasi personnelle.
+* Ces thèmes ne doivent devenir des familles réutilisables que si un autre personnage partage réellement une esthétique proche.
+* Le système futur `themeFamily + visualVariant + signature` ne doit pas être codé maintenant.
+* Il faut éviter de créer un thème unique pour chaque personnage mineur.
+* Il faut aussi éviter que plusieurs personnages majeurs se ressemblent parce qu’ils partagent une même palette.
+* Les images, portraits et assets visuels restent hors périmètre tant qu’un système propre n’est pas décidé.
+* La page d’accueil V2 “Livre-Monde vivant” reste un chantier séparé.
 
 Workflow d’ajout d’un personnage :
 
