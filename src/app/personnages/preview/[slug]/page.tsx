@@ -71,8 +71,11 @@ export default async function Page({ params }: PersonnagePreviewPageProps) {
       </div>
       <StandardImmersivePersonnage
         atmosphere={theme.atmosphere}
+        backHref="/personnages/preview"
+        backLabel="Retour au preview"
         personnage={personnage}
         narrative={NarrativeContent ? <PersonnageNarrative Content={NarrativeContent} /> : null}
+        previewStatus={personnage.publicationStatus}
       />
     </main>
   );

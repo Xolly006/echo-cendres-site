@@ -9,7 +9,10 @@ import styles from './StandardImmersivePersonnage.module.css';
 type StandardImmersivePersonnageProps = {
   personnage: Personnage;
   atmosphere?: PersonnageTheme['atmosphere'];
+  backHref?: string;
+  backLabel?: string;
   narrative?: ReactNode;
+  previewStatus?: Personnage['publicationStatus'];
 };
 
 type MagicItem = {
@@ -35,7 +38,14 @@ const magicLabels = {
   limits: 'Limites',
 };
 
-export function StandardImmersivePersonnage({ atmosphere, personnage, narrative }: StandardImmersivePersonnageProps) {
+export function StandardImmersivePersonnage({
+  atmosphere,
+  backHref = '/personnages',
+  backLabel = 'Retour aux personnages',
+  narrative,
+  personnage,
+  previewStatus,
+}: StandardImmersivePersonnageProps) {
   const identityItems = personnage.identity
     ? [
         personnage.identity.aliases && personnage.identity.aliases.length > 0
@@ -77,13 +87,21 @@ export function StandardImmersivePersonnage({ atmosphere, personnage, narrative 
 
       <div className={styles.content}>
         <header className={styles.intro}>
-          <p className={styles.role}>{personnage.role ?? 'Personnage'}</p>
+          <div className={styles.introMeta}>
+            <p className={styles.role}>{personnage.role ?? 'Personnage'}</p>
+            {previewStatus ? (
+              <span className={styles.previewPill} data-status={previewStatus}>
+                Preview {previewStatus}
+              </span>
+            ) : null}
+          </div>
           <h1 id="personnage-title" className={styles.title}>
             {personnage.nom}
           </h1>
         </header>
 
         <div className={styles.summaryBlock}>
+          <p className={styles.blockLabel}>Introduction</p>
           <p className={styles.summary}>{personnage.resumeCourt}</p>
 
           {personnage.tags && personnage.tags.length > 0 ? (
@@ -94,16 +112,19 @@ export function StandardImmersivePersonnage({ atmosphere, personnage, narrative 
             </ul>
           ) : null}
 
-          <Link className={styles.backLink} href="/personnages">
-            Retour aux personnages
+          <Link className={styles.backLink} href={backHref}>
+            {backLabel}
           </Link>
         </div>
 
         {identityItems.length > 0 ? (
           <section className={styles.identity} aria-labelledby="personnage-identity-title">
-            <h2 id="personnage-identity-title" className={styles.identityTitle}>
-              Identité
-            </h2>
+            <div className={styles.sectionHeader}>
+              <h2 id="personnage-identity-title" className={styles.identityTitle}>
+                Identité
+              </h2>
+              <p>Repères structurés de la fiche.</p>
+            </div>
             <dl className={styles.identityList}>
               {identityItems.map((item) => (
                 <div className={styles.identityItem} key={item.label}>
@@ -117,9 +138,12 @@ export function StandardImmersivePersonnage({ atmosphere, personnage, narrative 
 
         {magicItems.length > 0 ? (
           <section className={styles.magic} aria-labelledby="personnage-magic-title">
-            <h2 id="personnage-magic-title" className={styles.magicTitle}>
-              Magie
-            </h2>
+            <div className={styles.sectionHeader}>
+              <h2 id="personnage-magic-title" className={styles.magicTitle}>
+                Magie
+              </h2>
+              <p>Concepts, manifestations et limites déjà structurés.</p>
+            </div>
             <dl className={styles.magicList}>
               {magicItems.map((item) => (
                 <div className={styles.magicItem} key={item.label}>

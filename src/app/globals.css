@@ -576,7 +576,18 @@ a {
   position: relative;
   z-index: 3;
   width: min(72rem, calc(100% - 2rem));
-  margin: 0 auto 1rem;
+  margin: 0 auto 0.75rem;
+  border-color: color-mix(in srgb, var(--character-accent, var(--accent)) 42%, var(--character-border, var(--border)));
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--character-accent, var(--accent)) 10%, transparent), transparent),
+    color-mix(in srgb, var(--character-surface, var(--surface)) 72%, rgba(0, 0, 0, 0.2));
+  color: var(--character-muted, var(--muted));
+  backdrop-filter: blur(12px);
+}
+
+.preview-banner--floating strong,
+.preview-banner--floating a {
+  color: var(--character-text, var(--text));
 }
 
 .preview-status {

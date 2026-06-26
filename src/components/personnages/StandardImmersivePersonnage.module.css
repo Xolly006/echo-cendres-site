@@ -85,7 +85,7 @@
     'narrative narrative'
     'future future';
   gap: clamp(2rem, 7vw, 7rem);
-  width: min(78rem, 100%);
+  width: min(82rem, 100%);
   margin: 0 auto;
   padding: clamp(7rem, 13vh, 10rem) clamp(1rem, 5vw, 4rem) clamp(3rem, 8vh, 6rem);
 }
@@ -97,13 +97,38 @@
   max-width: 58rem;
 }
 
+.introMeta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1rem;
+  margin-bottom: 1.1rem;
+}
+
 .role {
-  margin: 0 0 1.1rem;
+  margin: 0;
   color: var(--character-accent, var(--accent));
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: var(--character-label-spacing, 0.22em);
   text-transform: uppercase;
+}
+
+.previewPill {
+  border: 1px solid color-mix(in srgb, var(--character-accent, var(--accent)) 48%, var(--character-border, var(--border)));
+  border-radius: 999px;
+  padding: 0.34rem 0.62rem;
+  color: var(--character-text, var(--text));
+  background: color-mix(in srgb, var(--character-accent, var(--accent)) 12%, transparent);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: calc(var(--character-label-spacing, 0.22em) * 0.45);
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.previewPill[data-status='draft'] {
+  border-style: dashed;
 }
 
 .title {
@@ -126,7 +151,18 @@
   min-width: 0;
   align-self: end;
   border-left: 1px solid var(--character-border, var(--border));
-  padding-left: clamp(1rem, 3vw, 2rem);
+  padding: clamp(1rem, 3vw, 1.6rem) 0 clamp(1rem, 3vw, 1.6rem) clamp(1rem, 3vw, 2rem);
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--character-surface, var(--surface)) 48%, transparent), transparent 86%);
+}
+
+.blockLabel {
+  margin: 0 0 0.85rem;
+  color: var(--character-accent, var(--accent));
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: calc(var(--character-label-spacing, 0.22em) * 0.65);
+  text-transform: uppercase;
 }
 
 .summary {
@@ -186,27 +222,47 @@
 
 .narrative {
   grid-area: narrative;
+  margin-top: clamp(0.5rem, 3vh, 2rem);
 }
 
 .magic {
   grid-area: magic;
-  width: min(64rem, 100%);
+  width: min(70rem, 100%);
 }
 
 .identity {
   grid-area: identity;
-  width: min(58rem, 100%);
+  width: min(68rem, 100%);
   margin-top: clamp(1rem, 4vh, 2.5rem);
+}
+
+.sectionHeader {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  justify-content: space-between;
+  gap: 0.75rem 1.5rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--character-border, var(--border)) 72%, transparent);
+  padding-bottom: 0.8rem;
 }
 
 .identityTitle,
 .magicTitle {
-  margin: 0 0 1rem;
+  margin: 0;
   color: var(--character-accent, var(--accent));
   font-size: 0.76rem;
   font-weight: 700;
   letter-spacing: var(--character-label-spacing, 0.22em);
   text-transform: uppercase;
+}
+
+.sectionHeader p {
+  max-width: 26rem;
+  margin: 0;
+  color: var(--character-muted, var(--muted));
+  font-size: 0.9rem;
+  line-height: 1.55;
 }
 
 .magicList {
@@ -215,14 +271,18 @@
   gap: 0;
   margin: 0;
   border-top: 1px solid var(--character-border, var(--border));
+  background:
+    linear-gradient(145deg, color-mix(in srgb, var(--character-surface, var(--surface)) 58%, transparent), transparent 76%);
 }
 
 .identityList {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
   gap: 0;
   margin: 0;
   border-top: 1px solid var(--character-border, var(--border));
+  background:
+    linear-gradient(145deg, color-mix(in srgb, var(--character-surface, var(--surface)) 52%, transparent), transparent 78%);
 }
 
 .magicItem {
@@ -242,6 +302,7 @@
 .identityItem {
   min-width: 0;
   border-right: 1px solid var(--character-border, var(--border));
+  border-bottom: 1px solid var(--character-border, var(--border));
   padding: 1rem clamp(0.8rem, 2vw, 1.25rem) 0.8rem 0;
 }
 
@@ -316,7 +377,9 @@
 
 :global(.personnage-theme-page[data-character-theme='feu-timide']) .summaryBlock {
   border-left-color: color-mix(in srgb, var(--character-accent) 42%, transparent);
-  box-shadow: -18px 0 42px rgba(201, 121, 63, 0.055);
+  background:
+    linear-gradient(90deg, rgba(201, 121, 63, 0.075), transparent 84%);
+  box-shadow: -18px 0 42px rgba(201, 121, 63, 0.07);
 }
 
 :global(.personnage-theme-page[data-character-theme='feu-timide']) .glowOne {
@@ -345,6 +408,8 @@
 :global(.personnage-theme-page[data-character-theme='vide-oppressant']) .summaryBlock {
   align-self: center;
   border-left-color: color-mix(in srgb, var(--character-border) 64%, transparent);
+  background:
+    linear-gradient(90deg, rgba(128, 143, 164, 0.045), transparent 86%);
   padding-left: clamp(1.4rem, 5vw, 3.2rem);
 }
 
@@ -443,7 +508,6 @@
 
   .identityItem {
     border-right: 0;
-    border-bottom: 1px solid var(--character-border, var(--border));
   }
 
   .magicItem,
@@ -467,6 +531,16 @@
 
   .identityList {
     grid-template-columns: 1fr;
+  }
+
+  .sectionHeader {
+    align-items: start;
+    flex-direction: column;
+  }
+
+  .summaryBlock,
+  :global(.personnage-theme-page[data-character-theme='vide-oppressant']) .summaryBlock {
+    padding-right: 0.75rem;
   }
 }
 
