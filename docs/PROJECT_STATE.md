@@ -178,3 +178,13 @@ Les différentes entités seront ajoutées progressivement. Le squelette doit pe
 ## Priorité actuelle
 
 Stabiliser séparément le moteur personnages, les sections structurées optionnelles, le moteur de thèmes et les futures compositions avant d’intégrer des fiches validées. Les signatures visuelles spécifiques restent hors périmètre pour le moment.
+
+## Système de signatures visuelles — pilote Kael
+
+* Le système séparé de signatures visuelles existe maintenant dans `src/components/personnages/signatures/`, avec un type `PersonnageSignature`, un registre résolu par slug et une exportation `getPersonnageSignature`.
+* Le garde-fou « ne pas coder les signatures maintenant » a été levé explicitement par le créateur le 2026-07-11, pour un pilote unique.
+* La signature pilote de Kael l’Éclipsé est en place : effacement lent et partiel des lettres du nom (cycles longs et décalés), voile froid traversant la scène, et dénégation ponctuelle de l’en-tête, comme si la page hésitait à reconnaître sa présence.
+* La signature est en CSS pur, sans JavaScript client, respecte `prefers-reduced-motion` avec un repli statique, et conserve le nom complet accessible aux lecteurs d’écran.
+* `StandardImmersivePersonnage` résout la signature par `personnage.slug` : une ligne d’overlay et un habillage conditionnel du titre. Les personnages sans signature gardent exactement le rendu antérieur, vérifié sur Varros.
+* Aucune donnée personnage n’a été modifiée : pas de nouveau champ dans les `data.json`.
+* Aucune autre signature ne doit être créée tant que le pilote Kael n’est pas validé visuellement par le créateur via `/personnages/preview/kael-eclipse`.

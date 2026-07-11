@@ -37,6 +37,17 @@
 * Les imports, exports, composants JSX, HTML brut, expressions JavaScript et liens à protocole dangereux dans les récits MDX sont interdits dans cette première version.
 * `@next/mdx` est configuré dans `next.config.mjs`; `src/mdx-components.tsx` fournit la convention globale requise par Next.
 
+## Système de signatures visuelles — pilote
+
+* Le garde-fou « ne pas coder les signatures maintenant » a été levé explicitement par le créateur le 2026-07-11, pour un pilote unique avant toute généralisation.
+* Le système vit dans `src/components/personnages/signatures/`, séparé de `PersonnageAtmosphere` et `PersonnageParticles`, conformément aux règles existantes.
+* Une signature est résolue par slug dans un registre local. Aucun nouveau champ n’est ajouté aux `data.json`.
+* Un personnage absent du registre garde exactement le rendu standard.
+* Une signature peut habiller le titre (`Title`) et ajouter une couche décorative (`Overlay`), sans jamais remplacer le thème.
+* Toute signature doit rester lisible, décorative, non interactive, et respecter `prefers-reduced-motion` avec un repli statique sobre.
+* Pilote actuel : Kael l’Éclipsé (`kael-eclipse`) — effacement lent et partiel des lettres du nom, voile froid traversant, dénégation ponctuelle de l’en-tête. Le nom complet reste accessible aux lecteurs d’écran via un texte masqué.
+* Aucune autre signature ne doit être ajoutée tant que le pilote Kael n’est pas validé visuellement par le créateur.
+
 ## Règles du système d’ambiance des personnages
 
 * `backgroundKind` sert à choisir l’ambiance de fond d’une fiche personnage : chaleur, vide, brume, cristal, étoiles ou autre direction visuelle prévue.

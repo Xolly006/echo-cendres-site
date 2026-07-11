@@ -252,3 +252,12 @@ Amara ne doit recevoir aucune signature visuelle spécifique maintenant. Les pis
 * aucune signature visuelle unique codée maintenant.
 
 Ces effets devront attendre le système séparé de signatures visuelles propres aux personnages majeurs. Le thème `amour-douleur` est une famille standard réutilisable pour l’amour sacrificiel, l’empathie, le lien, l’Agapè, la protection douloureuse, la tendresse tragique et la douleur partagée ; il ne doit pas être traité comme un thème uniquement réservé à Amara.
+
+## Pilote signatures visuelles — validation en cours
+
+1. Relire la signature de Kael via `/personnages/preview/kael-eclipse` : effacement des lettres, voile froid, dénégation de l’en-tête.
+2. Vérifier la lisibilité du nom sur mobile et sur desktop pendant les creux du cycle d’effacement.
+3. Vérifier le repli `prefers-reduced-motion` (réglage système « réduire les animations »).
+4. Ajuster intensité, durée ou opacité minimale selon le ressenti du créateur.
+5. Seulement après validation : décider du deuxième personnage signature (Aurélia ou Soryn sont les candidates naturelles).
+6. Ne pas ajouter de signature à un personnage mineur.

@@ -2,6 +2,7 @@ import Link from 'next/link';
 import type { ReactNode } from 'react';
 import { PersonnageAtmosphere } from '@/components/personnages/effects/PersonnageAtmosphere';
 import { PersonnageParticles } from '@/components/personnages/effects/PersonnageParticles';
+import { getPersonnageSignature } from '@/components/personnages/signatures';
 import type { PersonnageTheme } from '@/types/personnage-theme';
 import type { Personnage } from '@/types/personnage';
 import styles from './StandardImmersivePersonnage.module.css';
@@ -74,10 +75,15 @@ export function StandardImmersivePersonnage({
     : [];
   const magicItems = magicCandidates.filter((item): item is MagicItem => item !== null);
 
+  const signature = getPersonnageSignature(personnage.slug);
+  const SignatureTitle = signature?.Title;
+  const SignatureOverlay = signature?.Overlay;
+
   return (
     <section className={styles.scene} aria-labelledby="personnage-title">
       <PersonnageAtmosphere atmosphere={atmosphere} />
       <PersonnageParticles atmosphere={atmosphere} />
+      {SignatureOverlay ? <SignatureOverlay /> : null}
 
       <div className={styles.backdrop} aria-hidden="true">
         <span className={styles.glowOne} />
@@ -96,7 +102,7 @@ export function StandardImmersivePersonnage({
             ) : null}
           </div>
           <h1 id="personnage-title" className={styles.title}>
-            {personnage.nom}
+            {SignatureTitle ? <SignatureTitle>{personnage.nom}</SignatureTitle> : personnage.nom}
           </h1>
         </header>
 
