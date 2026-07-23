@@ -10,7 +10,7 @@ export default function HomePage() {
         <p className="hero__kicker">Le Livre-Monde</p>
         <h1 id="hero-title" className="hero__title">L’Écho des Cendres</h1>
         <p className="hero__subtitle">
-          Un atlas narratif pour explorer les personnages, les lieux, les événements et les fractures d’un monde qui refuse poliment de rester simple.
+          Un atlas narratif pour explorer les personnages, les lieux, les événements et les fractures de ce monde.
         </p>
         <div className="hero__actions" aria-label="Actions principales">
           <a className="primary-action" href="#sections">Entrer dans le Livre-Monde</a>
@@ -23,7 +23,7 @@ export default function HomePage() {
           <p className="eyebrow">Portes d’entrée</p>
           <h2 id="sections-title">Choisir une section</h2>
           <p>
-            Pour l’instant, les salles sont vides. C’est normal. On construit le palais avant d’inviter les tragédies à prendre le thé.
+            Les sections sont encore vides. Le contenu est ajouté progressivement, à mesure qu’il est vérifié.
           </p>
         </div>
         <div className="section-grid">
