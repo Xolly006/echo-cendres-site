@@ -155,3 +155,16 @@ Nouvelle règle : un thème porte la PALETTE et l'ATMOSPHÈRE. Une
 composition porte la MISE EN PAGE. Ce sont deux axes séparés. Les
 compositions sont des archétypes partagés (3 à 5 au total), jamais une
 par personnage.
+
+## Étapes 2 et 3 — moteur de composition et ancrages stables (2026-07-23)
+
+* La page d'un personnage traduit son Domaine Absolu quand il en a un, et
+  sa personnalité dans tous les cas. Aucune DA n'est inventée.
+* Un thème n'est pas une « famille » par décret : il le devient le jour où
+  un second personnage l'adopte réellement.
+* Les compositions exposent des ancrages stables (`data-personnage-content`,
+  `-exit`, `-erasable`, `-withdrawable`). Les signatures ne devinent plus
+  la structure du DOM.
+* Non-existence ≠ invisibilité : un élément atténué demeure. Le retrait du
+  flux est réservé aux éléments courts et autonomes ; le récit MDX n'est
+  jamais touché.

@@ -21,12 +21,25 @@ de données interchangeable derrière une couleur différente.
 - 7 thèmes personnages (`default`, `vide-oppressant`, `vie-sauvage`,
   `amour-douleur`, `or-maudit`, `masque-voile`, `feu-timide`), résolus par
   `themeKey`, fallback `default`.
-- Une seule mise en page, `StandardImmersivePersonnage`, partagée par tous
-  les personnages.
+- Typographie assumée : Cormorant Garamond (titres), Spectral (lecture,
+  italique comprise), Space Grotesk (interface), chargées via `next/font/google`.
+- Moteur de composition (`src/components/personnages/compositions/`), axe
+  séparé de `themeKey` : le thème porte la palette et l'atmosphère, la
+  composition porte la mise en page. Deux compositions existent —
+  `standard` (rendu historique, utilisé par les 6 personnages non
+  vitrines) et `fragment` (Kael l'Éclipsé). Résolues par le champ
+  `composition` de `data.json`, repli sur `standard` si absent ou inconnu.
+- Champ `identity.unrecorded` : liste de champs volontairement non
+  consignés, affichés vides par certaines compositions (ex. `fragment`).
 - Système de signatures visuelles séparé (`src/components/personnages/signatures/`) :
   pilote complet sur Kael l'Éclipsé (arrivée, dissolution du nom,
   effacement au pointeur, fumée, labels rongés, dénégation périodique,
-  bordures qui respirent, sortie dissoute).
+  bordures qui respirent, sortie dissoute). Les compositions exposent des
+  ancrages stables (`data-personnage-content`, `-exit`, `-erasable`,
+  `-withdrawable`) que la signature Kael consomme au lieu de deviner la
+  structure du DOM.
+- Thème `vide-oppressant` corrigé vers le canon : palette resserrée sur un
+  ciel nocturne sans étoiles, plutôt qu'un vide teinté.
 - Protection `draft`/`published` stable ; preview interne
   (`/personnages/preview`) jamais exposée en production.
 - Pages de sections placeholder : `/factions`, `/magie`, `/carte`,
@@ -34,20 +47,6 @@ de données interchangeable derrière une couleur différente.
 
 ## Ce qui manque
 
-- Une typographie réellement choisie et assumée.
-- Un axe de composition (mise en page) séparé du thème.
-- Des mises en page différenciées pour les personnages majeurs au-delà de Kael.
+- Des compositions dédiées pour les personnages majeurs au-delà de Kael
+  (Elias est la prochaine étape — voir `docs/NEXT_STEPS.md`).
 - Tout moteur structuré pour factions, lieux, événements, archives, magie transverse.
-
-## Problème identifié
-
-- Les 7 thèmes ne diffèrent aujourd'hui que par la palette : 7 fonds
-  quasi-noirs, 7 textes crème, la même serif système et Inter partout.
-- La mise en page est identique pour tous via `StandardImmersivePersonnage` :
-  même grille, mêmes blocs, dans le même ordre.
-- Résultat : le site ressemble à une base de données repeinte, pas à un
-  Livre-Monde différencié.
-- La signature de Kael est correcte en elle-même, mais elle entre en
-  contradiction avec une mise en page qui affirme systématiquement la
-  présence du personnage — l'effacement de Kael se joue contre sa propre
-  mise en page, pas avec elle.
