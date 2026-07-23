@@ -1,21 +1,75 @@
 /*
- * Signature visuelle de Kael l'Éclipsé.
+ * Signature visuelle de Kael l'Éclipsé — v1 complète.
  *
- * Grammaire : effacement, non-reconnaissance, froid.
- * - Chaque lettre du nom perd lentement sa présence, à son propre rythme,
- *   puis revient. Les cycles sont longs (18s) et décalés : la page semble
- *   oublier le nom par fragments, jamais en entier.
- * - Un voile froid traverse très lentement la scène.
- * - Une "dénégation" ponctuelle assombrit à peine la zone du titre,
- *   comme si la page hésitait à l'afficher.
+ * Grammaire (canon) :
+ * - Arrivée "cachot" : noir total, puis le nom se condense hors du flou.
+ * - Le nom s'effiloche en permanence (fumée qui s'élève), jamais en entier.
+ * - Le cerveau refuse d'admettre sa présence : les lettres proches du
+ *   curseur s'effacent, puis se reforment.
+ * - Une fumée noire globale assombrit la scène ; une zone de vide indéfini
+ *   marque l'endroit où il devrait être.
+ * - Les labels de sections sont rongés en permanence (dissolution de l'ego).
+ * - La Chambre Anéchoïque revient périodiquement assombrir l'en-tête.
+ * - Les bordures peinent à exister ; la sortie elle-même est partielle.
  *
- * Contraintes projet respectées :
- * - lisibilité d'abord : opacité minimale 0.28, une seule lettre au creux
- *   de son cycle à la fois grâce aux décalages ;
- * - prefers-reduced-motion : aucune animation, effacement statique léger ;
- * - aucun impact sur le récit MDX : les effets restent dans l'en-tête
- *   et la couche décorative.
+ * Technique : tout l'état vivant passe par des custom properties (--kael-*)
+ * consommées via calc()/color-mix(), jamais par une animation directe de
+ * opacity/filter/transform/border-color. Ça permet à un style inline posé
+ * par KaelSignatureClient (effacement au pointeur) de se composer avec une
+ * animation CSS en cours sans conflit de priorité de cascade, et de revenir
+ * proprement au cycle ambiant quand l'inline est retiré.
+ *
+ * prefers-reduced-motion : bloc unique en bas de fichier, coupe toute
+ * animation/transition et fige un rendu sobre et lisible.
  */
+
+@property --kael-fade {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: 1;
+}
+
+@property --kael-fade-blur {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 0px;
+}
+
+@property --kael-fade-y {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 0px;
+}
+
+@property --kael-proximity {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: 1;
+}
+
+@property --kael-proximity-blur {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 0px;
+}
+
+@property --kael-proximity-y {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 0px;
+}
+
+@property --kael-denial {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --kael-border-breath {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: 100;
+}
 
 .name {
   display: inline-block;
@@ -41,42 +95,90 @@
   white-space: pre;
 }
 
+/* Lettres du nom (titre) : cycle de dissolution ambiant + réactivité au pointeur. */
 .letter {
   display: inline-block;
-  animation: kael-letter-fade 18s ease-in-out infinite;
-  animation-delay: calc(var(--letter-index, 0) * -2.7s);
-  will-change: opacity, filter;
+  opacity: calc(var(--kael-fade, 1) * var(--kael-proximity, 1));
+  filter: blur(calc(var(--kael-fade-blur, 0px) + var(--kael-proximity-blur, 0px)));
+  transform: translateY(calc(var(--kael-fade-y, 0px) + var(--kael-proximity-y, 0px)));
+  transition: --kael-proximity 0.55s ease, --kael-proximity-blur 0.55s ease, --kael-proximity-y 0.55s ease;
+  animation: kael-letter-fade 7.5s ease-in-out infinite;
+  animation-delay: calc(var(--letter-index, 0) * -0.75s);
+  will-change: opacity, filter, transform;
 }
 
 @keyframes kael-letter-fade {
   0%,
-  62%,
+  55%,
   100% {
-    opacity: 1;
-    filter: blur(0);
-    transform: translateY(0);
+    --kael-fade: 1;
+    --kael-fade-blur: 0px;
+    --kael-fade-y: 0px;
   }
 
-  70% {
-    opacity: 0.62;
-    filter: blur(0.4px);
-    transform: translateY(0.5px);
+  63% {
+    --kael-fade: 0.5;
+    --kael-fade-blur: 0.6px;
+    --kael-fade-y: -1.2px;
   }
 
-  76% {
-    opacity: 0.28;
-    filter: blur(1.3px);
-    transform: translateY(1.5px);
+  71% {
+    --kael-fade: 0.08;
+    --kael-fade-blur: 2.5px;
+    --kael-fade-y: -3.6px;
   }
 
-  84% {
-    opacity: 0.7;
-    filter: blur(0.3px);
-    transform: translateY(0.5px);
+  79% {
+    --kael-fade: 0.32;
+    --kael-fade-blur: 1.1px;
+    --kael-fade-y: -1.8px;
+  }
+
+  88% {
+    --kael-fade: 0.82;
+    --kael-fade-blur: 0.2px;
+    --kael-fade-y: -0.3px;
   }
 }
 
-/* Couche décorative : au-dessus de l'atmosphère, sous le contenu. */
+/* Arrivée "cachot" : le nom se condense hors du flou, une seule fois. */
+section[aria-labelledby='personnage-title'][data-kael-phase='void'] .letter,
+section[aria-labelledby='personnage-title'][data-kael-phase='condense'] .letter {
+  animation: kael-letter-condense 1.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: calc(var(--letter-index, 0) * 45ms);
+}
+
+@keyframes kael-letter-condense {
+  0% {
+    opacity: 0;
+    filter: blur(9px);
+    transform: translate(var(--kael-scatter, 0px), 12px) scale(1.35);
+  }
+
+  100% {
+    opacity: 1;
+    filter: blur(0);
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+/* Lettres des labels de sections (Identité, Magie) : rongées + réactives au pointeur, jamais animées en boucle. */
+.labelLetter {
+  display: inline-block;
+  opacity: calc(var(--kael-rot, 1) * var(--kael-proximity, 1));
+  filter: blur(var(--kael-proximity-blur, 0px));
+  transform: translateY(var(--kael-proximity-y, 0px));
+  transition: --kael-proximity 0.55s ease, --kael-proximity-blur 0.55s ease, --kael-proximity-y 0.55s ease;
+  will-change: opacity, filter, transform;
+}
+
+/* Lettres du lien de sortie : basse opacité statique, jamais animée, toujours cliquable (le conteneur <a> n'est pas affecté). */
+.exitLetter {
+  display: inline-block;
+  opacity: var(--kael-rot, 1);
+}
+
+/* Couche ambiante décorative : voile de fond, derrière le contenu (z-index égal, DOM avant .content). */
 .overlay {
   position: absolute;
   inset: 0;
@@ -85,47 +187,44 @@
   pointer-events: none;
 }
 
-/* Voile froid : une nappe presque invisible qui traverse la scène. */
-.veil {
+/* Silhouette absente : le vide que la fumée contourne, en haut de la scène. */
+.void {
   position: absolute;
-  top: -20%;
-  left: -45%;
-  width: 42%;
-  height: 140%;
-  background: linear-gradient(
-    100deg,
-    transparent 0%,
-    rgba(126, 135, 144, 0.05) 38%,
-    rgba(220, 225, 229, 0.075) 50%,
-    rgba(126, 135, 144, 0.05) 62%,
-    transparent 100%
-  );
-  filter: blur(6px);
-  transform: skewX(-8deg);
-  animation: kael-veil-drift 34s linear infinite;
+  top: -6%;
+  left: 14%;
+  width: min(34rem, 46vw);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(3, 4, 7, 0.55) 0%, rgba(3, 4, 7, 0.28) 46%, transparent 74%);
+  filter: blur(14px);
+  animation: kael-void-breath 42s ease-in-out infinite;
 }
 
-@keyframes kael-veil-drift {
-  0% {
-    transform: translateX(0) skewX(-8deg);
-    opacity: 0;
-  }
-
-  12% {
-    opacity: 1;
-  }
-
-  88% {
-    opacity: 1;
-  }
-
+@keyframes kael-void-breath {
+  0%,
   100% {
-    transform: translateX(340%) skewX(-8deg);
-    opacity: 0;
+    opacity: 0.75;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.95;
+    transform: scale(1.04);
   }
 }
 
-/* Dénégation : la page hésite, très rarement, à reconnaître l'en-tête. */
+/* Fumée globale : canvas unique, hauteur de fenêtre, suit le scroll sans en sortir (sticky, pas fixed : reste scopé à .scene). */
+.smokeCanvas {
+  display: block;
+  position: sticky;
+  top: 0;
+  inset-inline: 0;
+  width: 100%;
+  height: 100vh;
+  pointer-events: none;
+}
+
+/* Dénégation périodique : assombrissement radial + extinction du titre/sous-titre, piloté par --kael-denial hérité. */
 .denial {
   position: absolute;
   top: 0;
@@ -134,40 +233,142 @@
   height: 46%;
   background: radial-gradient(
     ellipse 70% 90% at 28% 30%,
-    rgba(3, 4, 7, 0.55) 0%,
-    rgba(3, 4, 7, 0.2) 45%,
+    rgba(3, 4, 7, 0.72) 0%,
+    rgba(3, 4, 7, 0.32) 45%,
     transparent 75%
   );
-  opacity: 0;
-  animation: kael-denial 27s ease-in-out infinite;
+  opacity: var(--kael-denial, 0);
 }
 
-@keyframes kael-denial {
+:global(section[aria-labelledby='personnage-title']) {
+  animation: kael-denial-pulse 16s ease-in-out infinite;
+}
+
+@keyframes kael-denial-pulse {
   0%,
-  71%,
+  62%,
   100% {
-    opacity: 0;
+    --kael-denial: 0;
   }
 
-  76% {
-    opacity: 0.5;
+  70% {
+    --kael-denial: 0.55;
   }
 
-  79% {
-    opacity: 0.14;
+  74% {
+    --kael-denial: 1;
   }
 
-  83% {
-    opacity: 0.38;
+  84% {
+    --kael-denial: 0.86;
   }
 
-  90% {
-    opacity: 0;
+  89% {
+    --kael-denial: 1;
+  }
+
+  95% {
+    --kael-denial: 0.4;
   }
 }
 
-/* Accessibilité : sans mouvement, l'effacement devient statique et discret. */
+#personnage-title {
+  opacity: calc(1 - var(--kael-denial, 0) * 0.72);
+  filter: saturate(calc(1 - var(--kael-denial, 0) * 0.6)) brightness(calc(1 - var(--kael-denial, 0) * 0.32));
+}
+
+:global([data-kael-subtitle]) {
+  opacity: calc(1 - var(--kael-denial, 0) * 0.8);
+  filter: saturate(calc(1 - var(--kael-denial, 0) * 0.6));
+}
+
+/* Arrivée "cachot" : voile noir au-dessus de tout, une seule fois au montage. */
+.arrivalLayer {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.arrivalVeil {
+  position: absolute;
+  inset: 0;
+  background: #030407;
+  opacity: 0;
+  transition: opacity 1.6s ease;
+}
+
+section[aria-labelledby='personnage-title'][data-kael-phase='void'] .arrivalVeil {
+  opacity: 1;
+  transition: none;
+}
+
+section[aria-labelledby='personnage-title'][data-kael-phase='condense'] .arrivalVeil {
+  opacity: 0.82;
+}
+
+/* Reste de la page : fondu lent après la condensation du nom, jamais sur .intro (premier enfant). */
+:global([data-kael-content] > :not(:first-child)) {
+  transition: opacity 1.1s ease 0.1s;
+}
+
+:global(section[aria-labelledby='personnage-title'][data-kael-phase='void'] [data-kael-content] > :not(:first-child)),
+:global(section[aria-labelledby='personnage-title'][data-kael-phase='condense'] [data-kael-content] > :not(:first-child)) {
+  opacity: 0;
+}
+
+/* Bordures qui respirent : uniquement les hairlines des blocs Identité/Magie + le lien de sortie (100% CSS, pas de JS). */
+@keyframes kael-border-breath {
+  0%,
+  100% {
+    --kael-border-breath: 100;
+  }
+
+  50% {
+    --kael-border-breath: 32;
+  }
+}
+
+section[aria-labelledby='personnage-identity-title'] > div:first-child,
+section[aria-labelledby='personnage-magic-title'] > div:first-child {
+  border-bottom-color: color-mix(
+    in srgb,
+    var(--character-border, var(--border)) calc(var(--kael-border-breath) * 1%),
+    transparent
+  );
+  animation: kael-border-breath 13s ease-in-out infinite;
+}
+
+:global(section[aria-labelledby='personnage-identity-title'] dl),
+:global(section[aria-labelledby='personnage-magic-title'] dl) {
+  border-top-color: color-mix(
+    in srgb,
+    var(--character-border, var(--border)) calc(var(--kael-border-breath) * 1%),
+    transparent
+  );
+  animation: kael-border-breath 17s ease-in-out infinite;
+  animation-delay: -6s;
+}
+
+:global(a[data-kael-exit]) {
+  border-color: color-mix(
+    in srgb,
+    var(--character-border, var(--border)) calc(var(--kael-border-breath) * 1%),
+    transparent
+  );
+  animation: kael-border-breath 15s ease-in-out infinite;
+  animation-delay: -3s;
+}
+
+/* Accessibilité : sans mouvement, tout devient statique, sobre et lisible. */
 @media (prefers-reduced-motion: reduce) {
+  .letter,
+  .labelLetter,
+  .exitLetter {
+    transition: none;
+  }
+
   .letter {
     animation: none;
     opacity: calc(1 - min(var(--letter-index, 0) * 0.018, 0.3));
@@ -175,9 +376,39 @@
     transform: none;
   }
 
-  .veil,
-  .denial {
+  .void {
     animation: none;
+  }
+
+  :global(section[aria-labelledby='personnage-title']) {
+    animation: none;
+  }
+
+  section[aria-labelledby='personnage-identity-title'] > div:first-child,
+  section[aria-labelledby='personnage-magic-title'] > div:first-child,
+  :global(section[aria-labelledby='personnage-identity-title'] dl),
+  :global(section[aria-labelledby='personnage-magic-title'] dl),
+  :global(a[data-kael-exit]) {
+    animation: none;
+  }
+
+  .denial {
     opacity: 0;
+  }
+
+  #personnage-title,
+  :global([data-kael-subtitle]) {
+    opacity: 1;
+    filter: none;
+  }
+
+  .arrivalVeil {
+    opacity: 0;
+    transition: none;
+  }
+
+  :global([data-kael-content] > :not(:first-child)) {
+    opacity: 1;
+    transition: none;
   }
 }

@@ -1,19 +1,28 @@
 import type { ReactNode } from 'react';
 import type { PersonnageSignature } from '../types';
+import { KaelSignatureClient } from './KaelSignatureClient';
 import styles from './KaelSignature.module.css';
 
 /**
- * Signature visuelle de Kael l'Éclipsé — pilote du système de signatures.
+ * Signature visuelle de Kael l'Éclipsé — v1.
  *
  * Intention (docs/SIGNATURES_VISUELLES_PERSONNAGES.md) :
  * la page refuse de reconnaître sa présence. Le nom s'efface par endroits,
- * lentement, puis revient. Rien ne clignote, rien ne crie : c'est une
- * absence, pas un effet spécial.
+ * une fumée noire assombrit la scène, les labels de section sont rongés,
+ * le cerveau du lecteur "oublie" ce qui est proche du curseur. Rien ne
+ * clignote, rien ne crie : c'est une absence, pas un effet spécial.
  *
- * Tout est en CSS pur (aucun JavaScript client) et respecte
- * prefers-reduced-motion : sans animation, le nom garde seulement une
- * légère perte de présence statique sur ses dernières lettres.
+ * Ce fichier ne fait que du balisage + du CSS pur (letters, --letter-index,
+ * --kael-scatter). Tout le travail DOM/canvas/pointeur vit dans
+ * KaelSignatureClient.tsx ('use client'), monté via l'Overlay existant.
+ * Le registre par slug ne change pas.
  */
+
+function letterScatter(index: number): string {
+  const direction = index % 2 === 0 ? -1 : 1;
+  const magnitude = 4 + (index % 4) * 3;
+  return `${direction * magnitude}px`;
+}
 
 function splitName(children: ReactNode): ReactNode {
   if (typeof children !== 'string') {
@@ -36,7 +45,12 @@ function splitName(children: ReactNode): ReactNode {
         key={`letter-${index}`}
         aria-hidden="true"
         className={styles.letter}
-        style={{ '--letter-index': index } as React.CSSProperties}
+        style={
+          {
+            '--letter-index': index,
+            '--kael-scatter': letterScatter(index),
+          } as React.CSSProperties
+        }
       >
         {character}
       </span>
@@ -59,10 +73,16 @@ function KaelTitle({ children }: { children: ReactNode }) {
 
 function KaelOverlay() {
   return (
-    <div aria-hidden="true" className={styles.overlay}>
-      <span className={styles.veil} />
-      <span className={styles.denial} />
-    </div>
+    <>
+      <div aria-hidden="true" className={styles.overlay}>
+        <span className={styles.void} />
+        <span className={styles.denial} />
+        <KaelSignatureClient />
+      </div>
+      <div aria-hidden="true" className={styles.arrivalLayer}>
+        <span className={styles.arrivalVeil} />
+      </div>
+    </>
   );
 }
 
