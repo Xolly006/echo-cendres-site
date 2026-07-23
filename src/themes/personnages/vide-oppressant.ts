@@ -11,10 +11,10 @@ export const videOppressantTheme: PersonnageTheme = {
     border: 'rgba(174, 188, 202, 0.1)',
   },
   typography: {
-    titleFamily: "'Times New Roman', Georgia, serif",
-    bodyFamily: "Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+    titleFamily: "var(--font-serif-titre), Georgia, serif",
+    bodyFamily: "var(--font-serif-lecture), Georgia, serif",
     titleWeight: '400',
-    titleSpacing: '0.12em',
+    titleSpacing: '0.08em',
     bodyLineHeight: '2',
     labelSpacing: '0.34em',
   },

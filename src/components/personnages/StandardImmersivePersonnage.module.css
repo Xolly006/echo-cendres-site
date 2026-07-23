@@ -108,6 +108,7 @@
 .role {
   margin: 0;
   color: var(--character-accent, var(--accent));
+  font-family: var(--font-ui);
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: var(--character-label-spacing, 0.22em);
@@ -120,6 +121,7 @@
   padding: 0.34rem 0.62rem;
   color: var(--character-text, var(--text));
   background: color-mix(in srgb, var(--character-accent, var(--accent)) 12%, transparent);
+  font-family: var(--font-ui);
   font-size: 0.68rem;
   font-weight: 700;
   letter-spacing: calc(var(--character-label-spacing, 0.22em) * 0.45);
@@ -135,8 +137,8 @@
   max-width: min(16ch, 100%);
   margin: 0;
   font-family: var(--character-title-font, var(--font-title));
-  font-size: clamp(3.2rem, 8vw, 8rem);
-  font-weight: var(--character-title-weight, 500);
+  font-size: clamp(3.4rem, 8.4vw, 8.4rem);
+  font-weight: var(--character-title-weight, 600);
   letter-spacing: var(--character-title-spacing, 0.03em);
   line-height: 0.92;
   text-wrap: balance;
@@ -159,6 +161,7 @@
 .blockLabel {
   margin: 0 0 0.85rem;
   color: var(--character-accent, var(--accent));
+  font-family: var(--font-ui);
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: calc(var(--character-label-spacing, 0.22em) * 0.65);
@@ -187,6 +190,7 @@
   border-radius: 999px;
   padding: 0.35rem 0.75rem;
   color: var(--character-muted, var(--muted));
+  font-family: var(--font-ui);
   font-size: 0.78rem;
   letter-spacing: calc(var(--character-label-spacing, 0.22em) * 0.25);
 }
@@ -251,6 +255,7 @@
 .magicTitle {
   margin: 0;
   color: var(--character-accent, var(--accent));
+  font-family: var(--font-ui);
   font-size: 0.76rem;
   font-weight: 700;
   letter-spacing: var(--character-label-spacing, 0.22em);
@@ -313,6 +318,7 @@
 .identityItem dt {
   margin: 0 0 0.45rem;
   color: var(--character-muted, var(--muted));
+  font-family: var(--font-ui);
   font-size: 0.72rem;
   letter-spacing: calc(var(--character-label-spacing, 0.22em) * 0.5);
   text-transform: uppercase;
@@ -321,6 +327,7 @@
 .magicItem dt {
   margin: 0 0 0.5rem;
   color: var(--character-muted, var(--muted));
+  font-family: var(--font-ui);
   font-size: 0.72rem;
   letter-spacing: calc(var(--character-label-spacing, 0.22em) * 0.5);
   text-transform: uppercase;
@@ -415,7 +422,7 @@
 
 :global(.personnage-theme-page[data-character-theme='vide-oppressant']) .title {
   max-width: min(16ch, 100%);
-  font-size: clamp(2.9rem, 6.2vw, 6.4rem);
+  font-size: clamp(3.1rem, 6.4vw, 6.6rem);
   line-height: 1;
 }
 
@@ -483,7 +490,7 @@
   .title,
   :global(.personnage-theme-page[data-character-theme='vide-oppressant']) .title {
     max-width: min(18ch, 100%);
-    font-size: clamp(3rem, 10vw, 6rem);
+    font-size: clamp(3.2rem, 10.4vw, 6.3rem);
   }
 
   .futureSpace {
@@ -522,7 +529,7 @@
   .title,
   :global(.personnage-theme-page[data-character-theme='vide-oppressant']) .title {
     max-width: 100%;
-    font-size: clamp(2.4rem, 13vw, 4.4rem);
+    font-size: clamp(2.6rem, 13.5vw, 4.6rem);
   }
 
   .role {

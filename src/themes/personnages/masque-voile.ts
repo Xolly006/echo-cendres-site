@@ -11,8 +11,8 @@ export const masqueVoileTheme: PersonnageTheme = {
     border: 'rgba(215, 211, 218, 0.2)',
   },
   typography: {
-    titleFamily: "'Times New Roman', Georgia, serif",
-    bodyFamily: "Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+    titleFamily: "var(--font-serif-titre), Georgia, serif",
+    bodyFamily: "var(--font-serif-lecture), Georgia, serif",
     titleWeight: '400',
     titleSpacing: '0.095em',
     bodyLineHeight: '1.92',

@@ -11,9 +11,9 @@ export const vieSauvageTheme: PersonnageTheme = {
     border: 'rgba(190, 176, 105, 0.17)',
   },
   typography: {
-    titleFamily: "Georgia, 'Times New Roman', serif",
-    bodyFamily: "Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
-    titleWeight: '500',
+    titleFamily: "var(--font-serif-titre), Georgia, serif",
+    bodyFamily: "var(--font-serif-lecture), Georgia, serif",
+    titleWeight: '600',
     titleSpacing: '0.025em',
     bodyLineHeight: '1.86',
     labelSpacing: '0.2em',
