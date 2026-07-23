@@ -135,6 +135,7 @@ function parsePersonnage(rawValue: unknown, fileName: string): RawPersonnage {
     role: readOptionalString(rawValue.role, 'role', fileName),
     tags: readOptionalTags(rawValue.tags, fileName),
     themeKey: readOptionalString(rawValue.themeKey, 'themeKey', fileName),
+    composition: readOptionalString(rawValue.composition, 'composition', fileName),
     publicationStatus: readPublicationStatus(rawValue.publicationStatus, fileName),
     identity: readOptionalIdentity(rawValue.identity, fileName),
     magic: readOptionalMagic(rawValue.magic, fileName),

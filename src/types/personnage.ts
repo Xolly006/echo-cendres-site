@@ -5,6 +5,7 @@ export type Personnage = {
   role?: string;
   tags?: string[];
   themeKey?: string;
+  composition?: string;
   publicationStatus: 'draft' | 'published';
   hasNarrative: boolean;
   identity?: {

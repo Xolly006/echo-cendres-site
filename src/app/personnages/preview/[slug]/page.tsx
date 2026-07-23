@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import type { CSSProperties } from 'react';
 import { PersonnageNarrative } from '@/components/personnages/PersonnageNarrative';
-import { StandardImmersivePersonnage } from '@/components/personnages/StandardImmersivePersonnage';
+import { getPersonnageComposition, getPersonnageCompositionKey } from '@/components/personnages/compositions';
 import { loadPersonnageNarrative } from '@/content/personnages/narrative-registry';
 import {
   getPersonnageForPreviewBySlug,
@@ -48,6 +48,8 @@ export default async function Page({ params }: PersonnagePreviewPageProps) {
   const NarrativeContent = personnage.hasNarrative && (await validatePersonnageNarrativeSource(personnage.slug))
     ? await loadPersonnageNarrative(personnage.slug)
     : null;
+  const Composition = getPersonnageComposition(personnage.composition);
+  const compositionKey = getPersonnageCompositionKey(personnage.composition);
   const themeStyle = {
     '--character-bg': theme.palette.background,
     '--character-text': theme.palette.text,
@@ -64,12 +66,13 @@ export default async function Page({ params }: PersonnagePreviewPageProps) {
   } as CSSProperties;
 
   return (
-    <main className="directory-page personnage-theme-page" data-character-theme={theme.key} style={themeStyle}>
+    <main className="directory-page personnage-theme-page" data-character-theme={theme.key}
+      data-character-composition={compositionKey} style={themeStyle}>
       <div className="preview-banner preview-banner--floating" role="note">
         Preview locale : <strong>{personnage.publicationStatus}</strong>. Cette route n’est pas disponible en
         production. <Link href="/personnages/preview">Retour au preview</Link>
       </div>
-      <StandardImmersivePersonnage
+      <Composition
         atmosphere={theme.atmosphere}
         backHref="/personnages/preview"
         backLabel="Retour au preview"

@@ -1,43 +1,10 @@
 import Link from 'next/link';
-import type { ReactNode } from 'react';
 import { PersonnageAtmosphere } from '@/components/personnages/effects/PersonnageAtmosphere';
+import { getIdentityDetails, getMagicDetails } from '@/components/personnages/compositions/content';
+import type { PersonnageCompositionProps } from '@/components/personnages/compositions/types';
 import { PersonnageParticles } from '@/components/personnages/effects/PersonnageParticles';
 import { getPersonnageSignature } from '@/components/personnages/signatures';
-import type { PersonnageTheme } from '@/types/personnage-theme';
-import type { Personnage } from '@/types/personnage';
 import styles from './StandardImmersivePersonnage.module.css';
-
-type StandardImmersivePersonnageProps = {
-  personnage: Personnage;
-  atmosphere?: PersonnageTheme['atmosphere'];
-  backHref?: string;
-  backLabel?: string;
-  narrative?: ReactNode;
-  previewStatus?: Personnage['publicationStatus'];
-};
-
-type MagicItem = {
-  label: string;
-  value?: string;
-  values?: string[];
-};
-
-const identityLabels = {
-  aliases: 'Alias',
-  nature: 'Nature',
-  origin: 'Origine',
-  status: 'Statut',
-  era: 'Époque',
-};
-
-const magicLabels = {
-  concept: 'Concept',
-  domain: 'Domaine',
-  artifact: 'Artefact',
-  anchor: 'Ancre',
-  abilities: 'Capacités',
-  limits: 'Limites',
-};
 
 export function StandardImmersivePersonnage({
   atmosphere,
@@ -46,34 +13,9 @@ export function StandardImmersivePersonnage({
   narrative,
   personnage,
   previewStatus,
-}: StandardImmersivePersonnageProps) {
-  const identityItems = personnage.identity
-    ? [
-        personnage.identity.aliases && personnage.identity.aliases.length > 0
-          ? { label: identityLabels.aliases, value: personnage.identity.aliases.join(', ') }
-          : null,
-        personnage.identity.nature ? { label: identityLabels.nature, value: personnage.identity.nature } : null,
-        personnage.identity.origin ? { label: identityLabels.origin, value: personnage.identity.origin } : null,
-        personnage.identity.status ? { label: identityLabels.status, value: personnage.identity.status } : null,
-        personnage.identity.era ? { label: identityLabels.era, value: personnage.identity.era } : null,
-      ].filter((item): item is { label: string; value: string } => item !== null)
-    : [];
-
-  const magicCandidates: Array<MagicItem | null> = personnage.magic
-    ? [
-        personnage.magic.concept ? { label: magicLabels.concept, value: personnage.magic.concept } : null,
-        personnage.magic.domain ? { label: magicLabels.domain, value: personnage.magic.domain } : null,
-        personnage.magic.artifact ? { label: magicLabels.artifact, value: personnage.magic.artifact } : null,
-        personnage.magic.anchor ? { label: magicLabels.anchor, value: personnage.magic.anchor } : null,
-        personnage.magic.abilities && personnage.magic.abilities.length > 0
-          ? { label: magicLabels.abilities, values: personnage.magic.abilities }
-          : null,
-        personnage.magic.limits && personnage.magic.limits.length > 0
-          ? { label: magicLabels.limits, values: personnage.magic.limits }
-          : null,
-      ]
-    : [];
-  const magicItems = magicCandidates.filter((item): item is MagicItem => item !== null);
+}: PersonnageCompositionProps) {
+  const identityItems = getIdentityDetails(personnage);
+  const magicItems = getMagicDetails(personnage);
 
   const signature = getPersonnageSignature(personnage.slug);
   const SignatureTitle = signature?.Title;
@@ -133,7 +75,7 @@ export function StandardImmersivePersonnage({
             </div>
             <dl className={styles.identityList}>
               {identityItems.map((item) => (
-                <div className={styles.identityItem} key={item.label}>
+                <div className={styles.identityItem} key={item.key}>
                   <dt>{item.label}</dt>
                   <dd>{item.value}</dd>
                 </div>
@@ -152,7 +94,7 @@ export function StandardImmersivePersonnage({
             </div>
             <dl className={styles.magicList}>
               {magicItems.map((item) => (
-                <div className={styles.magicItem} key={item.label}>
+                <div className={styles.magicItem} key={item.key}>
                   <dt>{item.label}</dt>
                   <dd>
                     {item.value ? <p>{item.value}</p> : null}
