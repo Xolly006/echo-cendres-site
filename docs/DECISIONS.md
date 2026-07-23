@@ -126,3 +126,32 @@ Workflow d’ajout d’un personnage :
 6. Créer `histoire.mdx`.
 7. Tester localement la fiche personnage.
 8. Commit/push après validation.
+
+## Phase 2 — Différenciation visuelle (2026-07-23)
+
+La phase 1 (fondations) est terminée : moteur personnages, thèmes, MDX,
+preview, protection draft sont stables.
+
+La différenciation visuelle des personnages majeurs devient désormais un
+OBJECTIF, plus un risque à contenir.
+
+Sont explicitement levés :
+
+- « les signatures visuelles restent hors périmètre » ;
+- « rester sobre » comme règle par défaut ;
+- la règle interdisant une mise en page propre à un personnage.
+
+Restent absolument en vigueur :
+
+- aucun lore inventé sans validation du créateur ;
+- `publicationStatus: "draft"` ne passe jamais à `"published"` sans demande ;
+- `prefers-reduced-motion` respecté sur toute animation ;
+- lisibilité du récit MDX jamais dégradée ;
+- aucune nouvelle dépendance sans validation ;
+- `npm run build` doit passer ;
+- Varros reste le témoin de non-régression.
+
+Nouvelle règle : un thème porte la PALETTE et l'ATMOSPHÈRE. Une
+composition porte la MISE EN PAGE. Ce sont deux axes séparés. Les
+compositions sont des archétypes partagés (3 à 5 au total), jamais une
+par personnage.
