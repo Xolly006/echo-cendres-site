@@ -1,0 +1,395 @@
+/*
+ * Composition "fragment" — la Chambre Anéchoïque.
+ *
+ * Trois interdits absolus dans ce fichier :
+ *   1. aucune propriété `border` — l'Ancre est "une ombre sans contour" ;
+ *   2. aucun `:hover` — la Chambre retire le toucher ;
+ *   3. aucun repère spatial — "pas de sol, pas de ciel".
+ *
+ * `:focus-visible` est en revanche renforcé : la navigation clavier n'est
+ * jamais sacrifiée à une intention de mise en scène.
+ */
+
+.scene {
+  position: relative;
+  min-height: calc(100vh - 2rem);
+  overflow: hidden;
+  color: var(--character-text, var(--text));
+  font-family: var(--character-body-font, var(--font-body));
+  isolation: isolate;
+}
+
+/* Pas de .backdrop, pas de glow, pas d'horizon : rien n'indique où est
+   le haut, le bas, ni la profondeur. */
+
+.content {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  width: min(74rem, 100%);
+  margin: 0 auto;
+  padding: clamp(6rem, 11vh, 8.5rem) clamp(1.25rem, 5vw, 4rem) clamp(4.5rem, 10vh, 7rem);
+  gap: clamp(2.5rem, 6.5vw, 5.75rem);
+}
+
+/* ------------------------------------------------------------------ */
+/* En-tête : le rôle prend la place du titre, le nom passe en marge.   */
+/* ------------------------------------------------------------------ */
+
+.intro {
+  position: relative;
+  min-width: 0;
+  /* Décalage systématique vers l'extérieur de la colonne : le gabarit
+     semble avoir été conçu pour quelqu'un d'autre. */
+  margin-left: clamp(-2.5rem, -3vw, -0.75rem);
+}
+
+.sigil {
+  position: absolute;
+  top: clamp(-3.5rem, -6vw, -1.5rem);
+  left: clamp(-2rem, -4vw, -0.5rem);
+  width: clamp(9rem, 22vw, 17rem);
+  height: auto;
+  z-index: -1;
+  color: var(--character-text, var(--text));
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.role {
+  max-width: 22ch;
+  margin: 0 0 clamp(1.1rem, 3vw, 2rem);
+  /* Il n'émet rien : le rôle ne doit jamais être l'élément le plus
+     lumineux de l'écran. Le plus lisible de la page, c'est le récit. */
+  color: var(--character-muted, var(--muted));
+  font-family: var(--character-title-font, var(--font-title));
+  font-size: clamp(2.4rem, 6vw, 5.4rem);
+  opacity: 0.72;
+  font-weight: var(--character-title-weight, 400);
+  letter-spacing: var(--character-title-spacing, 0.06em);
+  line-height: 1.02;
+  text-wrap: balance;
+}
+
+.title {
+  max-width: 30ch;
+  /* Le nom est décalé encore plus loin que le reste, et vers la droite :
+     il n'appartient pas tout à fait au bloc qui le contient. */
+  margin: 0 0 0 clamp(0.5rem, 6vw, 5rem);
+  color: var(--character-muted, var(--muted));
+  font-family: var(--character-title-font, var(--font-title));
+  font-size: clamp(1rem, 1.6vw, 1.2rem);
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.previewPill {
+  display: inline-block;
+  margin: 1.5rem 0 0 clamp(0.5rem, 6vw, 5rem);
+  padding: 0.3rem 0;
+  color: var(--character-muted, var(--muted));
+  font-family: var(--font-ui);
+  font-size: 0.66rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  line-height: 1;
+  text-transform: uppercase;
+  opacity: 0.55;
+}
+
+/* ------------------------------------------------------------------ */
+/* Introduction                                                        */
+/* ------------------------------------------------------------------ */
+
+.summaryBlock {
+  min-width: 0;
+  max-width: 44rem;
+  /* Désaligné par rapport à l'en-tête : les blocs ne se répondent pas. */
+  margin-left: clamp(0rem, 9vw, 7rem);
+}
+
+.summary {
+  margin: 0;
+  color: var(--character-muted, var(--muted));
+  font-size: clamp(1rem, 1.9vw, 1.14rem);
+  line-height: var(--character-body-line-height, 2);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  /* Le gap est porté par les <li> eux-mêmes : quand un tag se retire du
+     flux, son espacement doit se retirer avec lui, sinon il laisse un
+     trou — et un trou est une absence perceptible. */
+  gap: 0.4rem 0;
+  margin: clamp(1.3rem, 3vw, 1.85rem) 0 clamp(1.5rem, 3.5vw, 2.25rem);
+  padding: 0;
+  list-style: none;
+}
+
+.tags li {
+  /* Pas de pilule, pas de contour : juste des mots posés. */
+  max-width: 22rem;
+  margin-right: clamp(1rem, 2.4vw, 1.4rem);
+  overflow: hidden;
+  color: var(--character-muted, var(--muted));
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  white-space: nowrap;
+  opacity: 0.62;
+  transition: max-width 0.85s ease, margin-right 0.85s ease, opacity 0.5s ease;
+}
+
+/*
+ * Non-existence, pas invisibilité.
+ *
+ * "Une invisibilité cache une chose qui demeure là." Un élément à
+ * opacity 0 demeure : il garde sa place, et cette place se voit. Ici le
+ * tag se retire du flux et la ligne se referme derrière lui — "la mémoire
+ * se referme autour du vide comme si rien n'avait été vu".
+ *
+ * L'attribut est posé par la signature du personnage, jamais par la
+ * composition : sans signature, la ligne de tags est strictement stable.
+ */
+.tags li[data-withdrawn] {
+  max-width: 0;
+  margin-right: 0;
+  opacity: 0;
+}
+
+.backLink {
+  display: inline-block;
+  padding: 0.6rem 0;
+  color: var(--character-muted, var(--muted));
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  /* Aucune transition, aucun :hover : la page ne sent pas la main. */
+}
+
+/* Le clavier, lui, est toujours reconnu. */
+.backLink:focus-visible {
+  outline: 2px solid var(--character-text, var(--text));
+  outline-offset: 6px;
+}
+
+/* ------------------------------------------------------------------ */
+/* Sections structurées                                                */
+/* ------------------------------------------------------------------ */
+
+.sectionTitle {
+  margin: 0 0 clamp(1.1rem, 2.2vw, 1.65rem);
+  color: var(--character-muted, var(--muted));
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  opacity: 0.5;
+}
+
+.identity {
+  min-width: 0;
+  max-width: 62rem;
+  margin-left: clamp(0rem, 3vw, 2.5rem);
+}
+
+.magic {
+  min-width: 0;
+  max-width: 62rem;
+  margin-left: clamp(0rem, 11vw, 9rem);
+}
+
+.identityList,
+.magicList {
+  display: grid;
+  margin: 0;
+  /* Aucune bordure, aucun fond : les blocs n'ont pas de forme propre. */
+}
+
+.identityList {
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  gap: clamp(1.3rem, 3vw, 2.25rem) clamp(1.2rem, 3vw, 2.6rem);
+}
+
+.magicList {
+  grid-template-columns: 1fr;
+  gap: clamp(1.3rem, 3vw, 2rem);
+}
+
+.identityItem,
+.magicItem {
+  min-width: 0;
+}
+
+/* Chaque item est décalé d'un cran différent : rien ne s'aligne. */
+.identityItem:nth-child(even) {
+  transform: translateY(0.9rem);
+}
+
+.magicItem:nth-child(3n + 2) {
+  margin-left: clamp(0rem, 2.5vw, 2rem);
+}
+
+.magicItem:nth-child(3n) {
+  margin-left: clamp(0rem, 1.25vw, 1rem);
+}
+
+.identityItem dt,
+.magicItem dt {
+  margin: 0 0 0.6rem;
+  color: var(--character-muted, var(--muted));
+  font-family: var(--font-ui);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.55;
+}
+
+.identityItem dd,
+.magicItem dd {
+  margin: 0;
+  color: var(--character-text, var(--text));
+  font-size: clamp(0.95rem, 1.5vw, 1.06rem);
+  line-height: var(--character-body-line-height, 2);
+  overflow-wrap: break-word;
+}
+
+/* Le champ non consigné : la case existe, elle est simplement vide.
+   min-height conserve sa hauteur pour que la grille reste régulière. */
+.identityItem[data-unrecorded] dd {
+  min-height: calc(1em * var(--character-body-line-height, 2));
+}
+
+.magicItem p {
+  margin: 0;
+}
+
+.magicItem ul {
+  display: grid;
+  gap: 0.6rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.magicItem li {
+  position: relative;
+  padding-left: 1.15rem;
+}
+
+.magicItem li::before {
+  position: absolute;
+  left: 0;
+  color: var(--character-muted, var(--muted));
+  content: '—';
+  opacity: 0.4;
+}
+
+/* ------------------------------------------------------------------ */
+/* Récit : la seule zone intacte.                                      */
+/* ------------------------------------------------------------------ */
+
+.narrative {
+  min-width: 0;
+  margin-left: clamp(0rem, 5vw, 4rem);
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ------------------------------------------------------------------ */
+/* Responsive : le décalage s'efface, la lisibilité passe avant.       */
+/* ------------------------------------------------------------------ */
+
+@media (max-width: 900px) {
+  .intro,
+  .summaryBlock,
+  .identity,
+  .magic,
+  .narrative {
+    margin-left: 0;
+  }
+
+  .title,
+  .previewPill {
+    margin-left: 0;
+  }
+
+  .identityItem:nth-child(even) {
+    transform: none;
+  }
+
+  .magicItem:nth-child(3n + 2),
+  .magicItem:nth-child(3n) {
+    margin-left: 0;
+  }
+
+  .content {
+    gap: clamp(2.5rem, 7vw, 4rem);
+    padding-top: clamp(6.5rem, 12vh, 8.5rem);
+  }
+}
+
+@media (max-width: 520px) {
+  .role {
+    font-size: clamp(2rem, 11vw, 3.2rem);
+  }
+
+  .title {
+    letter-spacing: 0.22em;
+  }
+
+  .identityList {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Contenu effaçable au pointeur.                                      */
+/*                                                                     */
+/* "Il peut marcher devant toi, te poignarder, et ton cerveau refusera */
+/* d'admettre qu'il est là." Ici c'est le lecteur qui subit : partout   */
+/* où il pointe, la page cesse d'admettre son propre contenu. Il faut  */
+/* lire à côté de son propre curseur.                                  */
+/*                                                                     */
+/* Les variables sont posées par la signature du personnage (client),  */
+/* jamais par la composition : une fiche sans signature reste           */
+/* strictement lisible et immobile.                                    */
+/* ------------------------------------------------------------------ */
+
+.content [data-personnage-erasable] {
+  opacity: var(--kael-proximity, 1);
+  filter: blur(var(--kael-proximity-blur, 0px));
+  transition: --kael-proximity 0.5s ease, --kael-proximity-blur 0.5s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .content [data-personnage-erasable] {
+    opacity: 1;
+    filter: none;
+    transition: none;
+  }
+
+  .tags li,
+  .tags li[data-withdrawn] {
+    max-width: 22rem;
+    margin-right: clamp(1rem, 2.4vw, 1.4rem);
+    opacity: 0.62;
+    transition: none;
+  }
+}

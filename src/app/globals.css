@@ -523,6 +523,22 @@ a {
     var(--character-bg, transparent);
 }
 
+/*
+ * Composition "fragment" : la Chambre Anéchoïque n'a "pas de sol, pas de
+ * ciel". Les fonds de page globaux dessinent les deux — un radial en haut
+ * (ciel) et un dégradé vertical (profondeur). On les neutralise ici, à la
+ * seule condition de la composition, sans toucher aux autres fiches.
+ */
+.personnage-theme-page[data-character-composition='fragment'] {
+  background: var(--character-bg, #000);
+}
+
+.personnage-theme-page[data-character-composition='fragment'] .preview-banner--floating {
+  border-color: color-mix(in srgb, var(--character-border, var(--border)) 70%, transparent);
+  background: transparent;
+  box-shadow: none;
+}
+
 .personnage-theme-page[data-character-theme='feu-timide'] {
   background:
     radial-gradient(circle at 30% 20%, color-mix(in srgb, var(--character-accent) 24%, transparent), transparent 16rem),

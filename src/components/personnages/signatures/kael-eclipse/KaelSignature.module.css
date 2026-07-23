@@ -412,3 +412,41 @@ section[aria-labelledby='personnage-magic-title'] > div:first-child {
     transition: none;
   }
 }
+
+/* ------------------------------------------------------------------ */
+/* Adaptation à la composition "fragment".                             */
+/*                                                                     */
+/* Dans "fragment", le nom n'est plus un titre géant : il est petit,   */
+/* en capitales, relégué en marge. Les amplitudes calibrées pour un    */
+/* titre de 8rem (dispersion d'arrivée, translations au pointeur)      */
+/* deviennent disproportionnées à cette taille. On les réduit sans     */
+/* toucher à la logique : mêmes effets, échelle adaptée.               */
+/* ------------------------------------------------------------------ */
+
+:global([data-character-composition='fragment']) .letter {
+  animation-duration: 9.5s;
+}
+
+:global([data-character-composition='fragment']) .letter,
+:global([data-character-composition='fragment']) .labelLetter {
+  transform: translateY(calc(var(--kael-fade-y, 0px) + var(--kael-proximity-y, 0px) * 0.35));
+}
+
+:global([data-character-composition='fragment']) section[aria-labelledby='personnage-title'][data-kael-phase='void'] .letter,
+:global([data-character-composition='fragment']) section[aria-labelledby='personnage-title'][data-kael-phase='condense'] .letter {
+  animation-name: kael-letter-condense-small;
+}
+
+@keyframes kael-letter-condense-small {
+  0% {
+    opacity: 0;
+    filter: blur(3.5px);
+    transform: translate(calc(var(--kael-scatter, 0px) * 0.3), 4px) scale(1.12);
+  }
+
+  100% {
+    opacity: 1;
+    filter: blur(0);
+    transform: translate(0, 0) scale(1);
+  }
+}

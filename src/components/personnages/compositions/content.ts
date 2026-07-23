@@ -68,3 +68,16 @@ export function getMagicDetails(personnage: Personnage): PersonnageDetail[] {
 
   return details;
 }
+
+/**
+ * Champs d'identité déclarés comme non consignés.
+ * Ils existent dans la fiche, mais sans valeur : c'est l'absence qui est
+ * l'information. Seules les compositions qui savent quoi en faire les
+ * affichent — "standard" les ignore.
+ */
+export function getUnrecordedDetails(personnage: Personnage): PersonnageDetail[] {
+  const unrecorded = personnage.identity?.unrecorded;
+  if (!unrecorded || unrecorded.length === 0) return [];
+
+  return unrecorded.map((label) => ({ key: `unrecorded-${label}`, label }));
+}

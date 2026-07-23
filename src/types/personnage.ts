@@ -14,6 +14,8 @@ export type Personnage = {
     origin?: string;
     status?: string;
     era?: string;
+    /** Champs volontairement non consignés, affichés vides par certaines compositions. */
+    unrecorded?: string[];
   };
   magic?: {
     concept?: string;

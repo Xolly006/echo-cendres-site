@@ -2,6 +2,7 @@
   "nom": "Kael l’Éclipsé",
   "publicationStatus": "draft",
   "themeKey": "vide-oppressant",
+  "composition": "fragment",
   "resumeCourt": "Kael l’Éclipsé est l’Assassin des Héritiers de l’Arquet, porteur du concept d’Inexistence. Enfant sans nom enfermé vingt ans dans le noir, il souhaitait si profondément ne plus exister qu’Astraevor lui accorda ce vœu : son corps fut dévoré. Sous sa cape, il ne reste qu’une fumée froide et une présence que le monde refuse d’admettre.",
   "role": "Héritier I — L’Assassin de l’Arquet",
   "tags": [
@@ -24,7 +25,10 @@
     "nature": "Corps dissous — fumée dense et froide sous une cape",
     "origin": "Enfant illégitime d’une lignée royale, enfermé dès la naissance",
     "status": "Actif — Conseil des Sept Héritiers",
-    "era": "Présent narratif"
+    "era": "Présent narratif",
+    "unrecorded": [
+      "Nom"
+    ]
   },
   "magic": {
     "concept": "Inexistence / Non-existence",

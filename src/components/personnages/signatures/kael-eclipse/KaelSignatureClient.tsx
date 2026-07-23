@@ -21,11 +21,46 @@ import styles from './KaelSignature.module.css';
  */
 
 const POINTER_RADIUS = 110;
+const BLOCK_POINTER_RADIUS = 190;
+
+/*
+ * Retrait du flux — la Non-existence.
+ *
+ * "Une invisibilité cache une chose qui demeure là." Un élément atténué
+ * demeure : il garde sa place, et cette place se voit. Les éléments
+ * marqués `data-personnage-withdrawable` se retirent au contraire du flux,
+ * et la ligne se referme derrière eux.
+ *
+ * Trois précautions :
+ *  - les rectangles sont mesurés une fois et jamais pendant un retrait,
+ *    sinon le retrait déplace la cible et provoque une oscillation ;
+ *  - hystérésis : on se retire à 130px, on ne revient qu'au-delà de 210px ;
+ *  - délais asymétriques : disparition lente (un oubli), retour plus lent
+ *    encore. Rien ne doit ressembler à un tic d'interface.
+ */
+const WITHDRAW_RADIUS = 130;
+const RESTORE_RADIUS = 210;
+const WITHDRAW_DELAY_MS = 320;
+const RESTORE_DELAY_MS = 900;
+
+type WithdrawableEntry = {
+  el: HTMLElement;
+  rect: { left: number; top: number; right: number; bottom: number };
+  withdrawn: boolean;
+  timer: number;
+};
 const ARRIVAL_VOID_MS = 1000;
 const ARRIVAL_CONDENSE_MS = 1300;
 
 type PointerTrackingState = {
   letters: Array<{ el: HTMLElement; x: number; y: number }>;
+  /**
+   * Blocs de contenu marqués `data-personnage-erasable` par la composition.
+   * Contrairement aux lettres, ils sont mesurés par leur rectangle entier :
+   * c'est la phrase qui cesse d'être admise, pas les caractères un par un.
+   */
+  blocks: Array<{ el: HTMLElement; rect: { left: number; top: number; right: number; bottom: number } }>;
+  withdrawables: WithdrawableEntry[];
   pointer: { x: number; y: number } | null;
   active: Set<HTMLElement>;
 };
@@ -92,6 +127,11 @@ function wrapLetters(el: HTMLElement | null, letterClassName: string, rongeChanc
 }
 
 function findContentWrapper(scene: HTMLElement): HTMLElement | null {
+  // Ancrage explicite fourni par la composition (data-personnage-content).
+  // Repli sur l'ancienne heuristique uniquement si l'attribut manque.
+  const anchored = scene.querySelector<HTMLElement>('[data-personnage-content]');
+  if (anchored) return anchored;
+
   for (const child of Array.from(scene.children)) {
     if (child instanceof HTMLElement && !child.hasAttribute('aria-hidden')) {
       return child;
@@ -120,11 +160,19 @@ function runArrival(scene: HTMLElement): () => void {
 
 function setupPointerTracking(
   letterEls: HTMLElement[],
+  blockEls: HTMLElement[],
+  withdrawableEls: HTMLElement[],
   ref: { current: PointerTrackingState | null },
 ): () => void {
-  if (letterEls.length === 0) return () => {};
+  if (letterEls.length === 0 && blockEls.length === 0 && withdrawableEls.length === 0) return () => {};
 
-  const state: PointerTrackingState = { letters: [], pointer: null, active: new Set() };
+  const state: PointerTrackingState = {
+    letters: [],
+    blocks: [],
+    withdrawables: [],
+    pointer: null,
+    active: new Set(),
+  };
   ref.current = state;
 
   const measure = () => {
@@ -134,6 +182,37 @@ function setupPointerTracking(
       const rect = el.getBoundingClientRect();
       return { el, x: rect.left + scrollX + rect.width / 2, y: rect.top + scrollY + rect.height / 2 };
     });
+    state.blocks = blockEls.map((el) => {
+      const rect = el.getBoundingClientRect();
+      return {
+        el,
+        rect: {
+          left: rect.left + scrollX,
+          top: rect.top + scrollY,
+          right: rect.right + scrollX,
+          bottom: rect.bottom + scrollY,
+        },
+      };
+    });
+
+    // Les retirables ne sont mesurés que s'ils sont tous présents : mesurer
+    // pendant un retrait figerait une position fausse.
+    if (state.withdrawables.every((entry) => !entry.withdrawn)) {
+      state.withdrawables = withdrawableEls.map((el, index) => {
+        const rect = el.getBoundingClientRect();
+        return {
+          el,
+          rect: {
+            left: rect.left + scrollX,
+            top: rect.top + scrollY,
+            right: rect.right + scrollX,
+            bottom: rect.bottom + scrollY,
+          },
+          withdrawn: state.withdrawables[index]?.withdrawn ?? false,
+          timer: 0,
+        };
+      });
+    }
   };
 
   let resizeTimeout = 0;
@@ -169,6 +248,11 @@ function setupPointerTracking(
       el.style.removeProperty('--kael-proximity-y');
     }
 
+    for (const entry of state.withdrawables) {
+      window.clearTimeout(entry.timer);
+      entry.el.removeAttribute('data-withdrawn');
+    }
+
     ref.current = null;
   };
 }
@@ -190,7 +274,27 @@ function applyProximity(state: PointerTrackingState) {
         nextActive.add(el);
       }
     }
+
+    // Distance au rectangle, pas au centre : un long paragraphe ne doit pas
+    // s'effacer entierement parce que le curseur touche son milieu.
+    for (const { el, rect } of state.blocks) {
+      const dx = Math.max(rect.left - px, 0, px - rect.right);
+      const dy = Math.max(rect.top - py, 0, py - rect.bottom);
+      const dist = Math.hypot(dx, dy);
+
+      if (dist < BLOCK_POINTER_RADIUS) {
+        const t = dist / BLOCK_POINTER_RADIUS;
+        // Plancher a 0.12 : l'information reste techniquement presente,
+        // le lecteur n'a qu'a ecarter son curseur pour la relire.
+        const proximity = Math.min(1, 0.12 + t * t * 0.88);
+        el.style.setProperty('--kael-proximity', proximity.toFixed(3));
+        el.style.setProperty('--kael-proximity-blur', `${(2.2 * (1 - t)).toFixed(2)}px`);
+        nextActive.add(el);
+      }
+    }
   }
+
+  applyWithdrawal(state);
 
   for (const el of state.active) {
     if (!nextActive.has(el)) {
@@ -201,6 +305,43 @@ function applyProximity(state: PointerTrackingState) {
   }
 
   state.active = nextActive;
+}
+
+function applyWithdrawal(state: PointerTrackingState) {
+  for (const entry of state.withdrawables) {
+    let dist = Number.POSITIVE_INFINITY;
+
+    if (state.pointer) {
+      const { x: px, y: py } = state.pointer;
+      const dx = Math.max(entry.rect.left - px, 0, px - entry.rect.right);
+      const dy = Math.max(entry.rect.top - py, 0, py - entry.rect.bottom);
+      dist = Math.hypot(dx, dy);
+    }
+
+    const shouldWithdraw = dist < WITHDRAW_RADIUS;
+    const shouldRestore = dist > RESTORE_RADIUS;
+
+    if (shouldWithdraw && !entry.withdrawn && entry.timer === 0) {
+      entry.timer = window.setTimeout(() => {
+        entry.withdrawn = true;
+        entry.timer = 0;
+        entry.el.setAttribute('data-withdrawn', '');
+      }, WITHDRAW_DELAY_MS);
+    } else if (shouldRestore && entry.withdrawn && entry.timer === 0) {
+      entry.timer = window.setTimeout(() => {
+        entry.withdrawn = false;
+        entry.timer = 0;
+        entry.el.removeAttribute('data-withdrawn');
+      }, RESTORE_DELAY_MS);
+    } else if (entry.timer !== 0) {
+      // Le curseur a changé d'avis avant la fin du délai : on annule.
+      const stillValid = entry.withdrawn ? shouldRestore : shouldWithdraw;
+      if (!stillValid) {
+        window.clearTimeout(entry.timer);
+        entry.timer = 0;
+      }
+    }
+  }
 }
 
 function createWisp(width: number, height: number): SmokeWisp {
@@ -236,7 +377,9 @@ export function KaelSignatureClient() {
 
     const identityHeading = scene.querySelector<HTMLElement>('#personnage-identity-title');
     const magicHeading = scene.querySelector<HTMLElement>('#personnage-magic-title');
-    const backLink = scene.querySelector<HTMLAnchorElement>('a');
+    const backLink =
+      scene.querySelector<HTMLAnchorElement>('a[data-personnage-exit]') ??
+      scene.querySelector<HTMLAnchorElement>('a');
 
     const identityLetters = wrapLetters(identityHeading, styles.labelLetter, 0.28);
     const magicLetters = wrapLetters(magicHeading, styles.labelLetter, 0.28);
@@ -258,7 +401,14 @@ export function KaelSignatureClient() {
     let cleanupPointer = () => {};
     if (!reducedMotion && finePointer) {
       const titleLetters = Array.from(scene.querySelectorAll<HTMLElement>(`.${styles.letter}`));
-      cleanupPointer = setupPointerTracking([...titleLetters, ...identityLetters, ...magicLetters], pointerStateRef);
+      const erasableBlocks = Array.from(scene.querySelectorAll<HTMLElement>('[data-personnage-erasable]'));
+      const withdrawables = Array.from(scene.querySelectorAll<HTMLElement>('[data-personnage-withdrawable]'));
+      cleanupPointer = setupPointerTracking(
+        [...titleLetters, ...identityLetters, ...magicLetters],
+        erasableBlocks,
+        withdrawables,
+        pointerStateRef,
+      );
     }
 
     if (!reducedMotion) {

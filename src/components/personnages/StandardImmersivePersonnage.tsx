@@ -33,7 +33,7 @@ export function StandardImmersivePersonnage({
         <span className={styles.horizon} />
       </div>
 
-      <div className={styles.content}>
+      <div className={styles.content} data-personnage-content>
         <header className={styles.intro}>
           <div className={styles.introMeta}>
             <p className={styles.role}>{personnage.role ?? 'Personnage'}</p>
@@ -60,7 +60,7 @@ export function StandardImmersivePersonnage({
             </ul>
           ) : null}
 
-          <Link className={styles.backLink} href={backHref}>
+          <Link className={styles.backLink} href={backHref} data-personnage-exit>
             {backLabel}
           </Link>
         </div>

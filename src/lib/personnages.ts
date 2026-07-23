@@ -71,6 +71,7 @@ function readOptionalIdentity(value: unknown, fileName: string): Personnage['ide
     origin: readOptionalString(value.origin, 'identity.origin', fileName),
     status: readOptionalString(value.status, 'identity.status', fileName),
     era: readOptionalString(value.era, 'identity.era', fileName),
+    unrecorded: readOptionalStringList(value.unrecorded, 'identity.unrecorded', fileName),
   };
 }
 
