@@ -355,7 +355,7 @@ function createWisp(width: number, height: number): SmokeWisp {
     driftSpeed: 0.0015 + Math.random() * 0.002,
     opacityPhase: Math.random() * Math.PI * 2,
     opacitySpeed: 0.003 + Math.random() * 0.004,
-    baseOpacity: 0.05 + Math.random() * 0.08,
+    baseOpacity: 0.028 + Math.random() * 0.042,
   };
 }
 
@@ -467,7 +467,16 @@ export function KaelSignatureClient() {
       const voidY = height * 0.2;
       const voidRadius = Math.min(width, height) * 0.26;
 
-      context.globalCompositeOperation = 'multiply';
+      /*
+       * La fumée doit être PLUS CLAIRE que le fond, sinon elle n'existe pas.
+       * L'ancienne version dessinait du noir (rgba(3,4,7)) en mode multiply
+       * sur un fond quasi noir : mathématiquement invisible.
+       *
+       * Canon : "un morceau de ciel nocturne sans étoiles, une fumée noire
+       * qui s'effiloche". Sur du noir, une fumée noire se lit comme une
+       * densité un peu moins noire — pas comme une couleur.
+       */
+      context.globalCompositeOperation = 'lighter';
 
       for (const wisp of wisps) {
         wisp.y += wisp.speedY;
@@ -486,8 +495,8 @@ export function KaelSignatureClient() {
         const alpha = wisp.baseOpacity * breathing * voidFactor;
 
         const gradient = context.createRadialGradient(wisp.x, wisp.y, 0, wisp.x, wisp.y, wisp.radius);
-        gradient.addColorStop(0, `rgba(3, 4, 7, ${alpha})`);
-        gradient.addColorStop(1, 'rgba(3, 4, 7, 0)');
+        gradient.addColorStop(0, `rgba(128, 126, 132, ${alpha})`);
+        gradient.addColorStop(1, 'rgba(128, 126, 132, 0)');
 
         context.fillStyle = gradient;
         context.beginPath();

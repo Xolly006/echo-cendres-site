@@ -1,7 +1,8 @@
 {
   "nom": "Elias",
   "publicationStatus": "draft",
-  "themeKey": "default",
+  "themeKey": "lumiere-construite",
+  "composition": "retable",
   "resumeCourt": "Orphelin désigné Successeur à neuf ans, Elias est le Pilier du Sacré et l’hôte de Métatron, un Archange qu’il maintient à distance pour empêcher une extinction de masse. Il a vu le ciel vide avant Darian, mais n’a pas abandonné : sa foi n’est pas une soumission à l’institution, c’est une construction tournée vers l’humanité, l’espoir et la lumière qui persiste après la nuit.",
   "role": "Pilier du Sacré — Hôte de Métatron — Commandant des Paladins de l’Aube",
   "tags": [
@@ -26,10 +27,11 @@
       "Le Croyant",
       "Le Pilier du Sacré"
     ],
-    "nature": "Humain — hôte et réceptacle de Métatron — descendant de la lignée d’Elian",
+    "nature": "Humain — 3ᵉ Éveil prime, comme tous les Piliers de l’Existence",
     "origin": "Orphelin élevé dans un monastère",
-    "status": "Actif — en lutte quotidienne contre Métatron",
-    "era": "Présent narratif"
+    "status": "Actif — Pilier du Sacré de Celestia, sous l’autorité du Haut-Pontife",
+    "era": "Présent narratif",
+    "appearance": "Il fait son âge et paraît fatigué, mais le corps est entraîné. Cheveux châtains en désordre, yeux bruns — dorés lorsqu’il use de ses pouvoirs, avec des gravures de croix runiques dans la pupille."
   },
   "magic": {
     "concept": "L’Ordre / Le Sacré",
@@ -40,7 +42,8 @@
       "Manipulation d’équations sacrées et d’effets gravitationnels via Métatron",
       "Voix de Dieu : colonnes de lumière orbitale via Métatron",
       "Feu sacré purificateur",
-      "Domaine de l’Horizon des Promesses : le mensonge y devient impossible"
+      "Domaine de l’Horizon des Promesses : le mensonge y devient impossible",
+      "Sa protection de Pilier s’étend au monde entier, sans exception — y compris contre sa propre fratrie"
     ],
     "limits": [
       "Au-delà de 50% de synchronisation, Métatron risque de prendre le contrôle",
@@ -50,5 +53,17 @@
       "Les actions de Métatron dans son corps ne sont pas toujours la volonté d’Elias",
       "Sa mort pourrait libérer Métatron sans hôte"
     ]
+  },
+  "possession": {
+    "entity": "Métatron",
+    "entitySlug": "metatron",
+    "sync": 50,
+    "verdicts": {
+      "nom": "UTILISATEUR ELIAS",
+      "role": "CONTENEUR — SYNCHRONISATION NOMINALE",
+      "identite": "REGISTRE",
+      "magie": "CAPACITÉS ALLOUÉES",
+      "incertitudes": "DONNÉES INSUFFISANTES — SUPPRIMÉES"
+    }
   }
 }

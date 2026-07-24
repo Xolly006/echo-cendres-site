@@ -1,5 +1,6 @@
 import { StandardImmersivePersonnage } from '@/components/personnages/StandardImmersivePersonnage';
 import { FragmentPersonnage } from './fragment/FragmentPersonnage';
+import { RetablePersonnage } from './retable/RetablePersonnage';
 import type { PersonnageCompositionComponent } from './types';
 
 /**
@@ -16,6 +17,7 @@ import type { PersonnageCompositionComponent } from './types';
 const COMPOSITIONS: Record<string, PersonnageCompositionComponent> = {
   standard: StandardImmersivePersonnage,
   fragment: FragmentPersonnage,
+  retable: RetablePersonnage,
 };
 
 export const DEFAULT_COMPOSITION_KEY = 'standard';

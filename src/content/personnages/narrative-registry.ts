@@ -12,6 +12,7 @@ export const personnageNarrativeLoaders: Record<string, PersonnageNarrativeLoade
   'aurelia-reine-midas': async () => (await import('@/content/personnages/aurelia-reine-midas/histoire.mdx')).default as PersonnageNarrativeComponent,
   'elias-pilier-sacre': async () => (await import('@/content/personnages/elias-pilier-sacre/histoire.mdx')).default as PersonnageNarrativeComponent,
   'kael-eclipse': async () => (await import('@/content/personnages/kael-eclipse/histoire.mdx')).default as PersonnageNarrativeComponent,
+  'metatron': async () => (await import('@/content/personnages/metatron/histoire.mdx')).default as PersonnageNarrativeComponent,
   'prototype-technique': async () => (await import('@/content/personnages/prototype-technique/histoire.mdx')).default as PersonnageNarrativeComponent,
   'soryn-la-voilee': async () => (await import('@/content/personnages/soryn-la-voilee/histoire.mdx')).default as PersonnageNarrativeComponent,
   'varros-fleau': async () => (await import('@/content/personnages/varros-fleau/histoire.mdx')).default as PersonnageNarrativeComponent,

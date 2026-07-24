@@ -1,0 +1,162 @@
+import Link from 'next/link';
+import { getPersonnageSignature } from '@/components/personnages/signatures';
+import { getIdentityDetails, getMagicDetails } from '@/components/personnages/compositions/content';
+import type { PersonnageCompositionProps } from '@/components/personnages/compositions/types';
+import { RetableScene } from './RetableScene';
+import styles from './RetablePersonnage.module.css';
+
+/**
+ * Composition "retable".
+ *
+ * Traduction du Domaine Absolu d'Elias à 50 % de synchronisation :
+ * GLORIA SANCTUS — L'HORIZON DES PROMESSES.
+ *
+ * "Ce n'est pas une église. C'est une Ville de Cristal en construction.
+ *  Il y a des échafaudages de lumière. Il y a des statues représentant tous
+ *  ceux qu'Elias n'a pas pu sauver, mais ici ils sont vivants, faits de
+ *  lumière solide, et ils soutiennent les murs."
+ *
+ * Ce que la composition en tire :
+ * - un retable : centré, frontal, symétrique, vertical. Contrairement à
+ *   "fragment", le personnage EST le sujet de sa page ;
+ * - en construction : rien n'est parfaitement aligné ni terminé. Les
+ *   séparateurs s'interrompent, les marges sont irrégulières. L'inachevé
+ *   est l'état normal, pas un défaut ;
+ * - une seule source de lumière, basse et chaude, qui vacille. Elle a une
+ *   direction : quelqu'un la tient ;
+ * - la page respire : c'est un homme qui tient un seuil, en direct ;
+ * - la règle du Domaine, "Le Mensonge est impossible", devient un
+ *   comportement réel : cette fiche est la seule du site qui affiche ce
+ *   qu'elle ne sait pas.
+ *
+ * La jauge de synchronisation est l'élément vital de la page : tant que le
+ * nombre varie, l'hôte tient. C'est sur elle que se jouera la bascule vers
+ * Métatron.
+ */
+
+export function RetablePersonnage({
+  backHref = '/personnages',
+  backLabel = 'Retour aux personnages',
+  narrative,
+  personnage,
+  previewStatus,
+}: PersonnageCompositionProps) {
+  const identityItems = getIdentityDetails(personnage);
+  const magicItems = getMagicDetails(personnage);
+  const uncertainties = personnage.uncertainties ?? [];
+
+  const signature = getPersonnageSignature(personnage.slug);
+  const SignatureTitle = signature?.Title;
+  const SignatureOverlay = signature?.Overlay;
+
+  return (
+    <RetableScene possession={personnage.possession}>
+      <section className={styles.scene} aria-labelledby="personnage-title">
+      {/* Une seule source, basse et chaude : "une lumière qui brûle comme
+          des larmes". Elle a une direction — quelqu'un la tient. */}
+      <div className={styles.lumiere} aria-hidden="true">
+        <span className={styles.foyer} />
+        <span className={styles.echafaudage} />
+      </div>
+
+      {SignatureOverlay ? <SignatureOverlay /> : null}
+
+      <div className={styles.content} data-personnage-content>
+        <header className={styles.intro}>
+          {previewStatus ? (
+            <span className={styles.previewPill} data-status={previewStatus}>
+              Preview {previewStatus}
+            </span>
+          ) : null}
+
+          <h1 id="personnage-title" className={styles.title}>
+            {SignatureTitle ? <SignatureTitle>{personnage.nom}</SignatureTitle> : personnage.nom}
+          </h1>
+
+          <p className={styles.role}>{personnage.role ?? 'Personnage'}</p>
+        </header>
+
+        <div className={styles.summaryBlock}>
+          <p className={styles.summary}>{personnage.resumeCourt}</p>
+
+          {personnage.tags && personnage.tags.length > 0 ? (
+            <ul className={styles.tags} aria-label="Tags du personnage">
+              {personnage.tags.map((tag) => (
+                <li key={tag}>{tag}</li>
+              ))}
+            </ul>
+          ) : null}
+        </div>
+
+        {identityItems.length > 0 ? (
+          <section className={styles.identity} aria-labelledby="personnage-identity-title">
+            <h2 id="personnage-identity-title" className={styles.sectionTitle}>
+              Identité
+            </h2>
+            <dl className={styles.identityList}>
+              {identityItems.map((item) => (
+                <div className={styles.identityItem} key={item.key}>
+                  <dt>{item.label}</dt>
+                  <dd>{item.value}</dd>
+                </div>
+              ))}
+            </dl>
+          </section>
+        ) : null}
+
+        {magicItems.length > 0 ? (
+          <section className={styles.magic} aria-labelledby="personnage-magic-title">
+            <h2 id="personnage-magic-title" className={styles.sectionTitle}>
+              Magie
+            </h2>
+            <dl className={styles.magicList}>
+              {magicItems.map((item) => (
+                <div className={styles.magicItem} key={item.key}>
+                  <dt>{item.label}</dt>
+                  <dd>
+                    {item.value ? <p>{item.value}</p> : null}
+                    {item.values ? (
+                      <ul>
+                        {item.values.map((value) => (
+                          <li key={value}>{value}</li>
+                        ))}
+                      </ul>
+                    ) : null}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </section>
+        ) : null}
+
+        {narrative ? <div className={styles.narrative}>{narrative}</div> : null}
+
+        {/*
+          "Dans cette zone, le Mensonge est impossible."
+          La seule fiche du site qui déclare ses propres lacunes. Ce ne sont
+          pas des éléments de lore : ce sont des constats sur l'état des
+          sources, que seul le créateur peut trancher.
+        */}
+        {uncertainties.length > 0 ? (
+          <section className={styles.incertitudes} aria-labelledby="personnage-uncertainties-title">
+            <h2 id="personnage-uncertainties-title" className={styles.sectionTitle}>
+              Ce que cette fiche ne sait pas
+            </h2>
+            <ul className={styles.incertitudesList}>
+              {uncertainties.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </section>
+        ) : null}
+
+        <div className={styles.exit}>
+          <Link className={styles.backLink} href={backHref} data-personnage-exit>
+            {backLabel}
+          </Link>
+        </div>
+      </div>
+      </section>
+    </RetableScene>
+  );
+}

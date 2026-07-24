@@ -50,6 +50,44 @@ function readOptionalTags(value: unknown, fileName: string): string[] | undefine
   return value;
 }
 
+function readOptionalPossession(value: unknown, fileName: string): Personnage['possession'] {
+  if (value === undefined || value === null) return undefined;
+
+  if (typeof value !== 'object' || Array.isArray(value)) {
+    throw new Error(`Champ "possession" invalide dans ${fileName}.`);
+  }
+
+  const raw = value as Record<string, unknown>;
+  const entity = readOptionalString(raw.entity, 'possession.entity', fileName);
+  const sync = raw.sync;
+
+  if (!entity) throw new Error(`Champ "possession.entity" requis dans ${fileName}.`);
+  if (typeof sync !== 'number' || sync < 0 || sync > 100) {
+    throw new Error(`Champ "possession.sync" doit être un nombre entre 0 et 100 dans ${fileName}.`);
+  }
+
+  let verdicts: Record<string, string> | undefined;
+  if (raw.verdicts !== undefined && raw.verdicts !== null) {
+    if (typeof raw.verdicts !== 'object' || Array.isArray(raw.verdicts)) {
+      throw new Error(`Champ "possession.verdicts" invalide dans ${fileName}.`);
+    }
+    verdicts = {};
+    for (const [key, entry] of Object.entries(raw.verdicts as Record<string, unknown>)) {
+      if (typeof entry !== 'string') {
+        throw new Error(`Verdict "${key}" invalide dans ${fileName}.`);
+      }
+      verdicts[key] = entry;
+    }
+  }
+
+  return {
+    entity,
+    entitySlug: readOptionalString(raw.entitySlug, 'possession.entitySlug', fileName),
+    sync,
+    verdicts,
+  };
+}
+
 function readOptionalStringList(value: unknown, fieldName: string, fileName: string): string[] | undefined {
   if (value === undefined) return undefined;
   if (!Array.isArray(value) || value.some((entry) => typeof entry !== 'string')) {
@@ -71,6 +109,7 @@ function readOptionalIdentity(value: unknown, fileName: string): Personnage['ide
     origin: readOptionalString(value.origin, 'identity.origin', fileName),
     status: readOptionalString(value.status, 'identity.status', fileName),
     era: readOptionalString(value.era, 'identity.era', fileName),
+    appearance: readOptionalString(value.appearance, 'identity.appearance', fileName),
     unrecorded: readOptionalStringList(value.unrecorded, 'identity.unrecorded', fileName),
   };
 }
@@ -137,6 +176,8 @@ function parsePersonnage(rawValue: unknown, fileName: string): RawPersonnage {
     tags: readOptionalTags(rawValue.tags, fileName),
     themeKey: readOptionalString(rawValue.themeKey, 'themeKey', fileName),
     composition: readOptionalString(rawValue.composition, 'composition', fileName),
+    uncertainties: readOptionalStringList(rawValue.uncertainties, 'uncertainties', fileName),
+    possession: readOptionalPossession(rawValue.possession, fileName),
     publicationStatus: readPublicationStatus(rawValue.publicationStatus, fileName),
     identity: readOptionalIdentity(rawValue.identity, fileName),
     magic: readOptionalMagic(rawValue.magic, fileName),

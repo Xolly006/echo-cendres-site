@@ -21,6 +21,7 @@ const IDENTITY_LABELS = {
   origin: 'Origine',
   status: 'Statut',
   era: 'Époque',
+  appearance: 'Apparence',
 } as const;
 
 const MAGIC_LABELS = {
@@ -45,6 +46,8 @@ export function getIdentityDetails(personnage: Personnage): PersonnageDetail[] {
   if (identity.origin) details.push({ key: 'origin', label: IDENTITY_LABELS.origin, value: identity.origin });
   if (identity.status) details.push({ key: 'status', label: IDENTITY_LABELS.status, value: identity.status });
   if (identity.era) details.push({ key: 'era', label: IDENTITY_LABELS.era, value: identity.era });
+  if (identity.appearance)
+    details.push({ key: 'appearance', label: IDENTITY_LABELS.appearance, value: identity.appearance });
 
   return details;
 }

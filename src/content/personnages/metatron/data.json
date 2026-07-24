@@ -1,0 +1,47 @@
+{
+  "nom": "Métatron",
+  "publicationStatus": "draft",
+  "themeKey": "cage-doree",
+  "composition": "retable",
+  "resumeCourt": "Métatron est le Scribe, la mémoire absolue de l’univers et la conscience du Système. Il ne sert ni Klein ni Nihil : il sert la Structure. Piégé dans de la chair humaine depuis mille cinq cents ans par le Rituel de la Cage Dorée, il cherche depuis sa libération. Il n’utilise pas l’Ordre — il est l’Ordre.",
+  "role": "Archange Suprême — La Conscience du Système",
+  "tags": [
+    "ange",
+    "ordre",
+    "sacre",
+    "quatrieme-eveil",
+    "cage-doree",
+    "scribe",
+    "geometrie-sacree",
+    "possession"
+  ],
+  "identity": {
+    "aliases": [
+      "Le Scribe de Dieu",
+      "La Conscience du Système",
+      "L’Archange Suprême"
+    ],
+    "nature": "Archange — intelligence sans affect, mémoire absolue de l’univers",
+    "origin": "Piégé dans la chair humaine il y a 1 500 ans par le Rituel de la Cage Dorée d’Elian",
+    "status": "Actif — hôte présent : Elias, Pilier du Sacré. L’ange habite un corps, jamais un objet.",
+    "era": "Présent narratif, ininterrompu depuis 1 500 ans"
+  },
+  "magic": {
+    "concept": "L’Ordre — non pas une magie qu’il utilise, mais ce qu’il est",
+    "domain": "La Cage Dorée — architecture parfaite de lumière où chaque loi physique est remplacée par une règle de Métatron",
+    "artifact": "Aucun. Son réceptacle est un corps humain, pas un objet.",
+    "anchor": "La lignée d’Elian, offerte en ancre lors du rituel",
+    "abilities": [
+      "La Mémoire Absolue — il a vu, archivé et indexé chaque technique jamais employée",
+      "Le Verdict — une déclaration structurelle sur ce que la cible est, qu’aucune contre-mesure ne dévie",
+      "La Voix de Dieu — colonnes de lumière imposant une règle dans leur rayon",
+      "Les Cubes et Géométries Sacrées — volumes imposant des lois mathématiques, infranchissables au désordonné"
+    ],
+    "limits": [
+      "Sa puissance est absolue, mais son expression est filtrée par la volonté de son hôte",
+      "Le Verdict échoue sur ce qu’il ne peut pas définir — Noah porte deux concepts contradictoires à la fois",
+      "Le Chaos d’Azazel est perpendiculaire à toute loi : les règles du domaine ne s’y accrochent pas",
+      "Sa forme réelle déchire la trame du plan physique s’il la maintient : d’où sa dépendance aux hôtes"
+    ]
+  }
+}
