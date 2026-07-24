@@ -15,6 +15,13 @@ export type PersonnageCompositionProps = {
   backLabel?: string;
   narrative?: ReactNode;
   previewStatus?: Personnage['publicationStatus'];
+  /**
+   * En cas de possession : la fiche complète de l'entité et son récit,
+   * pour que la page de l'entité puisse s'imposer À 100 % — la vraie,
+   * pas une recoloration de celle de l'hôte.
+   */
+  entityPersonnage?: Personnage;
+  entityNarrative?: ReactNode;
 };
 
 export type PersonnageCompositionComponent = (props: PersonnageCompositionProps) => ReactNode;

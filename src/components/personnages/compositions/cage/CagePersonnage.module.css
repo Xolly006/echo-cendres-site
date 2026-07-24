@@ -1,0 +1,375 @@
+/*
+ * Composition "cage" — LA CAGE DORÉE.
+ *
+ * Quatre règles tenues dans tout ce fichier :
+ *   1. AUCUNE OMBRE. La lumière vient de partout, donc de nulle part.
+ *   2. LA GRAVITÉ S'INVERSE. Tout ce qui dérive monte.
+ *   3. TOUT EST SUR LA GRILLE. Aucun décalage, aucune approximation.
+ *   4. ON EST DEDANS. Un cadre encadre le viewport en permanence.
+ *
+ * Aucune animation n'utilise d'easing : `linear` partout. L'easing est une
+ * hésitation, et il n'en a pas.
+ */
+
+.scene {
+  position: relative;
+  min-height: calc(100vh - 2rem);
+  overflow: hidden;
+  color: var(--character-text, var(--text));
+  font-family: var(--character-body-font, var(--font-body));
+  isolation: isolate;
+}
+
+/* ------------------------------------------------------------------ */
+/* La Roue — trop grande pour le cadre                                 */
+/* ------------------------------------------------------------------ */
+
+.roue {
+  position: fixed;
+  /* Débordement volontaire : on n'en voit qu'un arc. */
+  inset: -28vh -22vw;
+  z-index: -2;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.roue svg {
+  width: 100%;
+  height: 100%;
+}
+
+.roueAnneau {
+  transform-origin: 0 0;
+  animation-name: cage-rotation;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.roueCordes {
+  transform-origin: 0 0;
+  animation: cage-rotation 320s linear infinite reverse;
+}
+
+@keyframes cage-rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Les yeux ne s'ouvrent jamais tous en même temps. */
+.roueYeux g {
+  animation: cage-paupiere 13s linear infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+@keyframes cage-paupiere {
+  0%,
+  9%,
+  100% {
+    opacity: 0.9;
+  }
+  11%,
+  13% {
+    opacity: 0.05;
+  }
+  15%,
+  62% {
+    opacity: 0.9;
+  }
+  64%,
+  66% {
+    opacity: 0.05;
+  }
+  68% {
+    opacity: 0.9;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Les Colonnes — législation locale et temporaire                     */
+/* ------------------------------------------------------------------ */
+
+.colonnes {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.colonne {
+  position: absolute;
+  top: -10%;
+  height: 120%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--character-accent, var(--accent)) 26%, transparent) 22%,
+    color-mix(in srgb, var(--character-accent, var(--accent)) 40%, transparent) 50%,
+    color-mix(in srgb, var(--character-accent, var(--accent)) 26%, transparent) 78%,
+    transparent
+  );
+  mix-blend-mode: multiply;
+  opacity: 0.5;
+  animation-name: cage-balayage;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+/* Elles montent. La gravité est inversée. */
+@keyframes cage-balayage {
+  from {
+    transform: translateY(60%);
+  }
+  to {
+    transform: translateY(-160%);
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Le cadre — on est DANS la Cage                                      */
+/* ------------------------------------------------------------------ */
+
+.cadre {
+  position: fixed;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.cadre span {
+  position: absolute;
+  background: color-mix(in srgb, var(--character-accent, var(--accent)) 55%, transparent);
+}
+
+.cadre span[data-edge='haut'],
+.cadre span[data-edge='bas'] {
+  left: clamp(0.75rem, 2.5vw, 2rem);
+  right: clamp(0.75rem, 2.5vw, 2rem);
+  height: 1px;
+}
+
+.cadre span[data-edge='haut'] {
+  top: clamp(0.75rem, 2.5vw, 2rem);
+}
+
+.cadre span[data-edge='bas'] {
+  bottom: clamp(0.75rem, 2.5vw, 2rem);
+}
+
+.cadre span[data-edge='gauche'],
+.cadre span[data-edge='droite'] {
+  top: clamp(0.75rem, 2.5vw, 2rem);
+  bottom: clamp(0.75rem, 2.5vw, 2rem);
+  width: 1px;
+}
+
+.cadre span[data-edge='gauche'] {
+  left: clamp(0.75rem, 2.5vw, 2rem);
+}
+
+.cadre span[data-edge='droite'] {
+  right: clamp(0.75rem, 2.5vw, 2rem);
+}
+
+/* ------------------------------------------------------------------ */
+/* Contenu — un registre, pas un portrait                              */
+/* ------------------------------------------------------------------ */
+
+.content {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  width: min(64rem, 100%);
+  margin: 0 auto;
+  padding: clamp(6rem, 12vh, 9rem) clamp(2rem, 6vw, 4.5rem) clamp(5rem, 10vh, 7rem);
+  /* Grille stricte : aucun décalage, aucune approximation. */
+  gap: 3rem;
+}
+
+.intro {
+  display: grid;
+  gap: 1rem;
+}
+
+.previewPill {
+  color: var(--character-muted, var(--muted));
+  font-family: var(--font-ui);
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+.registre {
+  margin: 0;
+  color: var(--character-accent, var(--accent));
+  font-family: var(--font-ui);
+  font-size: 0.64rem;
+  font-weight: 500;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+}
+
+.title {
+  margin: 0;
+  font-family: var(--character-title-font, var(--font-title));
+  font-size: clamp(2.6rem, 7vw, 5.4rem);
+  font-weight: var(--character-title-weight, 500);
+  letter-spacing: var(--character-title-spacing, 0.02em);
+  line-height: 1;
+}
+
+.role {
+  margin: 0;
+  color: var(--character-muted, var(--muted));
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: var(--character-label-spacing, 0.3em);
+  text-transform: uppercase;
+}
+
+.summary {
+  max-width: 46rem;
+  margin: 0;
+  font-size: clamp(1rem, 1.8vw, 1.12rem);
+  line-height: var(--character-body-line-height, 1.85);
+}
+
+.sectionTitle {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin: 0 0 1.75rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--character-border, var(--border)) 100%, transparent);
+  color: var(--character-text, var(--text));
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+}
+
+.sectionIndex,
+.entryIndex {
+  color: var(--character-accent, var(--accent));
+  font-variant-numeric: tabular-nums;
+}
+
+.entries {
+  display: grid;
+  gap: 0;
+  margin: 0;
+}
+
+/* Des entrées de registre : rangées, numérotées, séparées par un trait. */
+.entry {
+  display: grid;
+  grid-template-columns: minmax(11rem, 15rem) 1fr;
+  gap: 1.5rem;
+  padding: 1.1rem 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--character-border, var(--border)) 55%, transparent);
+}
+
+.entry dt {
+  display: flex;
+  gap: 0.85rem;
+  margin: 0;
+  color: var(--character-muted, var(--muted));
+  font-family: var(--font-ui);
+  font-size: 0.66rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.entry dd {
+  margin: 0;
+  font-size: clamp(0.95rem, 1.5vw, 1.04rem);
+  line-height: var(--character-body-line-height, 1.85);
+  overflow-wrap: break-word;
+}
+
+.entry dd p {
+  margin: 0;
+}
+
+.entry dd ul {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.entry dd li {
+  position: relative;
+  padding-left: 1.4rem;
+}
+
+.entry dd li::before {
+  position: absolute;
+  left: 0;
+  color: var(--character-accent, var(--accent));
+  content: '·';
+}
+
+.narrative {
+  max-width: 44rem;
+}
+
+.exit {
+  padding-top: 1rem;
+}
+
+.backLink {
+  color: var(--character-muted, var(--muted));
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  transition: color 180ms linear;
+}
+
+.backLink:hover,
+.backLink:focus-visible {
+  color: var(--character-accent, var(--accent));
+}
+
+.backLink:focus-visible {
+  outline: 2px solid var(--character-accent, var(--accent));
+  outline-offset: 6px;
+}
+
+@media (max-width: 720px) {
+  .content {
+    padding-left: clamp(1.25rem, 5vw, 2rem);
+    padding-right: clamp(1.25rem, 5vw, 2rem);
+    gap: 2.25rem;
+  }
+
+  .entry {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .roueAnneau,
+  .roueCordes,
+  .roueYeux g,
+  .colonne {
+    animation: none;
+  }
+
+  .colonne {
+    opacity: 0.18;
+  }
+}

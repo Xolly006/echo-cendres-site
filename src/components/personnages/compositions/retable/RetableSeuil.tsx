@@ -4,141 +4,176 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import styles from './RetablePersonnage.module.css';
 
 /**
- * Le Seuil de synchronisation.
+ * Le Seuil — un VOLUME, pas un interrupteur.
  *
- * Canon : "Elias se limite volontairement à 50% de synchronisation. Si
- * Elias lâchait prise (Synergie 100%), Métatron prendrait le contrôle
- * total." Et : "Il doit méditer 10 heures par jour juste pour empêcher
- * Métatron de prendre le contrôle."
+ * Un anneau que l'on tourne : cliquer ou glisser n'importe où sur l'anneau
+ * règle la synchronisation entre 0 et 100. LA VALEUR RESTE LÀ OÙ ON LA
+ * LÂCHE — pas de rappel, pas de verrouillage, pas de retour élastique.
+ * On peut monter, redescendre, s'arrêter à 63.
  *
- * Le seuil n'est pas un indicateur : c'est un effort. Le lecteur est celui
- * qui le fait lâcher.
+ * Le point de repos canonique de l'hôte (50 pour Elias) est marqué d'un
+ * cran sur l'anneau : c'est là que la page se charge, et le lecteur voit
+ * toujours où l'hôte, lui, se tient.
  *
- * Un clic bascule. La montée dure environ deux secondes, la descente un
- * peu plus : reprendre le contrôle coûte plus cher que le perdre.
- *
- * Une fois arrivé à 100, le nombre cesse de varier — c'est ainsi qu'Elias
- * disparaît : pas en s'effaçant, en cessant de varier.
- *
- * Sous prefers-reduced-motion, la bascule est immédiate.
+ * Accessibilité : c'est un vrai slider — role="slider", flèches clavier
+ * (±2, ±10 avec PageUp/PageDown), Home/End, annonce polie de la valeur.
  */
 
-const CEILING = 100;
-const RISE_MS = 2000;
-const FALL_MS = 3200;
+const CIRCUMFERENCE = 270.2; // 2πr, r=43
 
 type SeuilProps = {
-  /** Synergie tenue par l'hôte. 50 pour Elias, 80 pour Solomon, 100 pour Célestine. */
-  floor: number;
+  value: number;
+  /** Synergie tenue par l'hôte au repos — le cran sur l'anneau. */
+  restingPoint: number;
   onSyncChange: (value: number) => void;
 };
 
-export function RetableSeuil({ floor, onSyncChange }: SeuilProps) {
-  const FLOOR = floor;
-  const [sync, setSync] = useState(floor);
-  const [busy, setBusy] = useState(false);
-
-  const frameRef = useRef(0);
-  const syncRef = useRef(floor);
-  const onChangeRef = useRef(onSyncChange);
+export function RetableSeuil({ value, restingPoint, onSyncChange }: SeuilProps) {
+  const [dragging, setDragging] = useState(false);
+  const valueRef = useRef(value);
 
   useEffect(() => {
-    onChangeRef.current = onSyncChange;
-  }, [onSyncChange]);
+    valueRef.current = value;
+  }, [value]);
+  const ringRef = useRef<SVGSVGElement | null>(null);
 
-  useEffect(() => () => cancelAnimationFrame(frameRef.current), []);
+  const setFromPointer = useCallback(
+    (clientX: number, clientY: number) => {
+      const svg = ringRef.current;
+      if (!svg) return;
 
-  const animateTo = useCallback((target: number) => {
-    cancelAnimationFrame(frameRef.current);
+      const rect = svg.getBoundingClientRect();
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top + rect.height / 2;
 
-    const from = syncRef.current;
-    const distance = target - from;
-    if (distance === 0) return;
+      // Angle depuis le haut de l'anneau, sens horaire, 0..1
+      const angle = Math.atan2(clientX - cx, cy - clientY);
+      const turn = (angle + Math.PI * 2) % (Math.PI * 2) / (Math.PI * 2);
+      let next = Math.round(turn * 100);
 
-    const reduced =
-      typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    if (reduced) {
-      syncRef.current = target;
-      setSync(target);
-      onChangeRef.current(target);
-      return;
-    }
-
-    const duration = distance > 0 ? RISE_MS : FALL_MS;
-    const started = performance.now();
-    setBusy(true);
-
-    const step = (now: number) => {
-      const t = Math.min(1, (now - started) / duration);
-      // Départ lent, fin nette : la correction s'impose, elle ne s'excuse pas.
-      const eased = t < 0.5 ? 2 * t * t : 1 - (-2 * t + 2) ** 2 / 2;
-      const value = from + distance * eased;
-
-      syncRef.current = value;
-      setSync(value);
-      onChangeRef.current(value);
-
-      if (t < 1) {
-        frameRef.current = requestAnimationFrame(step);
-        return;
+      // Sur un cadran circulaire, 100 et 0 se touchent : un pixel de trop
+      // en haut et on retombe brutalement de 100 à 0. Trois protections :
+      // - zone magnétique : au-delà de 97 on colle à 100, sous 3 on colle à 0 ;
+      // - pas de saut de plus de 50 en un seul mouvement (anti-wraparound).
+      if (next >= 97) next = 100;
+      if (next <= 3 && valueRef.current > 50) next = 100;
+      else if (next <= 3) next = 0;
+      if (Math.abs(next - valueRef.current) > 50 && next < valueRef.current) {
+        next = valueRef.current >= 97 ? 100 : next;
       }
 
-      frameRef.current = 0;
-      syncRef.current = target;
-      setSync(target);
-      onChangeRef.current(target);
-      setBusy(false);
+      valueRef.current = next;
+      onSyncChange(next);
+    },
+    [onSyncChange],
+  );
+
+  useEffect(() => {
+    if (!dragging) return;
+
+    const onMove = (event: PointerEvent) => setFromPointer(event.clientX, event.clientY);
+    const onUp = () => setDragging(false);
+
+    window.addEventListener('pointermove', onMove);
+    window.addEventListener('pointerup', onUp);
+    window.addEventListener('pointercancel', onUp);
+    return () => {
+      window.removeEventListener('pointermove', onMove);
+      window.removeEventListener('pointerup', onUp);
+      window.removeEventListener('pointercancel', onUp);
     };
+  }, [dragging, setFromPointer]);
 
-    frameRef.current = requestAnimationFrame(step);
-  }, []);
-
-  const toggle = useCallback(() => {
-    animateTo(syncRef.current >= (FLOOR + CEILING) / 2 ? FLOOR : CEILING);
-  }, [animateTo]);
-
-  const locked = sync >= CEILING;
-  const rounded = Math.round(sync);
-  const progress = ((sync - FLOOR) / (CEILING - FLOOR)) * 100;
+  const rounded = Math.round(value);
+  const digits = String(rounded).split('');
+  const progress = value / 100;
 
   return (
     <div className={styles.seuil}>
       <p className={styles.seuilLabel}>Synchronisation</p>
 
-      <button
-        type="button"
+      <div
         className={styles.seuilControl}
-        aria-pressed={locked}
-        aria-label={
-          locked
-            ? 'Synchronisation à cent pour cent. Activer pour reprendre le contrôle.'
-            : 'Synchronisation maintenue à cinquante pour cent. Activer pour lâcher prise.'
-        }
-        data-busy={busy ? '' : undefined}
-        data-locked={locked ? '' : undefined}
-        onClick={toggle}
+        role="slider"
+        tabIndex={0}
+        aria-label="Synchronisation avec l'entité"
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-valuenow={rounded}
+        aria-valuetext={`${rounded} pour cent`}
+        data-dragging={dragging ? '' : undefined}
+        data-locked={rounded >= 100 ? '' : undefined}
+        onPointerDown={(event) => {
+          event.preventDefault();
+          setDragging(true);
+          setFromPointer(event.clientX, event.clientY);
+        }}
+        onKeyDown={(event) => {
+          const step =
+            event.key === 'ArrowUp' || event.key === 'ArrowRight' ? 2
+            : event.key === 'ArrowDown' || event.key === 'ArrowLeft' ? -2
+            : event.key === 'PageUp' ? 10
+            : event.key === 'PageDown' ? -10
+            : null;
+
+          if (step !== null) {
+            event.preventDefault();
+            onSyncChange(Math.min(100, Math.max(0, rounded + step)));
+          } else if (event.key === 'Home') {
+            event.preventDefault();
+            onSyncChange(0);
+          } else if (event.key === 'End') {
+            event.preventDefault();
+            onSyncChange(100);
+          }
+        }}
       >
-        <span className={styles.seuilValue}>
-          <span className={styles.seuilDigits} aria-hidden="true">
-            {rounded}
-          </span>
-          <span className={styles.seuilUnit} aria-hidden="true">
-            %
-          </span>
-        </span>
+        <span className={styles.seuilAnneau} aria-hidden="true">
+          <svg ref={ringRef} viewBox="0 0 100 100" focusable="false">
+            <circle className={styles.seuilPiste} cx="50" cy="50" r="43" />
+            <circle
+              className={styles.seuilArc}
+              cx="50"
+              cy="50"
+              r="43"
+              style={{ strokeDashoffset: CIRCUMFERENCE - CIRCUMFERENCE * progress }}
+            />
+            {/* Le cran : la position de repos de l'hôte. */}
+            <line
+              className={styles.seuilCran}
+              x1="50"
+              y1="3"
+              x2="50"
+              y2="10"
+              transform={`rotate(${restingPoint * 3.6} 50 50)`}
+            />
+            {/* La poignée. */}
+            <circle
+              className={styles.seuilPoignee}
+              cx="50"
+              cy="7"
+              r="3"
+              transform={`rotate(${value * 3.6} 50 50)`}
+            />
+          </svg>
 
-        <span className={styles.seuilTrace} aria-hidden="true">
-          <span className={styles.seuilFill} style={{ width: `${progress}%` }} />
+          <span className={styles.seuilValue}>
+            {digits.map((digit, index) => (
+              <span
+                key={`${index}-${digit}`}
+                className={styles.seuilDigit}
+                data-owner={index / digits.length < progress ? 'entite' : 'hote'}
+              >
+                {digit}
+              </span>
+            ))}
+            <span className={styles.seuilUnit}>%</span>
+          </span>
         </span>
-
-        <span className={styles.seuilHint} aria-hidden="true">
-          {locked ? 'Reprendre le contrôle' : 'Lâcher prise'}
-        </span>
-      </button>
+      </div>
 
       <p className={styles.srOnly} role="status" aria-live="polite">
-        {locked ? 'Métatron a pris le contrôle.' : `Synchronisation à ${rounded} pour cent.`}
+        Synchronisation à {rounded} pour cent.
       </p>
     </div>
   );

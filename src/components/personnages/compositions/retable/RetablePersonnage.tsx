@@ -3,6 +3,7 @@ import { getPersonnageSignature } from '@/components/personnages/signatures';
 import { getIdentityDetails, getMagicDetails } from '@/components/personnages/compositions/content';
 import type { PersonnageCompositionProps } from '@/components/personnages/compositions/types';
 import { RetableScene } from './RetableScene';
+import { CagePersonnage } from '../cage/CagePersonnage';
 import styles from './RetablePersonnage.module.css';
 
 /**
@@ -34,12 +35,51 @@ import styles from './RetablePersonnage.module.css';
  * Métatron.
  */
 
+
+/**
+ * Le sceau d'Elias — la pupille gravée.
+ *
+ * Canon : "yeux bruns, dorés lorsqu'il use de ses pouvoirs, avec des
+ * gravures de croix runiques dans la pupille."
+ *
+ * Une pupille, et dedans une croix runique. Rien d'autre. C'est son
+ * équivalent de l'Ombre sans contour de Kael.
+ */
+function PupilleGravee() {
+  return (
+    <svg className={styles.sceau} viewBox="0 0 120 120" aria-hidden="true" focusable="false">
+      <defs>
+        <radialGradient id="retable-iris" cx="50%" cy="50%" r="50%">
+          <stop offset="34%" stopColor="var(--character-accent)" stopOpacity="0.34" />
+          <stop offset="72%" stopColor="var(--character-accent)" stopOpacity="0.12" />
+          <stop offset="100%" stopColor="var(--character-accent)" stopOpacity="0" />
+        </radialGradient>
+      </defs>
+
+      <circle cx="60" cy="60" r="52" fill="url(#retable-iris)" />
+      <circle cx="60" cy="60" r="30" fill="none" stroke="var(--character-accent)" strokeWidth="0.9" opacity="0.5" />
+
+      {/* La croix runique gravée dans la pupille. */}
+      <g stroke="var(--character-accent)" strokeWidth="1.1" fill="none" opacity="0.85">
+        <line x1="60" y1="34" x2="60" y2="86" />
+        <line x1="42" y1="52" x2="78" y2="52" />
+        <line x1="48" y1="76" x2="72" y2="76" />
+        <line x1="52" y1="34" x2="68" y2="34" />
+      </g>
+
+      <circle cx="60" cy="60" r="7" fill="var(--character-accent)" opacity="0.28" />
+    </svg>
+  );
+}
+
 export function RetablePersonnage({
   backHref = '/personnages',
   backLabel = 'Retour aux personnages',
   narrative,
   personnage,
   previewStatus,
+  entityPersonnage,
+  entityNarrative,
 }: PersonnageCompositionProps) {
   const identityItems = getIdentityDetails(personnage);
   const magicItems = getMagicDetails(personnage);
@@ -49,8 +89,19 @@ export function RetablePersonnage({
   const SignatureTitle = signature?.Title;
   const SignatureOverlay = signature?.Overlay;
 
+  const entityPage =
+    personnage.possession && entityPersonnage ? (
+      <CagePersonnage
+        personnage={entityPersonnage}
+        narrative={entityNarrative}
+        backHref={backHref}
+        backLabel={backLabel}
+        previewStatus={previewStatus}
+      />
+    ) : undefined;
+
   return (
-    <RetableScene possession={personnage.possession}>
+    <RetableScene possession={personnage.possession} entityPage={entityPage}>
       <section className={styles.scene} aria-labelledby="personnage-title">
       {/* Une seule source, basse et chaude : "une lumière qui brûle comme
           des larmes". Elle a une direction — quelqu'un la tient. */}
@@ -69,7 +120,11 @@ export function RetablePersonnage({
             </span>
           ) : null}
 
-          <h1 id="personnage-title" className={styles.title}>
+          <h1
+            id="personnage-title"
+            className={styles.title}
+            data-entity-name={personnage.possession?.entity}
+          >
             {SignatureTitle ? <SignatureTitle>{personnage.nom}</SignatureTitle> : personnage.nom}
           </h1>
 
@@ -129,7 +184,14 @@ export function RetablePersonnage({
           </section>
         ) : null}
 
-        {narrative ? <div className={styles.narrative}>{narrative}</div> : null}
+        {narrative ? (
+          <div className={styles.narrativeZone}>
+            {/* Le sceau en arrière-plan du récit : grand, sombre, derrière
+                le texte — comme l'Ombre de Kael derrière son en-tête. */}
+            <PupilleGravee />
+            <div className={styles.narrative}>{narrative}</div>
+          </div>
+        ) : null}
 
         {/*
           "Dans cette zone, le Mensonge est impossible."

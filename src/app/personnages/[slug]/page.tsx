@@ -34,6 +34,14 @@ export default async function Page({ params }: PersonnagePageProps) {
   const NarrativeContent = personnage.hasNarrative && (await validatePersonnageNarrativeSource(personnage.slug))
     ? await loadPersonnageNarrative(personnage.slug)
     : null;
+  // Possession : on charge la fiche et le récit de l'entité pour que sa
+  // page puisse s'imposer à 100 % de synchronisation.
+  const entitySlug = personnage.possession?.entitySlug;
+  const entityPersonnage = entitySlug ? await getPublishedPersonnageBySlug(entitySlug) : null;
+  const EntityNarrative =
+    entityPersonnage?.hasNarrative && (await validatePersonnageNarrativeSource(entityPersonnage.slug))
+      ? await loadPersonnageNarrative(entityPersonnage.slug)
+      : null;
   const Composition = getPersonnageComposition(personnage.composition);
   const compositionKey = getPersonnageCompositionKey(personnage.composition);
   const themeStyle = {
@@ -58,6 +66,8 @@ export default async function Page({ params }: PersonnagePageProps) {
         atmosphere={theme.atmosphere}
         personnage={personnage}
         narrative={NarrativeContent ? <PersonnageNarrative Content={NarrativeContent} /> : null}
+        entityPersonnage={entityPersonnage ?? undefined}
+        entityNarrative={EntityNarrative ? <PersonnageNarrative Content={EntityNarrative} /> : undefined}
       />
     </main>
   );

@@ -2,50 +2,56 @@
 
 import { useCallback, useState } from 'react';
 import type { CSSProperties, ReactNode } from 'react';
-import Link from 'next/link';
+import { AnimatePresence, motion } from 'framer-motion';
 import { RetableSeuil } from './RetableSeuil';
+import { RoueDeFeu } from '../cage/RoueDeFeu';
+import { Colonnes } from '../cage/Colonnes';
 import styles from './RetablePersonnage.module.css';
+import cageStyles from '../cage/CagePersonnage.module.css';
 
 /**
- * Enveloppe cliente de la composition "retable".
+ * L'orchestrateur de la possession — le modèle VOLUME.
  *
- * Elle porte l'état de synchronisation et le traduit en attributs sur la
- * scène. Aucun contenu n'est monté ni démonté : la lutte se joue
- * intégralement en couches superposées.
+ * La synchronisation n'est plus un interrupteur : c'est un curseur continu
+ * de 0 à 100, et L'ÉTAT DE LA PAGE EST LA VALEUR. La valeur reste là où le
+ * lecteur la lâche. On peut monter, redescendre, s'arrêter entre deux.
  *
- * LA CONTAMINATION
+ * Répartition des territoires :
  *
- * L'erreur serait d'interpoler les couleurs de l'un vers l'autre : on
- * obtiendrait une bouillie tiède, et une lutte ne se mélange pas. Ici, une
- * couche ivoire en `mix-blend-mode: difference` est posée sur toute la
- * page, révélée par un masque irrégulier qui progresse avec la synergie.
+ *   0 – 35    ELIAS PUR. Son noir, sa bougie, son sceau. À 0, aucune trace
+ *             de l'ange : sa page telle qu'il la tient.
+ *   35 – 55   PRÉSENCE. La Roue se devine derrière le noir, une colonne
+ *             passe parfois. Rien ne lutte encore : quelque chose regarde.
+ *   55 – 85   LA LUTTE. Le nom glitche, deux lumières se disputent la
+ *             page, le coeur s'accélère.
+ *   85 – 100  LA CAGE. Le cadre se referme, le fond bascule vers l'ivoire —
+ *             légitime ici : on ne recolore pas la page d'Elias, on change
+ *             de territoire.
+ *   100       LA page de Métatron. La vraie : son registre, son récit, sa
+ *             roue pleine. Pas une recoloration.
  *
- * Conséquence : là où le masque est ouvert, le fond sombre devient ivoire
- * et le texte clair devient noir — la page de Métatron, au pixel près, sans
- * dupliquer une seule ligne de contenu. Et comme le masque ne suit aucune
- * limite de bloc, un même mot peut être coupé en deux : moitié Elias,
- * moitié Métatron, fracture au milieu de la lettre.
- *
- * LE RYTHME CARDIAQUE
- *
- * "Tu hésites, Utilisateur Elias. Ton rythme cardiaque augmente. C'est
- * inefficace." Entre 50 et 100, une pulsation entre dans le tempo de la
- * page et accélère. À 100 elle s'arrête net — un cœur qu'on éteint.
+ * Framer Motion (AnimatePresence) gère l'entrée et la sortie des mondes en
+ * fondu, proprement, au lieu d'un château de calc() et d'opacités.
  */
+
+type Possession = {
+  entity: string;
+  entitySlug?: string;
+  sync: number;
+  verdicts?: Record<string, string>;
+};
 
 type RetableSceneProps = {
   children: ReactNode;
-  possession?: {
-    entity: string;
-    entitySlug?: string;
-    sync: number;
-    verdicts?: Record<string, string>;
-  };
+  possession?: Possession;
+  /** La page complète de l'entité, rendue à 100 %. */
+  entityPage?: ReactNode;
 };
 
-export function RetableScene({ children, possession }: RetableSceneProps) {
-  const floor = possession?.sync ?? 50;
-  const [sync, setSync] = useState(floor);
+const EASE = [0.4, 0, 0.2, 1] as const;
+
+export function RetableScene({ children, possession, entityPage }: RetableSceneProps) {
+  const [sync, setSync] = useState(possession?.sync ?? 50);
 
   const handleSyncChange = useCallback((value: number) => setSync(value), []);
 
@@ -53,8 +59,13 @@ export function RetableScene({ children, possession }: RetableSceneProps) {
     return <>{children}</>;
   }
 
-  const progress = Math.min(1, Math.max(0, (sync - floor) / (100 - floor || 1)));
-  const state = sync >= 100 ? 'entite' : sync > floor ? 'lutte' : 'hote';
+  const p = sync / 100;
+  const presence = sync >= 35;
+  const lutte = sync >= 55;
+  const cage = sync >= 85;
+  const entite = sync >= 100;
+
+  const state = entite ? 'entite' : cage ? 'cage' : lutte ? 'lutte' : presence ? 'presence' : 'hote';
 
   const verdictVars: Record<string, string> = {};
   for (const [key, value] of Object.entries(possession.verdicts ?? {})) {
@@ -67,33 +78,85 @@ export function RetableScene({ children, possession }: RetableSceneProps) {
       data-sync={state}
       style={
         {
-          '--sync-progress': progress.toFixed(3),
-          // Le coeur accélère à mesure que l'hôte perd prise.
-          '--heartbeat': `${(1.15 - progress * 0.55).toFixed(2)}s`,
+          '--sync-progress': p.toFixed(3),
+          '--lutte-progress': Math.min(1, Math.max(0, (sync - 55) / 30)).toFixed(3),
+          '--cage-progress': Math.min(1, Math.max(0, (sync - 85) / 15)).toFixed(3),
+          '--heartbeat': `${(1.2 - Math.min(1, Math.max(0, (sync - 55) / 45)) * 0.6).toFixed(2)}s`,
           ...verdictVars,
         } as CSSProperties
       }
     >
-      {children}
+      <AnimatePresence>
+        {!entite ? (
+          <motion.div
+            key="hote"
+            initial={false}
+            exit={{ opacity: 0, y: -14, transition: { duration: 1.5, ease: EASE } }}
+          >
+            {children}
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
 
-      {/* La contamination : une seule couche, aucun contenu dupliqué. */}
-      <div className={styles.contamination} aria-hidden="true" />
+      <AnimatePresence>
+        {presence && !entite ? (
+          <motion.div
+            key="presence"
+            className={styles.entiteMonde}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.16 + p * 0.84, transition: { duration: 2.2, ease: EASE } }}
+            exit={{ opacity: 0, transition: { duration: 1.6, ease: EASE } }}
+            aria-hidden="true"
+          >
+            <RoueDeFeu />
+            {lutte ? <Colonnes /> : null}
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
 
-      {/* La Cage Dorée : architecture parfaite de lumière, qui se trace
-          puis tourne, linear, pour toujours. */}
-      <div className={styles.cage} aria-hidden="true">
-        <span className={styles.cageAnneau} data-ring="1" />
-        <span className={styles.cageAnneau} data-ring="2" />
-        <span className={styles.cageAnneau} data-ring="3" />
-      </div>
+      <AnimatePresence>
+        {cage && !entite ? (
+          <motion.div
+            key="cage"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1, transition: { duration: 1.2, ease: EASE } }}
+            exit={{ opacity: 0, transition: { duration: 1, ease: EASE } }}
+            aria-hidden="true"
+          >
+            <div className={styles.aube} />
+            {/* L'avant-goût : le registre de l'entité se devine déjà à
+                travers la page de l'hôte, avant la bascule complète. */}
+            {entityPage ? (
+              <div className={styles.entiteApercu} aria-hidden="true">
+                {entityPage}
+              </div>
+            ) : null}
+            <div className={cageStyles.cadre}>
+              <span data-edge="haut" />
+              <span data-edge="bas" />
+              <span data-edge="gauche" />
+              <span data-edge="droite" />
+            </div>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {entite && entityPage ? (
+          <motion.div
+            key="entite"
+            className={styles.entitePage}
+            initial={{ opacity: 0, scale: 1.015 }}
+            animate={{ opacity: 1, scale: 1, transition: { duration: 2.2, ease: EASE } }}
+            exit={{ opacity: 0, scale: 1.01, transition: { duration: 1.3, ease: EASE } }}
+          >
+            {entityPage}
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
 
       <div className={styles.seuilMount}>
-        <RetableSeuil floor={floor} onSyncChange={handleSyncChange} />
-        {possession.entitySlug ? (
-          <Link className={styles.entityLink} href={`/personnages/preview/${possession.entitySlug}`}>
-            {possession.entity}
-          </Link>
-        ) : null}
+        <RetableSeuil value={sync} restingPoint={possession.sync} onSyncChange={handleSyncChange} />
       </div>
     </div>
   );
