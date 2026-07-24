@@ -13,16 +13,20 @@ Fait :
 3. **Kael l'Éclipsé en composition "fragment"** — mise en page qui affirme
    sa présence, en tension avec la signature qui l'efface.
 
+4. **Elias en composition "retable"** — Elias en composition "retable",
+   fiche Métatron en composition "cage", mécanisme de possession
+   (`possession`, modèle VOLUME) et transition entre les deux pages.
+
+Dette technique notée :
+
+- Gravures runiques encore à faire sur la fiche Métatron.
+- Réglages fins des répartitions du modèle VOLUME (seuils 35/55/85 à
+  affiner à l'usage).
+
 Prochaine étape :
 
-4. **Elias en composition "retable"** — mise en page dédiée pour Elias,
-   une page Métatron claire (contrainte, pas identité d'Elias), et une
-   transition soignée entre les deux.
-
-Ensuite :
-
-5. **Déploiement progressif** — étendre les compositions validées aux
-   autres personnages majeurs, un par un, après validation du créateur.
+5. **Personnage suivant** — choisir le prochain personnage majeur à
+   porter en composition dédiée, après validation du créateur.
 
 ## Backlog long terme
 

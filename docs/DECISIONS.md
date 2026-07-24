@@ -168,3 +168,15 @@ par personnage.
 * Non-existence ≠ invisibilité : un élément atténué demeure. Le retrait du
   flux est réservé aux éléments courts et autonomes ; le récit MDX n'est
   jamais touché.
+
+## Étapes 4 à 8 — Elias, Métatron, possession (2026-07-24)
+
+* Le taux de synchronisation (`possession.sync`) est un paramètre de
+  direction artistique, pas seulement une donnée de lore : il pilote
+  directement le rendu de la page, pas une légende à côté.
+* À 100 %, c'est la PAGE DE L'ENTITÉ qui s'impose — la vraie composition
+  et le vrai thème de l'entité — jamais une simple recoloration de la
+  page de l'hôte.
+* Sur la page publique, l'entité possédante n'est chargée que si elle est
+  `published` : un hôte publié ne peut jamais exposer une entité encore
+  en `draft`.
