@@ -59,6 +59,8 @@ export function RetableScene({ children, possession, entityPage }: RetableSceneP
     return <>{children}</>;
   }
 
+  // Seuil de repos de l hote : Elias 50, Solomon 80, Celestine 100.
+  const repos = possession.sync;
   const p = sync / 100;
   const presence = sync >= 35;
   const lutte = sync >= 55;
@@ -82,6 +84,12 @@ export function RetableScene({ children, possession, entityPage }: RetableSceneP
           '--lutte-progress': Math.min(1, Math.max(0, (sync - 55) / 30)).toFixed(3),
           '--cage-progress': Math.min(1, Math.max(0, (sync - 85) / 15)).toFixed(3),
           '--heartbeat': `${(1.2 - Math.min(1, Math.max(0, (sync - 55) / 45)) * 0.6).toFixed(2)}s`,
+          /*
+           * Le grésillement du nom démarre dès que le lecteur quitte le
+           * seuil de l'hôte, et s'accélère : ~7 s entre deux prises juste
+           * au-dessus du seuil, ~1,4 s à l'approche de 100.
+           */
+          '--glitch-duree': `${(7 - Math.min(1, Math.max(0, (sync - repos) / (100 - repos || 1))) * 5.6).toFixed(2)}s`,
           ...verdictVars,
         } as CSSProperties
       }

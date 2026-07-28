@@ -126,16 +126,28 @@ export function RetablePersonnage({
             </span>
           ) : null}
 
+          {/*
+            Le nom est réellement SUBSTITUÉ, il n'est pas masqué.
+
+            Les versions précédentes posaient un calque opaque par-dessus le
+            titre de l'hôte : il fallait alors faire coïncider deux largeurs
+            de texte différentes, et le nom de l'entité débordait de son
+            fond. Ici, les deux noms sont deux éléments frères empilés dans
+            la même cellule de grille. Chacun a son centrage, sa police et
+            sa taille propres — aucun n'a à masquer l'autre.
+
+            Le nom de l'hôte reste seul dans le flux du document pour les
+            lecteurs d'écran : celui de l'entité est aria-hidden.
+          */}
           <h1 id="personnage-title" className={styles.title}>
-            {/*
-              Le nom est enveloppé dans un span inline-block : le calque de
-              glitch se cale ainsi sur la largeur du TEXTE. Posé sur le h1
-              (un bloc), il couvrait toute la colonne et produisait une
-              barre sombre pleine largeur au lieu d'un nom substitué.
-            */}
-            <span className={styles.titleTexte} data-entity-name={personnage.possession?.entity}>
+            <span className={styles.titreHote}>
               {SignatureTitle ? <SignatureTitle>{personnage.nom}</SignatureTitle> : personnage.nom}
             </span>
+            {personnage.possession ? (
+              <span className={styles.titreEntite} aria-hidden="true">
+                {personnage.possession.entity}
+              </span>
+            ) : null}
           </h1>
 
           <p className={styles.role}>{personnage.role ?? 'Personnage'}</p>

@@ -684,53 +684,93 @@
   32% { transform: scale(1.0026); }
 }
 
-/* --- Le glitch du nom (lutte et cage) ------------------------------ */
+/* --- La substitution du nom ---------------------------------------- */
+/*                                                                     */
+/* Les deux noms occupent la même cellule de grille : chacun est centré */
+/* pour lui-même, avec sa police et sa taille. Aucun ne masque l'autre  */
+/* — c'est une substitution, pas un cache. La hauteur du titre est      */
+/* celle du plus grand des deux, donc rien ne saute.                    */
+/*                                                                     */
+/* Le grésillement commence dès que le lecteur s'éloigne du seuil de    */
+/* l'hôte et s'intensifie avec la synchronisation : rare et bref au     */
+/* début, incessant en fin de lutte.                                    */
 
-.titleTexte {
-  position: relative;
-  display: inline-block;
+.title {
+  display: grid;
+  justify-items: center;
 }
 
-.sceneState[data-sync='lutte'] .titleTexte::after,
-.sceneState[data-sync='cage'] .titleTexte::after {
-  content: attr(data-entity-name);
-  position: absolute;
-  /*
-   * Le calque se dimensionne sur SON PROPRE texte, pas sur celui de
-   * l'hôte. Avec `inset`, il était contraint à la boîte d'« Elias »
-   * (~11rem) alors que « MÉTATRON » en capitales occupe le double : le
-   * texte débordait de son fond des deux côtés.
-   *
-   * `width: max-content` + centrage par la propriété `translate` — et non
-   * par `transform`, que les keyframes du glitch utilisent déjà.
-   */
-  top: 50%;
-  left: 50%;
-  translate: -50% -50%;
-  width: max-content;
-  max-width: 92vw;
-  padding: 0.18em 0.55em;
-  background: var(--character-bg, #0c0a07);
+.titreHote,
+.titreEntite {
+  grid-area: 1 / 1;
+}
+
+.titreEntite {
   color: #c9a227;
   font-family: var(--font-ui);
-  /* Assez petit pour qu'un nom long tienne sous un titre court. */
-  font-size: 0.34em;
+  font-size: 0.46em;
   font-weight: 500;
-  letter-spacing: 0.12em;
-  line-height: 1.1;
-  text-align: center;
+  letter-spacing: 0.14em;
+  line-height: 1.35;
   text-transform: uppercase;
-  white-space: nowrap;
+  align-self: center;
+  /* Invisible tant que l'entité ne tient pas la page. */
   opacity: 0;
-  animation: retable-glitch calc(4.8s - var(--lutte-progress, 0) * 3.6s) linear infinite;
 }
 
-@keyframes retable-glitch {
-  0%, 88.9%, 100% { opacity: 0; }
-  89%, 90.4% { opacity: 1; transform: translateX(0.06em); }
-  90.5%, 91.2% { opacity: 0; }
-  91.3%, 93.8% { opacity: 1; transform: translateX(-0.04em); }
-  93.9% { opacity: 0; }
+/* Dès qu'on quitte le seuil de l'hôte, les deux noms se disputent le
+   titre : quand l'un apparaît, l'autre s'efface exactement en même temps. */
+.sceneState[data-sync='presence'] .titreHote,
+.sceneState[data-sync='lutte'] .titreHote,
+.sceneState[data-sync='cage'] .titreHote {
+  animation: retable-nom-hote var(--glitch-duree, 5.2s) steps(1, end) infinite;
+}
+
+.sceneState[data-sync='presence'] .titreEntite,
+.sceneState[data-sync='lutte'] .titreEntite,
+.sceneState[data-sync='cage'] .titreEntite {
+  animation: retable-nom-entite var(--glitch-duree, 5.2s) steps(1, end) infinite;
+}
+
+/* steps(1, end) : pas de fondu. Une substitution est franche — le signal
+   saute, il ne se fond pas. */
+@keyframes retable-nom-hote {
+  0%, 86.9% { opacity: 1; }
+  87%, 89.4% { opacity: 0; }
+  89.5%, 90.9% { opacity: 1; }
+  91%, 95.4% { opacity: 0; }
+  95.5%, 100% { opacity: 1; }
+}
+
+@keyframes retable-nom-entite {
+  0%, 86.9% { opacity: 0; }
+  87%, 89.4% { opacity: 1; }
+  89.5%, 90.9% { opacity: 0; }
+  91%, 95.4% { opacity: 1; }
+  95.5%, 100% { opacity: 0; }
+}
+
+/* À 100 %, plus de dispute : l'entité tient le titre en continu. Le nom
+   de l'hôte reste dans le document — porté, pas effacé. */
+.sceneState[data-sync='entite'] .titreHote {
+  opacity: 0;
+  animation: none;
+}
+
+.sceneState[data-sync='entite'] .titreEntite {
+  opacity: 1;
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sceneState[data-sync='presence'] .titreHote,
+  .sceneState[data-sync='lutte'] .titreHote,
+  .sceneState[data-sync='cage'] .titreHote,
+  .sceneState[data-sync='presence'] .titreEntite,
+  .sceneState[data-sync='lutte'] .titreEntite,
+  .sceneState[data-sync='cage'] .titreEntite {
+    animation: none;
+  }
 }
 
 /* ------------------------------------------------------------------ */
