@@ -16,16 +16,25 @@ Fait :
 4. **Elias en composition "retable"** — Elias en composition "retable",
    fiche Métatron en composition "cage", mécanisme de possession
    (`possession`, modèle VOLUME) et transition entre les deux pages.
+5. **Ysolde en composition "canopee"** — lianes procédurales autour du nom,
+   pluie, papillons, mousse qui reprend les sections lues, pousse finale ;
+   Ibuki ajouté au récit et aux `links` d'Ysolde ; `RevealAuDefilement`
+   décliné par composition ; `rafPartage`, boucle d'animation unique pour
+   la page.
 
 Dette technique notée :
 
 - Gravures runiques encore à faire sur la fiche Métatron.
 - Réglages fins des répartitions du modèle VOLUME (seuils 35/55/85 à
   affiner à l'usage).
+- Les lianes de la composition "canopee" repartent brutalement quand le
+  nombre de lignes de contenu change.
+- Les récits des personnages sont trop courts : format résumé plutôt que
+  scènes développées.
 
 Prochaine étape :
 
-5. **Personnage suivant** — choisir le prochain personnage majeur à
+6. **Personnage suivant** — choisir le prochain personnage majeur à
    porter en composition dédiée, après validation du créateur.
 
 ## Backlog long terme

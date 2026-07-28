@@ -28,10 +28,20 @@ de données interchangeable derrière une couleur différente.
   italique comprise), Space Grotesk (interface), chargées via `next/font/google`.
 - Moteur de composition (`src/components/personnages/compositions/`), axe
   séparé de `themeKey` : le thème porte la palette et l'atmosphère, la
-  composition porte la mise en page. Quatre compositions existent —
+  composition porte la mise en page. Cinq compositions existent —
   `standard` (rendu historique), `fragment` (Kael l'Éclipsé), `retable`
-  (Elias) et `cage` (Métatron). Résolues par le champ `composition` de
-  `data.json`, repli sur `standard` si absent ou inconnu.
+  (Elias), `cage` (Métatron) et `canopee` (Ysolde). Résolues par le champ
+  `composition` de `data.json`, repli sur `standard` si absent ou inconnu.
+- Composition `canopee` (Ysolde) : lianes en croissance procédurale sur
+  canvas s'enroulant autour du nom (deux plans avant/arrière), pluie,
+  papillons, mousse qui reprend visuellement les sections déjà lues,
+  pousse finale.
+- Ibuki ajouté au récit et aux `links` d'Ysolde.
+- `RevealAuDefilement` (`src/components/personnages/effects/`) : apparition
+  au défilement, déclinée par composition (pousse / se condense / s'allume
+  / se pose selon le personnage).
+- `rafPartage` : une seule boucle `requestAnimationFrame` partagée pour
+  toute la page, utilisée par les effets de la composition `canopee`.
 - Champ `identity.unrecorded` : liste de champs volontairement non
   consignés, affichés vides par certaines compositions (ex. `fragment`).
 - Fiche Métatron complète (`draft`, `themeKey: "cage-doree"`, composition
@@ -63,6 +73,6 @@ de données interchangeable derrière une couleur différente.
 
 - Des compositions dédiées pour les personnages majeurs restants
   (voir `docs/NEXT_STEPS.md` pour le prochain personnage).
-- Gravures runiques sur la fiche Métatron ; réglages fins des répartitions
-  du modèle VOLUME (dette technique, voir `docs/NEXT_STEPS.md`).
+- Dette technique accumulée sur les compositions (gravures runiques,
+  réglages fins, récits trop courts) — détail dans `docs/NEXT_STEPS.md`.
 - Tout moteur structuré pour factions, lieux, événements, archives, magie transverse.

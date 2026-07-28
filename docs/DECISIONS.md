@@ -180,3 +180,15 @@ par personnage.
 * Sur la page publique, l'entité possédante n'est chargée que si elle est
   `published` : un hôte publié ne peut jamais exposer une entité encore
   en `draft`.
+
+## Ysolde et passe performance/responsive (2026-07-27)
+
+* Aucun `filter` animé en transition : il force un repaint complet à
+  chaque image et provoque des saccades sur GPU intégré. Seuls `opacity`
+  et `transform` sont autorisés dans les transitions animées.
+* Une seule boucle `requestAnimationFrame` par page, partagée entre tous
+  les effets qui en ont besoin (`rafPartage`).
+* Le nom de l'hôte et celui de l'entité sont deux éléments frères
+  empilés, jamais un calque masquant l'autre.
+* three.js est écarté : bibliothèque 3D pour un besoin 2D, et charge GPU
+  supplémentaire sur un problème qui est déjà un problème de performance.
