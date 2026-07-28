@@ -373,3 +373,34 @@
     opacity: 0.18;
   }
 }
+
+/* ------------------------------------------------------------------ */
+/* Apparition au défilement — ÇA SE POSE                               */
+/*                                                                     */
+/* Pas de fondu progressif, pas de flou : le bloc arrive d'un cran, en  */
+/* linear. Il ne s'annonce pas, il est déclaré.                        */
+/* ------------------------------------------------------------------ */
+
+/* Aucun filter animé ici : un blur en transition force un repaint complet
+   à chaque image et fait saccader la page sur GPU intégré. Seuls opacity
+   et transform sont confiés au compositeur. */
+.content [data-reveal] {
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 0.42s linear,
+    transform 0.42s linear;
+}
+
+.content [data-reveal][data-revealed] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .content [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

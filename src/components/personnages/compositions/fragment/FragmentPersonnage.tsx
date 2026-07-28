@@ -6,6 +6,7 @@ import {
   getMagicDetails,
   getUnrecordedDetails,
 } from '@/components/personnages/compositions/content';
+import { RevealAuDefilement } from '@/components/personnages/effects/RevealAuDefilement';
 import type { PersonnageCompositionProps } from '@/components/personnages/compositions/types';
 import styles from './FragmentPersonnage.module.css';
 
@@ -77,6 +78,7 @@ export function FragmentPersonnage({
 
   return (
     <section className={styles.scene} aria-labelledby="personnage-title">
+      <RevealAuDefilement />
       {/* Pas de PersonnageAtmosphere : ses halos et ses traces dessinent un
           ciel et une profondeur. Le Domaine dit "pas de sol, pas de ciel".
           Seules subsistent les particules et la fumée de la signature. */}
@@ -124,7 +126,8 @@ export function FragmentPersonnage({
         </div>
 
         {identityItems.length > 0 || unrecordedItems.length > 0 ? (
-          <section className={styles.identity} aria-labelledby="personnage-identity-title">
+            <section className={styles.identity} aria-labelledby="personnage-identity-title"
+            data-reveal>
             <h2 id="personnage-identity-title" className={styles.sectionTitle}>
               Identité
             </h2>
@@ -153,7 +156,8 @@ export function FragmentPersonnage({
         ) : null}
 
         {magicItems.length > 0 ? (
-          <section className={styles.magic} aria-labelledby="personnage-magic-title">
+            <section className={styles.magic} aria-labelledby="personnage-magic-title"
+            data-reveal>
             <h2 id="personnage-magic-title" className={styles.sectionTitle}>
               Magie
             </h2>

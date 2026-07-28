@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { getPersonnageSignature } from '@/components/personnages/signatures';
 import { getIdentityDetails, getMagicDetails } from '@/components/personnages/compositions/content';
+import { RevealAuDefilement } from '@/components/personnages/effects/RevealAuDefilement';
 import type { PersonnageCompositionProps } from '@/components/personnages/compositions/types';
 import { RetableScene } from './RetableScene';
 import { CagePersonnage } from '../cage/CagePersonnage';
@@ -103,6 +104,11 @@ export function RetablePersonnage({
   return (
     <RetableScene possession={personnage.possession} entityPage={entityPage}>
       <section className={styles.scene} aria-labelledby="personnage-title">
+      <RevealAuDefilement />
+      {/* Le sceau : FIXE, derrière tout le contenu, comme ceux d'Ysolde et
+          de Métatron. Il ne défile pas — c'est un fond, pas un ornement. */}
+      <PupilleGravee />
+
       {/* Une seule source, basse et chaude : "une lumière qui brûle comme
           des larmes". Elle a une direction — quelqu'un la tient. */}
       <div className={styles.lumiere} aria-hidden="true">
@@ -120,12 +126,16 @@ export function RetablePersonnage({
             </span>
           ) : null}
 
-          <h1
-            id="personnage-title"
-            className={styles.title}
-            data-entity-name={personnage.possession?.entity}
-          >
-            {SignatureTitle ? <SignatureTitle>{personnage.nom}</SignatureTitle> : personnage.nom}
+          <h1 id="personnage-title" className={styles.title}>
+            {/*
+              Le nom est enveloppé dans un span inline-block : le calque de
+              glitch se cale ainsi sur la largeur du TEXTE. Posé sur le h1
+              (un bloc), il couvrait toute la colonne et produisait une
+              barre sombre pleine largeur au lieu d'un nom substitué.
+            */}
+            <span className={styles.titleTexte} data-entity-name={personnage.possession?.entity}>
+              {SignatureTitle ? <SignatureTitle>{personnage.nom}</SignatureTitle> : personnage.nom}
+            </span>
           </h1>
 
           <p className={styles.role}>{personnage.role ?? 'Personnage'}</p>
@@ -144,7 +154,8 @@ export function RetablePersonnage({
         </div>
 
         {identityItems.length > 0 ? (
-          <section className={styles.identity} aria-labelledby="personnage-identity-title">
+            <section className={styles.identity} aria-labelledby="personnage-identity-title"
+            data-reveal>
             <h2 id="personnage-identity-title" className={styles.sectionTitle}>
               Identité
             </h2>
@@ -160,7 +171,8 @@ export function RetablePersonnage({
         ) : null}
 
         {magicItems.length > 0 ? (
-          <section className={styles.magic} aria-labelledby="personnage-magic-title">
+            <section className={styles.magic} aria-labelledby="personnage-magic-title"
+            data-reveal>
             <h2 id="personnage-magic-title" className={styles.sectionTitle}>
               Magie
             </h2>
@@ -184,14 +196,7 @@ export function RetablePersonnage({
           </section>
         ) : null}
 
-        {narrative ? (
-          <div className={styles.narrativeZone}>
-            {/* Le sceau en arrière-plan du récit : grand, sombre, derrière
-                le texte — comme l'Ombre de Kael derrière son en-tête. */}
-            <PupilleGravee />
-            <div className={styles.narrative}>{narrative}</div>
-          </div>
-        ) : null}
+        {narrative ? <div className={styles.narrative}>{narrative}</div> : null}
 
         {/*
           "Dans cette zone, le Mensonge est impossible."

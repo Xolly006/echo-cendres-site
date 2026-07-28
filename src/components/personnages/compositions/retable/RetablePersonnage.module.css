@@ -45,11 +45,11 @@
   border-radius: 50%;
   background: radial-gradient(
     ellipse at center,
-    color-mix(in srgb, var(--character-accent, var(--accent)) 20%, transparent) 0%,
-    color-mix(in srgb, var(--character-accent, var(--accent)) 7%, transparent) 42%,
+    color-mix(in srgb, var(--character-accent, var(--accent)) 30%, transparent) 0%,
+    color-mix(in srgb, var(--character-accent, var(--accent)) 12%, transparent) 42%,
     transparent 72%
   );
-  animation: retable-veille 11s ease-in-out infinite;
+  animation: retable-veille 7.5s ease-in-out infinite;
 }
 
 /*
@@ -77,20 +77,19 @@
   opacity: 0.5;
 }
 
+/* Une flamme ne pulse pas : elle sursaute. Rythme volontairement
+   irrégulier, avec deux à-coups francs par cycle. */
 @keyframes retable-veille {
-  0%,
-  100% {
-    opacity: 0.78;
-    transform: translateX(-50%) scale(1);
-  }
-  38% {
-    opacity: 0.94;
-    transform: translateX(-50%) scale(1.014);
-  }
-  61% {
-    opacity: 0.7;
-    transform: translateX(-50%) scale(0.994);
-  }
+  0% { opacity: 0.74; transform: translateX(-50%) scale(1); }
+  9% { opacity: 0.97; transform: translateX(-50%) scale(1.028); }
+  14% { opacity: 0.68; transform: translateX(-50%) scale(0.988); }
+  23% { opacity: 0.88; transform: translateX(-50%) scale(1.012); }
+  41% { opacity: 0.8; transform: translateX(-50%) scale(1.002); }
+  47% { opacity: 1; transform: translateX(-50%) scale(1.034); }
+  52% { opacity: 0.72; transform: translateX(-50%) scale(0.99); }
+  68% { opacity: 0.9; transform: translateX(-50%) scale(1.008); }
+  83% { opacity: 0.76; transform: translateX(-50%) scale(0.996); }
+  100% { opacity: 0.74; transform: translateX(-50%) scale(1); }
 }
 
 /* ------------------------------------------------------------------ */
@@ -574,11 +573,24 @@
   z-index: -1;
   content: '';
   pointer-events: none;
+  /* La nef : deux files de piliers et une voûte, à peine devinées.
+     Plus la synchronisation est basse, plus l'église est présente —
+     c'est SON territoire. */
   background:
-    radial-gradient(38% 68% at 22% 8%, color-mix(in srgb, var(--character-accent, #c2914b) 7%, transparent), transparent 70%),
-    radial-gradient(38% 68% at 78% 8%, color-mix(in srgb, var(--character-accent, #c2914b) 7%, transparent), transparent 70%),
-    radial-gradient(20% 46% at 50% 0%, color-mix(in srgb, var(--character-accent, #c2914b) 10%, transparent), transparent 75%);
-  opacity: calc(1 - var(--sync-progress, 0.5) * 0.8);
+    linear-gradient(90deg,
+      color-mix(in srgb, var(--character-accent, #c2914b) 9%, transparent) 0 1px,
+      transparent 1px 8%,
+      color-mix(in srgb, var(--character-accent, #c2914b) 6%, transparent) 8% calc(8% + 1px),
+      transparent calc(8% + 1px) 17%,
+      transparent 83% calc(92% - 1px),
+      color-mix(in srgb, var(--character-accent, #c2914b) 6%, transparent) calc(92% - 1px) 92%,
+      transparent 92% calc(100% - 1px),
+      color-mix(in srgb, var(--character-accent, #c2914b) 9%, transparent) calc(100% - 1px) 100%
+    ),
+    radial-gradient(42% 78% at 18% 4%, color-mix(in srgb, var(--character-accent, #c2914b) 11%, transparent), transparent 72%),
+    radial-gradient(42% 78% at 82% 4%, color-mix(in srgb, var(--character-accent, #c2914b) 11%, transparent), transparent 72%),
+    radial-gradient(26% 52% at 50% -4%, color-mix(in srgb, var(--character-accent, #c2914b) 15%, transparent), transparent 76%);
+  opacity: calc(1 - var(--sync-progress, 0.5) * 0.72);
 }
 
 /* --- Le monde de l'entité (Framer gère l'entrée/sortie) ------------ */
@@ -674,27 +686,38 @@
 
 /* --- Le glitch du nom (lutte et cage) ------------------------------ */
 
-.sceneState[data-sync='lutte'] .title,
-.sceneState[data-sync='cage'] .title {
+.titleTexte {
   position: relative;
+  display: inline-block;
 }
 
-.sceneState[data-sync='lutte'] .title::after,
-.sceneState[data-sync='cage'] .title::after {
+.sceneState[data-sync='lutte'] .titleTexte::after,
+.sceneState[data-sync='cage'] .titleTexte::after {
   content: attr(data-entity-name);
   position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
+  /*
+   * Le calque se dimensionne sur SON PROPRE texte, pas sur celui de
+   * l'hôte. Avec `inset`, il était contraint à la boîte d'« Elias »
+   * (~11rem) alors que « MÉTATRON » en capitales occupe le double : le
+   * texte débordait de son fond des deux côtés.
+   *
+   * `width: max-content` + centrage par la propriété `translate` — et non
+   * par `transform`, que les keyframes du glitch utilisent déjà.
+   */
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  width: max-content;
+  max-width: 92vw;
+  padding: 0.18em 0.55em;
   background: var(--character-bg, #0c0a07);
   color: #c9a227;
   font-family: var(--font-ui);
-  /* Le nom de l'entité est plus long que celui de l'hôte : on le rend un
-     cran plus petit et sans le tracking hérité du serif, sinon il déborde
-     et paraît décentré. */
-  font-size: 0.62em;
+  /* Assez petit pour qu'un nom long tienne sous un titre court. */
+  font-size: 0.34em;
   font-weight: 500;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
+  line-height: 1.1;
   text-align: center;
   text-transform: uppercase;
   white-space: nowrap;
@@ -714,43 +737,70 @@
 /* Le sceau : arrière-plan du récit                                    */
 /* ------------------------------------------------------------------ */
 
-.narrativeZone {
-  position: relative;
-  width: 100%;
-  max-width: 44rem;
-}
-
-.narrativeZone .sceau {
-  position: absolute;
-  top: 8%;
+/* Le sceau est FIXE : il ne défile pas avec le contenu. C'est un fond,
+   au même titre que la Spirale d'Ysolde ou la Roue de Métatron. */
+.sceau {
+  position: fixed;
+  top: 50%;
   left: 50%;
-  z-index: 0;
-  width: clamp(20rem, 44vw, 32rem);
+  z-index: -1;
+  width: min(58rem, 118vw);
+  height: auto;
   margin: 0;
-  transform: translateX(-50%);
-  opacity: 0.1;
+  transform: translate(-50%, -50%);
+  color: var(--character-accent, var(--accent));
+  opacity: 0.16;
   pointer-events: none;
 }
 
 /* "Dorés lorsqu'il use de ses pouvoirs" : l'oeil s'intensifie avec la
    synchro. */
-.sceneState[data-sync='lutte'] .narrativeZone .sceau,
-.sceneState[data-sync='cage'] .narrativeZone .sceau {
-  opacity: calc(0.1 + var(--lutte-progress, 0) * 0.14);
+/* "Dorés lorsqu'il use de ses pouvoirs" : l'oeil s'intensifie avec la
+   synchronisation. */
+.sceneState[data-sync='lutte'] .sceau,
+.sceneState[data-sync='cage'] .sceau {
+  opacity: calc(0.16 + var(--lutte-progress, 0) * 0.22);
 }
 
-.narrativeZone .narrative {
-  position: relative;
-  z-index: 1;
-}
+
 
 @media (prefers-reduced-motion: reduce) {
   .sceneState[data-sync='lutte'] .foyer,
   .sceneState[data-sync='cage'] .foyer,
   .sceneState[data-sync='lutte'] .content,
   .sceneState[data-sync='cage'] .content,
-  .sceneState[data-sync='lutte'] .title::after,
-  .sceneState[data-sync='cage'] .title::after {
+  .sceneState[data-sync='lutte'] .titleTexte::after,
+  .sceneState[data-sync='cage'] .titleTexte::after {
     animation: none;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Apparition au défilement — ÇA S'ALLUME                              */
+/*                                                                     */
+/* Fondu chaud et légère montée : une flamme qu'on approche.           */
+/* ------------------------------------------------------------------ */
+
+/* Aucun filter animé ici : un blur en transition force un repaint complet
+   à chaque image et fait saccader la page sur GPU intégré. Seuls opacity
+   et transform sont confiés au compositeur. */
+.content [data-reveal] {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 1.2s cubic-bezier(0.33, 0, 0.2, 1),
+    transform 1.2s cubic-bezier(0.33, 0, 0.2, 1);
+}
+
+.content [data-reveal][data-revealed] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .content [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 }

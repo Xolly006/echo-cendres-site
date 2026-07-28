@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { getIdentityDetails, getMagicDetails } from '@/components/personnages/compositions/content';
+import { RevealAuDefilement } from '@/components/personnages/effects/RevealAuDefilement';
 import type { PersonnageCompositionProps } from '@/components/personnages/compositions/types';
 import { RoueDeFeu } from './RoueDeFeu';
 import { Colonnes } from './Colonnes';
@@ -44,6 +45,7 @@ export function CagePersonnage({
 
   return (
     <section className={styles.scene} aria-labelledby="personnage-title">
+      <RevealAuDefilement />
       <RoueDeFeu />
       <Colonnes />
 
@@ -73,7 +75,8 @@ export function CagePersonnage({
         <p className={styles.summary}>{personnage.resumeCourt}</p>
 
         {identityItems.length > 0 ? (
-          <section className={styles.registreBloc} aria-labelledby="personnage-identity-title">
+            <section className={styles.registreBloc} aria-labelledby="personnage-identity-title"
+            data-reveal>
             <h2 id="personnage-identity-title" className={styles.sectionTitle}>
               <span className={styles.sectionIndex}>02</span> Registre
             </h2>
@@ -94,7 +97,8 @@ export function CagePersonnage({
         ) : null}
 
         {magicItems.length > 0 ? (
-          <section className={styles.registreBloc} aria-labelledby="personnage-magic-title">
+            <section className={styles.registreBloc} aria-labelledby="personnage-magic-title"
+            data-reveal>
             <h2 id="personnage-magic-title" className={styles.sectionTitle}>
               <span className={styles.sectionIndex}>03</span> Capacités allouées
             </h2>

@@ -2,6 +2,7 @@
   "nom": "Ysolde la Sauvage",
   "publicationStatus": "draft",
   "themeKey": "vie-sauvage",
+  "composition": "canopee",
   "resumeCourt": "Chamane recluse et Pilier de la Vie, Ysolde incarne la Biomasse, la Nature et le Cycle naturel. Elle ressent la mort des forêts, la douleur des animaux et porte la Vie sans naïveté : face à Dayu, elle ne triomphe pas, elle met fin à une négation de la mort en pleurant celle qu’elle doit arrêter.",
   "role": "Pilier de la Vie — Gardienne de Silvareth",
   "tags": [
@@ -27,8 +28,9 @@
     ],
     "nature": "Humaine — Pilier de la Vie",
     "origin": "Chamane d’une tribu reculée",
-    "status": "Active — Pilier en fonction",
-    "era": "Présent narratif"
+    "status": "Active — Pilier en fonction. Mère adoptive d’Ibuki, le Premier Papillon, fils de Dayu.",
+    "era": "Présent narratif",
+    "appearance": "Pieds nus, silencieuse, entourée d’une aura verte et dorée. Elle saigne de la sève dorée."
   },
   "magic": {
     "concept": "La Biomasse / La Nature / Le Cycle naturel",
@@ -45,6 +47,13 @@
       "Elle refuse souvent d’aider les humains civilisés qu’elle juge destructeurs",
       "Sa magie respecte le Cycle naturel et ne doit pas être réduite à un soin confortable",
       "Couper un lien magique vital peut sauver le cycle, mais brise aussi ceux qui s’y accrochent"
+    ]
+  },
+  "links": {
+    "characters": [
+      "ibuki",
+      "dayu",
+      "bora"
     ]
   }
 }

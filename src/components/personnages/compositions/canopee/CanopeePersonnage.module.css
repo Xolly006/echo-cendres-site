@@ -1,0 +1,481 @@
+/*
+ * Composition "canopée" — la jungle qu'elle a créée.
+ *
+ * Règles tenues dans tout ce fichier :
+ *   1. AUCUN :hover. La forêt ne remarque pas le lecteur — ce n'est pas
+ *      un refus (Kael), c'est une occupation. :focus-visible reste.
+ *   2. ORGANIQUE. Pas de grille stricte : les clairières ont des largeurs
+ *      inégales, le flux serpente d'un côté à l'autre.
+ *   3. LA SÈVE DORÉE. Le vert est toujours veiné d'or.
+ *   4. TOUT CONTINUE SANS TOI. Croissance, brume, visiteurs : aucun de
+ *      ces cycles ne dépend du curseur.
+ */
+
+.scene {
+  position: relative;
+  min-height: calc(100vh - 2rem);
+  overflow: hidden;
+  color: var(--character-text, var(--text));
+  font-family: var(--character-body-font, var(--font-body));
+  isolation: isolate;
+}
+
+/* ------------------------------------------------------------------ */
+/* Le sceau — la Spirale de Croissance                                 */
+/* ------------------------------------------------------------------ */
+
+.sceau {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: -2;
+  width: min(72rem, 130vw);
+  height: auto;
+  transform: translate(-50%, -50%);
+  opacity: 0.14;
+  pointer-events: none;
+}
+
+/* La fougère se déroule : une rotation imperceptible sur un cycle très
+   long. La forêt ne se presse pas. */
+.sceauSpirale {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: canopee-deroule 240s linear infinite;
+}
+
+@keyframes canopee-deroule {
+  from {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(4deg) scale(1.03);
+  }
+  to {
+    transform: rotate(0deg) scale(1);
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Les visiteurs                                                       */
+/* ------------------------------------------------------------------ */
+
+.visiteurs {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* La brume : dérive lente, verte, deux nappes désynchronisées. */
+.brume {
+  position: absolute;
+  inset: -20%;
+  background:
+    radial-gradient(42% 30% at 30% 40%, color-mix(in srgb, var(--character-accent, #7fa05a) 9%, transparent), transparent 70%),
+    radial-gradient(36% 26% at 74% 66%, color-mix(in srgb, var(--character-accent, #7fa05a) 7%, transparent), transparent 72%);
+  animation: canopee-brume 52s ease-in-out infinite;
+}
+
+.brume[data-nappe='2'] {
+  animation-duration: 77s;
+  animation-direction: reverse;
+  opacity: 0.7;
+}
+
+@keyframes canopee-brume {
+  0%,
+  100% {
+    transform: translate(0, 0);
+    opacity: 0.8;
+  }
+  33% {
+    transform: translate(3%, -2%);
+    opacity: 1;
+  }
+  66% {
+    transform: translate(-2%, 2%);
+    opacity: 0.6;
+  }
+}
+
+.visiteursCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* ------------------------------------------------------------------ */
+/* Structure organique — des clairières, pas une grille                */
+/* ------------------------------------------------------------------ */
+
+.content {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  width: min(70rem, 100%);
+  margin: 0 auto;
+  padding: clamp(6rem, 12vh, 9rem) clamp(1.25rem, 5vw, 4rem) clamp(5rem, 10vh, 7rem);
+  gap: clamp(3.5rem, 8vw, 6.5rem);
+}
+
+.intro {
+  max-width: 40rem;
+  /* Le flux serpente : l'intro penche à gauche… */
+  margin-left: clamp(0rem, 2vw, 1.5rem);
+}
+
+.previewPill {
+  display: inline-block;
+  margin-bottom: 1rem;
+  color: var(--character-muted, var(--muted));
+  font-family: var(--font-ui);
+  font-size: 0.64rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+.title {
+  margin: 0 0 clamp(1rem, 2.5vw, 1.75rem);
+  font-family: var(--character-title-font, var(--font-title));
+  font-size: clamp(2.8rem, 7vw, 5.8rem);
+  font-weight: var(--character-title-weight, 400);
+  letter-spacing: var(--character-title-spacing, 0.04em);
+  line-height: 1.04;
+  text-wrap: balance;
+}
+
+.role {
+  margin: 0;
+  color: var(--character-accent, var(--accent));
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: var(--character-label-spacing, 0.24em);
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
+/* ------------------------------------------------------------------ */
+/* Les lianes — enroulement autour du nom                              */
+/*                                                                     */
+/* Deux canvas encadrent le texte : l'un dessous, l'autre dessus. La    */
+/* liane passe de l'un à l'autre selon la phase de son hélice — c'est   */
+/* cette alternance qui produit l'enroulement. Un seul plan donnerait   */
+/* un dessin plat posé à côté du nom.                                   */
+/* ------------------------------------------------------------------ */
+
+.lianesHote,
+.lianesHoteSmall {
+  position: relative;
+  display: inline-block;
+  isolation: isolate;
+}
+
+.lianesArriere,
+.lianesAvant {
+  position: absolute;
+  pointer-events: none;
+}
+
+.lianesArriere {
+  z-index: 0;
+}
+
+.lianesTexte {
+  position: relative;
+  z-index: 1;
+}
+
+/* Les brins qui croisent les lettres restent fins et translucides :
+   du lierre, pas une rature. */
+.lianesAvant {
+  z-index: 2;
+}
+
+/* ------------------------------------------------------------------ */
+/* Les clairières                                                      */
+/* ------------------------------------------------------------------ */
+
+.clairiere {
+  position: relative;
+  min-width: 0;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  /* Aucune bordure rectiligne : un rayon irrégulier, organique. */
+  border-radius: 42% 58% 51% 49% / 8% 7% 9% 8%;
+  background: color-mix(in srgb, var(--character-surface, rgba(20, 28, 16, 0.5)) 100%, transparent);
+  max-width: 46rem;
+}
+
+/* …le flux serpente. */
+.clairiereDecalee {
+  margin-left: auto;
+  margin-right: clamp(0rem, 3vw, 2.5rem);
+  max-width: 42rem;
+}
+
+.clairiere:nth-of-type(odd) {
+  max-width: 44rem;
+}
+
+/* "Croissance." — la mousse regagne les sections lues. */
+.clairiere::before {
+  position: absolute;
+  inset: 0;
+  content: '';
+  border-radius: inherit;
+  pointer-events: none;
+  background:
+    radial-gradient(30% 40% at 0% 0%, color-mix(in srgb, var(--character-accent, #7fa05a) 22%, transparent), transparent 70%),
+    radial-gradient(26% 36% at 100% 100%, color-mix(in srgb, var(--character-accent, #7fa05a) 18%, transparent), transparent 72%);
+  opacity: 0;
+  transition: opacity 6s ease;
+}
+
+.clairiere[data-canopee-repris]::before {
+  opacity: 1;
+}
+
+.summary {
+  margin: 0;
+  color: var(--character-muted, var(--muted));
+  font-size: clamp(1rem, 1.9vw, 1.14rem);
+  line-height: var(--character-body-line-height, 1.9);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem 1.3rem;
+  margin: clamp(1.4rem, 3vw, 2rem) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tags li {
+  color: var(--character-muted, var(--muted));
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  opacity: 0.66;
+}
+
+.sectionTitle {
+  margin: 0 0 clamp(1.3rem, 2.5vw, 1.9rem);
+  font-family: var(--character-title-font, var(--font-title));
+  font-size: clamp(1.5rem, 3vw, 2.1rem);
+  font-weight: 400;
+  letter-spacing: 0.06em;
+}
+
+.identityList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  gap: clamp(1.3rem, 2.5vw, 2rem);
+  margin: 0;
+}
+
+.magicList {
+  display: grid;
+  gap: clamp(1.3rem, 2.5vw, 1.9rem);
+  margin: 0;
+}
+
+.identityItem,
+.magicItem {
+  min-width: 0;
+}
+
+.identityItem dt,
+.magicItem dt {
+  margin: 0 0 0.5rem;
+  color: var(--character-accent, var(--accent));
+  font-family: var(--font-ui);
+  font-size: 0.66rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+
+.identityItem dd,
+.magicItem dd {
+  margin: 0;
+  color: var(--character-text, var(--text));
+  font-size: clamp(0.95rem, 1.5vw, 1.05rem);
+  line-height: var(--character-body-line-height, 1.9);
+  overflow-wrap: break-word;
+}
+
+.magicItem p {
+  margin: 0;
+}
+
+.magicItem ul {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.magicItem li {
+  position: relative;
+  padding-left: 1.25rem;
+}
+
+.magicItem li::before {
+  position: absolute;
+  left: 0;
+  color: var(--character-accent, var(--accent));
+  content: '·';
+}
+
+/* ------------------------------------------------------------------ */
+/* Les cendres — et ce qui y pousse                                    */
+/* ------------------------------------------------------------------ */
+
+/* Le récit se désature en descendant : le vert s'éteint vers la cendre.
+   La page finit comme elle — puis une pousse perce. */
+.cendres {
+  max-width: 46rem;
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--character-surface, rgba(20, 28, 16, 0.5)) 100%, transparent) 0%,
+      rgba(38, 37, 34, 0.55) 78%,
+      rgba(42, 40, 38, 0.6) 100%
+    );
+}
+
+.cendres .narrative {
+  position: relative;
+  z-index: 1;
+}
+
+/* Le gris gagne le texte lui-même en fin de récit. */
+.cendres .narrative > :global(*:nth-last-child(-n + 3)) {
+  color: color-mix(in srgb, var(--character-text, var(--text)) 62%, #8a8781);
+}
+
+.pousse {
+  display: block;
+  width: 3.2rem;
+  height: auto;
+  margin: clamp(1.5rem, 3vw, 2.25rem) auto 0;
+}
+
+.pousseTige {
+  stroke-dasharray: 130;
+  stroke-dashoffset: 130;
+  animation: canopee-pousse 9s cubic-bezier(0.25, 0.1, 0.25, 1) 1.5s forwards;
+}
+
+.pousseFeuille {
+  transform-box: fill-box;
+  transform-origin: bottom right;
+  opacity: 0;
+  animation: canopee-eclosion 3s ease-out 7s forwards;
+}
+
+/* ------------------------------------------------------------------ */
+/* Sortie                                                              */
+/* ------------------------------------------------------------------ */
+
+.exit {
+  margin-left: clamp(0rem, 2vw, 1.5rem);
+}
+
+.backLink {
+  color: var(--character-muted, var(--muted));
+  font-family: var(--font-ui);
+  font-size: 0.74rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  /* Pas de :hover : la forêt ne remarque pas la main. */
+}
+
+.backLink:focus-visible {
+  outline: 2px solid var(--character-accent, var(--accent));
+  outline-offset: 6px;
+}
+
+/* ------------------------------------------------------------------ */
+/* Responsive & accessibilité                                          */
+/* ------------------------------------------------------------------ */
+
+@media (max-width: 720px) {
+  .clairiereDecalee {
+    margin-right: 0;
+  }
+
+  .content {
+    gap: clamp(2.5rem, 6vw, 4rem);
+  }
+
+  .sceau {
+    width: 140vw;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sceauSpirale,
+  .brume,
+  .pluie span,
+  .papillon,
+  .papillonAiles {
+    animation: none;
+  }
+
+  .pousseTige {
+    stroke-dashoffset: 0;
+    animation: none;
+  }
+
+  .pousseFeuille {
+    opacity: 0.75;
+    animation: none;
+  }
+
+  .clairiere::before {
+    transition: none;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Apparition au défilement — ÇA POUSSE                                */
+/*                                                                     */
+/* Le bloc monte du bas et se déplie verticalement, lentement. Rien ne */
+/* se presse dans une forêt.                                           */
+/* ------------------------------------------------------------------ */
+
+/* Aucun filter animé ici : un blur en transition force un repaint complet
+   à chaque image et fait saccader la page sur GPU intégré. Seuls opacity
+   et transform sont confiés au compositeur. */
+.content [data-reveal] {
+  opacity: 0;
+  transform: translateY(38px) scaleY(0.955);
+  transform-origin: bottom center;
+  transition:
+    opacity 1.6s cubic-bezier(0.16, 0.84, 0.3, 1),
+    transform 1.6s cubic-bezier(0.16, 0.84, 0.3, 1);
+}
+
+.content [data-reveal][data-revealed] {
+  opacity: 1;
+  transform: translateY(0) scaleY(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .content [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
