@@ -458,22 +458,23 @@
 /* Aucun filter animé ici : un blur en transition force un repaint complet
    à chaque image et fait saccader la page sur GPU intégré. Seuls opacity
    et transform sont confiés au compositeur. */
-.content [data-reveal] {
+.content [data-reveal][data-hidden] {
   opacity: 0;
   transform: translateY(38px) scaleY(0.955);
   transform-origin: bottom center;
+
+}
+
+.content [data-reveal] {
   transition:
     opacity 1.6s cubic-bezier(0.16, 0.84, 0.3, 1),
     transform 1.6s cubic-bezier(0.16, 0.84, 0.3, 1);
-}
-
-.content [data-reveal][data-revealed] {
   opacity: 1;
   transform: translateY(0) scaleY(1);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .content [data-reveal] {
+  .content [data-reveal][data-hidden] {
     opacity: 1;
     transform: none;
     transition: none;

@@ -452,21 +452,22 @@
 /* un rideau qui monte. Aucun filter animé.                            */
 /* ------------------------------------------------------------------ */
 
-.content [data-reveal] {
+.content [data-reveal][data-hidden] {
   clip-path: inset(0 0 100% 0);
   opacity: 0;
+
+}
+
+.content [data-reveal] {
   transition:
     clip-path 1s cubic-bezier(0.22, 0.61, 0.3, 1),
     opacity 0.5s ease;
-}
-
-.content [data-reveal][data-revealed] {
   clip-path: inset(0 0 0 0);
   opacity: 1;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .content [data-reveal] {
+  .content [data-reveal][data-hidden] {
     clip-path: none;
     opacity: 1;
     transition: none;

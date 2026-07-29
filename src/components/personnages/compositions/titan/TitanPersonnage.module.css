@@ -419,21 +419,22 @@
 /* compositeur.                                                        */
 /* ------------------------------------------------------------------ */
 
-.content [data-reveal] {
+.content [data-reveal][data-hidden] {
   opacity: 0;
   transform: translateY(-26px);
+
+}
+
+.content [data-reveal] {
   transition:
     opacity 0.62s cubic-bezier(0.5, 0, 0.75, 0),
     transform 0.62s cubic-bezier(0.5, 0, 0.75, 0);
-}
-
-.content [data-reveal][data-revealed] {
   opacity: 1;
   transform: translateY(0);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .content [data-reveal] {
+  .content [data-reveal][data-hidden] {
     opacity: 1;
     transform: none;
     transition: none;
