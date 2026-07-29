@@ -2,6 +2,7 @@
   "nom": "Soryn la Voilée",
   "publicationStatus": "draft",
   "themeKey": "masque-voile",
+  "composition": "theatre",
   "resumeCourt": "Soryn la Voilée est une héritière de l’Arquet sans tragédie fondatrice, ancienne artiste lassée du réel, qui utilise les masques, le doute et les illusions tangibles pour repeindre le monde à sa manière.",
   "role": "Héritière n°2 de l’Arquet — Maîtresse des illusions et des réseaux d’espionnage",
   "tags": [
@@ -21,30 +22,67 @@
       "La Mère des Masques",
       "L’Illusionniste"
     ],
-    "nature": "Humaine liée au Mensonge incarné et aux illusions psychosomatiques",
+    "nature": "Humaine liée au Mensonge incarné et aux illusions psychosomatiques. Aucune pitié — elle vous trouve artistiquement divertissant.",
     "origin": "Ancienne artiste et peintre de génie, entrée dans l’Arquet par dégoût du réel",
     "status": "Active au sein de l’Arquet",
-    "era": "Présent narratif"
+    "era": "Présent narratif",
+    "appearance": "Personne n’a jamais vu son visage. On dit qu’elle n’en a plus. Elle ne se montre que par ses masques de porcelaine, qui changent."
   },
   "magic": {
     "concept": "Mensonge incarné / Illusion psychosomatique",
-    "domain": "Le Théâtre des Cauchemars",
+    "domain": "Le Théâtre des Cauchemars — une salle de miroirs infinis où votre propre reflet vous sourit méchamment. Sa règle : « Si tu crois que tu meurs, tu meurs. »",
     "artifact": "Masques de porcelaine changeants",
     "anchor": "Masque brisé",
     "abilities": [
-      "Crée des illusions visuelles",
-      "Trompe les sens et la perception",
-      "Utilise le doute comme arme stratégique",
-      "Rend certaines illusions tangibles grâce à l’Ancre de l’Arquet",
-      "Provoque des réactions psychosomatiques chez ses victimes",
-      "Dirige des réseaux d’espions et d’informateurs"
+      "Le Doute — son arme réelle. Sa magie brute est faible ; elle s’en sert pour rendre les gens fous.",
+      "Illusion psychosomatique : elle ne touche pas sa cible. Elle crée une illusion où celle-ci brûle — le cerveau, convaincu, ordonne au cœur de s’arrêter et à la peau de cloquer.",
+      "Illusions tangibles grâce à l’Ancre de l’Arquet",
+      "Masques de porcelaine changeants : aucun visage fixe, aucune identité vérifiable",
+      "Direction des réseaux d’espions et d’informateurs de l’Arquet",
+      "Commandement partagé des Traqueurs d’Étoiles, avec Kael l’Éclipsé"
     ],
     "limits": [
-      "Sa puissance brute reste faible comparée à d’autres Héritiers",
-      "Son pouvoir dépend de la perception, de la croyance et de l’ancrage sensoriel de la cible",
-      "Son pouvoir peut être contourné par des êtres ou situations qui échappent à la perception classique",
-      "Certains contre-pouvoirs liés au silence, à l’absence de signature ou à la rupture des illusions devront être développés plus tard",
-      "Ses failles exactes ne doivent pas être détaillées dans cette première fiche"
+      "Sa puissance brute est faible comparée aux autres Héritiers : elle ne gagne aucun affrontement direct",
+      "Son pouvoir dépend entièrement de la perception et de la croyance de la cible",
+      "Un aveugle lui échappe : on n’illusionne pas quelqu’un qui ne voit pas",
+      "Une cible sans imagination — une machine — ne peut pas être convaincue",
+      "Un Zéro n’a aucune signature énergétique : l’illusion ne trouve rien où s’accrocher et ne se déclenche pas"
+    ]
+  },
+  "illusions": {
+    "aliases": [
+      "La Mère des Masques, L’Illusionniste",
+      "L’Illusionniste, La Mère des Masques"
+    ],
+    "origin": [
+      "Ancienne artiste et peintre de génie, entrée dans l’Arquet par dégoût du réel",
+      "Peintre de génie devenue Héritière, entrée dans l’Arquet par lassitude du réel",
+      "Artiste accomplie, entrée dans l’Arquet parce que le réel avait cessé de l’intéresser"
+    ],
+    "nature": [
+      "Humaine liée au Mensonge incarné et aux illusions psychosomatiques. Aucune pitié — elle vous trouve artistiquement divertissant.",
+      "Humaine, porteuse du Mensonge incarné et des illusions psychosomatiques. Aucune pitié : vous n’êtes, pour elle, qu’un sujet artistiquement divertissant."
+    ],
+    "concept": [
+      "Mensonge incarné / Illusion psychosomatique",
+      "Illusion psychosomatique / Mensonge incarné"
+    ],
+    "domain": [
+      "Le Théâtre des Cauchemars — une salle de miroirs infinis où votre propre reflet vous sourit méchamment. Sa règle : « Si tu crois que tu meurs, tu meurs. »",
+      "Le Théâtre des Cauchemars — des miroirs à l’infini, et dans chacun votre reflet qui vous sourit méchamment. Sa règle : « Si tu crois que tu meurs, tu meurs. »"
+    ]
+  },
+  "images": {
+    "fond": {
+      "src": "/personnages/soryn-la-voilee/theatre.webp",
+      "alt": "Salle de théâtre à l’italienne déserte, lustres de cristal allumés, dorures et velours rouge, scène vide",
+      "ancrage": "center 40%"
+    }
+  },
+  "links": {
+    "characters": [
+      "kael-eclipse",
+      "aurelia-reine-midas"
     ]
   }
 }

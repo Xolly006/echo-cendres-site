@@ -88,6 +88,25 @@ function readOptionalPossession(value: unknown, fileName: string): Personnage['p
   };
 }
 
+function readOptionalIllusions(value: unknown, fileName: string): Personnage['illusions'] {
+  if (value === undefined || value === null) return undefined;
+  if (typeof value !== 'object' || Array.isArray(value)) {
+    throw new Error(`Champ "illusions" invalide dans ${fileName}.`);
+  }
+
+  const sortie: Record<string, string[]> = {};
+  for (const [champ, variantes] of Object.entries(value as Record<string, unknown>)) {
+    if (!Array.isArray(variantes) || variantes.some((v) => typeof v !== 'string')) {
+      throw new Error(`Illusions du champ "${champ}" invalides dans ${fileName}.`);
+    }
+    if (variantes.length < 2) {
+      throw new Error(`Le champ "${champ}" doit avoir au moins deux formulations dans ${fileName}.`);
+    }
+    sortie[champ] = variantes as string[];
+  }
+  return sortie;
+}
+
 function readOptionalImage(
   value: unknown,
   champ: string,
@@ -208,6 +227,7 @@ function parsePersonnage(rawValue: unknown, fileName: string): RawPersonnage {
     themeKey: readOptionalString(rawValue.themeKey, 'themeKey', fileName),
     composition: readOptionalString(rawValue.composition, 'composition', fileName),
     uncertainties: readOptionalStringList(rawValue.uncertainties, 'uncertainties', fileName),
+    illusions: readOptionalIllusions(rawValue.illusions, fileName),
     images: readOptionalImages(rawValue.images, fileName),
     possession: readOptionalPossession(rawValue.possession, fileName),
     publicationStatus: readPublicationStatus(rawValue.publicationStatus, fileName),

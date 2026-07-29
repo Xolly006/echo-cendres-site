@@ -4,6 +4,7 @@ import { RetablePersonnage } from './retable/RetablePersonnage';
 import { CagePersonnage } from './cage/CagePersonnage';
 import { CanopeePersonnage } from './canopee/CanopeePersonnage';
 import { TitanPersonnage } from './titan/TitanPersonnage';
+import { TheatrePersonnage } from './theatre/TheatrePersonnage';
 import type { PersonnageCompositionComponent } from './types';
 
 /**
@@ -24,6 +25,7 @@ const COMPOSITIONS: Record<string, PersonnageCompositionComponent> = {
   cage: CagePersonnage,
   canopee: CanopeePersonnage,
   titan: TitanPersonnage,
+  theatre: TheatrePersonnage,
 };
 
 export const DEFAULT_COMPOSITION_KEY = 'standard';

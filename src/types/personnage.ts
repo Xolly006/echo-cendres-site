@@ -29,6 +29,19 @@ export type Personnage = {
    * de raconter un trajet — chez Varros, le champ de blé de l'homme
    * qu'il était cède au cratère de ce qu'il est devenu.
    */
+  /**
+   * Formulations alternatives de certains champs.
+   *
+   * Une fiche qui déclare des illusions change discrètement la
+   * FORMULATION de ces champs quand le lecteur ne les regarde pas. Le
+   * fait énoncé reste rigoureusement le même : seuls les mots bougent.
+   * Le lecteur finit par douter de sa mémoire, jamais de la vérité de la
+   * fiche.
+   *
+   * Réservé aux personnages dont le mensonge est le concept — chez Soryn,
+   * "le doute comme arme".
+   */
+  illusions?: Record<string, string[]>;
   images?: {
     fond?: PersonnageImage;
     fondSecondaire?: PersonnageImage;

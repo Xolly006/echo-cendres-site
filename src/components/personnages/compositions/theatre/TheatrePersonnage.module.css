@@ -1,0 +1,484 @@
+/*
+ * Composition "théâtre" — Le Théâtre des Cauchemars.
+ *
+ * Trois règles :
+ *   1. LE LECTEUR EST DANS LA SALLE. Un proscenium encadre le viewport en
+ *      permanence : c'est la seule page du site qui place le lecteur
+ *      DEVANT au lieu de DEDANS.
+ *   2. ELLE EST PEINTRE DE GÉNIE. Cette page doit être belle, soignée,
+ *      symétrique. C'est exactement ce qui met mal à l'aise chez
+ *      quelqu'un qui n'a aucune tragédie pour l'excuser.
+ *   3. RIEN N'EST CHAUD. Bordeaux, porcelaine, dorure fanée. Un théâtre
+ *      vide et un peu trop propre.
+ */
+
+.scene {
+  position: relative;
+  min-height: calc(100vh - 2rem);
+  overflow: hidden;
+  color: var(--character-text, var(--text));
+  font-family: var(--character-body-font, var(--font-body));
+  isolation: isolate;
+}
+
+/* ------------------------------------------------------------------ */
+/* Le proscenium                                                       */
+/* ------------------------------------------------------------------ */
+
+.proscenium {
+  position: fixed;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.proscenium span {
+  position: absolute;
+}
+
+/* Les rideaux : lourds, plissés, jamais tirés. */
+.proscenium span[data-rideau='gauche'],
+.proscenium span[data-rideau='droit'] {
+  top: 0;
+  bottom: 0;
+  width: clamp(2.5rem, 9vw, 8rem);
+  background:
+    repeating-linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.42) 0 0.9rem,
+      rgba(0, 0, 0, 0.08) 0.9rem 1.5rem,
+      rgba(0, 0, 0, 0.5) 1.5rem 2.2rem
+    ),
+    linear-gradient(90deg, #2a0d14 0%, #3d1520 55%, #1c080d 100%);
+}
+
+.proscenium span[data-rideau='gauche'] {
+  left: 0;
+  box-shadow: 1.5rem 0 3rem -1rem rgba(0, 0, 0, 0.75);
+}
+
+.proscenium span[data-rideau='droit'] {
+  right: 0;
+  transform: scaleX(-1);
+  box-shadow: 1.5rem 0 3rem -1rem rgba(0, 0, 0, 0.75);
+}
+
+/* La frise : le pan de rideau qui pend en haut de scène. */
+.proscenium span[data-rideau='frise'] {
+  top: 0;
+  right: 0;
+  left: 0;
+  height: clamp(1.75rem, 5vh, 4rem);
+  background:
+    repeating-linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.34) 0 1.1rem,
+      rgba(0, 0, 0, 0.06) 1.1rem 1.8rem
+    ),
+    linear-gradient(180deg, #2a0d14 0%, #230b11 62%, transparent 100%);
+  box-shadow: 0 1rem 2.5rem -0.75rem rgba(0, 0, 0, 0.7);
+}
+
+/* ------------------------------------------------------------------ */
+/* Le sceau — Thalie et Melpomène                                      */
+/* ------------------------------------------------------------------ */
+
+.sceau {
+  position: fixed;
+  top: 48%;
+  left: 50%;
+  z-index: -2;
+  width: min(64rem, 118vw);
+  height: auto;
+  transform: translate(-50%, -50%);
+  color: var(--character-text, var(--text));
+  opacity: 0.2;
+  pointer-events: none;
+}
+
+/*
+ * Ils s'échangent. Très lentement — 72 secondes — et par un fondu croisé
+ * si long qu'on ne peut pas attraper le moment où ça bascule. On sait
+ * juste que ce n'était pas dans ce sens tout à l'heure.
+ */
+.masqueGauche,
+.masqueDroit {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: theatre-echange 72s ease-in-out infinite;
+}
+
+.masqueDroit {
+  animation-name: theatre-echange-inverse;
+}
+
+@keyframes theatre-echange {
+  0%,
+  44% {
+    transform: translateX(0);
+  }
+  50%,
+  94% {
+    transform: translateX(240px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes theatre-echange-inverse {
+  0%,
+  44% {
+    transform: translateX(0);
+  }
+  50%,
+  94% {
+    transform: translateX(-240px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* La craquelure                                                       */
+/* ------------------------------------------------------------------ */
+
+.craquelure {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  color: var(--character-text, var(--text));
+  opacity: 0.16;
+  pointer-events: none;
+}
+
+/* ------------------------------------------------------------------ */
+/* Le nom double                                                       */
+/*                                                                     */
+/* Le fantôme porte LE MÊME texte que le nom réel : une impression mal  */
+/* calée ne peut, par construction, jamais déborder. L'alias — plus     */
+/* long — apparaît en dessous au survol, à une taille qui tient.        */
+/* ------------------------------------------------------------------ */
+
+.nomDouble {
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+}
+
+.nomVrai {
+  position: relative;
+  z-index: 1;
+}
+
+.nomFantome {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: 100%;
+  color: var(--character-accent, var(--accent));
+  opacity: 0.36;
+  transform: translate(0.055em, 0.05em);
+  transition:
+    transform 640ms cubic-bezier(0.2, 0, 0.15, 1),
+    opacity 640ms ease;
+}
+
+.nomDouble:hover .nomFantome,
+.nomDouble:focus-within .nomFantome {
+  opacity: 0.72;
+  transform: translate(0.22em, 0.17em);
+}
+
+/* L'alias : caché au repos, révélé au survol. Petit, en capitales,
+   il tient toujours sous le nom. */
+.nomAlias {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  width: max-content;
+  max-width: 88vw;
+  margin-top: 0.35em;
+  translate: -50% 0;
+  color: var(--character-accent, var(--accent));
+  font-family: var(--font-ui);
+  font-size: 0.19em;
+  font-weight: 500;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(-0.6em);
+  transition:
+    opacity 520ms ease,
+    transform 520ms cubic-bezier(0.2, 0, 0.15, 1);
+  pointer-events: none;
+}
+
+.nomDouble:hover .nomAlias,
+.nomDouble:focus-within .nomAlias {
+  opacity: 0.85;
+  transform: translateY(0);
+}
+
+/* ------------------------------------------------------------------ */
+/* Contenu — centré, soigné, symétrique                                */
+/* ------------------------------------------------------------------ */
+
+.content {
+  position: relative;
+  z-index: 4;
+  display: grid;
+  justify-items: center;
+  width: min(58rem, 100%);
+  margin: 0 auto;
+  padding: clamp(6.5rem, 13vh, 10rem) clamp(3rem, 11vw, 9rem) clamp(6rem, 12vh, 9rem);
+  gap: clamp(3rem, 6.5vw, 5.5rem);
+  text-align: center;
+}
+
+.intro {
+  max-width: 42rem;
+}
+
+.previewPill {
+  display: inline-block;
+  margin-bottom: 1.25rem;
+  color: var(--character-muted, var(--muted));
+  font-family: var(--font-ui);
+  font-size: 0.64rem;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+
+/* Cormorant : serif à fort contraste, élégante. C'est l'affiche d'une
+   pièce — et elle est peintre de génie. */
+.title {
+  margin: 0 0 clamp(1rem, 2.5vw, 1.75rem);
+  font-family: var(--character-title-font, var(--font-title));
+  font-size: clamp(2.7rem, 7vw, 5.6rem);
+  font-weight: var(--character-title-weight, 400);
+  letter-spacing: var(--character-title-spacing, 0.03em);
+  line-height: 1.06;
+  text-wrap: balance;
+}
+
+.role {
+  max-width: 34ch;
+  margin: 0 auto;
+  color: var(--character-accent, var(--accent));
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: var(--character-label-spacing, 0.24em);
+  line-height: 1.9;
+  text-transform: uppercase;
+}
+
+.bloc {
+  width: 100%;
+  max-width: 44rem;
+  padding: clamp(1.5rem, 3.5vw, 2.5rem);
+  /* Un cadre de scène doré, fin et symétrique. */
+  border: 1px solid color-mix(in srgb, var(--character-accent, var(--accent)) 26%, transparent);
+  background: color-mix(in srgb, var(--character-bg, #150a0e) 82%, transparent);
+  backdrop-filter: blur(7px);
+}
+
+.summary {
+  margin: 0;
+  color: var(--character-muted, var(--muted));
+  font-size: clamp(1rem, 1.9vw, 1.14rem);
+  line-height: var(--character-body-line-height, 1.9);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem 1.3rem;
+  margin: clamp(1.4rem, 3vw, 2rem) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tags li {
+  color: var(--character-muted, var(--muted));
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  opacity: 0.68;
+}
+
+.sectionTitle {
+  margin: 0 0 clamp(1.4rem, 3vw, 2.1rem);
+  color: var(--character-accent, var(--accent));
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+
+.identityList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  gap: clamp(1.4rem, 3vw, 2.1rem);
+  margin: 0;
+}
+
+.magicList {
+  display: grid;
+  gap: clamp(1.4rem, 3vw, 2rem);
+  margin: 0;
+}
+
+.identityItem,
+.magicItem {
+  min-width: 0;
+}
+
+.identityItem dt,
+.magicItem dt {
+  margin: 0 0 0.55rem;
+  color: var(--character-muted, var(--muted));
+  font-family: var(--font-ui);
+  font-size: 0.66rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.72;
+}
+
+.identityItem dd,
+.magicItem dd {
+  margin: 0;
+  color: var(--character-text, var(--text));
+  font-size: clamp(0.95rem, 1.5vw, 1.05rem);
+  line-height: var(--character-body-line-height, 1.9);
+  overflow-wrap: break-word;
+}
+
+/* Aucune transition sur la valeur : un mensonge ne s'annonce pas. */
+.valeur {
+  display: inline;
+}
+
+.magicItem p {
+  margin: 0;
+}
+
+.magicItem ul {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.magicItem li {
+  position: relative;
+  padding-left: 1.3rem;
+  text-align: left;
+}
+
+.magicItem li::before {
+  position: absolute;
+  left: 0;
+  color: var(--character-accent, var(--accent));
+  content: '·';
+}
+
+.narrative {
+  max-width: 40rem;
+  text-align: left;
+}
+
+.exit {
+  padding-top: 0.5rem;
+}
+
+.backLink {
+  color: var(--character-muted, var(--muted));
+  font-family: var(--font-ui);
+  font-size: 0.74rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  transition: color 320ms ease;
+}
+
+.backLink:hover,
+.backLink:focus-visible {
+  color: var(--character-accent, var(--accent));
+}
+
+.backLink:focus-visible {
+  outline: 2px solid var(--character-accent, var(--accent));
+  outline-offset: 6px;
+}
+
+/* ------------------------------------------------------------------ */
+/* Responsive                                                          */
+/* ------------------------------------------------------------------ */
+
+@media (max-width: 820px) {
+  .proscenium span[data-rideau='gauche'],
+  .proscenium span[data-rideau='droit'] {
+    width: clamp(1.1rem, 4vw, 2.25rem);
+  }
+
+  .content {
+    padding-left: clamp(2rem, 8vw, 3.5rem);
+    padding-right: clamp(2rem, 8vw, 3.5rem);
+    gap: clamp(2.25rem, 6vw, 3.5rem);
+  }
+
+  .identityList {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Apparition au défilement — LE RIDEAU SE LÈVE                        */
+/*                                                                     */
+/* Le bloc se révèle de bas en haut par clip-path, franchement, comme   */
+/* un rideau qui monte. Aucun filter animé.                            */
+/* ------------------------------------------------------------------ */
+
+.content [data-reveal] {
+  clip-path: inset(0 0 100% 0);
+  opacity: 0;
+  transition:
+    clip-path 1s cubic-bezier(0.22, 0.61, 0.3, 1),
+    opacity 0.5s ease;
+}
+
+.content [data-reveal][data-revealed] {
+  clip-path: inset(0 0 0 0);
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .content [data-reveal] {
+    clip-path: none;
+    opacity: 1;
+    transition: none;
+  }
+
+  .masqueGauche,
+  .masqueDroit {
+    animation: none;
+  }
+
+  .nomFantome,
+  .nomAlias {
+    transition: none;
+  }
+}
