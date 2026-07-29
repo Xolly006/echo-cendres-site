@@ -192,3 +192,18 @@ par personnage.
   empilés, jamais un calque masquant l'autre.
 * three.js est écarté : bibliothèque 3D pour un besoin 2D, et charge GPU
   supplémentaire sur un problème qui est déjà un problème de performance.
+
+## Varros, Soryn et sûreté des apparitions (2026-07-29)
+
+* LE CONTENU N'EST JAMAIS MASQUÉ PAR DÉFAUT. Le HTML servi est
+  entièrement lisible ; le script masque avant le premier rendu puis
+  révèle, avec révélation immédiate de ce qui est déjà à l'écran et un
+  filet de sûreté à 3 secondes. Sans JavaScript, la page reste complète.
+* Les images vivent dans `public/personnages/<slug>/`, en WebP sous
+  300 Ko, champ `alt` obligatoire.
+* Les illusions changent la FORMULATION, jamais le fait énoncé : aucun
+  lore n'est inventé par un effet.
+* La police de titre est choisie par composition, jamais héritée.
+* Une fiche est d'abord un répertoire : capacités, limites, réseaux et
+  contres priment sur les effets.
+* three.js écarté : tous les effets restent en SVG, canvas 2D et CSS.

@@ -21,6 +21,14 @@ Fait :
    Ibuki ajouté au récit et aux `links` d'Ysolde ; `RevealAuDefilement`
    décliné par composition ; `rafPartage`, boucle d'animation unique pour
    la page.
+6. **Varros en composition "titan"** — page qui penche à gauche, bras
+   maudit qui pulse, impact aléatoire toutes les 11-26s, runes Elder
+   Futhark, chaînes brisées en diagonale ; système d'images (`images`,
+   voile amortisseur, bascule champ de blé / cratère au défilement).
+7. **Soryn en composition "theatre"** — proscenium fixe, nom double décalé
+   avec alias révélé au survol, masques de Thalie et Melpomène qui
+   s'échangent, craquelure liée au défilement ; champ `illusions`
+   (formulations alternatives hors viewport).
 
 Dette technique notée :
 
@@ -34,8 +42,8 @@ Dette technique notée :
 
 Prochaine étape :
 
-6. **Personnage suivant** — choisir le prochain personnage majeur à
-   porter en composition dédiée, après validation du créateur.
+8. **Aurélia et Amara** — seuls personnages majeurs restants à porter en
+   composition dédiée, après validation du créateur.
 
 ## Backlog long terme
 

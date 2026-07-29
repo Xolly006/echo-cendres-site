@@ -28,18 +28,35 @@ de données interchangeable derrière une couleur différente.
   italique comprise), Space Grotesk (interface), chargées via `next/font/google`.
 - Moteur de composition (`src/components/personnages/compositions/`), axe
   séparé de `themeKey` : le thème porte la palette et l'atmosphère, la
-  composition porte la mise en page. Cinq compositions existent —
+  composition porte la mise en page. Sept compositions existent —
   `standard` (rendu historique), `fragment` (Kael l'Éclipsé), `retable`
-  (Elias), `cage` (Métatron) et `canopee` (Ysolde). Résolues par le champ
-  `composition` de `data.json`, repli sur `standard` si absent ou inconnu.
+  (Elias), `cage` (Métatron), `canopee` (Ysolde), `titan` (Varros) et
+  `theatre` (Soryn). Résolues par le champ `composition` de `data.json`,
+  repli sur `standard` si absent ou inconnu.
 - Composition `canopee` (Ysolde) : lianes en croissance procédurale sur
   canvas s'enroulant autour du nom (deux plans avant/arrière), pluie,
   papillons, mousse qui reprend visuellement les sections déjà lues,
   pousse finale.
 - Ibuki ajouté au récit et aux `links` d'Ysolde.
+- Composition `titan` (Varros) : page qui penche à gauche, bras maudit qui
+  pulse, impact aléatoire toutes les 11-26s, runes Elder Futhark, chaînes
+  brisées en diagonale.
+- Composition `theatre` (Soryn) : proscenium fixe, nom double décalé avec
+  alias révélé au survol, masques de Thalie et Melpomène qui s'échangent,
+  craquelure liée au défilement.
+- Système d'images : champ `images` optionnel dans `data.json`,
+  `next/image` en `fill`, voile amortisseur, bascule entre deux images au
+  défilement (Varros : le champ de blé cède au cratère). Les images
+  vivent dans `public/personnages/<slug>/`.
+- Champ `illusions` : formulations alternatives qui changent hors du
+  viewport (Soryn, « le doute comme arme ») — la formulation varie, jamais
+  le fait énoncé.
 - `RevealAuDefilement` (`src/components/personnages/effects/`) : apparition
   au défilement, déclinée par composition (pousse / se condense / s'allume
-  / se pose selon le personnage).
+  / se pose / tombe / rideau qui se lève selon le personnage). Le contenu
+  n'est jamais masqué par défaut : le HTML servi est lisible, le masquage
+  n'intervient qu'au premier rendu client, avec révélation immédiate de ce
+  qui est déjà à l'écran et un filet de sûreté à 3 secondes.
 - `rafPartage` : une seule boucle `requestAnimationFrame` partagée pour
   toute la page, utilisée par les effets de la composition `canopee`.
 - Champ `identity.unrecorded` : liste de champs volontairement non
