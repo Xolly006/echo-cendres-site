@@ -1,0 +1,54 @@
+/*
+ * Le fond imagé.
+ *
+ * Il est fixe et derrière tout : il ne défile pas, il ne capte jamais le
+ * pointeur, et il reste sous le sceau du personnage comme sous le contenu.
+ */
+
+.fond {
+  position: fixed;
+  inset: 0;
+  z-index: -3;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.calque {
+  position: absolute;
+  inset: 0;
+  /* Désaturation : une image trop colorée se dispute la page avec le
+     thème du personnage. Elle apporte de la matière, pas une palette. */
+  filter: saturate(0.72) contrast(1.08);
+  transition: opacity 220ms linear;
+}
+
+/*
+ * Le voile. Sans lui, aucun texte n'est lisible sur une image de fond.
+ * Plus dense en bas, là où le contenu est le plus dense, et teinté par le
+ * fond du personnage pour que l'image appartienne à SON monde.
+ */
+.voile {
+  position: absolute;
+  inset: 0;
+  /*
+   * Le voile était trop dense : trois amortissements empilés (intensité
+   * basse + désaturation forte + voile épais) noyaient complètement
+   * l'image. Il est maintenant LÉGER EN HAUT — là où il n'y a que le
+   * titre, donc où l'image peut respirer — et il ne redevient dense
+   * qu'au niveau des blocs de texte.
+   */
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--character-bg, #07070b) 22%, transparent) 0%,
+      color-mix(in srgb, var(--character-bg, #07070b) 40%, transparent) 32%,
+      color-mix(in srgb, var(--character-bg, #07070b) 78%, transparent) 62%,
+      color-mix(in srgb, var(--character-bg, #07070b) 92%, transparent) 100%
+    );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .calque {
+    transition: none;
+  }
+}

@@ -1,7 +1,8 @@
 {
   "nom": "Varros le Fléau",
   "publicationStatus": "draft",
-  "themeKey": "default",
+  "themeKey": "fer-et-terre",
+  "composition": "titan",
   "resumeCourt": "Ancien fermier géant et pacifiste, Varros fut forcé de tuer dans des arènes pour sauver une famille déjà morte. Il rejoignit l’Arquet pour éteindre sa conscience, mais la malédiction décupla sa force sans faire taire son esprit : il reste prisonnier d’un corps de titan berserker qui tue pendant que l’homme doux en lui supplie que cela s’arrête.",
   "role": "Héritier de l’Arquet — Commandant des Marteaux de l’Aube",
   "tags": [
@@ -26,7 +27,8 @@
     "nature": "Humain Marqué — Héritier de l’Arquet",
     "origin": "Ancien fermier géant, origine géographique à préciser",
     "status": "Actif — Héritier de l’Arquet",
-    "era": "Présent narratif"
+    "era": "Présent narratif",
+    "appearance": "Deux mètres vingt. Une montagne de muscles tristes. Sa peau, marquée par les runes de l’Arquet, fume sous le froid. Son bras gauche pulse d’une lumière rouge et cherche en permanence quelque chose à détruire."
   },
   "magic": {
     "concept": "Violence Pure / Malédiction berserker de l’Arquet",
@@ -45,5 +47,17 @@
       "Son bras gauche peut saigner face à certaines failles biologiques",
       "Sa force n’est pas absolue face à l’adaptation prolongée"
     ]
+  },
+  "images": {
+    "fond": {
+      "src": "/personnages/varros-fleau/champ.webp",
+      "alt": "Champ de blé couché sous un ciel d’orage, outils agricoles abandonnés, une trouée de lumière basse à l’horizon",
+      "ancrage": "center 60%"
+    },
+    "fondSecondaire": {
+      "src": "/personnages/varros-fleau/cratere.webp",
+      "alt": "Vaste cratère creusé dans un champ de neige, roches noires soufflées, ciel bas couleur fer",
+      "ancrage": "center"
+    }
   }
 }

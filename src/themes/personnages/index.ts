@@ -4,6 +4,7 @@ import { defaultPersonnageTheme } from './default';
 import { feuTimideTheme } from './feu-timide';
 import { lumiereConstruiteTheme } from './lumiere-construite';
 import { cageDoreeTheme } from './cage-doree';
+import { ferEtTerreTheme } from './fer-et-terre';
 import { masqueVoileTheme } from './masque-voile';
 import { orMauditTheme } from './or-maudit';
 import { videOppressantTheme } from './vide-oppressant';
@@ -15,6 +16,7 @@ const personnageThemes: Record<string, PersonnageTheme> = {
   [feuTimideTheme.key]: feuTimideTheme,
   [lumiereConstruiteTheme.key]: lumiereConstruiteTheme,
   [cageDoreeTheme.key]: cageDoreeTheme,
+  [ferEtTerreTheme.key]: ferEtTerreTheme,
   [masqueVoileTheme.key]: masqueVoileTheme,
   [orMauditTheme.key]: orMauditTheme,
   [videOppressantTheme.key]: videOppressantTheme,

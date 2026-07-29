@@ -1,3 +1,10 @@
+export type PersonnageImage = {
+  src: string;
+  alt: string;
+  /** object-position CSS, par défaut "center". */
+  ancrage?: string;
+};
+
 export type Personnage = {
   slug: string;
   nom: string;
@@ -13,6 +20,19 @@ export type Personnage = {
    * Seules les compositions qui savent quoi en faire les affichent.
    */
   uncertainties?: string[];
+  /**
+   * Images de fond de la fiche. Optionnelles : une fiche sans image
+   * s'affiche exactement comme avant.
+   *
+   * `fond` est l'image d'accueil, `fondSecondaire` celle vers laquelle la
+   * page bascule au fil du défilement. Deux images permettent à une page
+   * de raconter un trajet — chez Varros, le champ de blé de l'homme
+   * qu'il était cède au cratère de ce qu'il est devenu.
+   */
+  images?: {
+    fond?: PersonnageImage;
+    fondSecondaire?: PersonnageImage;
+  };
   /**
    * Possession par une entité dont l'hôte n'est pas le propriétaire.
    *

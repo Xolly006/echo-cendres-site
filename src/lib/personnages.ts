@@ -88,6 +88,37 @@ function readOptionalPossession(value: unknown, fileName: string): Personnage['p
   };
 }
 
+function readOptionalImage(
+  value: unknown,
+  champ: string,
+  fileName: string,
+): { src: string; alt: string; ancrage?: string } | undefined {
+  if (value === undefined || value === null) return undefined;
+  if (typeof value !== 'object' || Array.isArray(value)) {
+    throw new Error(`Champ "${champ}" invalide dans ${fileName}.`);
+  }
+  const raw = value as Record<string, unknown>;
+  const src = readOptionalString(raw.src, `${champ}.src`, fileName);
+  const alt = readOptionalString(raw.alt, `${champ}.alt`, fileName);
+  if (!src) throw new Error(`Champ "${champ}.src" requis dans ${fileName}.`);
+  // L'alternative textuelle n'est pas optionnelle : une image de fond
+  // décorative doit au minimum déclarer ce qu'elle montre.
+  if (!alt) throw new Error(`Champ "${champ}.alt" requis dans ${fileName}.`);
+  return { src, alt, ancrage: readOptionalString(raw.ancrage, `${champ}.ancrage`, fileName) };
+}
+
+function readOptionalImages(value: unknown, fileName: string): Personnage['images'] {
+  if (value === undefined || value === null) return undefined;
+  if (typeof value !== 'object' || Array.isArray(value)) {
+    throw new Error(`Champ "images" invalide dans ${fileName}.`);
+  }
+  const raw = value as Record<string, unknown>;
+  return {
+    fond: readOptionalImage(raw.fond, 'images.fond', fileName),
+    fondSecondaire: readOptionalImage(raw.fondSecondaire, 'images.fondSecondaire', fileName),
+  };
+}
+
 function readOptionalStringList(value: unknown, fieldName: string, fileName: string): string[] | undefined {
   if (value === undefined) return undefined;
   if (!Array.isArray(value) || value.some((entry) => typeof entry !== 'string')) {
@@ -177,6 +208,7 @@ function parsePersonnage(rawValue: unknown, fileName: string): RawPersonnage {
     themeKey: readOptionalString(rawValue.themeKey, 'themeKey', fileName),
     composition: readOptionalString(rawValue.composition, 'composition', fileName),
     uncertainties: readOptionalStringList(rawValue.uncertainties, 'uncertainties', fileName),
+    images: readOptionalImages(rawValue.images, fileName),
     possession: readOptionalPossession(rawValue.possession, fileName),
     publicationStatus: readPublicationStatus(rawValue.publicationStatus, fileName),
     identity: readOptionalIdentity(rawValue.identity, fileName),

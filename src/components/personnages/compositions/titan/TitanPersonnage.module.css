@@ -1,0 +1,451 @@
+/*
+ * Composition "titan" — Varros le Fléau.
+ *
+ * Trois règles :
+ *   1. TOUT PÈSE. Marges épaisses, interlignage large, blocs massifs.
+ *      Rien n'est agile. Aucune transition rapide.
+ *   2. L'ASYMÉTRIE VERS LA GAUCHE. Le bras maudit est à gauche : la page
+ *      est déséquilibrée de ce côté et ne se rééquilibre jamais.
+ *   3. IL EST MATIÈRE, PAS ABSENCE. Pas de noir pur — de la terre, du
+ *      fer, du rouge de rune éteint.
+ */
+
+.scene {
+  position: relative;
+  min-height: calc(100vh - 2rem);
+  overflow: hidden;
+  color: var(--character-text, var(--text));
+  font-family: var(--character-body-font, var(--font-body));
+  isolation: isolate;
+}
+
+/* ------------------------------------------------------------------ */
+/* Le sceau — les chaînes brisées                                      */
+/* ------------------------------------------------------------------ */
+
+/*
+ * La chaîne court en diagonale d'un bord à l'autre du cadre. Centrée sur
+ * le viewport, elle paraissait décalée par rapport à la colonne de texte
+ * — qui, elle, penche volontairement à gauche. En pleine diagonale, la
+ * question du centrage ne se pose plus.
+ */
+.sceau {
+  position: fixed;
+  inset: -10vh -6vw;
+  z-index: -2;
+  width: auto;
+  height: auto;
+  color: var(--character-accent, var(--accent));
+  opacity: 0.17;
+  pointer-events: none;
+}
+
+/* ------------------------------------------------------------------ */
+/* Le bras gauche                                                      */
+/* ------------------------------------------------------------------ */
+
+.bras {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  width: clamp(1.4rem, 3vw, 2rem);
+  pointer-events: none;
+}
+
+.brasVeine {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: clamp(0.32rem, 0.8vw, 0.5rem);
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    color-mix(in srgb, var(--character-accent, #9e4436) 55%, transparent) 18%,
+    color-mix(in srgb, var(--character-accent, #9e4436) 80%, transparent) 50%,
+    color-mix(in srgb, var(--character-accent, #9e4436) 55%, transparent) 82%,
+    transparent 100%
+  );
+  /* Un coeur au repos : lent, régulier, jamais paisible. */
+  animation: titan-pouls 3.4s ease-in-out infinite;
+}
+
+/* Les runes montent le long du bras. Elles ne réagissent pas au lecteur :
+   elles sont là parce que la Marque est là. */
+/* Les runes gravées le long du bras. Elles défilent lentement vers le
+   haut : la Marque monte, elle ne s'arrête jamais. */
+.brasRunes {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  color: color-mix(in srgb, var(--character-accent, #9e4436) 92%, transparent);
+  opacity: 0.55;
+}
+
+.runes {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: clamp(1.05rem, 2.4vw, 1.5rem);
+  height: 200%;
+  transform: translateX(-50%);
+  animation: titan-runes 46s linear infinite;
+}
+
+@keyframes titan-pouls {
+  0%,
+  100% {
+    opacity: 0.5;
+    filter: none;
+  }
+  46% {
+    opacity: 0.95;
+  }
+  62% {
+    opacity: 0.62;
+  }
+}
+
+@keyframes titan-runes {
+  from {
+    transform: translate(-50%, 0);
+  }
+  to {
+    transform: translate(-50%, -50%);
+  }
+}
+
+/* L'impact : la bande s'embrase, brièvement. */
+.bras[data-impact] .brasVeine {
+  opacity: 1;
+  box-shadow: 0 0 3rem 0.6rem color-mix(in srgb, var(--character-accent, #9e4436) 45%, transparent);
+  animation: none;
+}
+
+.bras[data-impact] .brasRunes {
+  opacity: 0.9;
+}
+
+/*
+ * Le tressaut. Un coup sec, une fois, sans easing d'arrivée : ce n'est
+ * pas un mouvement, c'est un choc. Piloté depuis <html> pour que rien
+ * dans le contenu n'ait à être recalculé.
+ */
+:global(html[data-impact]) .content {
+  animation: titan-choc 420ms cubic-bezier(0.2, 0, 0.1, 1);
+}
+
+@keyframes titan-choc {
+  0% {
+    transform: translate(0, 0);
+  }
+  12% {
+    transform: translate(-5px, 3px);
+  }
+  26% {
+    transform: translate(3px, -2px);
+  }
+  44% {
+    transform: translate(-2px, 1px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* La buée — la chaleur d'un corps qui s'échappe                       */
+/* ------------------------------------------------------------------ */
+
+.buee {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.buee span {
+  position: absolute;
+  inset: -30% -10%;
+  background:
+    radial-gradient(28% 22% at 12% 78%, rgba(214, 200, 184, 0.05), transparent 70%),
+    radial-gradient(24% 18% at 86% 62%, rgba(214, 200, 184, 0.04), transparent 72%);
+  animation: titan-buee 46s ease-in-out infinite;
+}
+
+.buee span[data-nappe='2'] {
+  animation-duration: 67s;
+  animation-direction: reverse;
+  opacity: 0.7;
+}
+
+@keyframes titan-buee {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateY(-6%);
+    opacity: 1;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Contenu — lourd, décalé à gauche                                    */
+/* ------------------------------------------------------------------ */
+
+.content {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  width: min(62rem, 100%);
+  /* Jamais centré : la page penche du côté du bras. */
+  margin: 0 auto 0 clamp(1.5rem, 12vw, 11rem);
+  padding: clamp(6.5rem, 13vh, 10rem) clamp(1.5rem, 5vw, 4rem) clamp(6rem, 12vh, 9rem);
+  gap: clamp(3.5rem, 7vw, 6rem);
+}
+
+.intro {
+  max-width: 44rem;
+}
+
+.previewPill {
+  display: inline-block;
+  margin-bottom: 1.25rem;
+  color: var(--character-muted, var(--muted));
+  font-family: var(--font-ui);
+  font-size: 0.64rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+.title {
+  margin: 0 0 clamp(1rem, 2.5vw, 1.6rem);
+  /* Cormorant est une serif élégante à fort contraste : elle dit la
+     finesse, pas la masse. Pour Varros, la grotesque du site — plus
+     large, plus dense, industrielle. */
+  font-family: var(--font-ui);
+  font-size: clamp(2.6rem, 6.8vw, 5.2rem);
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  line-height: 1.02;
+  text-wrap: balance;
+}
+
+.role {
+  margin: 0;
+  color: var(--character-accent, var(--accent));
+  font-family: var(--font-ui);
+  font-size: 0.74rem;
+  font-weight: 500;
+  letter-spacing: var(--character-label-spacing, 0.22em);
+  text-transform: uppercase;
+}
+
+/* Des blocs massifs, épais, posés. */
+.bloc {
+  min-width: 0;
+  max-width: 46rem;
+  padding: clamp(1.5rem, 3.5vw, 2.5rem) clamp(1.5rem, 3.5vw, 2.75rem);
+  border-left: 3px solid color-mix(in srgb, var(--character-accent, var(--accent)) 40%, transparent);
+  /* Le bloc porte lui-même sa lisibilité : fond dense et flou d'arrière-
+     plan. L'image reste visible tout autour au lieu d'être noyée. */
+  background: color-mix(in srgb, var(--character-bg, #100c09) 82%, transparent);
+  backdrop-filter: blur(8px);
+}
+
+.summary {
+  margin: 0;
+  color: var(--character-muted, var(--muted));
+  font-size: clamp(1.02rem, 1.9vw, 1.16rem);
+  line-height: var(--character-body-line-height, 1.95);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.4rem;
+  margin: clamp(1.5rem, 3vw, 2.25rem) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tags li {
+  color: var(--character-muted, var(--muted));
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  opacity: 0.68;
+}
+
+.sectionTitle {
+  margin: 0 0 clamp(1.5rem, 3vw, 2.25rem);
+  color: var(--character-accent, var(--accent));
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+}
+
+.identityList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  gap: clamp(1.5rem, 3vw, 2.25rem);
+  margin: 0;
+}
+
+.magicList {
+  display: grid;
+  gap: clamp(1.5rem, 3vw, 2.1rem);
+  margin: 0;
+}
+
+.identityItem,
+.magicItem {
+  min-width: 0;
+}
+
+.identityItem dt,
+.magicItem dt {
+  margin: 0 0 0.55rem;
+  color: var(--character-muted, var(--muted));
+  font-family: var(--font-ui);
+  font-size: 0.66rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+
+.identityItem dd,
+.magicItem dd {
+  margin: 0;
+  color: var(--character-text, var(--text));
+  font-size: clamp(0.96rem, 1.5vw, 1.06rem);
+  line-height: var(--character-body-line-height, 1.95);
+  overflow-wrap: break-word;
+}
+
+.magicItem p {
+  margin: 0;
+}
+
+.magicItem ul {
+  display: grid;
+  gap: 0.55rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.magicItem li {
+  position: relative;
+  padding-left: 1.4rem;
+}
+
+.magicItem li::before {
+  position: absolute;
+  left: 0;
+  color: var(--character-accent, var(--accent));
+  content: '—';
+  opacity: 0.6;
+}
+
+.narrative {
+  max-width: 42rem;
+}
+
+.exit {
+  padding-top: 0.5rem;
+}
+
+.backLink {
+  color: var(--character-muted, var(--muted));
+  font-family: var(--font-ui);
+  font-size: 0.74rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  /* Lent : rien n'est vif chez lui. */
+  transition: color 420ms ease;
+}
+
+.backLink:hover,
+.backLink:focus-visible {
+  color: var(--character-accent, var(--accent));
+}
+
+.backLink:focus-visible {
+  outline: 2px solid var(--character-accent, var(--accent));
+  outline-offset: 6px;
+}
+
+/* ------------------------------------------------------------------ */
+/* Responsive                                                          */
+/* ------------------------------------------------------------------ */
+
+@media (max-width: 900px) {
+  .content {
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
+    padding-left: clamp(1.5rem, 6vw, 2.5rem);
+    gap: clamp(2.5rem, 6vw, 4rem);
+  }
+
+  .bloc {
+    max-width: none;
+  }
+
+  .identityList {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Apparition au défilement — ÇA TOMBE                                 */
+/*                                                                     */
+/* Le bloc arrive d'en haut avec du poids et s'arrête net, sans rebond. */
+/* Quelque chose de lourd qu'on pose.                                   */
+/*                                                                     */
+/* Aucun filter animé : seuls opacity et transform sont confiés au      */
+/* compositeur.                                                        */
+/* ------------------------------------------------------------------ */
+
+.content [data-reveal] {
+  opacity: 0;
+  transform: translateY(-26px);
+  transition:
+    opacity 0.62s cubic-bezier(0.5, 0, 0.75, 0),
+    transform 0.62s cubic-bezier(0.5, 0, 0.75, 0);
+}
+
+.content [data-reveal][data-revealed] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .content [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .brasVeine,
+  .runes,
+  .buee span {
+    animation: none;
+  }
+
+  :global(html[data-impact]) .content {
+    animation: none;
+  }
+}
