@@ -207,66 +207,103 @@
 }
 
 /*
- * LE VELOURS.
+ * LA VITRINE.
  *
- * Deux essais ratés avant celui-ci. Les boîtes bordées : trois
- * compositions avaient convergé vers le même rectangle. Le halo radial
- * seul : trop faible, et calé sur le bloc entier alors que le texte est
- * une colonne étroite — il s'étalait dans le vide et ratait ce qu'il
- * devait couvrir.
+ * Trois essais avant celui-ci. La boîte bordée : trois compositions
+ * avaient convergé vers le même rectangle. Le halo radial seul : trop
+ * faible, et calé sur le bloc alors que le texte est une colonne étroite.
+ * La bande de velours pleine largeur : elle ne faisait qu'assombrir par
+ * endroits, elle ne disait rien.
  *
- * Une vitrine de joaillier n'est ni une caisse ni du verre transparent
- * posé sur du décor : c'est du VELOURS NOIR, uni et mat. C'est le fond
- * qui fait ressortir la pièce.
+ * Ce qu'il faut pour elle est un PRÉSENTOIR : deux montants d'or fins
+ * encadrent le texte à gauche et à droite, et le cadre reste OUVERT en
+ * haut et en bas. Ça encadre sans enfermer — exactement l'inverse d'une
+ * caisse, et personne d'autre sur le site n'a ça.
  *
- * Donc une bande sombre pleine largeur derrière chaque section — aucune
- * bordure, aucun coin, aucun contour. Elle se fond en haut et en bas, et
- * l'image reste visible ENTRE les bandes.
+ * Le fond sombre reste, mais resserré sur la colonne de texte : c'est lui
+ * qui garantit la lisibilité sur l'image.
  */
 .bloc {
   position: relative;
   width: 100%;
   max-width: 42rem;
-  padding: clamp(1.5rem, 3.5vw, 2.5rem) clamp(1.5rem, 4vw, 3rem);
+  padding: clamp(1.75rem, 4vw, 2.75rem) clamp(1.75rem, 4.5vw, 3.25rem);
 }
 
+/* Le fond du présentoir : sombre, sans bord, resserré sur le texte. */
 .bloc::before {
   position: absolute;
-  /* Pleine largeur du viewport : une bande, pas une boîte. */
-  top: 0;
-  bottom: 0;
-  left: 50%;
+  inset: 0;
   z-index: -1;
-  width: 100vw;
-  translate: -50% 0;
   content: '';
   background: linear-gradient(
     180deg,
     transparent 0%,
-    color-mix(in srgb, var(--character-bg, #0c0906) 88%, transparent) 12%,
-    color-mix(in srgb, var(--character-bg, #0c0906) 93%, transparent) 50%,
-    color-mix(in srgb, var(--character-bg, #0c0906) 88%, transparent) 88%,
+    color-mix(in srgb, var(--character-bg, #0c0906) 90%, transparent) 9%,
+    color-mix(in srgb, var(--character-bg, #0c0906) 94%, transparent) 50%,
+    color-mix(in srgb, var(--character-bg, #0c0906) 90%, transparent) 91%,
     transparent 100%
   );
   pointer-events: none;
 }
 
-/* Le filet d'or entre deux sections : plus large et plus net qu'avant,
-   c'est la seule ligne de la page. */
-.bloc + .bloc::after {
+/* Les deux montants : ils s'arrêtent avant le haut et avant le bas. */
+.bloc::after {
   position: absolute;
-  top: calc(-1 * clamp(1.5rem, 3.5vw, 3rem));
-  left: 50%;
-  width: clamp(5rem, 14vw, 11rem);
-  height: 1px;
-  translate: -50% 0;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    color-mix(in srgb, var(--character-accent, var(--accent)) 75%, transparent) 50%,
-    transparent
-  );
+  top: clamp(0.75rem, 2vw, 1.5rem);
+  right: 0;
+  bottom: clamp(0.75rem, 2vw, 1.5rem);
+  left: 0;
   content: '';
+  border-right: 1px solid color-mix(in srgb, var(--character-accent, var(--accent)) 42%, transparent);
+  border-left: 1px solid color-mix(in srgb, var(--character-accent, var(--accent)) 42%, transparent);
+  /* Les montants s'estompent vers leurs extrémités : le cadre est ouvert. */
+  mask-image: linear-gradient(180deg, transparent, #000 18%, #000 82%, transparent);
+  pointer-events: none;
+}
+
+/* ------------------------------------------------------------------ */
+/* Texte courant — RÈGLES RESTAURÉES                                   */
+/*                                                                     */
+/* Un précédent script avait supprimé .summary, .tags, .tags li et      */
+/* .sectionTitle en insérant le fond : d'où les tags en liste à puces   */
+/* verticale et les titres de section sans style.                       */
+/* ------------------------------------------------------------------ */
+
+.summary {
+  margin: 0;
+  color: var(--character-muted, var(--muted));
+  font-size: clamp(1rem, 1.9vw, 1.12rem);
+  line-height: var(--character-body-line-height, 1.95);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.55rem 1.4rem;
+  margin: clamp(1.6rem, 3.5vw, 2.25rem) 0 0;
+  padding: 0;
+  /* Sans cette ligne, chaque tag devient une puce sur sa propre ligne. */
+  list-style: none;
+}
+
+.tags li {
+  color: var(--character-muted, var(--muted));
+  font-family: var(--font-ui);
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  opacity: 0.7;
+}
+
+.sectionTitle {
+  margin: 0 0 clamp(1.6rem, 3vw, 2.25rem);
+  color: var(--character-accent, var(--accent));
+  font-family: var(--font-ui);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
 }
 
 /* Chaque champ est une pièce présentée seule : une par ligne, très
