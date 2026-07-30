@@ -207,3 +207,15 @@ par personnage.
 * Une fiche est d'abord un répertoire : capacités, limites, réseaux et
   contres priment sur les effets.
 * three.js écarté : tous les effets restent en SVG, canvas 2D et CSS.
+
+## Aurélia (2026-07-29)
+
+* Un effet déclenché par le curseur doit exiger un GESTE, pas un passage :
+  la proximité au pointeur dorait la page pendant la simple lecture,
+  l'effet se battait contre le texte. Il faut poser le curseur sur
+  l'élément.
+* Aucun conteneur rectangulaire fermé : trois compositions avaient
+  convergé vers le même motif de boîte à cause du système d'images.
+  Encadrer sans enfermer.
+* Un effet qui engage le lecteur doit être irréversible pour avoir du
+  poids (transmutation d'Aurélia).

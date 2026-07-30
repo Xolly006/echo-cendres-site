@@ -29,6 +29,12 @@ Fait :
    avec alias révélé au survol, masques de Thalie et Melpomène qui
    s'échangent, craquelure liée au défilement ; champ `illusions`
    (formulations alternatives hors viewport).
+8. **Aurélia en composition "orfevrerie"** — présentoir à deux montants
+   d'or, transmutation au contact réel du curseur et définitive, compteur
+   pondéré par la longueur du texte, cage de verre, Cercle d'Équilibre
+   or/argent, Flux d'Argent au défilement, apparitions hésitantes ; récit
+   enrichi (cage de verre, Ancre comme restriction, Khemetra et le fleuve
+   pris en otage) ; images (main d'or en haut, cage brisée plus bas).
 
 Dette technique notée :
 
@@ -39,11 +45,14 @@ Dette technique notée :
   nombre de lignes de contenu change.
 - Les récits des personnages sont trop courts : format résumé plutôt que
   scènes développées.
+- Boîtes rectangulaires fermées à retirer sur Varros et Soryn (motif de
+  conteneur convergent, voir docs/DECISIONS.md).
+- Navigation interne des fiches à ajouter (sommaire de lecture).
 
 Prochaine étape :
 
-8. **Aurélia et Amara** — seuls personnages majeurs restants à porter en
-   composition dédiée, après validation du créateur.
+9. **Amara** — dernier personnage majeur restant à porter en composition
+   dédiée, après validation du créateur.
 
 ## Backlog long terme
 

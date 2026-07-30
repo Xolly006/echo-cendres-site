@@ -28,11 +28,11 @@ de données interchangeable derrière une couleur différente.
   italique comprise), Space Grotesk (interface), chargées via `next/font/google`.
 - Moteur de composition (`src/components/personnages/compositions/`), axe
   séparé de `themeKey` : le thème porte la palette et l'atmosphère, la
-  composition porte la mise en page. Sept compositions existent —
+  composition porte la mise en page. Huit compositions existent —
   `standard` (rendu historique), `fragment` (Kael l'Éclipsé), `retable`
-  (Elias), `cage` (Métatron), `canopee` (Ysolde), `titan` (Varros) et
-  `theatre` (Soryn). Résolues par le champ `composition` de `data.json`,
-  repli sur `standard` si absent ou inconnu.
+  (Elias), `cage` (Métatron), `canopee` (Ysolde), `titan` (Varros),
+  `theatre` (Soryn) et `orfevrerie` (Aurélia). Résolues par le champ
+  `composition` de `data.json`, repli sur `standard` si absent ou inconnu.
 - Composition `canopee` (Ysolde) : lianes en croissance procédurale sur
   canvas s'enroulant autour du nom (deux plans avant/arrière), pluie,
   papillons, mousse qui reprend visuellement les sections déjà lues,
@@ -44,10 +44,18 @@ de données interchangeable derrière une couleur différente.
 - Composition `theatre` (Soryn) : proscenium fixe, nom double décalé avec
   alias révélé au survol, masques de Thalie et Melpomène qui s'échangent,
   craquelure liée au défilement.
+- Composition `orfevrerie` (Aurélia) : présentoir à deux montants d'or
+  ouverts en haut et en bas, transmutation au contact réel du curseur
+  (`pointerenter`) et définitive, compteur pondéré par la longueur du
+  texte, cage de verre, Cercle d'Équilibre or/argent, Flux d'Argent au
+  défilement, apparitions hésitantes.
+- Récit d'Aurélia enrichi : la cage de verre, l'Ancre comme restriction et
+  non comme puissance, Khemetra et le fleuve pris en otage.
 - Système d'images : champ `images` optionnel dans `data.json`,
   `next/image` en `fill`, voile amortisseur, bascule entre deux images au
-  défilement (Varros : le champ de blé cède au cratère). Les images
-  vivent dans `public/personnages/<slug>/`.
+  défilement (Varros : le champ de blé cède au cratère ; Aurélia : la main
+  d'or en haut, la cage brisée plus bas). Les images vivent dans
+  `public/personnages/<slug>/`.
 - Champ `illusions` : formulations alternatives qui changent hors du
   viewport (Soryn, « le doute comme arme ») — la formulation varie, jamais
   le fait énoncé.
