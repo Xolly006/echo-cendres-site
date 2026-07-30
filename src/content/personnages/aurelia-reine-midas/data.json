@@ -2,6 +2,7 @@
   "nom": "Aurélia",
   "publicationStatus": "draft",
   "themeKey": "or-maudit",
+  "composition": "orfevrerie",
   "resumeCourt": "Aurélia, Reine Midas, est une héritière maudite capable de changer ce qu’elle touche en or. Trésorière et source financière majeure de l’Arquet, elle sert l’organisation parce que son Ancre lui permet de contrôler sa malédiction et de toucher sans tuer.",
   "role": "Héritière de l’Arquet — Trésorière et Reine Midas",
   "tags": [
@@ -23,28 +24,46 @@
       "Banquière maudite"
     ],
     "nature": "Humaine maudite liée à la transmutation de l’or et de l’argent",
-    "origin": "Fille du Roi Midas légendaire",
-    "status": "Active au sein de l’Arquet",
-    "era": "Présent narratif"
+    "origin": "Fille cachée du Roi Midas. Elle a grandi dans une cage de verre, nourrie à la cuillère : tout ce qu’elle effleurait — nourriture, draps, amants — se changeait en or massif.",
+    "status": "Active — Trésorière de l’Arquet. Elle tient le fleuve de Khemetra en otage et vend l’eau goutte à goutte contre une soumission totale.",
+    "era": "Présent narratif",
+    "appearance": "Une jeune femme d’une beauté irréelle. Sa peau a un éclat métallique, ses cheveux sont des fils d’or pur — et elle ne retire jamais ses Gants de Soie Noire."
   },
   "magic": {
     "concept": "Transmutation / Valeur / Or maudit",
-    "domain": "Transmutation de l’or et de l’argent",
+    "domain": "Transmutation statique — l’orfèvrerie. Ce qu’elle touche devient or, et cesse de vivre.",
     "artifact": "Gants de Soie Noire enchantés",
     "anchor": "Couronne fondue en or liquide",
     "abilities": [
-      "Transforme ce qu’elle touche en or",
-      "Contrôle partiellement la transmutation grâce à l’Ancre de l’Arquet",
-      "Façonne l’or en armes, piques ou surfaces",
-      "Manipule l’argent comme un flux conducteur et tranchant",
-      "Utilise sa richesse et sa magie comme leviers politiques"
+      "Transmutation offensive : le sol devient or liquide brûlant ou piques d’or solides",
+      "Elle transforme l’armure d’un ennemi en or massif : trop lourde, il ne peut plus bouger",
+      "Elle transforme l’air en poussière d’or, ou en aiguilles",
+      "Elle transforme le sang dans les veines en or liquide — arrêt cardiaque immédiat",
+      "Le Flux d’Argent : elle manipule l’argent liquide comme du mercure, conducteur de magie, pour trancher et détourner les sorts d’autres mages",
+      "Trésorière de l’Arquet : elle achète des rois, finance des guerres et corrompt les institutions"
     ],
     "limits": [
-      "Sans l’Ancre, la malédiction reprend le dessus",
-      "Le contact humain reste son point faible émotionnel",
-      "Son contrôle dépend de sa concentration",
-      "Elle sert l’Arquet pour conserver le droit de toucher sans tuer",
-      "Sa quête de contrôle ne doit pas être confondue avec une guérison"
+      "Contrairement à son père, elle contrôle la transmutation — mais elle doit se concentrer",
+      "Sans l’Ancre de l’Arquet, elle ne peut toucher aucune peau humaine sans la tuer",
+      "Elle sert l’Arquet uniquement pour garder ce droit de toucher : c’est son unique levier sur elle",
+      "Sa mort sans annulation de ses sorts rendrait ses transmutations éternelles — ce qui la protège autant que ses gants"
+    ]
+  },
+  "images": {
+    "fond": {
+      "src": "/personnages/aurelia-reine-midas/main-or.webp",
+      "alt": "Une main d’or liquide effleurant une surface d’or en fusion, reflets et coulures",
+      "ancrage": "center 45%"
+    },
+    "fondSecondaire": {
+      "src": "/personnages/aurelia-reine-midas/cage.webp",
+      "alt": "Cage à oiseaux d’argent brisée, un oiseau d’or lumineux s’en échappant",
+      "ancrage": "center"
+    }
+  },
+  "links": {
+    "characters": [
+      "soryn-la-voilee"
     ]
   }
 }
