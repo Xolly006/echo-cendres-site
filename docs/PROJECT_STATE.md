@@ -28,11 +28,14 @@ de données interchangeable derrière une couleur différente.
   italique comprise), Space Grotesk (interface), chargées via `next/font/google`.
 - Moteur de composition (`src/components/personnages/compositions/`), axe
   séparé de `themeKey` : le thème porte la palette et l'atmosphère, la
-  composition porte la mise en page. Huit compositions existent —
-  `standard` (rendu historique), `fragment` (Kael l'Éclipsé), `retable`
-  (Elias), `cage` (Métatron), `canopee` (Ysolde), `titan` (Varros),
-  `theatre` (Soryn) et `orfevrerie` (Aurélia). Résolues par le champ
-  `composition` de `data.json`, repli sur `standard` si absent ou inconnu.
+  composition porte la mise en page. Neuf compositions existent —
+  `standard` (repli, rendu historique), `fragment` (Kael l'Éclipsé),
+  `retable` (Elias), `cage` (Métatron), `canopee` (Ysolde), `titan`
+  (Varros), `theatre` (Soryn), `orfevrerie` (Aurélia) et `agape` (Amara).
+  Résolues par le champ `composition` de `data.json`, repli sur `standard`
+  si absent ou inconnu. Tous les personnages réels ont désormais une
+  composition propre : la phase de différenciation visuelle des
+  personnages est terminée (voir `docs/NEXT_STEPS.md`).
 - Composition `canopee` (Ysolde) : lianes en croissance procédurale sur
   canvas s'enroulant autour du nom (deux plans avant/arrière), pluie,
   papillons, mousse qui reprend visuellement les sections déjà lues,
@@ -51,6 +54,11 @@ de données interchangeable derrière une couleur différente.
   défilement, apparitions hésitantes.
 - Récit d'Aurélia enrichi : la cage de verre, l'Ancre comme restriction et
   non comme puissance, Khemetra et le fleuve pris en otage.
+- Composition `agape` (Amara) : réciprocité (ce que le lecteur réchauffe
+  s'éteint ailleurs, réversible), nom et sceau qui battent au même rythme
+  cardiaque, sceau en vesica piscis, récit en italique comme une lettre,
+  jardin du général en fin de page.
+- Fiche Amara corrigée : elle est un électron libre, ni Arquet ni Pilier.
 - Système d'images : champ `images` optionnel dans `data.json`,
   `next/image` en `fill`, voile amortisseur, bascule entre deux images au
   défilement (Varros : le champ de blé cède au cratère ; Aurélia : la main
@@ -96,8 +104,8 @@ de données interchangeable derrière une couleur différente.
 
 ## Ce qui manque
 
-- Des compositions dédiées pour les personnages majeurs restants
-  (voir `docs/NEXT_STEPS.md` pour le prochain personnage).
-- Dette technique accumulée sur les compositions (gravures runiques,
-  réglages fins, récits trop courts) — détail dans `docs/NEXT_STEPS.md`.
+- Dette technique accumulée sur les compositions (boîtes fermées à
+  retirer, gravures runiques Métatron) — détail dans `docs/NEXT_STEPS.md`.
 - Tout moteur structuré pour factions, lieux, événements, archives, magie transverse.
+- Sections vides sans contenu réel (Factions en priorité), page d'accueil,
+  navigation interne des fiches personnages.

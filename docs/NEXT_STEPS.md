@@ -35,24 +35,28 @@ Fait :
    or/argent, Flux d'Argent au défilement, apparitions hésitantes ; récit
    enrichi (cage de verre, Ancre comme restriction, Khemetra et le fleuve
    pris en otage) ; images (main d'or en haut, cage brisée plus bas).
+9. **Amara en composition "agape"** — réciprocité (ce que le lecteur
+   réchauffe s'éteint ailleurs, réversible), nom et sceau qui battent au
+   même rythme cardiaque, sceau en vesica piscis, récit en italique comme
+   une lettre, jardin du général en fin de page ; fiche corrigée (électron
+   libre, ni Arquet ni Pilier).
+
+**Phase personnages terminée** : les 8 personnages réels ont chacun une
+composition propre.
 
 Dette technique notée :
 
-- Gravures runiques encore à faire sur la fiche Métatron.
-- Réglages fins des répartitions du modèle VOLUME (seuils 35/55/85 à
-  affiner à l'usage).
-- Les lianes de la composition "canopee" repartent brutalement quand le
-  nombre de lignes de contenu change.
-- Les récits des personnages sont trop courts : format résumé plutôt que
-  scènes développées.
 - Boîtes rectangulaires fermées à retirer sur Varros et Soryn (motif de
   conteneur convergent, voir docs/DECISIONS.md).
-- Navigation interne des fiches à ajouter (sommaire de lecture).
+- Gravures runiques encore à faire sur la fiche Métatron.
 
-Prochaine étape :
+## Prochaines pistes
 
-9. **Amara** — dernier personnage majeur restant à porter en composition
-   dédiée, après validation du créateur.
+- Nouveaux personnages à extraire du document source, un par un, après
+  validation du créateur.
+- Sections vides à peupler, Factions en premier.
+- Page d'accueil.
+- Navigation interne des fiches personnages (sommaire de lecture).
 
 ## Backlog long terme
 

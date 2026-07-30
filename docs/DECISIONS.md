@@ -219,3 +219,14 @@ par personnage.
   Encadrer sans enfermer.
 * Un effet qui engage le lecteur doit être irréversible pour avoir du
   poids (transmutation d'Aurélia).
+
+## Amara et clôture de la phase personnages (2026-07-30)
+
+* Un personnage de l'Arquet sans Ancre voit son sceau tiré de sa PUPILLE
+  de 2e Éveil.
+* Un effet réversible (Amara) et un effet définitif (Aurélia) disent deux
+  choses opposées : le choix fait partie de la caractérisation, pas un
+  détail technique interchangeable.
+* Ambiguïté de source notée sur Amara : le document source la dit à la
+  fois « percutée à la naissance » et « elle n'est pas née mage ». Non
+  résolue, à trancher par le créateur avant toute publication.
