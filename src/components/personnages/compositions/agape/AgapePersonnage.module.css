@@ -1,0 +1,435 @@
+/*
+ * Composition "agapè" — Le Mariage des Âmes.
+ *
+ * Quatre règles :
+ *   1. RIEN N'EST GRATUIT. Ce que le lecteur réchauffe est payé ailleurs.
+ *   2. C'EST UNE LETTRE. Colonne étroite, interlignage très large,
+ *      italique dans le récit — écrite à la main, à quelqu'un qui ne la
+ *      lira jamais.
+ *   3. TOUT BAT AU MÊME RYTHME. Une seule pulsation traverse la page.
+ *      Pas un coeur : deux, synchronisés.
+ *   4. AUCUN ROSE SUCRÉ. Ambre chaud et rose cendré — la chaleur d'un
+ *      feu, pas d'un bouquet. Sa magie brise des esprits.
+ */
+
+.scene {
+  position: relative;
+  min-height: calc(100vh - 2rem);
+  overflow: hidden;
+  color: var(--character-text, var(--text));
+  font-family: var(--character-body-font, var(--font-body));
+  isolation: isolate;
+}
+
+/* ------------------------------------------------------------------ */
+/* Le sceau — les deux cercles                                         */
+/* ------------------------------------------------------------------ */
+
+.sceau {
+  position: fixed;
+  top: 44%;
+  left: 50%;
+  z-index: -2;
+  width: min(56rem, 116vw);
+  height: auto;
+  transform: translate(-50%, -50%);
+  opacity: 0.5;
+  pointer-events: none;
+  /* Les deux auras respirent ensemble, au rythme de la page. */
+  animation: agape-battement 4.6s ease-in-out infinite;
+}
+
+/*
+ * LE BATTEMENT PARTAGÉ.
+ *
+ * Le même rythme partout, en même temps. C'est le Mariage des Âmes rendu
+ * visible : deux coeurs qui ne battent plus qu'à l'unisson. Deux temps
+ * par cycle — un battement, jamais une respiration.
+ */
+@keyframes agape-battement {
+  0% {
+    opacity: 0.44;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  8% {
+    opacity: 0.62;
+    transform: translate(-50%, -50%) scale(1.012);
+  }
+  16% {
+    opacity: 0.47;
+    transform: translate(-50%, -50%) scale(1.002);
+  }
+  26% {
+    opacity: 0.56;
+    transform: translate(-50%, -50%) scale(1.008);
+  }
+  38%,
+  100% {
+    opacity: 0.44;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Contenu — une lettre                                                */
+/* ------------------------------------------------------------------ */
+
+.content {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  width: min(46rem, 100%);
+  /* Marge gauche généreuse : la marge d'une page manuscrite. */
+  margin: 0 auto;
+  padding: clamp(6.5rem, 13vh, 10rem) clamp(1.75rem, 6vw, 4rem) clamp(6rem, 12vh, 9rem);
+  gap: clamp(3rem, 6vw, 5rem);
+}
+
+.intro {
+  max-width: 38rem;
+}
+
+.previewPill {
+  display: inline-block;
+  margin-bottom: 1.25rem;
+  color: var(--character-muted, var(--muted));
+  font-family: var(--font-ui);
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  opacity: 0.72;
+}
+
+.title {
+  margin: 0 0 clamp(1rem, 2.5vw, 1.6rem);
+  font-family: var(--character-title-font, var(--font-title));
+  font-size: clamp(2.6rem, 6.5vw, 5rem);
+  font-weight: var(--character-title-weight, 400);
+  letter-spacing: var(--character-title-spacing, 0.02em);
+  line-height: 1.06;
+  text-wrap: balance;
+}
+
+/*
+ * Le nom bat. Ce n'est pas un ornement : c'est un signe vital, et c'est
+ * le seul nom du site qui en ait un. Même rythme que le sceau — elle et
+ * son domaine ne font qu'un.
+ */
+.titreCoeur {
+  display: inline-block;
+  transform-origin: center;
+  animation: agape-coeur 4.6s ease-in-out infinite;
+}
+
+@keyframes agape-coeur {
+  0% {
+    transform: scale(1);
+    text-shadow: none;
+  }
+  8% {
+    transform: scale(1.018);
+    text-shadow: 0 0 2rem color-mix(in srgb, var(--character-accent, #c47a52) 45%, transparent);
+  }
+  16% {
+    transform: scale(1.004);
+    text-shadow: 0 0 1rem color-mix(in srgb, var(--character-accent, #c47a52) 20%, transparent);
+  }
+  26% {
+    transform: scale(1.012);
+    text-shadow: 0 0 1.6rem color-mix(in srgb, var(--character-accent, #c47a52) 35%, transparent);
+  }
+  38%,
+  100% {
+    transform: scale(1);
+    text-shadow: none;
+  }
+}
+
+.role {
+  margin: 0;
+  color: var(--character-accent, var(--accent));
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: var(--character-label-spacing, 0.22em);
+  line-height: 1.9;
+  text-transform: uppercase;
+}
+
+/* ------------------------------------------------------------------ */
+/* Les blocs — pas de cadre, une lueur de bougie                       */
+/* ------------------------------------------------------------------ */
+
+.bloc {
+  position: relative;
+  min-width: 0;
+  padding: clamp(1.5rem, 3.5vw, 2.5rem) clamp(1.5rem, 4vw, 2.75rem);
+  transition:
+    opacity 1.4s cubic-bezier(0.3, 0, 0.2, 1),
+    filter 1.4s cubic-bezier(0.3, 0, 0.2, 1);
+}
+
+/* La lisibilité vient d'une lueur douce, sans bord ni angle : la lumière
+   d'une bougie posée sur une lettre. */
+.bloc::before {
+  position: absolute;
+  inset: -2% -3%;
+  z-index: -1;
+  content: '';
+  border-radius: 46% 54% 50% 50% / 10% 9% 11% 10%;
+  background: radial-gradient(
+    70% 62% at 42% 46%,
+    color-mix(in srgb, var(--character-bg, #140d0b) 94%, transparent) 0%,
+    color-mix(in srgb, var(--character-bg, #140d0b) 86%, transparent) 58%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+/* ------------------------------------------------------------------ */
+/* LA RÉCIPROCITÉ — "Nous sommes Un."                                  */
+/*                                                                     */
+/* Ce que le lecteur réchauffe est payé ailleurs. Contrairement à la    */
+/* transmutation d'Aurélia, l'effet est RÉVERSIBLE : elle ne détruit    */
+/* rien, elle déplace.                                                  */
+/* ------------------------------------------------------------------ */
+
+.bloc[data-rechauffe] {
+  filter: brightness(1.16) saturate(1.1);
+}
+
+.bloc[data-rechauffe]::before {
+  background: radial-gradient(
+    70% 62% at 42% 46%,
+    color-mix(in srgb, var(--character-accent, #c47a52) 16%, var(--character-bg, #140d0b)) 0%,
+    color-mix(in srgb, var(--character-bg, #140d0b) 88%, transparent) 62%,
+    transparent 100%
+  );
+}
+
+.bloc[data-eteint] {
+  opacity: 0.42;
+  filter: brightness(0.7) saturate(0.55);
+}
+
+/* ------------------------------------------------------------------ */
+/* Texte                                                               */
+/* ------------------------------------------------------------------ */
+
+.summary {
+  margin: 0;
+  color: var(--character-muted, var(--muted));
+  font-size: clamp(1rem, 1.9vw, 1.14rem);
+  line-height: var(--character-body-line-height, 2.1);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.3rem;
+  margin: clamp(1.5rem, 3vw, 2rem) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tags li {
+  color: var(--character-muted, var(--muted));
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  letter-spacing: 0.13em;
+  opacity: 0.66;
+}
+
+.sectionTitle {
+  margin: 0 0 clamp(1.4rem, 3vw, 2rem);
+  color: var(--character-accent, var(--accent));
+  font-family: var(--font-ui);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+}
+
+.identityList {
+  display: grid;
+  gap: clamp(1.4rem, 3vw, 2rem);
+  margin: 0;
+}
+
+.magicList {
+  display: grid;
+  gap: clamp(1.5rem, 3vw, 2.1rem);
+  margin: 0;
+}
+
+.identityItem,
+.magicItem {
+  min-width: 0;
+}
+
+.identityItem dt,
+.magicItem dt {
+  margin: 0 0 0.5rem;
+  color: var(--character-muted, var(--muted));
+  font-family: var(--font-ui);
+  font-size: 0.64rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.65;
+}
+
+.identityItem dd,
+.magicItem dd {
+  margin: 0;
+  color: var(--character-text, var(--text));
+  font-size: clamp(0.96rem, 1.5vw, 1.06rem);
+  line-height: var(--character-body-line-height, 2.1);
+  overflow-wrap: break-word;
+}
+
+.magicItem p {
+  margin: 0;
+}
+
+.magicItem ul {
+  display: grid;
+  gap: 0.55rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.magicItem li {
+  position: relative;
+  padding-left: 1.3rem;
+}
+
+.magicItem li::before {
+  position: absolute;
+  left: 0;
+  color: var(--character-accent, var(--accent));
+  content: '·';
+}
+
+/* Le récit est une lettre manuscrite : en italique, plus aéré encore. */
+.narrative {
+  max-width: 36rem;
+  font-style: italic;
+  line-height: 2.2;
+}
+
+/* ------------------------------------------------------------------ */
+/* Le jardin du général                                                */
+/* ------------------------------------------------------------------ */
+
+.jardin {
+  display: block;
+  width: min(20rem, 70%);
+  height: auto;
+  margin: clamp(1.5rem, 4vw, 3rem) auto 0;
+}
+
+/* Les fleurs poussent lentement, chacune à son heure — plantées à la
+   main par quelqu'un qui n'avait jamais fait ça. */
+.fleur {
+  transform-box: fill-box;
+  transform-origin: bottom center;
+  animation: agape-pousse 8s ease-out forwards;
+  transform: scaleY(0);
+  opacity: 0;
+}
+
+@keyframes agape-pousse {
+  to {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Sortie                                                              */
+/* ------------------------------------------------------------------ */
+
+.exit {
+  padding-top: 0.5rem;
+}
+
+.backLink {
+  color: var(--character-muted, var(--muted));
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  transition: color 480ms ease;
+}
+
+.backLink:hover,
+.backLink:focus-visible {
+  color: var(--character-accent, var(--accent));
+}
+
+.backLink:focus-visible {
+  outline: 2px solid var(--character-accent, var(--accent));
+  outline-offset: 6px;
+}
+
+/* ------------------------------------------------------------------ */
+/* Responsive                                                          */
+/* ------------------------------------------------------------------ */
+
+@media (max-width: 720px) {
+  .content {
+    gap: clamp(2.25rem, 6vw, 3.5rem);
+  }
+
+  .narrative {
+    max-width: none;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Apparition au défilement — ÇA S'OUVRE                               */
+/*                                                                     */
+/* Les blocs ne montent ni ne tombent : ils s'ouvrent depuis le centre, */
+/* comme des mains qui s'écartent.                                      */
+/* ------------------------------------------------------------------ */
+
+.content [data-reveal] {
+  transition:
+    opacity 1.5s cubic-bezier(0.24, 0.7, 0.3, 1),
+    clip-path 1.5s cubic-bezier(0.24, 0.7, 0.3, 1);
+  clip-path: inset(0 0 0 0);
+  opacity: 1;
+}
+
+.content [data-reveal][data-hidden] {
+  clip-path: inset(46% 0 46% 0);
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .content [data-reveal],
+  .content [data-reveal][data-hidden] {
+    clip-path: none;
+    opacity: 1;
+    transition: none;
+  }
+
+  .sceau,
+  .titreCoeur,
+  .fleur {
+    animation: none;
+  }
+
+  .fleur {
+    transform: none;
+    opacity: 1;
+  }
+
+  .bloc {
+    transition: none;
+  }
+}

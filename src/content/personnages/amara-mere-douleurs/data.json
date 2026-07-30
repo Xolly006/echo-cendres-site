@@ -2,6 +2,7 @@
   "nom": "Amara",
   "publicationStatus": "draft",
   "themeKey": "amour-douleur",
+  "composition": "agape",
   "resumeCourt": "Électron libre née sous le choc du Concept LIEN, Amara incarne un amour sacrificiel si vaste qu’il rend la violence presque impossible. À la tête d’un orphelinat neutre au milieu des guerres, elle protège sans appartenir ni à l’Arquet ni aux Piliers : sa tendresse n’est pas une faiblesse, c’est une douleur partagée.",
   "role": "La Mère des Douleurs — Gardienne d’un orphelinat neutre",
   "tags": [
@@ -22,27 +23,37 @@
       "La Mère des Douleurs",
       "L’Intouchable par empathie"
     ],
-    "nature": "Humaine percutée à la naissance par le Concept LIEN",
+    "nature": "Électron libre — ni Arquet, ni Pilier. Percutée à la naissance par le Concept LIEN (Amour / Agapè), un fragment trop grand pour une âme ordinaire : son empathie lui a permis de fusionner sans exploser.",
     "origin": "Née non-mage, fusionnée avec un fragment du Concept LIEN grâce à son empathie",
-    "status": "Active — électron libre",
+    "status": "Active — elle dirige un orphelinat neutre au milieu d’un champ de bataille. Aucune armée n’ose l’attaquer.",
     "era": "Présent narratif"
   },
   "magic": {
     "concept": "Amour / LIEN / Agapè",
-    "domain": "Le Mariage des Âmes — domaine d’empathie absolue",
+    "domain": "Le Mariage des Âmes — une cathédrale de lumière douce. Sa règle : « Nous sommes Un. » Tous les dégâts sont partagés.",
     "abilities": [
-      "Ressent physiquement les émotions et la douleur des autres",
-      "Perçoit l’intention de tuer avant qu’un coup ne parte",
-      "Peut apaiser une foule par sa seule présence",
-      "Transfère sur son propre corps les blessures d’autrui",
-      "Partage les dégâts dans son Domaine absolu",
-      "Rend la violence contre elle presque impossible par empathie partagée"
+      "Le Lien Empathique Total : frapper Amara, c’est recevoir la même blessure, au même endroit, avec la même douleur",
+      "La tuer, c’est mourir instantanément — le match nul forcé, que personne ne peut gagner",
+      "Absorption de la douleur d’autrui : elle peut porter la peine de quelqu’un à sa place",
+      "Troisième Éveil : elle rend à un agresseur la somme des souffrances qu’il a causées, en une seconde"
     ],
     "limits": [
-      "Sa magie repose sur le sacrifice de soi et l’absorption de la douleur",
-      "Elle ne peut pas mourir tant qu’elle a quelqu’un à protéger",
-      "Le seul vrai contre est le refus de se battre",
-      "Elle n’est pas un Pilier et ne doit pas être institutionnalisée dans le système des Piliers"
+      "Sa magie n’est pas une magie de guerre : elle n’attaque pas, elle unit",
+      "Elle ne se protège pas — elle rend la violence impossible en la partageant",
+      "Le seul contre connu est de ne pas se battre du tout",
+      "Ce qu’elle absorbe, elle le porte : la douleur d’autrui ne disparaît pas, elle change de porteur"
     ]
+  },
+  "images": {
+    "fond": {
+      "src": "/personnages/amara-mere-douleurs/mains.webp",
+      "alt": "Deux mains qui s’approchent sans se toucher, une lumière ambrée entre elles",
+      "ancrage": "center 42%"
+    },
+    "fondSecondaire": {
+      "src": "/personnages/amara-mere-douleurs/flammes.webp",
+      "alt": "Flammes roses et pâles se déployant dans une obscurité rouge",
+      "ancrage": "center"
+    }
   }
 }
