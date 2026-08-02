@@ -1,0 +1,128 @@
+{
+  "nom": "L'Ordre de l'Arquet",
+  "ere": "actuelle",
+  "statut": "active",
+  "resume": "Les Péchés Capitaux de la Magie : sept sièges au service d'une Volonté qui n'apparaît jamais et ne laisse jamais un siège vide.",
+  "themeKey": "argent-froid",
+  "composition": "fil",
+  "publicationStatus": "draft",
+  "membres": [
+    {
+      "nom": "Astraevor",
+      "statut": "fondateur",
+      "rang": "Cercle Zéro",
+      "notes": "N'apparaît jamais aux réunions ; transmet ses instructions par rêves, prémonitions ou parchemins vierges qui ne s'écrivent que sous les yeux des Héritiers. Il est leur Volonté, pas leur chef. Leur a promis un monde libre des caprices des Piliers ; en réalité, il les nourrit pour qu'ils deviennent les gardes du corps du futur Nihil. Veille à ce que l'Arquet ait toujours exactement le bon nombre de Généraux : un siège vide est comblé avant que le déséquilibre ne se remarque."
+    },
+    {
+      "nom": "Veyran",
+      "titre": "L'Oracle",
+      "statut": "en-poste",
+      "rang": "Façade",
+      "notes": "Chef de façade, sans magie. Préside le Conseil quand une réunion physique est nécessaire, signe les traités au nom de factions fictives que l'Arquet contrôle, traduit les instructions d'Astraevor en ordres exécutables. Aucune autorité réelle."
+    },
+    {
+      "nom": "Kael",
+      "titre": "Le Silence qui Marche",
+      "concept": "L'Inexistence",
+      "statut": "en-poste",
+      "personnageSlug": "kael-eclipse",
+      "rang": "Conseil"
+    },
+    {
+      "nom": "Soryn",
+      "titre": "La Mère des Masques",
+      "concept": "Le Mensonge Incarné",
+      "statut": "en-poste",
+      "personnageSlug": "soryn-la-voilee",
+      "rang": "Conseil"
+    },
+    {
+      "nom": "Varros",
+      "titre": "Le Titan de la Ruine",
+      "concept": "La Violence Pure",
+      "statut": "en-poste",
+      "personnageSlug": "varros-fleau",
+      "rang": "Conseil"
+    },
+    {
+      "nom": "Aurélia",
+      "titre": "Reine Midas",
+      "statut": "en-poste",
+      "personnageSlug": "aurelia-reine-midas",
+      "remplace": "Eryth",
+      "rang": "Conseil",
+      "notes": "A remplacé Eryth quand Astraevor a jugé son travail sur l'Ancre du Néant terminé."
+    },
+    {
+      "nom": "Cindrel",
+      "titre": "Le Chœur Dissonant",
+      "concept": "La Folie Sonore",
+      "statut": "en-poste",
+      "rang": "Conseil",
+      "notes": "Il ne chante pas : il émet des fréquences qui résonnent avec la peur primale."
+    },
+    {
+      "nom": "Therys",
+      "titre": "L'Oracle Brisé",
+      "concept": "Le Fatalisme",
+      "statut": "en-poste",
+      "rang": "Conseil",
+      "notes": "Yeux cousus pour ne voir que les possibles ; pleure du sang noir. Ce qu'elle voit — le retour de Nihil — la terrifie, et elle ne peut pas s'arrêter."
+    },
+    {
+      "nom": "Neihem Roshim",
+      "concept": "Nécromancie de l'Histoire",
+      "statut": "en-poste",
+      "remplace": "Draeven",
+      "rang": "Conseil"
+    },
+    {
+      "nom": "Eryth",
+      "titre": "Le Chimiste des Âmes",
+      "concept": "Corruption Biologique",
+      "statut": "ecarte",
+      "remplacePar": "Aurélia",
+      "notes": "Retiré vivant, non mort. A fondé ensuite les Ateliers Prométhéens (hors périmètre V1)."
+    },
+    {
+      "nom": "Draeven",
+      "titre": "L'Architecte de la Chair",
+      "concept": "Nécromancie Mécanique",
+      "statut": "mort",
+      "remplacePar": "Neihem Roshim"
+    },
+    {
+      "nom": "Dayu",
+      "statut": "mort",
+      "remplacePar": "Malachar",
+      "notes": "Arc résolu par Ysolde."
+    },
+    {
+      "nom": "Malachar",
+      "statut": "en-poste",
+      "remplace": "Dayu",
+      "notes": "À VALIDER — le canon ne tranche pas si l'Ordre compte sept ou huit sièges avec son arrivée. Non représenté dans la composition : aucun siège n'y est numéroté."
+    }
+  ],
+  "branches": [
+    {
+      "nom": "Les Traqueurs d'Étoiles",
+      "role": "Anti-mages ; marque sur l'œil ou la main ; « Le Verrouillage » bloque le flux de mana pendant 3 secondes. Capes grises, masques lisses.",
+      "commandePar": ["Kael", "Soryn"]
+    },
+    {
+      "nom": "Les Marteaux de l'Aube",
+      "role": "Marque sur le cœur ou les muscles ; « L'Impact Cinétique » ; peau de pierre grise. Armures gravées de constellations. Ils ne parlent pas.",
+      "commandePar": ["Varros"]
+    },
+    {
+      "nom": "Les Recousus",
+      "role": "Marque gravée sur prothèses ou os apparents ; « La Surcharge » ; kamikazes magiques. Chair nécrosée et pièces mécaniques dorées.",
+      "commandePar": ["Draeven", "Neihem Roshim"]
+    }
+  ],
+  "mecanique": {
+    "nom": "La Marque",
+    "principe": "Puissance contre obéissance : l'Ordre recrute les désespérés. La Marque n'accorde pas une nature, elle amplifie celle qui est déjà là — chez un coléreux, elle amplifie la rage. Elle est partout : le banquier, le roi ou le boulanger peut être un Marqué."
+  }
+}

@@ -2,22 +2,24 @@ import { readdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+// Ce script génère deux registres MDX distincts : personnages et factions.
+// Miroir exact d'un dossier de contenu à l'autre, jamais partagés : les
+// deux moteurs restent découplés (docs/FACTIONS_MODELE.md §1).
+
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const personnagesDirectory = path.join(projectRoot, 'src/content/personnages');
-const outputPath = path.join(personnagesDirectory, 'narrative-registry.ts');
 
 function toSingleQuoted(value) {
   return value.replaceAll('\\', '\\\\').replaceAll("'", "\\'");
 }
 
-async function findNarrativeSlugs() {
-  const entries = await readdir(personnagesDirectory, { withFileTypes: true });
+async function findNarrativeSlugs(contentDirectory) {
+  const entries = await readdir(contentDirectory, { withFileTypes: true });
   const slugs = [];
 
   for (const entry of entries) {
     if (!entry.isDirectory()) continue;
 
-    const files = await readdir(path.join(personnagesDirectory, entry.name), { withFileTypes: true });
+    const files = await readdir(path.join(contentDirectory, entry.name), { withFileTypes: true });
     const hasNarrative = files.some((file) => file.isFile() && file.name === 'histoire.mdx');
 
     if (hasNarrative) {
@@ -28,11 +30,11 @@ async function findNarrativeSlugs() {
   return slugs.sort((a, b) => a.localeCompare(b, 'fr'));
 }
 
-function buildRegistrySource(slugs) {
+function buildRegistrySource(slugs, { importBase, componentTypeName, loaderTypeName, loadersName, loadFnName }) {
   const loaders = slugs
     .map((slug) => {
       const safeSlug = toSingleQuoted(slug);
-      return `  '${safeSlug}': async () => (await import('@/content/personnages/${safeSlug}/histoire.mdx')).default as PersonnageNarrativeComponent,`;
+      return `  '${safeSlug}': async () => (await import('${importBase}/${safeSlug}/histoire.mdx')).default as ${componentTypeName},`;
     })
     .join('\n');
 
@@ -42,20 +44,43 @@ function buildRegistrySource(slugs) {
 import type { ComponentType } from 'react';
 import type { MDXComponents } from 'mdx/types';
 
-export type PersonnageNarrativeComponent = ComponentType<{ components?: MDXComponents }>;
-export type PersonnageNarrativeLoader = () => Promise<PersonnageNarrativeComponent>;
+export type ${componentTypeName} = ComponentType<{ components?: MDXComponents }>;
+export type ${loaderTypeName} = () => Promise<${componentTypeName}>;
 
-export const personnageNarrativeLoaders: Record<string, PersonnageNarrativeLoader> = {
+export const ${loadersName}: Record<string, ${loaderTypeName}> = {
 ${loaders}
 };
 
-export async function loadPersonnageNarrative(slug: string): Promise<PersonnageNarrativeComponent | null> {
-  const loader = personnageNarrativeLoaders[slug];
+export async function ${loadFnName}(slug: string): Promise<${componentTypeName} | null> {
+  const loader = ${loadersName}[slug];
 
   return loader ? loader() : null;
 }
 `;
 }
 
-const slugs = await findNarrativeSlugs();
-await writeFile(outputPath, buildRegistrySource(slugs), 'utf8');
+async function generateRegistry({ contentDirectory, outputFile, importBase, componentTypeName, loaderTypeName, loadersName, loadFnName }) {
+  const slugs = await findNarrativeSlugs(contentDirectory);
+  const source = buildRegistrySource(slugs, { importBase, componentTypeName, loaderTypeName, loadersName, loadFnName });
+  await writeFile(path.join(contentDirectory, outputFile), source, 'utf8');
+}
+
+await generateRegistry({
+  contentDirectory: path.join(projectRoot, 'src/content/personnages'),
+  outputFile: 'narrative-registry.ts',
+  importBase: '@/content/personnages',
+  componentTypeName: 'PersonnageNarrativeComponent',
+  loaderTypeName: 'PersonnageNarrativeLoader',
+  loadersName: 'personnageNarrativeLoaders',
+  loadFnName: 'loadPersonnageNarrative',
+});
+
+await generateRegistry({
+  contentDirectory: path.join(projectRoot, 'src/content/factions'),
+  outputFile: 'narrative-registry.ts',
+  importBase: '@/content/factions',
+  componentTypeName: 'FactionNarrativeComponent',
+  loaderTypeName: 'FactionNarrativeLoader',
+  loadersName: 'factionNarrativeLoaders',
+  loadFnName: 'loadFactionNarrative',
+});
