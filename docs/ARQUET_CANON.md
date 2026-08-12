@@ -6,6 +6,11 @@ hors implémentation V1.
 
 Aucun contenu inventé. Lignes source dans `Magic.txt`.
 
+> **Note de préséance.** Ce fichier est une extraction V1, non mise à jour
+> depuis l'écriture des strates de `docs/ARQUET_COMPOSITION.md`. En cas de
+> divergence, la section canonique récente de `Magic.txt` (l.33231–33676)
+> fait foi, et `ARQUET_COMPOSITION.md` en est la synthèse à jour.
+
 ---
 
 ## 1. Nature et fondation — CANON
@@ -46,20 +51,16 @@ Astraevor n'est pas perçu comme un chef mais comme une **Volonté**.
 **Le mensonge :** il a promis aux Héritiers qu'ils bâtissaient un monde
 libre des caprices des Dieux, c'est-à-dire des Piliers.
 
-**La vérité :** il les nourrit pour qu'ils deviennent les gardes du corps
-du futur Nihil.
-
-**Le TOC** (l.21609) — élément mécanique majeur : *l'Arquet a toujours
-exactement le bon nombre de Généraux.* Si un Héritier tombe, Astraevor en
-nomme un autre **avant que le déséquilibre le dérange**. Ses plans de
-manipulation mondiale sont parfois retardés pour cette raison.
+**Le but actuel** — celui de la section canonique récente, qui prévaut sur
+ce qui précède (voir note de préséance en tête de fichier) : forcer le
+sceau du Mora Miserium de l'intérieur, et démonter la loterie des
+structures d'âme.
 
 ---
 
 ## 3. Le Conseil des Héritiers — **VERROUILLÉ**
 
-Sept sièges, « les Péchés Capitaux de la Magie » (l.575). Chaque siège est
-une transgression des lois magiques. Roster arbitré par le créateur.
+Sept sièges. Roster arbitré par le créateur.
 
 | # | Siège occupé par | Titre | Concept | Fiche site |
 |---|---|---|---|---|
@@ -68,38 +69,44 @@ une transgression des lois magiques. Roster arbitré par le créateur.
 | III | **Varros** | Le Titan de la Ruine | La Violence Pure | ✅ `varros-fleau` |
 | IV | **Aurélia** | Reine Midas | — | ✅ `aurelia-reine-midas` |
 | V | **Cindrel** | Le Chœur Dissonant | La Folie Sonore | ❌ |
-| VI | **Therys** | L'Oracle Brisé | Le Fatalisme | ❌ |
-| VII | **Neihem Roshim** | — | Nécromancie de l'Histoire | ❌ |
+| VI | **Malachar** | — | *à écrire* | ❌ |
+| VII | **Neihem Roshim** | — | Nécromancie de l'Histoire — commande les Armées | ❌ |
 
 **Succession — canon :**
 
 - **Eryth**, le Chimiste des Âmes (Corruption Biologique) — *écarté*, non
   mort. Remplacé par **Aurélia** quand Astraevor a jugé son travail sur
-  l'Ancre du Néant terminé. Fonde ensuite les Ateliers Prométhéens (l.29508).
+  l'Ancre terminé. Fonde ensuite les Ateliers Prométhéens (l.29508).
 - **Draeven**, l'Architecte de la Chair (Nécromancie Mécanique) — *mort*.
   Remplacé par **Neihem Roshim**.
 - **Dayu** — *morte*, arc résolu par Ysolde. Remplacée par **Malachar**.
 
+**Therys — retirée du roster.** Elle figurait dans la liste ancienne
+(l.575) mais **n'apparaît pas une seule fois** dans la section canonique
+récente (l.33231–33676), dont la liste « Les sept sièges actuels » donne
+exactement les sept noms ci-dessus. Son statut n'est pas déclaré : le
+créateur indique ne l'avoir jamais utilisée. Elle n'est ni morte ni
+écartée — elle n'est simplement pas titulaire. **À arbitrer si elle doit
+revenir sous une autre forme.**
+
 **Le Conseil est complet.** Conformément au TOC d'Astraevor (§2), aucun
 siège ne reste vide : le remplacement précède le déséquilibre.
 
-> **Point mineur à clarifier plus tard** — Malachar n'est pas encore
-> raccroché à un numéro de siège dans cette table. Soit il occupe le siège
-> de Therys, soit le Conseil compte huit sièges. N'empêche rien : le modèle
-> de données n'impose pas de numérotation.
+> **Résolu.** Malachar occupe le siège laissé par Dayu. Le Conseil compte
+> sept titulaires, conformes à la liste canonique récente. Aucune
+> numérotation n'est affichée par la composition de toute façon.
 
 **Détails canon retenus :**
 - Kael n'est pas invisible : le cerveau refuse d'admettre qu'il est là. Il
   tue sans laisser de plaie.
 - Soryn : personne n'a jamais vu son visage, on dit qu'elle n'en a plus.
   Elle dirige les réseaux d'espions.
-- Varros : bras gauche noirci par une Ancre du Néant gigantesque. L'arme de
-  siège de l'Ordre.
+- Varros : bras gauche noirci par une Ancre gigantesque. L'arme de siège de
+  l'Ordre.
 - Cindrel : il ne chante pas, il émet des fréquences qui résonnent avec la
   peur primale.
-- Therys : yeux cousus pour ne voir que les possibles, pleure du sang noir.
-  Ce qu'elle voit — le retour de Nihil — la terrifie, et elle ne peut pas
-  s'arrêter.
+- Malachar : remplace Dayu. Aucune fonction déclarée à ce jour — le
+  créateur la décrit comme étant à ses débuts. **Ne rien inventer.**
 
 ## 4. La Marque — CANON
 

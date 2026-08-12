@@ -1,4 +1,4 @@
-import { FilFaction } from './fil/FilFaction';
+import { PalimpsesteFaction } from './palimpseste/PalimpsesteFaction';
 import type { FactionCompositionComponent } from './types';
 
 /**
@@ -17,7 +17,7 @@ import type { FactionCompositionComponent } from './types';
  */
 
 const COMPOSITIONS: Record<string, FactionCompositionComponent> = {
-  fil: FilFaction,
+  palimpseste: PalimpsesteFaction,
 };
 
 export const DEFAULT_COMPOSITION_KEY = 'standard';

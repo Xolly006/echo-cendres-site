@@ -1,8 +1,12 @@
-# Composition `fil` — L'Ordre de l'Arquet
+# Composition `palimpseste` — L'Ordre de l'Arquet
 
-Spec de direction artistique. À lire après `ARQUET_CANON.md` et
-`FACTIONS_MODELE.md`. Les étapes 1 à 5 du moteur sont faites : cette spec
-ne concerne que la couche visuelle et comportementale.
+Spec de direction artistique. **Remplace toutes les versions
+précédentes.** La composition `fil` est abandonnée : elle dessinait un
+organigramme, et l'Arquet n'en est pas un.
+
+Écrite après relecture intégrale de la section Arquet de `Magic.txt`
+(l.33231–33676), plus les blocs Sujets Nexus (l.20106, 22282) et
+Ashren Veil (l.18046).
 
 **Rien n'est codé avant validation par le créateur.**
 
@@ -10,306 +14,465 @@ ne concerne que la couche visuelle et comportementale.
 
 ## 0. Le verbe
 
-> **L'Arquet comble.**
+> **L'Arquet convainc.**
 
-Aucun vide ne survit sur cette page — sauf un seul, en haut, qui n'est pas
-un siège.
+Le lecteur arrive sur une page savante. On lui présente un argument, et
+**il est bon** : le système des Piliers distribue les pouvoirs
+fondamentaux selon un critère que personne n'a choisi ni mérité — une
+structure d'âme tirée au sort à la naissance. Olympe classée « affinités
+mineures » pendant des décennies avant de devenir la plus puissante
+utilisatrice du Temps. Un fermier reçoit un siège pendant qu'un apprenti
+s'entraîne toute sa vie pour rien.
 
-Trois invariants canon, traduits en comportement plutôt qu'en décor :
+Le lecteur est d'accord. Il continue à être d'accord pendant que la page
+s'assombrit. Et en bas, il a donné raison à une organisation qui fabrique
+des êtres en laboratoire, retire méthodiquement du monde les meilleurs
+candidats un par un, et a consommé Eryth à la seconde où il avait fini
+de produire.
 
-| Canon | Comportement de la page |
-|---|---|
-| Le TOC d'Astraevor : un siège vide est comblé avant que le déséquilibre le dérange (l.21609) | Là où le lecteur produit un vide, la page l'a déjà refermé |
-| Astraevor n'apparaît jamais aux réunions ; ses parchemins ne s'écrivent que sous les yeux des Héritiers (l.568) | Son nom ne se compose qu'une fois les sept sièges ouverts |
-| La Marque n'accorde rien : elle amplifie ce qu'elle trouve (l.18038) | La page n'impose aucun rythme — elle exagère celui du lecteur |
+**Le malaise ne vient pas d'une révélation. Il vient du fait que le
+lecteur a hoché la tête tout du long.**
 
----
+Le canon l'écrit : *« On peut désillusionner un croyant. On ne peut pas
+désillusionner quelqu'un qui a raison sur les faits. »*
 
-## 1. La signature — les fils
+### Pourquoi `palimpseste`
 
-**C'est le seul endroit où cette page dépense son audace.** Tout le reste
-reste discipliné et silencieux. Si un choix décoratif ne sert pas les fils,
-il saute.
-
-Un fil par membre **en poste** descend de son nom et converge vers un point
-unique : **Veyran l'Oracle**. C'est la version officielle, celle que le
-monde croit — voilà l'homme qui tient l'Ordre.
-
-> **Le nombre de fils dérive de `data.json`. Il n'est jamais écrit en dur,
-> jamais affirmé, jamais affiché.**
->
-> Le canon contient deux couches : la liste ancienne des « sept Péchés
-> Capitaux » (l.575) et le roster tardif où Dayu apparaît. Le compte de
-> sept vient de la version ancienne et n'est pas arbitré. Figer un nombre
-> aujourd'hui reviendrait à trancher du lore par le code.
->
-> Le verbe survit intact : « aucun siège vide » ne dit rien du nombre de
-> sièges. La composition fonctionne à sept comme à neuf.
->
-> **Corollaire : pas de chiffres romains, pas de numérotation.** Une
-> numérotation doit encoder quelque chose de vrai ; ici elle mentirait.
-
-Puis, à la révélation, les fils ne changent pas de forme. On voit
-simplement qu'ils **continuent** : ils traversent Veyran et remontent hors
-du cadre, vers le haut, vers un espace resté vide toute la page.
-
-Veyran n'était pas la main. C'était un nœud. Le canon le dit mot pour mot :
-il n'a aucune autorité réelle, il traduit des instructions en ordres
-exécutables (l.17991, 20267).
-
-**La page a menti au lecteur exactement comme l'Arquet ment au monde — et
-le lecteur ne peut pas s'en vouloir : il a cru ce qu'on lui montrait.**
-
-### Exécution technique
-
-- SVG, `path` en courbes de Bézier douces. Pas de canvas ici : les fils
-  sont peu nombreux, statiques en géométrie, et le SVG reste net à toute
-  densité d'écran.
-- Animation par `stroke-dashoffset`, `opacity` et `transform` uniquement.
-  **Aucun `filter` animé** (règle du 2026-07-27).
-- Les fils se recalculent sur `resize` avec un debounce, jamais à chaque
-  image.
-- La prolongation au-dessus de Veyran est un second groupe de `path`,
-  présent dès le rendu serveur, révélé par `opacity`.
+Un manuscrit gratté et réécrit, où le texte ancien transparaît sous le
+nouveau. Quatre noms sur un seul corps en dix-huit siècles. Et une
+organisation dont le nom — l'Arché, le principe premier — annonce
+qu'elle cherche la couche du dessous. *« Ce n'est pas un club de mages
+puissants. C'est une entreprise archéologique avec une armée. »*
 
 ---
 
-## 2. Palette — thème `argent-froid`
+## 1. Les strates
 
-Nouveau fichier `src/themes/personnages/argent-froid.ts`, enregistré dans
-`index.ts`. **Aucun thème existant n'est modifié.**
+La page traverse des états successifs, chacun correspondant à un visage
+historique. Elle ne change pas de sujet : elle change **de registre**,
+par degrés trop petits pour être remarqués.
 
-| Rôle | Valeur | Intention |
+| Strate | Époque | Ce que la page a l'air d'être |
 |---|---|---|
-| `background` | `#0b0c0e` | Charbon très légèrement bleuté |
-| `text` | `#dfe2e6` | Argent clair |
-| `muted` | `#8a9099` | Gris de registre |
-| `accent` | `#c8cdd4` | **Argent — pas une couleur** |
-| `surface` | `rgba(18, 20, 24, 0.58)` | |
-| `border` | `rgba(200, 205, 212, 0.14)` | |
+| I | An 0 — Les Chercheurs de l'Arché | Une notice de société savante |
+| II | ~An 400 — La Confrérie du Seuil | Un registre de compagnie franche |
+| III | ~An 900 — L'Ordre des Éclipsés | Un livre de comptes |
+| IV | An 1800 — L'Arquet | Une note de service |
+| V | La main | Un tissu administratif |
 
-**Le pari, et il est assumé : l'Arquet est la seule entité du site sans
-teinte propre.** Aurélia a l'or, Ysolde le vert, Soryn le rouge sombre,
-Varros la terre. L'Arquet n'a que du gris métal — parce qu'il ne possède
-rien en propre. Il porte ce qu'il prend aux autres.
+**Le point de bascule ne doit jamais être identifiable.** Chaque strate
+diffère peu de sa voisine ; c'est l'écart entre la I et la V qui doit
+saisir quand on remonte.
 
-Ce n'est pas de l'obscurité. C'est de la **clarté cérémonielle qui ne
-révèle rien** : beaucoup de lumière ambiante, aucun visage. Les références
-fournies par le créateur (le lustre qui éclaire une salle entière sans
-éclairer un seul regard, les figures de dos en tenue de cérémonie, le
-cloître vide) disent toutes la même chose.
+C'est la structure d'Arkadia appliquée au lecteur — crédit, dépendance,
+postes, inversion. *« Il n'y a pas eu de coup d'État. Il y a eu une
+réunion, et tout le monde a compris en même temps. »*
 
-**Aucun portrait, aucune illustration de personne sur cette page. Jamais.**
+### Ce qui dérive
 
----
+| | I | II | III | IV | V |
+|---|---|---|---|---|---|
+| Corps | Spectral 1.9 | 1.8 | 1.7 | 1.6 | 1.55 |
+| Intitulés | Cormorant bas-de-casse | Cormorant | Space Grotesk | Space Grotesk caps | Space Grotesk caps, tracking large |
+| Colonne | 34rem | 36rem | 40rem | 44rem | 46rem |
+| Accent | os `#cfc9bd` | acier `#a8adb4` | plomb `#8f949b` | argent `#c8cdd4` | argent `#c8cdd4` |
+| Fond | `#0d0e10` | `#0b0c0e` | `#090a0c` | `#070809` | `#070809` |
 
-## 3. Typographie — le conflit machine / humains
+L'accent de la strate IV est **plus clair** que celui de la III.
+Délibéré : l'Arquet moderne n'est pas plus sombre, il est plus **net**.
+La menace n'est pas l'obscurité, c'est la propreté administrative.
 
-La police de titre est choisie par composition, jamais héritée (règle du
-2026-07-29).
+### Aucune animation
 
-- **Le nom de la faction et les intitulés de structure** → Space Grotesk,
-  capitales, interlettrage large. Registre administratif. L'Arquet n'est
-  pas un temple : le canon dit qu'il est né d'une **nécessité**, pas d'une
-  ambition — Astraevor avait besoin d'une infrastructure.
-- **Les noms des Héritiers** → Cormorant Garamond. Ce sont des personnes.
-- **Le récit MDX** → Spectral, inchangé, jamais dégradé.
+**La dérive n'est pas animée.** Chaque strate porte son style en CSS
+statique. Interpoler `line-height`, `letter-spacing` ou `max-width`
+déclencherait un recalcul de mise en page à chaque image — saccades sur
+GPU intégré, interdit par la règle du 2026-07-27.
 
-La tension entre l'administration et les humains qu'elle consomme est
-portée par la typographie elle-même. Rien d'autre n'a besoin de la dire.
-
----
-
-## 4. Structure
-
-```
-        ┌ espace vide, haut de page ─────────────┐
-        │   (rien. pendant toute la lecture)      │
-        └─────────────────────────────────────────┘
-                          ▲  ▲  ▲
-                          │  │  │   ← prolongation révélée
-        ╔═══════════════════════════════════════╗
-        ║   VEYRAN L'ORACLE                     ║
-        ║   chef de façade — aucune autorité    ║
-        ╚═══════════════════════════════════════╝
-             ╱   ╱   ╱   │   ╲   ╲   ╲
-            ╱   ╱   ╱    │    ╲   ╲   ╲
-          (un fil par membre en poste — nombre dérivé des données)
-```
-
-Les noms sont ceux que `data.json` déclare `en-poste`, dans leur ordre de
-déclaration. Aucun indice, aucun numéro, aucun total.
-
-**Aucun conteneur rectangulaire fermé** (règle du 2026-07-29 — trois
-compositions y avaient déjà convergé). Veyran est marqué par un
-resserrement des fils et un changement de graisse, pas par une boîte.
-
-Le remplissage se fait par **rapprochement**, jamais par encadrement.
+La continuité vient de la **faible différence entre strates voisines**,
+pas d'une transition. Plus robuste, plus rapide, et survit à
+`prefers-reduced-motion` sans traitement particulier.
 
 ---
 
-## 5. La substitution dans le siège
+## 2. L'irréversibilité
 
-Draeven est affiché avec son concept, la Nécromancie Mécanique. Le lecteur
-engage le siège : le nom cède la place à **Neihem Roshim**.
+Une seule chose est dynamique : le **cadre** — teinte de fond générale et
+traitement du nom de la faction.
 
-Pas de fondu croisé, pas de superposition, pas de fenêtre : **le siège
-n'est jamais vide, pas même le temps d'une image**. Là où le lecteur
-attend le vertige du trou, quelqu'un est déjà là.
+À mesure que le lecteur franchit une strate, le cadre adopte son état.
+**Il ne revient jamais en arrière.** Remonter ne restitue pas la sobriété
+du début : on ne peut pas revenir à l'état où l'on n'avait pas encore
+accepté.
 
-Même mécanique pour Eryth → Aurélia (écarté, vivant) et
-Dayu → Malachar (morte, arc résolu par Ysolde).
+*« Ils avaient juste besoin d'être indispensables assez longtemps pour
+que le retrait devienne impossible. »*
 
-> **Correction.** Une version antérieure de ce document affirmait une
-> chaîne « Therys → Dayu → Malachar ». C'était une déduction, pas du
-> canon : rien dans `Magic.txt` ne dit que Therys est morte ou remplacée.
-> `ARQUET_CANON.md` §3 la donne en poste, et cela fait foi.
->
-> La substitution n'affiche que les successions réellement documentées.
-> Therys est un membre en poste comme les autres, sans chaîne.
-
-L'interaction exige un **geste** — un clic ou un `pointerenter` réel, pas
-un survol de passage (règle du 2026-07-29, apprise sur Aurélia). Sur
-tactile, un appui simple.
+Implémentation : `IntersectionObserver`, une classe d'état sur le
+conteneur racine, transition en `opacity` seule. Aucun `filter`, une
+seule boucle rAF via `rafPartage` si nécessaire.
 
 ---
 
-## 6. La révélation d'Astraevor
+## 3. Contenu jamais masqué — contrainte absolue
 
-Son nom se compose **quand les sept sièges ont été ouverts**, pas avant.
+Règle du 2026-07-29, non négociable.
 
-Ce n'est pas une récompense à débloquer : c'est le canon appliqué à la
-lettre. Les parchemins ne s'écrivent que sous les yeux des Héritiers. On ne
-voit pas Astraevor de l'extérieur — il faut être dedans.
-
-Il ne s'affiche pas : il **s'écrit**, lentement, dans l'espace resté vide
-en haut de page et dont on n'avait pas compris qu'il attendait quelque
-chose. Au même moment, les fils révèlent leur prolongation.
-
-C'est ce qui garantit qu'aucune section n'est sautée : pas une barre de
-progression, mais une **absence qu'on finit par remarquer**.
-
-### ⚠️ Contrainte absolue — le contenu n'est jamais masqué
-
-Règle du 2026-07-29, non négociable : **le HTML servi est entièrement
-lisible.** Sans JavaScript, la page est complète.
-
-Concrètement :
-
-- Astraevor est **déjà présent** dans la liste des membres, au rang
-  Cercle Zéro, comme n'importe quel autre membre. Son nom, son rôle et son
-  mensonge sont dans le HTML dès le départ.
-- La composition cérémonielle en haut de page est une **couche
-  supplémentaire**, pas la seule occurrence de l'information.
-- Draeven **et** Neihem sont tous deux dans le HTML servi. L'interaction
-  change lequel est au premier plan, jamais lequel existe.
-- Filet de sûreté à 3 secondes, comme `RevealAuDefilement`.
-
-**Aucune information n'est conditionnée à une interaction.** Ce qui est
-conditionné, c'est la mise en scène.
+- Le HTML servi est **entièrement lisible**. Sans JavaScript, la page est
+  complète et les strates sont là avec leur style statique.
+- Seule **l'irréversibilité du cadre** est conditionnée. Aucune
+  information n'attend un défilement.
+- Tous les membres sont dans le HTML dès le rendu serveur.
 
 ---
 
-## 7. Le rythme amplifié
+## 4. Le contenu, strate par strate
 
-La Marque n'accorde rien : elle aggrave ce qu'elle trouve.
+Rien n'est inventé. Tout provient de `Magic.txt`.
 
-La page mesure la vitesse de défilement du lecteur et l'exagère
-légèrement. Lecture lente → les apparitions s'appesantissent, les fils
-ralentissent. Défilement rapide → tout s'emballe.
+### Strate I — Les Chercheurs de l'Arché
 
-Aucune autre composition du site ne fait ça : elles proposent toutes un
-rythme. Celle-ci renvoie au lecteur le sien, en pire.
+L'Arché : le principe premier, ce dont tout procède. Thalès disait l'eau,
+Héraclite le feu. L'organisation a tordu la question — si l'Arché précède
+toute forme, ce n'est pas une matière, c'est le Vide qui précède la
+Création. *« Le nom n'est pas une prétention. C'est une adresse. »*
 
-**Amplitude faible.** L'effet doit être ressenti sans être identifié. S'il
-devient perceptible comme un effet, il est raté. Plafond et plancher stricts
-pour que la lecture ne soit jamais empêchée.
+**L'origine — l'Ombre du Cercle.** Le Cercle de l'Unité éclate quand
+Klein se scelle. Sylvia meurt de chagrin, Gora devient une montagne,
+Elian construit une cage, Fenris part vers le nord. Vyl s'en va sans un
+mot. Ce qu'il fonde n'est pas une organisation criminelle : une société
+de récupération. Cinq amis venaient de perdre le sixième, un seul a
+refusé le deuil. Le vol de l'écaille de Bahamut pendant son sommeil — un
+exploit de collectionneur, pas de guerrier. *« On ne cambriole pas un
+Monarque endormi par hasard. On le fait parce qu'on a une liste. »*
 
-Une seule boucle `requestAnimationFrame`, via `rafPartage`
-(règle du 2026-07-27).
+**Ce que les membres croient chercher.** La quasi-totalité pense faire de
+la philosophie radicale. Ils n'ont pas tort. Ce qu'ils ignorent : un seul
+homme sait déjà ce qu'il y a en bas et ne cherche rien — il creuse vers
+une serrure précise.
+
+*Image : `cloitre.webp`*
+
+### Strate II — La Confrérie du Seuil
+
+Les royaumes cessent de financer la garde du cristal, l'ordre se vend.
+Compagnies franches, escortes, recouvrement de dettes magiques. La leçon
+fondatrice : une organisation qui rend des services indispensables ne se
+fait pas dissoudre.
+
+**La Marque Primitive.** Ni encre ni rituel : exposition directe aux
+résidus dans les fissures profondes. ~40 % de survie. Amplification
+incontrôlée, personnalité qui se fragmente en quelques années. *« On ne
+recrutait pas — on essayait des gens. »*
+
+### Strate III — L'Ordre des Éclipsés
+
+Camouflage quasi religieux. Ils cessent de se battre et se mettent à
+financer.
+
+**Les Faux Piliers.** Après le Grand Silence le mana s'appauvrit ;
+l'Univers ne produit plus assez d'humains à structure adéquate. Sièges
+vacants, concepts sans porteurs. L'Arquet fournit des candidats — la
+Marque amplifie assez pour tromper tout observateur extérieur, et le
+plafond de verre ne se voit pas tant qu'on n'exige pas un Domaine Absolu.
+**Le Tailleur** : quarante ans de règne comme Nouveau Thanatos, dissipé
+en quelques secondes le jour où un véritable Pilier de la Mort a émergé.
+
+**La Marque Rituelle.** Encre distillée, aiguille d'os. ~60 % de survie,
+utilité 10 à 20 ans. C'est l'ère de **la Recousue** — élève de la Reine
+Rouge, écartée par l'Univers à la succession. Sa magie n'était pas la
+guérison mais **la persistance** : démembrée, chaque morceau restait
+vivant et opérationnel. Sa fin : un piège creusé sur des mois, l'asphyxie
+lente pendant que sa magie réparait indéfiniment.
+**Le doc ne dit jamais qu'elle est morte.**
+
+**Arkadia**, quatre phases sur trois siècles : le crédit, la dépendance,
+les postes, l'inversion. *« Il n'y a pas eu de coup d'État. »*
+
+*Images : `manuscrit.webp`, puis `galerie.webp`*
+
+### Strate IV — L'Arquet
+
+Astraevor vainc Karn, puis Chronos, puis comprend que le sceau du Mora
+Miserium est inviolable de l'extérieur même pour un 4e Éveil. Sept
+sièges, un commanditaire qui n'apparaît jamais. *Formalisé, pas fondé —
+il a hérité d'un réseau vieux de mille huit cents ans.*
+
+**Qui dirige quoi.** Instructions par rêves, prémonitions, parchemins
+vierges qui ne s'écrivent que sous les yeux des Héritiers. Aucun Héritier
+ne l'a rencontré plus de deux ou trois fois. **Veyran** n'a jamais été le
+dirigeant et ne le prétend pas : porte-parole sans magie qui sait tout,
+parce qu'un porte-parole ignorant est inutile. Il y a eu des Veyran avant
+Veyran.
+
+**Ce qui n'est jamais du combat** — l'économie, le renseignement, la
+diplomatie, la collection. Khemetra est le modèle : Aurélia tient la
+source du fleuve, donc le Pharaon obéit. *« L'Arquet ne renverse jamais
+un pouvoir — il devient la condition de sa survie. »*
+
+**L'Ancre.** Pas un tatouage : une archive compressée, mana corrompu et
+informations condensés en une figure sur la peau. L'encre provient de
+résidus prélevés près des failles où des fragments de Nihil ont été
+projetés. La forme s'adapte à l'âme.
+
+**La Marque Graduée et le cas Eryth.** Il n'a pas inventé la Marque : il
+a compris que la dissolution d'identité n'est pas un effet secondaire
+mais **le mécanisme**. Moins il te reste de toi, plus tu es fort. La
+Combustion prend l'enfance, puis le nom, puis la raison de se battre,
+dans cet ordre. Il l'a dosée — cinquante-trois sujets. Ses deux ajouts
+sont des choix de conception : le plafond de verre (jamais de Domaine
+Absolu) et le kill-switch. *« Il n'a pas rendu la Marque plus puissante.
+Il l'a rendue sûre pour l'employeur. »*
+Et à la seconde où l'upgrade a été livré, une vision falsifiée montrée à
+six Héritiers l'a écarté. **Même la quintessence est consommable.** Sauf
+qu'il a gardé son Ancre, ses sept Ateliers, sa méthode et ses
+financements.
+
+**L'entrée et les deux voies.** On ne reçoit pas la Marque en arrivant —
+il y a un sas. La succession désignée (Soryn a succédé à Mystério) ou le
+**duel de sang** : tu défies l'Héritier en poste, tu le tues, tu prends
+sa place. Aucune autorisation à demander.
+**La rumeur** : le vainqueur hériterait aussi des compétences et de
+l'expérience. Probablement vrai — une Ancre qui consomme de l'identité
+pendant des décennies finit par en contenir. *« Ce n'est pas un cadeau.
+C'est un parasite avec un historique. »* Personne n'est sûr parce que
+ceux à qui c'est arrivé ne savent plus très bien qui répondrait à la
+question.
+
+**Mystério, alias Pether Rudeus.** Prédécesseur de Soryn. Horsen, cheval
+de feu réduit à un crâne équin en flammes. Premier Héritier dont la magie
+s'améliore proportionnellement à ce qu'il libère — la vitrine d'Eryth.
+Mort contre Elias jeune, et ce duel explique pourquoi Elias médite dix
+heures par jour.
+
+**Le vivier.** Chaque Héritier choisi pour sa brisure, sa douleur
+utilisable, son désespoir malléable. Ils ne promettent jamais de la
+puissance : ils promettent la chose précise qui manque. L'orphelin qui
+n'a pas eu la chance de Léo. Un Bora qui a refusé d'avancer. Une Calista
+méchante. Un successeur de Pilier que l'Univers n'a pas choisi. **Une
+veuve qui prête sa force pour que ses enfants mangent — celle-là n'a
+aucune idéologie, elle a un loyer.**
+
+**L'organigramme** — Diplomates, Marqués, Armées (Neihem invoque les
+morts : la seule armée du monde dont les pertes reviennent au service le
+lendemain), Classe Spéciale, Héritiers. Les sept sièges actuels : Kael,
+Soryn, Varros, Aurélia, Cindrel, Neihem Roshim, Malachar.
+
+**Lucian.** Il a rejoint l'Arquet et **il n'est pas Marqué** — exception
+qui n'existe nulle part ailleurs. Marquer Lucian le débrancherait du
+siège qu'il doit occuper : quelqu'un sait exactement ce qu'il est et a
+donné l'instruction de ne pas y toucher. Il n'y est pas allé par colère.
+*« Il les a rejoints parce qu'il n'a pas trouvé d'argument. »*
+
+### Strate V — La main
+
+Même registre, aucune rupture.
+
+**Les Cinq Doigts.** La classe la plus nombreuse, la seule qui n'exige ni
+magie, ni Ancre, ni serment. Chanceliers, greffiers, recteurs, juges de
+paix, armateurs. Héritiers directs de la Maison de Prêt — quand on prête
+à la moitié des royaumes, on finit par former, payer et promouvoir la
+moitié de leurs administrations. **La plupart ne savent pas ce qu'ils
+servent.**
+
+*« On ne démantèle pas ça. Il n'y a pas de complice à retourner, pas de
+réseau à décapiter, pas de repaire à fouiller. Il y a un tissu
+administratif, et retirer le tissu fait s'effondrer les royaumes qui
+reposent dessus. »*
+
+Les cinq fonctions — **le Pouce** (les dettes ; il ne menace jamais, il
+rappelle), **l'Index** (la désignation ; il tient la liste des porteurs
+de structure d'âme non branchés), **le Majeur** (la contradiction ; le
+seul dont le métier est de dire non, et le seul à pouvoir refuser un
+ordre venu d'en haut), **l'Annulaire** (l'alliance ; trois générations de
+résultats), **l'Auriculaire** (l'oubli ; il ne tue pratiquement jamais —
+un mort produit une enquête, il déplace).
+
+Aucun ne commande aux autres. **Aucun ne connaît l'identité des autres.**
+
+**Le renversement.** Les Héritiers sont l'outil, les Diplomates sont
+l'organisation. Tuer les sept ne ferait pas tomber l'Arquet : ça
+retirerait sa force de frappe à une structure qui n'en a presque jamais
+besoin, et qui en formerait sept autres en une génération.
+
+> **Conséquence pour la mise en page.** Les sept sièges ne sont pas le
+> sommet du récit. Ils arrivent **avant** la main. En faire le point
+> culminant reviendrait à commettre l'erreur que le texte reproche aux
+> Piliers, à Celestia et aux Académies.
+
+*Image : `lettres.webp`*
+
+### L'assèchement — avant la chute
+
+L'Ancre empêche une structure d'âme de se lier à une fonction. **Chaque
+Marqué est une pièce définitivement retirée du stock de l'Univers.**
+Aurélia possède probablement la meilleure affinité Matière vivante du
+monde. Elle est débranchée à vie, et elle ne le sait pas.
+
+L'effet n'est pas que les Piliers actuels soient faibles — c'est qu'il
+devient **de plus en plus difficile d'en trouver**. Le vivier se raréfie
+à chaque génération. L'Univers ne se venge pas : il distribue avec ce qui
+reste.
+
+Et si l'organisation sait cela, alors elle sait que les âmes ont une
+structure, qu'elles se lient à des fonctions, que les Piliers sont des
+modules dans un système. **Elle a compris la mécanique du monde avant
+ceux qui l'incarnent.** Le vrai but n'a alors pas besoin d'un sabotage :
+retirer assez de structures suffit à ce que le système s'arrête faute de
+matériau.
+
+*Image : `hall.webp`*
+
+### Les deux failles — même registre plat
+
+**Dans la main.** Personne ne peut vérifier un Doigt puisque personne ne
+sait qui il est. Un Doigt qui filtrerait ce qu'il transmet ne serait
+détecté par personne. *« Il n'y a pas de contrôle, parce qu'il n'y a
+jamais eu besoin d'en mettre un. »*
+
+**Dans les créations.** Les Sujets Nexus ne sont pas des soldats. Quatre
+individus conçus lors d'événements Nexus qu'Astraevor peut prédire des
+siècles à l'avance. Un Nexus n'amplifie pas que la magie : il amplifie
+**tout, y compris l'âme**. Ils ont développé une **troisième
+conscience** — et une troisième conscience ne reçoit d'ordres de
+personne, **pas même d'Astraevor**. Deux se sont échappés.
+
+### La chute — hors strate, sans ornement
+
+Vyl a fondé ce réseau pour ramener Klein. Astraevor en a hérité pour
+libérer Nihil. Les deux objectifs exigent exactement les mêmes moyens.
+Des générations d'Héritiers ont travaillé à la même tâche en croyant
+servir des causes opposées.
+
+Et il reste peut-être, quelque part dans la structure, une vieille lignée
+qui n'a jamais changé d'objectif et qui attend toujours le retour de
+l'homme à l'écharpe.
+
+> **Aucun traitement visuel.** Pas de grande typographie, pas
+> d'apparition, pas d'accent. Le registre le plus plat de la page. C'est
+> la seule façon de ne pas l'affaiblir.
 
 ---
 
-## 8. Accessibilité — plancher de qualité, sans l'annoncer
+## 5. Les images
 
-- `prefers-reduced-motion: reduce` → les fils sont **statiques et déjà
-  prolongés**, Astraevor est visible d'emblée, aucune amplification de
-  rythme. La page reste juste ; elle perd la mise en scène, pas le sens.
-- Navigation clavier complète : chaque siège est atteignable au `Tab`,
-  focus visible, la substitution se déclenche à `Enter`.
-- Chaque siège porte un `aria-label` explicite ; les changements de nom
-  sont annoncés en `aria-live="polite"`.
-- Les fils SVG sont `aria-hidden="true"` — ils sont décoratifs,
-  l'information est dans le texte.
-- Responsive jusqu'à 375 px : sous 640 px les fils passent en colonne
-  simple, la prolongation reste lisible.
+Le type `Faction` reçoit un champ `images` optionnel, calqué sur celui
+des personnages. Ajout **additif** — aucune fiche existante ne devient
+invalide.
+
+| Fichier | Placement | Ce qu'il dit |
+|---|---|---|
+| `cloitre.webp` | Strate I | Une communauté d'érudits. La lumière ne tombe sur personne. |
+| `manuscrit.webp` | Strate III | L'or est dans l'encre, pas dans une couronne. |
+| `galerie.webp` | Strate III — Arkadia | Une noblesse qui doit son arbre généalogique à l'Annulaire sans le savoir. |
+| `lettres.webp` | Strate V | L'agrégat de choses non secrètes. Le vrai visage. |
+| `hall.webp` | L'assèchement | Immense, institutionnel, désert. Le tissu qu'on ne peut pas retirer. |
+
+**Exception assumée sur `galerie.webp`** — la seule image où des visages
+apparaissent, et ils sont **peints**. Ce ne sont pas des membres de
+l'Arquet : ce sont ses résultats.
+
+**Écartée : la main sur l'échiquier.** Elle dit qu'un joueur unique
+manipule le monde — ce que le texte réfute. Il n'y a pas de joueur : il y
+a un tissu, cinq doigts qui ne se connaissent pas, personne au centre.
+
+Traitement : `next/image` en `fill`, voile amortisseur, jamais de
+conteneur fermé. L'image accompagne la strate, elle ne l'illustre pas
+frontalement.
 
 ---
 
-## 9. Périmètre de fichiers
+## 6. Ce que la page ne fait jamais
+
+- **Aucun portrait, aucune illustration de personne** (sauf peints).
+- **Aucun conteneur rectangulaire fermé** (règle du 2026-07-29).
+- **Aucun jugement moral dans la mise en forme.** La page ne signale
+  jamais que l'argument est un piège. Si elle le fait, le verbe meurt.
+- **Aucun nombre de membres écrit en dur** — tout dérivé de `data.json`.
+
+---
+
+## 7. Accessibilité
+
+- `prefers-reduced-motion: reduce` → cadre en état final d'emblée, aucune
+  transition. Les strates restent distinctes : la dérive est du CSS
+  statique.
+- Contraste minimum 4.5:1 sur chaque strate. La V est la plus à risque.
+- Navigation clavier complète, focus visible.
+- Responsive jusqu'à 375 px : la dérive de colonne s'écrase, celle de
+  typographie et d'accent demeure.
+
+---
+
+## 8. Périmètre de fichiers
 
 Création :
 ```
-src/themes/personnages/argent-froid.ts
-src/components/factions/compositions/fil/FilFaction.tsx
-src/components/factions/compositions/fil/FilFaction.module.css
-src/components/factions/compositions/fil/Fils.tsx
-src/components/factions/compositions/fil/Siege.tsx
-src/components/factions/compositions/index.ts
-src/components/factions/compositions/types.ts
+src/components/factions/compositions/palimpseste/Strate.tsx
 ```
 
 Modification :
 ```
-src/themes/personnages/index.ts       (enregistrement additif du thème)
-src/content/factions/ordre-de-l-arquet/data.json  (themeKey, composition, Veyran)
-src/app/factions/[slug]/page.tsx      (résolution de composition)
-src/app/factions/preview/[slug]/page.tsx
+src/types/faction.ts                     (champ `images` optionnel)
+src/themes/personnages/arche.ts          (5 états au lieu de 4)
+src/components/factions/compositions/palimpseste/PalimpsesteFaction.tsx
+src/components/factions/compositions/palimpseste/PalimpsesteFaction.module.css
+src/content/factions/ordre-de-l-arquet/histoire.mdx
+src/content/factions/ordre-de-l-arquet/data.json    (champ images)
 ```
 
-**Hors périmètre :** toute composition personnage, `src/lib/personnages.ts`,
-`src/types/personnage.ts`, tout thème existant, tout `data.json` personnage.
-
-### ⚠️ Changement de périmètre à valider
-
-**Veyran doit entrer en V1.** `ARQUET_CANON.md` §5 le classait hors
-périmètre, mais toute la signature repose sur lui : sans le chef de façade,
-il n'y a pas de mensonge à révéler.
-
-Il rejoint `membres` avec `rang: "Façade"` et `statut: "en-poste"`,
-contenu strictement issu de l.17991–18025 et 20267. **Décision du
-créateur requise avant implémentation.**
+**Hors périmètre :** toute composition personnage, `src/lib/`, tout thème
+existant, tout `data.json` personnage.
 
 ---
 
-## 10. Ordre d'exécution
+## 9. Ordre d'exécution
 
 | # | Livrable | Critère |
 |---|---|---|
-| 1 | Thème `argent-froid` + registre | Build passe, thèmes existants intacts |
-| 2 | Registre de compositions factions + repli `standard` | Une composition inconnue retombe sur `standard` |
-| 3 | Structure `fil` statique — sièges, Veyran, aucun fil | Lisible sans JS, aucune boîte fermée |
-| 4 | Les fils SVG, état initial (convergence sur Veyran) | Statique sous `reduced-motion` |
-| 5 | Substitution dans les sièges | Draeven **et** Neihem dans le HTML servi |
-| 6 | Révélation d'Astraevor + prolongation des fils | Visible d'emblée sous `reduced-motion` |
-| 7 | Amplification du rythme | Imperceptible comme effet ; plafonnée |
+| ~~1~~ | ~~Suppression `fil/`, thème `arche`~~ | ✅ fait |
+| ~~2~~ | ~~Socle de mise en page~~ | ✅ fait |
+| 3 | `histoire.mdx` réécrit — strate par strate | Contenu complet, lisible sans JS |
+| 4 | Les strates en CSS statique | Écart I↔V saisissant, I↔II imperceptible |
+| 5 | Champ `images` + placement des 5 visuels | Aucun conteneur fermé |
+| 6 | Irréversibilité du cadre | Remonter ne restitue pas l'état initial |
 
-Chaque étape : `npm run build` passe, diff annoncé avant application.
+**L'étape 3 se fait strate par strate**, avec validation du ton avant
+d'enchaîner. Si la voix savante de la strate I n'est pas juste, les
+suivantes partent de travers.
 
 ---
 
-## 11. Critères de refus
-
-La livraison est rejetée si :
+## 10. Critères de refus
 
 - une information n'existe que derrière une interaction ;
-- un nombre de membres est écrit en dur, affiché, ou déduit ailleurs que
-  de `data.json` ;
-- une succession non documentée dans `ARQUET_CANON.md` a été inventée ;
+- le point de bascule entre deux strates est identifiable ;
+- remonter en haut de page restitue l'état initial ;
+- la mise en forme signale que l'argument est un piège ;
+- la chute finale a reçu un traitement emphatique ;
+- les sept sièges sont présentés comme le sommet du récit ;
+- un `filter` est animé, ou une seconde boucle rAF créée ;
 - une boîte rectangulaire fermée est apparue ;
-- un `filter` est animé, ou une seconde boucle `rAF` a été créée ;
-- l'amplification du rythme se remarque comme un effet ;
 - le récit MDX est moins lisible qu'avant ;
-- un portrait ou une illustration de personne a été ajouté ;
-- la page tient encore debout si on retire les fils — cela voudrait dire
-  qu'ils décoraient au lieu de dire.
+- un nombre de membres est écrit en dur.
+
+---
+
+## 11. Lacunes et pistes — non comblées
+
+1. **Ashren Veil ≠ Ash.** Deux personnages distincts portent ce nom :
+   Ashren Veil (l.18046, l'enfant aux deux consciences) et Ash, élève de
+   Kratos. Redondance signalée par le créateur, **à arbitrer**. La
+   mention « Ashren encadre les Armées » (l.33468) est donc ambiguë.
+2. **Sujets Nexus** — quatre individus, noms de code seulement. Ils
+   méritent leur propre entité : **faction future**, pas sous-partie de
+   l'Arquet. Non développés ici.
+3. **Les cinq fonctions des Doigts** sont marquées « proposition — noms
+   et rôles à valider » dans `Magic.txt`. Utilisées telles quelles.
+4. **Malachar** — aucune fonction déclarée. Ne rien inventer.
+5. **Piste ouverte, à traiter en session dédiée** : existe-t-il un moyen
+   de se libérer d'une Ancre ? Si oui, tout l'assèchement devient
+   réversible. **Ne pas trancher ici.**
+6. **Bloc dupliqué** dans `Magic.txt` : « Pourquoi la prescience ne
+   suffit pas » et « Trois sièges sur sept sont des postes de collecte »
+   apparaissent deux fois à l'identique.

@@ -1,5 +1,6 @@
 import type { PersonnageTheme } from '@/types/personnage-theme';
 import { amourDouleurTheme } from './amour-douleur';
+import { archeTheme } from './arche';
 import { argentFroidTheme } from './argent-froid';
 import { defaultPersonnageTheme } from './default';
 import { feuTimideTheme } from './feu-timide';
@@ -13,6 +14,7 @@ import { vieSauvageTheme } from './vie-sauvage';
 
 const personnageThemes: Record<string, PersonnageTheme> = {
   [amourDouleurTheme.key]: amourDouleurTheme,
+  [archeTheme.key]: archeTheme,
   [argentFroidTheme.key]: argentFroidTheme,
   [defaultPersonnageTheme.key]: defaultPersonnageTheme,
   [feuTimideTheme.key]: feuTimideTheme,

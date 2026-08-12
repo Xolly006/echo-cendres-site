@@ -1,0 +1,47 @@
+/*
+ * Le fond imagé — copie du modèle PersonnageFond.module.css.
+ *
+ * Il est fixe et derrière tout : il ne défile pas, il ne capte jamais le
+ * pointeur, et il reste sous le contenu de la fiche.
+ */
+
+.fond {
+  position: fixed;
+  inset: 0;
+  z-index: -3;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.calque {
+  position: absolute;
+  inset: 0;
+  /* Désaturation statique : une image trop colorée se dispute la page
+     avec la palette de la strate. Elle apporte de la matière, pas une
+     couleur. */
+  filter: saturate(0.7) contrast(1.06);
+  transition: opacity 220ms linear;
+}
+
+/*
+ * Le voile. Sans lui, aucun texte n'est lisible sur une image de fond.
+ * Teinté par --character-bg pour que l'image appartienne au monde de la
+ * strate en cours, comme chez PersonnageFond.
+ */
+.voile {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--character-bg, #0d0e10) 22%, transparent) 0%,
+    color-mix(in srgb, var(--character-bg, #0d0e10) 40%, transparent) 32%,
+    color-mix(in srgb, var(--character-bg, #0d0e10) 78%, transparent) 62%,
+    color-mix(in srgb, var(--character-bg, #0d0e10) 92%, transparent) 100%
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .calque {
+    transition: none;
+  }
+}

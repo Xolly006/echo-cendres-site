@@ -2,16 +2,16 @@
   "nom": "L'Ordre de l'Arquet",
   "ere": "actuelle",
   "statut": "active",
-  "resume": "Les Péchés Capitaux de la Magie : sept sièges au service d'une Volonté qui n'apparaît jamais et ne laisse jamais un siège vide.",
-  "themeKey": "argent-froid",
-  "composition": "fil",
+  "resume": "Une société de récupération devenue un tissu administratif. Dix-huit siècles, quatre noms, et un argument que personne n'a réussi à réfuter.",
+  "themeKey": "arche",
+  "composition": "palimpseste",
   "publicationStatus": "draft",
   "membres": [
     {
       "nom": "Astraevor",
       "statut": "fondateur",
       "rang": "Cercle Zéro",
-      "notes": "N'apparaît jamais aux réunions ; transmet ses instructions par rêves, prémonitions ou parchemins vierges qui ne s'écrivent que sous les yeux des Héritiers. Il est leur Volonté, pas leur chef. Leur a promis un monde libre des caprices des Piliers ; en réalité, il les nourrit pour qu'ils deviennent les gardes du corps du futur Nihil. Veille à ce que l'Arquet ait toujours exactement le bon nombre de Généraux : un siège vide est comblé avant que le déséquilibre ne se remarque."
+      "notes": "N'apparaît jamais aux réunions ; transmet ses instructions par rêves, prémonitions ou parchemins vierges qui ne s'écrivent que sous les yeux des Héritiers. Il est leur Volonté, pas leur chef."
     },
     {
       "nom": "Veyran",
@@ -51,7 +51,7 @@
       "personnageSlug": "aurelia-reine-midas",
       "remplace": "Eryth",
       "rang": "Conseil",
-      "notes": "A remplacé Eryth quand Astraevor a jugé son travail sur l'Ancre du Néant terminé."
+      "notes": "A remplacé Eryth quand Astraevor a jugé son travail sur l'Ancre terminé."
     },
     {
       "nom": "Cindrel",
@@ -60,14 +60,6 @@
       "statut": "en-poste",
       "rang": "Conseil",
       "notes": "Il ne chante pas : il émet des fréquences qui résonnent avec la peur primale."
-    },
-    {
-      "nom": "Therys",
-      "titre": "L'Oracle Brisé",
-      "concept": "Le Fatalisme",
-      "statut": "en-poste",
-      "rang": "Conseil",
-      "notes": "Yeux cousus pour ne voir que les possibles ; pleure du sang noir. Ce qu'elle voit — le retour de Nihil — la terrifie, et elle ne peut pas s'arrêter."
     },
     {
       "nom": "Neihem Roshim",
@@ -101,7 +93,8 @@
       "nom": "Malachar",
       "statut": "en-poste",
       "remplace": "Dayu",
-      "notes": "À VALIDER — le canon ne tranche pas si l'Ordre compte sept ou huit sièges avec son arrivée. Non représenté dans la composition : aucun siège n'y est numéroté."
+      "rang": "Conseil",
+      "notes": "Remplace Dayu. Aucune fonction déclarée à ce jour — le créateur la décrit comme étant à ses débuts. Rien n'est inventé pour combler la case."
     }
   ],
   "branches": [
@@ -123,6 +116,33 @@
   ],
   "mecanique": {
     "nom": "La Marque",
-    "principe": "Puissance contre obéissance : l'Ordre recrute les désespérés. La Marque n'accorde pas une nature, elle amplifie celle qui est déjà là — chez un coléreux, elle amplifie la rage. Elle est partout : le banquier, le roi ou le boulanger peut être un Marqué."
-  }
+    "principe": "L'Ancre est une archive compressée : elle amplifie ce qu'elle trouve et consomme l'identité pour produire de la puissance. Ils ne promettent jamais de la puissance — ils promettent la chose précise qui manque."
+  },
+  "images": [
+    {
+      "src": "/factions/ordre-de-l-arquet/cloitre.webp",
+      "alt": "Un cloître de pierre désert, éclairé par des vitraux hauts.",
+      "placement": "strate-1"
+    },
+    {
+      "src": "/factions/ordre-de-l-arquet/manuscrit.webp",
+      "alt": "Un manuscrit ouvert, lettrines rehaussées à la feuille d'or.",
+      "placement": "strate-3"
+    },
+    {
+      "src": "/factions/ordre-de-l-arquet/galerie.webp",
+      "alt": "Une galerie de portraits peints, éclairée aux chandelles.",
+      "placement": "strate-3-arkadia"
+    },
+    {
+      "src": "/factions/ordre-de-l-arquet/lettres.webp",
+      "alt": "Une pile de lettres manuscrites et une plume.",
+      "placement": "strate-5"
+    },
+    {
+      "src": "/factions/ordre-de-l-arquet/hall.webp",
+      "alt": "Un grand hall institutionnel désert, aux colonnes dorées.",
+      "placement": "fin"
+    }
+  ]
 }

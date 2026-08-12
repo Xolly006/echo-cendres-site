@@ -46,6 +46,22 @@ export type FactionChronologie = {
   jalons?: { quand: string; quoi: string }[];
 };
 
+/**
+ * Calqué sur `PersonnageImage` (src/types/personnage.ts). Contrairement au
+ * personnage — deux slots fixes, `fond`/`fondSecondaire` — une faction peut
+ * accompagner un nombre variable de points de son récit : `placement` est
+ * une chaîne libre que seule la composition interprète (ex. une strate du
+ * palimpseste de l'Arquet, docs/ARQUET_COMPOSITION.md §5).
+ */
+export type FactionImage = {
+  src: string;
+  alt: string;
+  /** object-position CSS, par défaut "center". */
+  ancrage?: string;
+  /** Où l'image s'ancre dans le récit. Libre, lu par la composition. */
+  placement: string;
+};
+
 export type Faction = {
   slug: string;
   nom: string;
@@ -62,6 +78,8 @@ export type Faction = {
   branches?: FactionBranche[];
   mecanique?: FactionMecanique;
   chronologie?: FactionChronologie;
+  /** Optionnel : une fiche sans image s'affiche exactement comme avant. */
+  images?: FactionImage[];
 
   /** Champs volontairement non consignés, cf. identity.unrecorded. */
   unrecorded?: string[];

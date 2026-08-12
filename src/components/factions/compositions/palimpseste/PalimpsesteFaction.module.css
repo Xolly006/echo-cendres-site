@@ -1,0 +1,503 @@
+/*
+ * Composition "palimpseste" — L'Ordre de l'Arquet (docs/ARQUET_COMPOSITION.md).
+ *
+ * Étape 2 : le socle, repris tel quel de
+ * src/components/personnages/StandardImmersivePersonnage.module.css et
+ * src/components/personnages/PersonnageNarrative.module.css — largeur de
+ * colonne, marges de page, rythme vertical, titres de section, traitement
+ * du récit MDX. Aucune strate, aucune dérive, aucune irréversibilité,
+ * aucune animation : un seul état visuel, celui de la strate I du thème
+ * `arche` (os sur charbon).
+ *
+ * Aucun conteneur rectangulaire fermé : la séparation entre sections vient
+ * du rythme vertical et d'un filet border-bottom sous chaque titre de
+ * section, jamais d'une boîte à quatre bords.
+ */
+
+.scene {
+  position: relative;
+  min-height: calc(100vh - 2rem);
+  color: var(--character-text, var(--text));
+  font-family: var(--character-body-font, var(--font-body));
+}
+
+.content {
+  width: min(82rem, 100%);
+  margin: 0 auto;
+  padding: clamp(7rem, 13vh, 10rem) clamp(1rem, 5vw, 4rem) clamp(3rem, 8vh, 6rem);
+  display: grid;
+  gap: clamp(2rem, 7vw, 7rem);
+}
+
+.intro {
+  max-width: 58rem;
+}
+
+.previewPill {
+  display: inline-flex;
+  margin-bottom: 1.1rem;
+  border: 1px solid color-mix(in srgb, var(--character-accent, var(--accent)) 48%, var(--character-border, var(--border)));
+  border-radius: 999px;
+  padding: 0.34rem 0.62rem;
+  color: var(--character-text, var(--text));
+  background: color-mix(in srgb, var(--character-accent, var(--accent)) 12%, transparent);
+  font-family: var(--font-ui);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: calc(var(--character-label-spacing, 0.22em) * 0.45);
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.previewPill[data-status='draft'] {
+  border-style: dashed;
+}
+
+.eyebrow {
+  margin: 0 0 0.6rem;
+  color: var(--character-accent, var(--accent));
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: var(--character-label-spacing, 0.22em);
+  text-transform: uppercase;
+}
+
+.title {
+  max-width: min(16ch, 100%);
+  margin: 0;
+  font-family: var(--character-title-font, var(--font-title));
+  font-size: clamp(3.4rem, 8.4vw, 8.4rem);
+  font-weight: var(--character-title-weight, 600);
+  letter-spacing: var(--character-title-spacing, 0.03em);
+  line-height: 0.92;
+  text-wrap: balance;
+  overflow-wrap: break-word;
+  word-break: normal;
+  hyphens: none;
+}
+
+.epithete {
+  margin: 0.6rem 0 0;
+  color: var(--character-muted, var(--muted));
+  font-family: var(--character-title-font, var(--font-title));
+  font-size: 1.1rem;
+}
+
+.resume {
+  max-width: 40rem;
+  margin: 1.2rem 0 0;
+  color: var(--character-muted, var(--muted));
+  font-size: clamp(1rem, 2vw, 1.18rem);
+  line-height: var(--character-body-line-height, 1.8);
+}
+
+/* Même construction que .sectionHeader + .identityTitle/.magicTitle sur
+   une fiche personnage : titre + description optionnelle, filet en
+   dessous, jamais une boîte fermée. */
+.sectionHeader {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  justify-content: space-between;
+  gap: 0.75rem 1.5rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--character-border, var(--border)) 72%, transparent);
+  padding-bottom: 0.8rem;
+}
+
+.sectionTitle {
+  margin: 0;
+  color: var(--character-accent, var(--accent));
+  font-family: var(--font-ui);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: var(--character-label-spacing, 0.22em);
+  text-transform: uppercase;
+}
+
+.sectionHeader p {
+  max-width: 26rem;
+  margin: 0;
+  color: var(--character-muted, var(--muted));
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+/* Membres : largeur reprise de .identity/.magic (structure large). Grille
+   sans bordure, la séparation vient de l'espacement, pas d'une boîte. */
+.membres {
+  width: min(70rem, 100%);
+}
+
+.membresList {
+  display: grid;
+  /* Corrigé le 2026-08-12 : auto-fit sur minmax(13rem,1fr) tassait jusqu'à
+     4-5 colonnes sur les grands écrans, cartes collées, effet annuaire.
+     Plafond dur à 3 colonnes, espacement horizontal plus généreux que
+     vertical. */
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2rem clamp(2.5rem, 5vw, 4rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.membre {
+  min-width: 0;
+}
+
+.membreNom {
+  margin: 0;
+  font-family: var(--character-title-font, var(--font-title));
+  font-size: 1.2rem;
+}
+
+.membreTitre {
+  margin: 0.2rem 0 0;
+  color: var(--character-muted, var(--muted));
+  font-size: clamp(0.9rem, 1.4vw, 1rem);
+  line-height: 1.5;
+}
+
+.membreConcept {
+  margin: 0.25rem 0 0;
+  color: var(--character-accent, var(--accent));
+  font-family: var(--font-ui);
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.membreMeta {
+  margin: 0.4rem 0 0;
+  color: var(--character-muted, var(--muted));
+  font-family: var(--font-ui);
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+
+.membreNotes {
+  margin: 0.4rem 0 0;
+  max-width: 24rem;
+  color: var(--character-muted, var(--muted));
+  font-size: 0.85rem;
+  line-height: 1.55;
+}
+
+/* La Marque, Branches, Récit : largeur reprise de PersonnageNarrative
+   (colonne de lecture), pas de la grille large des membres. */
+.mecanique,
+.branches,
+.narrative {
+  width: min(46rem, 100%);
+}
+
+.proseParagraph {
+  margin: 0;
+  color: var(--character-muted, var(--muted));
+  font-size: clamp(1rem, 2vw, 1.12rem);
+  line-height: var(--character-body-line-height, 1.8);
+}
+
+.branchesList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.9rem;
+}
+
+.branchesList li {
+  color: var(--character-muted, var(--muted));
+  font-size: clamp(1rem, 2vw, 1.12rem);
+  line-height: var(--character-body-line-height, 1.8);
+}
+
+.branchesList strong {
+  color: var(--character-text, var(--text));
+}
+
+/* Récit MDX : mêmes tailles, marges et couleurs que
+   PersonnageNarrative.module.css. */
+.narrativeContent h1 {
+  margin: 0 0 1.4rem;
+  color: var(--character-text, var(--text));
+  font-family: var(--character-title-font, var(--font-title));
+  font-weight: var(--character-title-weight, 500);
+  letter-spacing: calc(var(--character-title-spacing, 0.03em) * 0.7);
+  font-size: clamp(2.4rem, 7vw, 4.8rem);
+  line-height: 0.98;
+  text-wrap: balance;
+}
+
+.narrativeContent h2 {
+  margin: clamp(2.8rem, 8vh, 5rem) 0 1rem;
+  color: var(--character-text, var(--text));
+  font-family: var(--character-title-font, var(--font-title));
+  font-weight: var(--character-title-weight, 500);
+  letter-spacing: calc(var(--character-title-spacing, 0.03em) * 0.7);
+  font-size: clamp(1.9rem, 5vw, 3rem);
+  line-height: 1.05;
+  text-wrap: balance;
+}
+
+.narrativeContent h3 {
+  margin: 2rem 0 0.8rem;
+  color: var(--character-accent, var(--accent));
+  font-family: var(--character-title-font, var(--font-title));
+  font-weight: var(--character-title-weight, 500);
+  letter-spacing: calc(var(--character-title-spacing, 0.03em) * 0.7);
+  font-size: clamp(1.25rem, 3vw, 1.7rem);
+  line-height: 1.2;
+}
+
+.narrativeContent p {
+  margin: 1rem 0 0;
+  color: var(--character-muted, var(--muted));
+  font-size: clamp(1rem, 2vw, 1.12rem);
+  line-height: var(--character-body-line-height, 1.8);
+}
+
+.narrativeContent blockquote {
+  margin: clamp(1.8rem, 5vh, 3rem) 0;
+  border-left: 1px solid var(--character-accent, var(--accent));
+  padding: 0.2rem 0 0.2rem clamp(1rem, 4vw, 1.6rem);
+  color: var(--character-text, var(--text));
+  font-family: var(--character-title-font, var(--font-title));
+  font-size: clamp(1.15rem, 3vw, 1.5rem);
+  line-height: 1.6;
+}
+
+.narrativeContent ul,
+.narrativeContent ol {
+  display: grid;
+  gap: 0.55rem;
+  margin: 1.1rem 0 0;
+  padding-left: 1.2rem;
+  color: var(--character-muted, var(--muted));
+  line-height: var(--character-body-line-height, 1.8);
+}
+
+.narrativeContent li {
+  padding-left: 0.25rem;
+}
+
+.narrativeContent hr {
+  margin: clamp(2.2rem, 6vh, 4rem) 0;
+  border: 0;
+  border-top: 1px solid var(--character-border, var(--border));
+}
+
+.narrativeContent a {
+  color: var(--character-accent, var(--accent));
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+/*
+ * Étape 4 — les cinq strates (docs/ARQUET_COMPOSITION.md §1, tableau
+ * "Ce qui dérive"), en CSS statique. Chaque `h2` du récit correspond à une
+ * strate, dans l'ordre du document : Les Chercheurs de l'Arché (I), La
+ * Confrérie du Seuil (II), L'Ordre des Éclipsés (III), L'Arquet (IV), La
+ * main (V). `h2:nth-of-type(N) ~ :is(p, blockquote)` porte le style de la
+ * strate N à tous ses paragraphes suivants, jusqu'à ce que la règle de la
+ * strate N+1 (plus loin dans la feuille, donc prioritaire à spécificité
+ * égale) prenne le relais à son propre `h2`. Aucune transition, aucune
+ * interpolation : la continuité vient de l'écart minime entre strates
+ * voisines, pas d'un mouvement. `--strata-N-accent`/`--strata-N-text`
+ * viennent de `archeStrates` (src/themes/personnages/arche.ts), posées en
+ * variables CSS par PalimpsesteFaction.tsx.
+ *
+ * Aucun background-color ici (correction du 2026-08-11 : un paragraphe
+ * teinté est un conteneur rectangulaire fermé, règle du 2026-07-29). Le
+ * fond de page reste uniforme ; la dérive passe par la couleur du corps
+ * de texte (`p`) elle-même, du plus chaud (I) au plus froid et net (V).
+ * Le texte des citations garde `--character-text` (fixe) : seule sa
+ * bordure gauche suit l'accent de la strate.
+ */
+
+.narrativeContent h2:nth-of-type(1) {
+  color: var(--strata-1-accent);
+  font-family: var(--font-serif-titre), Georgia, serif;
+}
+
+.narrativeContent h2:nth-of-type(1) ~ :is(p, blockquote) {
+  max-width: 34rem;
+  line-height: 1.9;
+}
+
+.narrativeContent h2:nth-of-type(1) ~ p {
+  color: var(--strata-1-text);
+}
+
+.narrativeContent h2:nth-of-type(1) ~ blockquote {
+  border-left-color: var(--strata-1-accent);
+}
+
+.narrativeContent h2:nth-of-type(2) {
+  color: var(--strata-2-accent);
+  font-family: var(--font-serif-titre), Georgia, serif;
+  text-transform: none;
+}
+
+.narrativeContent h2:nth-of-type(2) ~ :is(p, blockquote) {
+  max-width: 36rem;
+  line-height: 1.8;
+}
+
+.narrativeContent h2:nth-of-type(2) ~ p {
+  color: var(--strata-2-text);
+}
+
+.narrativeContent h2:nth-of-type(2) ~ blockquote {
+  border-left-color: var(--strata-2-accent);
+}
+
+.narrativeContent h2:nth-of-type(3) {
+  color: var(--strata-3-accent);
+  font-family: var(--font-grotesque-ui), system-ui, sans-serif;
+  text-transform: none;
+}
+
+.narrativeContent h2:nth-of-type(3) ~ :is(p, blockquote) {
+  max-width: 40rem;
+  line-height: 1.7;
+}
+
+.narrativeContent h2:nth-of-type(3) ~ p {
+  color: var(--strata-3-text);
+}
+
+.narrativeContent h2:nth-of-type(3) ~ blockquote {
+  border-left-color: var(--strata-3-accent);
+}
+
+.narrativeContent h2:nth-of-type(4) {
+  color: var(--strata-4-accent);
+  font-family: var(--font-grotesque-ui), system-ui, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.narrativeContent h2:nth-of-type(4) ~ :is(p, blockquote) {
+  max-width: 44rem;
+  line-height: 1.6;
+}
+
+.narrativeContent h2:nth-of-type(4) ~ p {
+  color: var(--strata-4-text);
+}
+
+.narrativeContent h2:nth-of-type(4) ~ blockquote {
+  border-left-color: var(--strata-4-accent);
+}
+
+.narrativeContent h2:nth-of-type(5) {
+  color: var(--strata-5-accent);
+  font-family: var(--font-grotesque-ui), system-ui, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.narrativeContent h2:nth-of-type(5) ~ :is(p, blockquote) {
+  max-width: 46rem;
+  line-height: 1.55;
+}
+
+.narrativeContent h2:nth-of-type(5) ~ p {
+  color: var(--strata-5-text);
+}
+
+.narrativeContent h2:nth-of-type(5) ~ blockquote {
+  border-left-color: var(--strata-5-accent);
+}
+
+/*
+ * Étape 5 — les cinq images (docs/ARQUET_COMPOSITION.md §5). Ancienne
+ * version (bandes insérées dans le récit) abandonnée le 2026-08-12 :
+ * erreur de conception, ça mettait les images dans le flux du texte. Le
+ * fond imagé vit maintenant dans PalimpsesteFond.tsx/.module.css, sur le
+ * modèle de PersonnageFond — fixe, plein écran, hors du récit.
+ */
+
+.backLinkWrap {
+  width: min(46rem, 100%);
+}
+
+.backLink {
+  display: inline-flex;
+  min-height: 2.8rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--character-border, var(--border));
+  border-radius: 999px;
+  padding: 0.75rem 1rem;
+  color: var(--character-text, var(--text));
+  background: color-mix(in srgb, var(--character-surface, var(--surface)) 70%, transparent);
+  font-weight: 700;
+  transition: border-color 180ms ease, transform 180ms ease, background 180ms ease;
+}
+
+.backLink:hover,
+.backLink:focus-visible {
+  border-color: color-mix(in srgb, var(--character-accent, var(--accent)) 58%, white 8%);
+  background: color-mix(in srgb, var(--character-surface, var(--surface)) 86%, transparent);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 1080px) {
+  .content {
+    min-height: auto;
+    padding-top: clamp(7rem, 12vh, 9rem);
+  }
+
+  .intro {
+    max-width: min(44rem, 100%);
+  }
+
+  .title {
+    max-width: min(18ch, 100%);
+    font-size: clamp(3.2rem, 10.4vw, 6.3rem);
+  }
+}
+
+@media (max-width: 820px) {
+  .content {
+    padding-top: 7.5rem;
+  }
+
+  .membresList {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 520px) {
+  .title {
+    max-width: 100%;
+    font-size: clamp(2.6rem, 13.5vw, 4.6rem);
+  }
+
+  .membresList {
+    grid-template-columns: 1fr;
+  }
+
+  .sectionHeader {
+    align-items: start;
+    flex-direction: column;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .backLink {
+    transition: none;
+  }
+
+  .backLink:hover,
+  .backLink:focus-visible {
+    transform: none;
+  }
+}

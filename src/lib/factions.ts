@@ -141,6 +141,26 @@ function readOptionalBranches(value: unknown, fileName: string): Faction['branch
   });
 }
 
+function readOptionalImages(value: unknown, fileName: string): Faction['images'] {
+  if (value === undefined) return undefined;
+  if (!Array.isArray(value)) {
+    throw new Error(`Faction invalide dans ${fileName}: le champ "images" doit être une liste.`);
+  }
+
+  return value.map((entry, index) => {
+    if (!isRecord(entry)) {
+      throw new Error(`Faction invalide dans ${fileName}: l'image #${index} doit être un objet.`);
+    }
+
+    return {
+      src: readRequiredString(entry.src, `images[${index}].src`, fileName),
+      alt: readRequiredString(entry.alt, `images[${index}].alt`, fileName),
+      ancrage: readOptionalString(entry.ancrage, `images[${index}].ancrage`, fileName),
+      placement: readRequiredString(entry.placement, `images[${index}].placement`, fileName),
+    };
+  });
+}
+
 function readOptionalMecanique(value: unknown, fileName: string): Faction['mecanique'] {
   if (value === undefined || value === null) return undefined;
   if (!isRecord(value)) {
@@ -208,6 +228,7 @@ function parseFaction(rawValue: unknown, fileName: string): RawFaction {
     branches: readOptionalBranches(rawValue.branches, fileName),
     mecanique: readOptionalMecanique(rawValue.mecanique, fileName),
     chronologie: readOptionalChronologie(rawValue.chronologie, fileName),
+    images: readOptionalImages(rawValue.images, fileName),
     unrecorded: readOptionalStringList(rawValue.unrecorded, 'unrecorded', fileName),
   };
 }
