@@ -1,14 +1,16 @@
 /*
- * Le fond imagé — copie du modèle PersonnageFond.module.css.
+ * Le fond, le rail, la jauge et les cendres de la fiche Arquet.
  *
- * Il est fixe et derrière tout : il ne défile pas, il ne capte jamais le
- * pointeur, et il reste sous le contenu de la fiche.
+ * Refonte du 2026-08-13 : valeurs reprises telles quelles de
+ * docs/maquettes/arquet.html (#arq-fonds, #arq-jauge, #arq-rail,
+ * #arq-cendres). Fixe et derrière tout : rien ici ne défile, rien ne
+ * capte le pointeur sauf le rail (navigation).
  */
 
 .fond {
   position: fixed;
   inset: 0;
-  z-index: -3;
+  z-index: 0;
   overflow: hidden;
   pointer-events: none;
 }
@@ -16,32 +18,182 @@
 .calque {
   position: absolute;
   inset: 0;
-  /* Désaturation statique : une image trop colorée se dispute la page
-     avec la palette de la strate. Elle apporte de la matière, pas une
-     couleur. */
-  filter: saturate(0.7) contrast(1.06);
-  transition: opacity 220ms linear;
+  opacity: 0;
+  /* Désaturation statique — jamais animée, seuls opacity/transform le
+     sont, posés par PalimpsesteFond.tsx à chaque frame. */
+  filter: saturate(0.6) contrast(1.05);
+  transform: scale(1.08);
+  transform-origin: center;
+  transition: opacity 700ms linear, transform 1400ms cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
-/*
- * Le voile. Sans lui, aucun texte n'est lisible sur une image de fond.
- * Teinté par --character-bg pour que l'image appartienne au monde de la
- * strate en cours, comme chez PersonnageFond.
- */
-.voile {
+.calque:last-child {
+  filter: saturate(0.55) contrast(1.04);
+}
+
+.voileChaud {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    180deg,
-    color-mix(in srgb, var(--character-bg, #0d0e10) 22%, transparent) 0%,
-    color-mix(in srgb, var(--character-bg, #0d0e10) 40%, transparent) 32%,
-    color-mix(in srgb, var(--character-bg, #0d0e10) 78%, transparent) 62%,
-    color-mix(in srgb, var(--character-bg, #0d0e10) 92%, transparent) 100%
-  );
+  background:
+    radial-gradient(circle at 50% 8%, rgba(140, 96, 42, 0.34), transparent 56%),
+    linear-gradient(180deg, rgba(14, 11, 8, 0.52) 0%, rgba(12, 10, 8, 0.72) 42%, rgba(10, 9, 8, 0.88) 100%);
+}
+
+.voileFroid {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  background: linear-gradient(180deg, rgba(7, 8, 9, 0.74) 0%, rgba(7, 8, 9, 0.88) 45%, rgba(4, 5, 6, 0.97) 100%);
+}
+
+.voileCentre {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 45%, transparent 34%, rgba(4, 4, 5, 0.72) 100%);
+}
+
+.nuit {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  background: linear-gradient(180deg, transparent 0%, rgba(2, 3, 4, 0.55) 60%, rgba(1, 2, 3, 0.85) 100%);
+}
+
+.jauge {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 0%;
+  z-index: 6;
+  background: linear-gradient(90deg, rgba(201, 161, 95, 0.15), #c9a15f);
+  box-shadow: 0 0 14px rgba(201, 161, 95, 0.5);
+  pointer-events: none;
+}
+
+.cendres {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ---------- Rail (coupe des strates) ---------- */
+
+.rail {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: clamp(4.6rem, 6vw, 6.4rem);
+  z-index: 6;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid rgba(200, 205, 212, 0.1);
+  background: linear-gradient(90deg, rgba(6, 6, 7, 0.72), rgba(6, 6, 7, 0.28));
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+  font-family: var(--font-grotesque-ui), 'Space Grotesk', system-ui, sans-serif;
+}
+
+.railItem {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0.9rem 0.7rem;
+  text-decoration: none;
+  color: rgba(180, 168, 148, 0.2);
+  border-bottom: 1px solid rgba(200, 205, 212, 0.09);
+  transition: color 600ms ease, background 700ms ease;
+  overflow: hidden;
+}
+
+.railItem:last-child {
+  border-bottom: none;
+}
+
+.railItem:nth-child(1) { background: linear-gradient(180deg, rgba(150, 104, 48, 0.16), rgba(150, 104, 48, 0.04)); }
+.railItem:nth-child(2) { background: linear-gradient(180deg, rgba(130, 96, 52, 0.12), rgba(120, 92, 56, 0.03)); }
+.railItem:nth-child(3) { background: linear-gradient(180deg, rgba(110, 104, 92, 0.1), rgba(96, 98, 98, 0.03)); }
+.railItem:nth-child(4) { background: linear-gradient(180deg, rgba(74, 84, 94, 0.12), rgba(60, 70, 80, 0.04)); }
+.railItem:nth-child(5) { background: linear-gradient(180deg, rgba(40, 48, 58, 0.16), rgba(20, 24, 30, 0.1)); }
+
+.railItem:hover,
+.railItem:focus-visible {
+  color: rgba(239, 230, 214, 0.9);
+}
+
+.railNumeral {
+  font-family: var(--character-title-font, 'Cormorant Garamond'), Georgia, serif;
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.railEra {
+  writing-mode: vertical-rl;
+  font-size: 0.5rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+
+.niveau {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+.niveauTrait {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 1px;
+  background: rgba(201, 161, 95, 0.85);
+  box-shadow: 0 0 10px rgba(201, 161, 95, 0.55);
+}
+
+.niveauPointe {
+  position: absolute;
+  right: -3px;
+  top: -3px;
+  width: 6px;
+  height: 6px;
+  background: #c9a15f;
+  transform: rotate(45deg);
+}
+
+.niveauCote {
+  position: absolute;
+  right: 0.55rem;
+  top: 0.4rem;
+  font-size: 0.48rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(201, 161, 95, 0.85);
+}
+
+@media (max-width: 1179px) {
+  .rail {
+    display: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .calque {
     transition: none;
+  }
+
+  .railItem {
+    transition: none;
+  }
+
+  .cendres {
+    display: none;
   }
 }

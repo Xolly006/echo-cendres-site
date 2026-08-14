@@ -1,54 +1,46 @@
 import type { PersonnageTheme } from '@/types/personnage-theme';
 
 /**
- * Composition "palimpseste" — cinq strates historiques de l'Arquet
- * (docs/ARQUET_COMPOSITION.md §1) : Les Chercheurs de l'Arché, la
- * Confrérie du Seuil, l'Ordre des Éclipsés, l'Arquet, La main. Chaque
- * strate porte son propre accent et son propre corps de texte, en CSS
- * statique — aucune interpolation animée entre elles (règle du
- * 2026-07-27).
+ * Composition "palimpseste" — L'Ordre de l'Arquet.
  *
- * `archeStrates` expose accent/texte/fond, consommés par
- * `PalimpsesteFaction` (variables CSS `--strata-N-accent`/`-text`/`-bg`).
- * `text` dérive du plus chaud (I) au plus froid et net (V), contraste
- * ≥ 4.5:1 vérifié sur le fond de page uniforme `#0d0e10` (correction du
- * 2026-08-11 : la dérive de fond ne passe plus par un background-color
- * sur les blocs de texte — conteneur fermé, règle du 2026-07-29 — mais
- * par la couleur du texte lui-même). `background` reste défini pour
- * l'irréversibilité du cadre (§2, étape séparée, non commencée) : c'est
- * la seule chose encore appelée à devenir dynamique. V reprend l'accent
- * et le fond de IV (tableau "Ce qui dérive", §1) : la bascule V n'est
- * jamais dans ces deux couleurs. `archeTheme` reste un `PersonnageTheme`
- * standard, enregistré comme n'importe quel autre thème : sa palette est
- * celle de la strate I, l'état initial avant toute dérive. Le thème
- * `argent-froid` (ancienne composition "fil") est conservé tel quel : il
- * correspond à la strate IV.
+ * Refonte du 2026-08-13 : reproduction de la maquette de référence
+ * docs/maquettes/arquet.html (Redesign_page_Arquet_magique), qui fait foi
+ * textuellement — plus une interprétation libre du tableau "Ce qui
+ * dérive" de docs/ARQUET_COMPOSITION.md §1. Accent OR `#c9a15f` en strate
+ * I, dérive vers le gris-acier `#c8cdd4` dès la strate IV (V reprend
+ * exactement l'accent de IV). `text` (couleur du corps) suit la même
+ * dérive chaud → froid, valeurs reprises telles quelles de la maquette.
+ * `numeralOpacity` est l'opacité du chiffre romain géant en filigrane de
+ * chaque strate (aria-hidden, cf. PalimpsesteFaction.tsx).
+ *
+ * Contraste vérifié ≥ 4.5:1 (WCAG) pour `text` sur le fond de page
+ * uniforme `#08080a` (celui de la maquette, `html`/`body`).
  */
 export const archeStrates = [
-  { id: 'i', accent: '#cfc9bd', text: '#a59c8d', background: '#0d0e10' },
-  { id: 'ii', accent: '#a8adb4', text: '#a0968d', background: '#0b0c0e' },
-  { id: 'iii', accent: '#8f949b', text: '#9a908d', background: '#090a0c' },
-  { id: 'iv', accent: '#c8cdd4', text: '#8c969b', background: '#070809' },
-  { id: 'v', accent: '#c8cdd4', text: '#8d95a0', background: '#070809' },
+  { id: 'i', accent: '#c9a15f', text: '#b4a894', numeralOpacity: 0.055 },
+  { id: 'ii', accent: '#b6a184', text: '#a89c8d', numeralOpacity: 0.05 },
+  { id: 'iii', accent: '#9aa0a2', text: '#9a938d', numeralOpacity: 0.05 },
+  { id: 'iv', accent: '#c8cdd4', text: '#8c969b', numeralOpacity: 0.05 },
+  { id: 'v', accent: '#c8cdd4', text: '#8d95a0', numeralOpacity: 0.05 },
 ] as const;
 
 export const archeTheme: PersonnageTheme = {
   key: 'arche',
   palette: {
-    background: archeStrates[0].background,
-    text: '#dfe2e6',
-    muted: '#8a9099',
+    background: '#08080a',
+    text: '#efe4cf',
+    muted: '#b4a894',
     accent: archeStrates[0].accent,
-    surface: 'rgba(18, 20, 24, 0.58)',
-    border: 'rgba(200, 205, 212, 0.14)',
+    surface: 'rgba(18, 16, 14, 0.58)',
+    border: 'rgba(201, 161, 95, 0.18)',
   },
   typography: {
-    titleFamily: "var(--font-serif-titre), Georgia, serif",
-    bodyFamily: "var(--font-serif-lecture), Georgia, serif",
-    titleWeight: '600',
-    titleSpacing: '0.03em',
+    titleFamily: "var(--font-serif-titre), 'Cormorant Garamond', Georgia, serif",
+    bodyFamily: "var(--font-serif-lecture), 'Spectral', Georgia, serif",
+    titleWeight: '300',
+    titleSpacing: '0.005em',
     bodyLineHeight: '1.9',
-    labelSpacing: '0.18em',
+    labelSpacing: '0.24em',
   },
   atmosphere: {
     backgroundKind: 'crystal',
