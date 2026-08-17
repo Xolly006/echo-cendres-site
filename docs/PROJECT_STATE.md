@@ -101,6 +101,23 @@ de données interchangeable derrière une couleur différente.
   (`/personnages/preview`) jamais exposée en production.
 - Pages de sections placeholder : `/factions`, `/magie`, `/carte`,
   `/chronologie`, `/evenements`, `/archives`.
+- Moteur Factions complet : types (`src/types/faction.ts`), validation
+  stricte et chargement (`src/lib/factions.ts`), routes
+  `/factions/[slug]` et `/factions/preview/[slug]`, registre de
+  compositions (`src/components/factions/compositions/`), protection
+  `draft`/`published` (le membre reste affiché, seul le lien vers sa
+  fiche personnage disparaît si elle n'est pas publiée).
+- Première faction : L'Ordre de l'Arquet (`draft`, composition
+  `palimpseste`, thème `arche`).
+- Composition `palimpseste` : cinq strates en CSS statique (I Les
+  Chercheurs de l'Arché → V La main), dérive de typographie, largeur de
+  colonne, accent et couleur de corps entre strates voisines ; cinq
+  fonds photographiques qui se relaient sur des ancres `data-fond` ;
+  rail latéral avec cote de progression et curseur de niveau ; canvas de
+  cendres ; voiles chaud/froid ; calque de nuit ; jauge de progression ;
+  irréversibilité par `maxProg` — remonter en haut de page ne restitue
+  jamais l'état initial.
+- Thème `arche` : cinq états, accent or `#c9a15f` dérivant vers le gris.
 
 ## Ce qui manque
 

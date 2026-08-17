@@ -50,17 +50,34 @@ Dette technique notée :
   conteneur convergent, voir docs/DECISIONS.md).
 - Gravures runiques encore à faire sur la fiche Métatron.
 
+## Factions
+
+Fait :
+
+1. **L'Ordre de l'Arquet** — composition `palimpseste`, thème `arche`,
+   maquette HTML reproduite (voir docs/DECISIONS.md, 2026-08-13).
+
+Dette assumée : le texte de l'Arquet est en dur dans
+`PalimpsesteFaction.tsx`, `histoire.mdx` n'est plus lu pour cette
+faction (voir docs/DECISIONS.md). À ne pas reproduire sur les
+prochaines factions.
+
 ## Prochaines pistes
 
+- Remettre `histoire.mdx` en service sur l'Arquet (dette ci-dessus).
+- Puis Chevaliers de la Cité des Héros (canon déjà complet) ou Piliers
+  (contradictions à arbitrer avant : Bibliothécaire, chronologies).
 - Nouveaux personnages à extraire du document source, un par un, après
   validation du créateur.
-- Sections vides à peupler, Factions en premier.
 - Page d'accueil.
 - Navigation interne des fiches personnages (sommaire de lecture).
 
+Dettes existantes conservées : boîtes rectangulaires fermées à retirer
+sur Varros et Soryn, gravures runiques encore à faire sur la fiche
+Métatron (détail dans "Dette technique notée" ci-dessus).
+
 ## Backlog long terme
 
-- Moteur factions (`src/content/factions`, modèle `Faction`, liens personnages ↔ factions).
 - Moteur lieux (`src/content/lieux`, modèle `Lieu`, carte SVG interactive).
 - Moteur événements (`src/content/evenements`, modèle `Evenement`, pages `/evenements/[slug]`).
 - Moteur archives (`src/content/archives`, modèle `Archive`).

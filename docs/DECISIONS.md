@@ -230,3 +230,23 @@ par personnage.
 * Ambiguïté de source notée sur Amara : le document source la dit à la
   fois « percutée à la naissance » et « elle n'est pas née mage ». Non
   résolue, à trancher par le créateur avant toute publication.
+
+## Arquet et la maquette (2026-08-13)
+
+* L'ordre de travail est canon → maquette → code. La composition "fil" a
+  échoué parce que le canon n'existait pas encore, et la première spec
+  DA a échoué parce qu'elle décrivait un comportement sans poser de
+  maquette. Ce qui a débloqué : une maquette HTML avec des valeurs
+  concrètes.
+* Une page de faction ne se met pas en page comme une fiche personnage.
+  Une organisation a une histoire, une structure et une emprise ; un
+  personnage a un nom et une intériorité.
+* Le récit EST la page. Les données (membres, mécanique, branches) ne
+  sont pas affichées avant lui et ne répètent pas ce qu'il dit.
+* Une composition cliente ne peut pas recevoir le composant MDX en
+  prop : il faut passer l'élément rendu (`<Narrative />`), pas la
+  fonction.
+* DETTE ASSUMÉE : le texte de l'Arquet est en dur dans
+  `PalimpsesteFaction.tsx`, `histoire.mdx` n'est plus lu pour cette
+  faction. Acceptable pour une page bespoke, À NE PAS REPRODUIRE. Les
+  prochaines factions gardent leur texte en MDX.
