@@ -6,7 +6,6 @@
 * Le contenu ne sera pas extrait automatiquement en masse depuis Magic.txt.
 * Chaque personnage ou entité sera vérifié manuellement avant intégration.
 * Tous les personnages du lore existent canoniquement, sauf décision explicite contraire du créateur.
-* Les informations concernant une entité peuvent comporter plusieurs statuts : confirmée, à confirmer, ancienne version, proposition IA ou retirée.
 * La navigation fondamentale doit rester cohérente même lorsque le thème visuel change.
 * L’ajout futur d’une entité ne doit pas nécessiter de copier-coller une page entière.
 * La page d’accueil est la première priorité.
@@ -46,7 +45,9 @@
 * Une signature peut habiller le titre (`Title`) et ajouter une couche décorative (`Overlay`), sans jamais remplacer le thème.
 * Toute signature doit rester lisible, décorative, non interactive, et respecter `prefers-reduced-motion` avec un repli statique sobre.
 * Pilote actuel : Kael l’Éclipsé (`kael-eclipse`) — effacement lent et partiel des lettres du nom, voile froid traversant, dénégation ponctuelle de l’en-tête. Le nom complet reste accessible aux lecteurs d’écran via un texte masqué.
-* Aucune autre signature ne doit être ajoutée tant que le pilote Kael n’est pas validé visuellement par le créateur.
+* Le verrou « aucune autre signature tant que le pilote Kael n’est pas
+  validé visuellement » est levé le 2026-09-06 : le pilote est validé.
+  Voir la frontière scène / signature dans la section datée correspondante.
 
 ## Règles du système d’ambiance des personnages
 
@@ -119,13 +120,12 @@ Contraintes :
 Workflow d’ajout d’un personnage :
 
 1. Extraire les informations depuis Magic.txt.
-2. Trier les informations entre canon, à vérifier, contradictoire et proposition.
-3. Faire valider le contenu par le créateur.
-4. Choisir un thème existant ou justifier la création future d’un thème réutilisable.
-5. Créer `data.json` en `draft`.
-6. Créer `histoire.mdx`.
-7. Tester localement la fiche personnage.
-8. Commit/push après validation.
+2. Faire valider le contenu par le créateur.
+3. Choisir un thème existant ou justifier la création future d’un thème réutilisable.
+4. Créer `data.json` en `draft`.
+5. Créer `histoire.mdx`.
+6. Tester localement la fiche personnage.
+7. Commit/push après validation.
 
 ## Phase 2 — Différenciation visuelle (2026-07-23)
 
@@ -228,8 +228,10 @@ par personnage.
   choses opposées : le choix fait partie de la caractérisation, pas un
   détail technique interchangeable.
 * Ambiguïté de source notée sur Amara : le document source la dit à la
-  fois « percutée à la naissance » et « elle n'est pas née mage ». Non
-  résolue, à trancher par le créateur avant toute publication.
+  fois « percutée à la naissance » et « elle n'est pas née mage ».
+  **Tranchée le 2026-09-06** : Amara naît non-mage, sans lignée, et le
+  Concept LIEN la percute à t=0 — il n'y a pas de vie d'avant. Le verrou
+  « à trancher avant toute publication » saute.
 
 ## Arquet et la maquette (2026-08-13)
 
@@ -250,3 +252,93 @@ par personnage.
   `PalimpsesteFaction.tsx`, `histoire.mdx` n'est plus lu pour cette
   faction. Acceptable pour une page bespoke, À NE PAS REPRODUIRE. Les
   prochaines factions gardent leur texte en MDX.
+
+## Arbitrages du créateur (2026-09-06)
+
+Six décisions, rendues en bloc. La première change la lecture de tout le
+reste du document et de ce fichier.
+
+1. **Règle de source — Magic.txt fait autorité.** Magic.txt est le
+   canon, y compris les passages marqués « proposition », « à valider »
+   ou « à confirmer » : ces mentions ne suspendent pas le canon. Seule
+   exception : deux informations réellement différentes portant sur la
+   même entité — c'est le seul cas qui demande un arbitrage du créateur.
+   `histoire.mdx` est la couche révisable quand le canon évolue.
+   Conséquence : l'entrée « plusieurs statuts : confirmée, à confirmer,
+   ancienne version, proposition IA ou retirée » et l'étape de tri
+   « canon, à vérifier, contradictoire et proposition » du workflow
+   d'ajout de personnage sont retirées de ce document — cette règle les
+   remplace.
+
+2. **Amara — ambiguïté tranchée.** L'entrée du 2026-07-30 est close.
+   Amara naît non-mage, sans lignée, et le Concept LIEN la percute à
+   t=0 : il n'y a pas de vie d'avant. `data.json` et `histoire.mdx`
+   disent déjà cela, aucun contenu à changer. Le verrou « à trancher
+   avant toute publication » est levé.
+
+3. **Piliers — neuf, pas dix.** `docs/FACTIONS_INVENTAIRE.md` section
+   D.1 affirmait « 10, pas 12 » sous « Tranché par le créateur » : c'est
+   faux, corrigé en neuf. Liste nominative :
+   - Guerre — Kratos
+   - Éléments — Bora
+   - Esprit — Calista
+   - Vie — Ysolde
+   - Mort — Ambroise
+   - Sacré — Elias
+   - Espace — Altaïr
+   - Matière — Titus Fernum
+   - Temps — Dame Olympe
+
+   Le Pilier du Feu reste retiré (Bora couvre les Éléments).
+
+4. **Le Bibliothécaire — clos.** Il n'y a pas de Pilier du Savoir.
+   Dominique est surnommé « Pilier du Savoir » par les gens : titre
+   humain, pas module. Requalifié en électron libre, comme Corvus. Le
+   verrou de `docs/NEXT_STEPS.md` (« contradictions à arbitrer avant :
+   Bibliothécaire ») est levé ; il ne reste que les chronologies.
+
+5. **Ashren et les Doigts.** Ashren Veil (l'Arquet) et Ash la sorcière
+   des poudres, élève de Kratos, sont deux personnes distinctes.
+   « Ashren encadre les Armées » (Magic.txt l.33468) désigne celui de
+   l'Arquet — lacune de `docs/ARQUET_COMPOSITION.md` §11.1 comblée. Par
+   la règle 1, les cinq fonctions des Doigts (§11.3, marquées
+   « proposition ») ne sont plus une réserve : elles sont canon.
+
+6. **Compositions — règle maintenue, vocabulaire corrigé, verrou Kael
+   levé.** Constat vérifié dans le code : les neuf « compositions »
+   rendent le même squelette (scène · couche décorative · content ·
+   intro · blocs · narrative · exit) ; seule la décoration varie, pas la
+   disposition. Duplication mesurée : Retable partage 65 % de ses
+   lignes avec Standard, Fragment 64 %, Titan/Canopée/Agapè 50 %. Il n'y
+   a donc pas neuf compositions mais UNE composition et neuf couches
+   narratives. La règle du 2026-07-23 (archétypes partagés, jamais un
+   par personnage) n'a pas été violée sur le fond : elle l'a été dans le
+   nom et dans le code. Elle est maintenue.
+
+   Vocabulaire retenu, cinq couches :
+
+   | Couche | Rôle | Cardinalité |
+   |---|---|---|
+   | SHELL ATLAS | navigation universelle | 1 |
+   | SQUELETTE | primitives + ancrages `data-personnage-*` | 1, partagé |
+   | SCÈNE | couche narrative de l'entité | illimité |
+   | SIGNATURE | comportement qui conteste la fiche | rare |
+   | THÈME | palette, typographie, atmosphère | 12 |
+
+   Deux règles qui vont avec :
+   - Le squelette NE FIXE PAS d'ordre. Il fournit des primitives ; la
+     scène choisit lesquelles elle emploie, dans quel ordre, et
+     lesquelles elle refuse. « intro → identité → magie → récit » est
+     le défaut de `standard`, pas une loi. L'ordre et la présence des
+     sections viennent du récit de l'entité.
+   - Frontière scène / signature : une scène habille la page, une
+     signature la conteste. Une signature n'existe que quand le concept
+     du personnage entre en conflit avec la fiche elle-même (Kael efface
+     son nom). Sinon, scène.
+
+   Le pilote Kael l'Éclipsé est validé visuellement par le créateur : le
+   verrou « aucune autre signature tant que le pilote n'est pas validé »
+   est levé, encadré désormais par la frontière ci-dessus.
+
+   Aucune suppression visuelle : les neuf identités actuelles sont
+   conservées.

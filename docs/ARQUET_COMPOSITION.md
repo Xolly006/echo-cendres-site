@@ -460,15 +460,18 @@ suivantes partent de travers.
 
 ## 11. Lacunes et pistes — non comblées
 
-1. **Ashren Veil ≠ Ash.** Deux personnages distincts portent ce nom :
-   Ashren Veil (l.18046, l'enfant aux deux consciences) et Ash, élève de
-   Kratos. Redondance signalée par le créateur, **à arbitrer**. La
-   mention « Ashren encadre les Armées » (l.33468) est donc ambiguë.
+1. **Ashren Veil ≠ Ash — tranché (2026-09-06).** Deux personnes
+   distinctes portent ce nom : Ashren Veil (l.18046, l'enfant aux deux
+   consciences, l'Arquet) et Ash la sorcière des poudres, élève de
+   Kratos. La mention « Ashren encadre les Armées » (l.33468) désigne
+   celui de l'Arquet. Lacune comblée.
 2. **Sujets Nexus** — quatre individus, noms de code seulement. Ils
    méritent leur propre entité : **faction future**, pas sous-partie de
    l'Arquet. Non développés ici.
 3. **Les cinq fonctions des Doigts** sont marquées « proposition — noms
-   et rôles à valider » dans `Magic.txt`. Utilisées telles quelles.
+   et rôles à valider » dans `Magic.txt`. Par la règle de source du
+   2026-09-06 (`docs/DECISIONS.md`), cette mention ne suspend pas le
+   canon : ce n'est plus une réserve, les Cinq Doigts sont canon.
 4. **Malachar** — aucune fonction déclarée. Ne rien inventer.
 5. **Piste ouverte, à traiter en session dédiée** : existe-t-il un moyen
    de se libérer d'une Ancre ? Si oui, tout l'assèchement devient

@@ -46,7 +46,7 @@ C'est la colonne vertébrale du moteur Factions.
 | # | Nom | Ère | Statut |
 |---|-----|-----|--------|
 | 4 | **L'Ordre de l'Arquet** — *Les Architectes de l'Ombre* | ~2000 ans → actif | CANON |
-| 5 | **Le Conseil des Piliers** — *Les Gardiens de la Réalité* | Actuelle | CANON — 10 Piliers, instances intermittentes |
+| 5 | **Le Conseil des Piliers** — *Les Gardiens de la Réalité* | Actuelle | CANON — 9 Piliers, instances intermittentes |
 | 6 | **La Congrégation de la Cage Dorée** — *L'Église secrète* | 1500 ans → actif | CANON |
 | 7 | **La Légion de Fer** — *L'Armée de Valeriana* | Actuelle | CANON |
 | 8 | **Les Disciples de l'Abysse** — *Le Culte du Chaos* | Éternelle, souterraine | CANON |
@@ -175,14 +175,29 @@ factions. Proposition : moteur `Lieux` séparé, avec relation
 
 ### Tranché par le créateur
 
-1. **Nombre de Piliers — 10, pas 12.** Le « Conseil des 12 Piliers »
-   (l.4168) est caduc.
+1. **Nombre de Piliers — 9, pas 12.** Le « Conseil des 12 Piliers »
+   (l.4168) est caduc. Liste nominative (arbitrage du créateur,
+   2026-09-06) :
+
+     | Pilier | Titulaire |
+     |---|---|
+     | Guerre | Kratos |
+     | Éléments | Bora |
+     | Esprit | Calista |
+     | Vie | Ysolde |
+     | Mort | Ambroise |
+     | Sacré | Elias |
+     | Espace | Altaïr |
+     | Matière | Titus Fernum |
+     | Temps | Dame Olympe |
+
    - **Il n'y a pas de Pilier du Savoir.** Définitif.
    - **Il n'y a pas de Pilier du Feu.** Il a existé en conception puis a
      été retiré : Bora couvre les Éléments, un Pilier du Feu ferait doublon.
-   - Conséquence à traiter : « Le Bibliothécaire (Savoir) » apparaît encore
-     dans d'anciennes listes (l.2870). Statut à requalifier — probablement
-     électron libre, comme Corvus. **Seul point encore ouvert.**
+   - « Le Bibliothécaire (Savoir) » apparaît encore dans d'anciennes
+     listes (l.2870) : c'est Dominique, surnommé « Pilier du Savoir » par
+     les gens — un titre humain, pas un module. Requalifié en électron
+     libre, comme Corvus. Clos.
 
 2. **Le Conseil des Piliers existe.** Ils tiennent parfois des instances.
    C'est donc une faction réelle — mais une faction intermittente et
