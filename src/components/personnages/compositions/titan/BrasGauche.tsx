@@ -15,26 +15,52 @@ import styles from './TitanPersonnage.module.css';
  * D'où une bande rouge sombre le long du bord GAUCHE de la page, sur toute
  * la hauteur. Elle pulse en permanence, lentement, comme un coeur au repos.
  *
- * Et, à intervalles longs et irréguliers, ELLE FRAPPE : la page tressaute
- * d'un coup sec, la bande s'embrase brièvement. Ce n'est pas une
- * animation en boucle qu'on finit par anticiper — c'est un impact, sans
- * prévenir, que personne n'a décidé. C'est tout le personnage : la
- * violence arrive, et l'homme à l'intérieur n'y est pour rien.
+ * Et, ELLE FRAPPE : la page tressaute d'un coup sec, la bande s'embrase
+ * brièvement. Le coup n'est plus posé sur une horloge — un lecteur qui
+ * parcourait la page normalement n'en voyait jamais que deux ou trois. Il
+ * est posé sur la progression du défilement : six seuils aléatoires sont
+ * tirés au montage, un par tranche de page, le dernier laissant une marge
+ * avant le bas. Un seuil franchi EN DESCENDANT déclenche le coup suivant.
+ * Il reste imprévisible — le lecteur ne choisit ni le nombre de seuils ni
+ * l'écart entre deux coups — mais il ne tombe plus pendant une lecture
+ * immobile, et jamais en remontant.
  *
  * Le tressaut passe par une variable CSS sur <html> plutôt que par un
  * transform sur le contenu : rien à recalculer, aucun repaint de texte.
  *
  * Sous prefers-reduced-motion, le bras pulse encore mais ne frappe jamais.
  *
- * Chaque impact grave une rune de plus sur le bras (voir Runes.tsx),
- * dans l'ordre du tableau RUNES. Une rune gravée reste ; après la
- * sixième, les impacts continuent mais ne gravent plus rien. Sous
+ * Chaque coup grave une rune de plus sur le bras (voir Runes.tsx), dans
+ * l'ordre du tableau RUNES : six seuils, six runes, la sixième gravée
+ * avant le bas de la page. Une rune gravée reste. Sous
  * prefers-reduced-motion, les six sont là dès le départ, sans qu'aucun
- * impact n'ait eu lieu.
+ * coup n'ait eu lieu.
  */
 
-const MIN_ENTRE_COUPS = 11000;
-const MAX_ENTRE_COUPS = 26000;
+// Durée du tressaut/embrasement — inchangée depuis la version pilotée par
+// horloge.
+const DUREE_IMPACT = 420;
+
+// Le dernier seuil laisse cette marge avant le bas de page (en fraction
+// de la hauteur parcourable), pour que la sixième rune soit toujours
+// gravée avant la fin.
+const MARGE_AVANT_BAS = 0.08;
+
+/**
+ * Six seuils de progression (0 à 1), un par sixième de page, chacun tiré
+ * au hasard dans sa tranche. Monotones par construction — pas besoin de
+ * les trier — et imprévisibles : ni leur écart ni leur position exacte
+ * ne sont fixes d'une visite à l'autre.
+ */
+function tirerSeuils(nombre: number): number[] {
+  const largeurTranche = 1 / nombre;
+
+  return Array.from({ length: nombre }, (_, index) => {
+    const debut = index * largeurTranche;
+    const fin = (index + 1) * largeurTranche - (index === nombre - 1 ? MARGE_AVANT_BAS : 0);
+    return debut + Math.random() * Math.max(0, fin - debut);
+  });
+}
 
 export function BrasGauche() {
   const [impact, setImpact] = useState(false);
@@ -49,10 +75,18 @@ export function BrasGauche() {
       return () => window.cancelAnimationFrame(id);
     }
 
-    let restant = MIN_ENTRE_COUPS + Math.random() * (MAX_ENTRE_COUPS - MIN_ENTRE_COUPS);
+    const seuils = tirerSeuils(RUNES.length);
+    let prochainSeuil = 0;
+    let progressionPrecedente = 0;
     let finImpact = 0;
 
     const desabonner = abonnerAuRaf((dt) => {
+      const parcourable = document.documentElement.scrollHeight - window.innerHeight;
+      const progression =
+        parcourable > 0 ? Math.min(1, Math.max(0, window.scrollY / parcourable)) : 0;
+      const enDescente = progression > progressionPrecedente;
+      progressionPrecedente = progression;
+
       if (finImpact > 0) {
         finImpact -= dt;
         if (finImpact <= 0) {
@@ -63,10 +97,11 @@ export function BrasGauche() {
         return;
       }
 
-      restant -= dt;
-      if (restant <= 0) {
-        restant = MIN_ENTRE_COUPS + Math.random() * (MAX_ENTRE_COUPS - MIN_ENTRE_COUPS);
-        finImpact = 420;
+      if (prochainSeuil >= seuils.length || !enDescente) return;
+
+      if (progression >= seuils[prochainSeuil]) {
+        prochainSeuil += 1;
+        finImpact = DUREE_IMPACT;
         setImpact(true);
         setGravees((g) => Math.min(g + 1, RUNES.length));
         document.documentElement.setAttribute('data-impact', '');

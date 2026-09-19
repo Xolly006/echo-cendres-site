@@ -84,11 +84,19 @@
   opacity: 0.55;
 }
 
+/* Le cadre plein — chaque rune s'y positionne en pourcentage de HAUTEUR
+   DE BANDE, pas en empilement local : c'est ce qui permet de la couvrir
+   entièrement à six runes sans jamais recalculer les précédentes. */
 .runes {
   position: absolute;
-  top: 0;
+  inset: 0;
+}
+
+.rune {
+  position: absolute;
   left: 50%;
   width: clamp(1.7rem, 4vw, 2.7rem);
+  aspect-ratio: 24 / 34;
   height: auto;
   transform: translateX(-50%);
 }

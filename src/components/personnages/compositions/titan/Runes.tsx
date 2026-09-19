@@ -12,6 +12,12 @@ import styles from './TitanPersonnage.module.css';
  * ci-dessous, ont déjà été gravées par un impact du bras ; le tracé
  * apparaît une fois, sans rejouer son apparition, et ne bouge plus.
  *
+ * Une troisième version les tassait toutes en haut de la bande. La rune
+ * d'index n se place maintenant à la fraction (n + 1) / 6 de la hauteur
+ * de la bande — TOUJOURS calculée sur les six, jamais sur le nombre
+ * actuellement gravé, pour qu'une rune déjà posée ne bouge jamais quand
+ * la suivante apparaît. À six runes, le bras est couvert du haut en bas.
+ *
  * Les six retenues disent quelque chose de lui :
  *   ᚾ Naudiz    "besoin, détresse"        — ce qu'il est
  *   ᚦ Thurisaz  le géant, la force brute  — ce qu'on a fait de lui
@@ -43,24 +49,28 @@ export function Runes({ count }: { count: number }) {
   const gravees = RUNES.slice(0, count);
 
   return (
-    <svg
-      className={styles.runes}
-      viewBox={`0 0 24 ${RUNES.length * 34}`}
-      preserveAspectRatio="xMidYMin meet"
-      aria-hidden="true"
-      focusable="false"
-    >
-      <g
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2.4"
-        strokeLinecap="square"
-        strokeLinejoin="miter"
-      >
-        {gravees.map((rune, index) => (
-          <path key={rune.nom} d={rune.d} transform={`translate(0 ${index * 34})`} />
-        ))}
-      </g>
-    </svg>
+    <div className={styles.runes} aria-hidden="true">
+      {gravees.map((rune, index) => (
+        // Ancrée par le bas : à l'index n, le bas du tracé touche la
+        // fraction (n + 1) / RUNES.length de la bande. Fixe par rune,
+        // jamais recalculée sur `count`.
+        <svg
+          key={rune.nom}
+          className={styles.rune}
+          style={{ bottom: `${(1 - (index + 1) / RUNES.length) * 100}%` }}
+          viewBox="0 0 24 34"
+          focusable="false"
+        >
+          <path
+            d={rune.d}
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.4"
+            strokeLinecap="square"
+            strokeLinejoin="miter"
+          />
+        </svg>
+      ))}
+    </div>
   );
 }
