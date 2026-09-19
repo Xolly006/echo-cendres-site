@@ -61,6 +61,10 @@
 * Les effets doivent rester décoratifs, désactivables ou allégés selon le contexte.
 * Les interactions spéciales, comme un titre qui se disloque ou un bouton qui fuit, ne doivent pas être placées dans `PersonnageAtmosphere` ou `PersonnageParticles`.
 * Les signatures visuelles propres aux personnages majeurs viendront plus tard dans un système séparé.
+* Critère « personnage majeur » remplacé le 2026-09-06 par la frontière
+  scène / signature : une signature n'existe que quand le concept du
+  personnage entre en conflit avec la fiche elle-même, jamais parce que
+  le personnage est important.
 * Une nouvelle valeur de `particleKind` ne doit pas être ajoutée sans besoin narratif clair.
 * Un effet ne doit pas être ajouté simplement parce qu’il est visuellement amusant ou spectaculaire.
 
@@ -79,6 +83,10 @@
 * `masque-voile` ne deviendra une famille réutilisable que si un autre personnage partage plus tard une esthétique de masques, illusions, miroirs, théâtre fermé ou mensonge élégant.
 * `masque-voile` doit rester différencié de `vide-oppressant` : Soryn doit évoquer la scène, le masque, le mensonge et le théâtre psychologique, pas seulement le vide froid.
 * Les effets uniques propres à un personnage majeur doivent attendre le futur système de signatures visuelles.
+* Critère « personnage majeur » remplacé le 2026-09-06 par la frontière
+  scène / signature : une signature n'existe que quand le concept du
+  personnage entre en conflit avec la fiche elle-même, jamais parce que
+  le personnage est important.
 * Les signatures visuelles spécifiques doivent rester séparées des thèmes standard, de `PersonnageAtmosphere` et de `PersonnageParticles`.
 * Claude peut servir à extraire et organiser des informations depuis Magic.txt, mais le créateur doit toujours valider ce qui est canonique.
 
