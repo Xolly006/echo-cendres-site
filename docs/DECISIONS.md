@@ -89,15 +89,21 @@ Le moteur utilise actuellement `themeKey`. Aucun nouveau champ ne doit être ajo
 * `themeKey` : clé actuelle utilisée par le moteur.
 * `themeFamily` : famille sensorielle générale.
 * `visualVariant` : variante visuelle propre à une entité dans une même famille.
-* `signature` : détail unique réservé aux personnages vitrines ou majeurs.
+
+`signature` ne fait pas partie de cette liste de couches de thème : elle
+est définie indépendamment par l'arbitrage du 2026-09-06 (section
+« Compositions — règle maintenue, vocabulaire corrigé, verrou Kael
+levé » plus bas). Une signature n'existe que quand le concept du
+personnage entre en conflit avec la fiche elle-même — jamais parce
+qu'un personnage est « majeur » ou « vitrine », un critère d'importance
+insuffisant en soi.
 
 La logique retenue :
 
 * les personnages secondaires ou proches esthétiquement peuvent partager une famille de thème ;
-* les personnages majeurs ou vitrines peuvent avoir une variante ou une signature propre ;
+* les personnages majeurs ou vitrines peuvent avoir une variante propre ;
 * une famille de thème donne une grammaire visuelle commune ;
-* une variante différencie un personnage dans cette famille ;
-* une signature ajoute un détail unique, seulement si nécessaire.
+* une variante différencie un personnage dans cette famille.
 
 Exemples à garder en tête :
 
@@ -111,7 +117,7 @@ Contraintes :
 * `or-maudit` sert actuellement surtout à Aurélia et peut rester une signature quasi personnelle.
 * `masque-voile` sert actuellement surtout à Soryn et peut rester une signature quasi personnelle.
 * Ces thèmes ne doivent devenir des familles réutilisables que si un autre personnage partage réellement une esthétique proche.
-* Le système futur `themeFamily + visualVariant + signature` ne doit pas être codé maintenant.
+* Le système futur `themeFamily + visualVariant` ne doit pas être codé maintenant.
 * Il faut éviter de créer un thème unique pour chaque personnage mineur.
 * Il faut aussi éviter que plusieurs personnages majeurs se ressemblent parce qu’ils partagent une même palette.
 * Les images, portraits et assets visuels restent hors périmètre tant qu’un système propre n’est pas décidé.
