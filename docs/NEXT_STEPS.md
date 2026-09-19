@@ -8,8 +8,10 @@ Fait :
    chargées via `next/font/google`, remplacent les polices système.
 2. **Moteur de composition** — axe `composition` séparé de `themeKey` dans
    `src/components/personnages/compositions/`. Le thème porte la palette
-   et l'atmosphère ; la composition porte la mise en page. Deux
-   compositions existent : `standard` et `fragment`.
+   et l'atmosphère ; la composition porte la mise en page. Neuf
+   compositions existent aujourd'hui : `standard`, `fragment`, `retable`,
+   `cage`, `canopee`, `titan`, `theatre`, `orfevrerie`, `agape` (elles ont
+   été ajoutées progressivement, voir les points 3 à 9 ci-dessous).
 3. **Kael l'Éclipsé en composition "fragment"** — mise en page qui affirme
    sa présence, en tension avec la signature qui l'efface.
 
@@ -66,7 +68,7 @@ prochaines factions.
 
 - Remettre `histoire.mdx` en service sur l'Arquet (dette ci-dessus).
 - Puis Chevaliers de la Cité des Héros (canon déjà complet) ou Piliers
-  (contradictions à arbitrer avant : Bibliothécaire, chronologies).
+  (contradictions à arbitrer avant : chronologies).
 - Nouveaux personnages à extraire du document source, un par un, après
   validation du créateur.
 - Page d'accueil.
@@ -75,6 +77,28 @@ prochaines factions.
 Dettes existantes conservées : boîtes rectangulaires fermées à retirer
 sur Varros et Soryn, gravures runiques encore à faire sur la fiche
 Métatron (détail dans "Dette technique notée" ci-dessus).
+
+## Chantiers vérifiés (2026-09-06)
+
+- **Publier une première fiche.** Tout le contenu est en `draft`
+  (voir `docs/PROJECT_STATE.md`) ; le site public n'expose encore rien.
+  Varros est déjà désigné témoin de non-régression (`CLAUDE.md`) : c'est
+  le candidat naturel pour la première bascule vers `published`.
+- **Extraction du squelette partagé** — décision 6 du lot 1
+  (`docs/DECISIONS.md`, 2026-09-06). Les neuf compositions rendent le
+  même squelette (scène · couche décorative · content · intro · blocs ·
+  narrative · exit) ; seule la décoration varie. Environ 6 500 lignes de
+  compositions à ramener vers 2 500, à rendu identique.
+- **Dette Arquet — duplication canon/rendu.** 34 des 65 paragraphes de
+  `src/content/factions/ordre-de-l-arquet/histoire.mdx` sont copiés à
+  l'identique dans `PalimpsesteFaction.tsx`, et seul le `.tsx` s'affiche
+  (voir dette assumée ci-dessus). Toute correction de canon doit être
+  faite deux fois tant que ce n'est pas résolu.
+- **`links` et `uncertainties` orphelins.** Déclarés dans les types
+  (`src/types/personnage.ts`), validés au chargement
+  (`src/lib/personnages.ts`), mais rendus presque nulle part : seule la
+  composition `retable` les affiche. À brancher dans les autres
+  compositions ou à retirer des types.
 
 ## Backlog long terme
 

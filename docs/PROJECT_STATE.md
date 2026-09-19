@@ -20,10 +20,12 @@ de données interchangeable derrière une couleur différente.
 - Moteur personnages stable : `data.json` + `histoire.mdx` par personnage,
   chargement et validation stricts (`src/lib/personnages.ts`).
 - 8 personnages réels en `draft` : Kael, Varros, Elias, Ysolde, Amara,
-  Aurélia, Soryn, Métatron.
-- 7 thèmes personnages (`default`, `vide-oppressant`, `vie-sauvage`,
-  `amour-douleur`, `or-maudit`, `masque-voile`, `feu-timide`), résolus par
-  `themeKey`, fallback `default`.
+  Aurélia, Soryn, Métatron. Plus une 9e fiche technique, `prototype-technique`,
+  utilisée uniquement pour vérifier le moteur.
+- 12 thèmes personnages (`default`, `vide-oppressant`, `vie-sauvage`,
+  `amour-douleur`, `or-maudit`, `masque-voile`, `feu-timide`, `arche`,
+  `argent-froid`, `cage-doree`, `fer-et-terre`, `lumiere-construite`),
+  résolus par `themeKey`, fallback `default`.
 - Typographie assumée : Cormorant Garamond (titres), Spectral (lecture,
   italique comprise), Space Grotesk (interface), chargées via `next/font/google`.
 - Moteur de composition (`src/components/personnages/compositions/`), axe
@@ -118,11 +120,32 @@ de données interchangeable derrière une couleur différente.
   irréversibilité par `maxProg` — remonter en haut de page ne restitue
   jamais l'état initial.
 - Thème `arche` : cinq états, accent or `#c9a15f` dérivant vers le gris.
+- **Ordre des Chevaliers de la Cité des Héros — canon et images prêts,
+  rien d'implémenté.** `docs/CHEVALIERS_CANON.md`,
+  `docs/CHEVALIERS_COMPOSITION.md` et 4 images
+  (`public/factions/ordre-des-chevaliers/`) existent depuis le
+  2026-08-24. Aucune entrée dans `src/content/factions/`, aucune
+  composition, aucun code ne référence cette faction : elle n'apparaît
+  nulle part sur le site.
+- **Tout le contenu est en `draft`.** 9 personnages (dont
+  `prototype-technique`) et l'unique faction (Arquet) sont en
+  `publicationStatus: "draft"`. Le site public n'expose donc aucune
+  fiche : `/personnages` et `/factions` listent des ensembles vides,
+  toute route `[slug]` renvoie 404.
 
 ## Ce qui manque
 
 - Dette technique accumulée sur les compositions (boîtes fermées à
   retirer, gravures runiques Métatron) — détail dans `docs/NEXT_STEPS.md`.
-- Tout moteur structuré pour factions, lieux, événements, archives, magie transverse.
+- Moteur structuré pour lieux, événements, archives, magie transverse
+  (le moteur Factions, lui, existe et fonctionne — voir ci-dessus).
 - Sections vides sans contenu réel (Factions en priorité), page d'accueil,
   navigation interne des fiches personnages.
+
+## État de build (vérifié le 2026-09-06)
+
+- `npm run build` passe : Next.js 16.2.7, compilation ~9 s, TypeScript
+  sans erreur, 12 pages générées.
+- `npm run lint` est cassé : `next lint` reçoit `lint` comme argument de
+  répertoire de projet et échoue immédiatement (« Invalid project
+  directory provided »). À corriger séparément.

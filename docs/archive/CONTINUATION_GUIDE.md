@@ -1,3 +1,7 @@
+> **Archivé le 2026-09-06, décrit l'état du moteur personnages initial,
+> ne pas utiliser comme source d'état.** Source d'état actuelle :
+> `docs/PROJECT_STATE.md` (état) et `docs/NEXT_STEPS.md` (suite).
+
 # Guide de continuation du projet
 
 Ce guide sert à reprendre le développement du Livre-Monde proprement, même sans assistance IA forte.
