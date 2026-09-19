@@ -4,7 +4,6 @@ import { PersonnageFond } from '@/components/personnages/effects/PersonnageFond'
 import { RevealAuDefilement } from '@/components/personnages/effects/RevealAuDefilement';
 import type { PersonnageCompositionProps } from '@/components/personnages/compositions/types';
 import { BrasGauche } from './BrasGauche';
-import { Runes } from './Runes';
 import styles from './TitanPersonnage.module.css';
 
 /**

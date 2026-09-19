@@ -7,6 +7,11 @@ import styles from './TitanPersonnage.module.css';
  * aucun sens. Ce sont ici de vraies runes de l'Elder Futhark, tracées en
  * segments droits — une rune est GRAVÉE, elle n'a aucune courbe.
  *
+ * Une deuxième version les faisait défiler en boucle : une rune gravée ne
+ * défile pas, elle reste. `count` dit combien de runes, dans l'ordre
+ * ci-dessous, ont déjà été gravées par un impact du bras ; le tracé
+ * apparaît une fois, sans rejouer son apparition, et ne bouge plus.
+ *
  * Les six retenues disent quelque chose de lui :
  *   ᚾ Naudiz    "besoin, détresse"        — ce qu'il est
  *   ᚦ Thurisaz  le géant, la force brute  — ce qu'on a fait de lui
@@ -16,7 +21,7 @@ import styles from './TitanPersonnage.module.css';
  *   ᚺ Hagalaz   la grêle, la destruction  — la Bête
  */
 
-const RUNES: Array<{ nom: string; d: string }> = [
+export const RUNES: Array<{ nom: string; d: string }> = [
   // ᚾ Naudiz — hampe verticale barrée d'une diagonale.
   { nom: 'naudiz', d: 'M 12 0 L 12 34 M 2 22 L 22 12' },
   // ᚦ Thurisaz — hampe et pointe triangulaire à droite.
@@ -31,15 +36,17 @@ const RUNES: Array<{ nom: string; d: string }> = [
   { nom: 'hagalaz', d: 'M 4 0 L 4 34 M 20 0 L 20 34 M 4 13 L 20 21' },
 ];
 
-export function Runes() {
-  // Deux passes du même alphabet : la bande défile en boucle sans couture.
-  const suite = [...RUNES, ...RUNES];
+export function Runes({ count }: { count: number }) {
+  // `slice` depuis le début : l'index dans ce sous-tableau reste l'index
+  // d'origine, donc une rune déjà gravée ne change jamais de position
+  // quand la suivante apparaît.
+  const gravees = RUNES.slice(0, count);
 
   return (
     <svg
       className={styles.runes}
-      viewBox="0 0 24 408"
-      preserveAspectRatio="xMidYMin slice"
+      viewBox={`0 0 24 ${RUNES.length * 34}`}
+      preserveAspectRatio="xMidYMin meet"
       aria-hidden="true"
       focusable="false"
     >
@@ -50,8 +57,8 @@ export function Runes() {
         strokeLinecap="square"
         strokeLinejoin="miter"
       >
-        {suite.map((rune, index) => (
-          <path key={`${rune.nom}-${index}`} d={rune.d} transform={`translate(0 ${index * 34})`} />
+        {gravees.map((rune, index) => (
+          <path key={rune.nom} d={rune.d} transform={`translate(0 ${index * 34})`} />
         ))}
       </g>
     </svg>

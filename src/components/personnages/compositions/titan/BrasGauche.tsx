@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { abonnerAuRaf } from '@/components/personnages/effects/rafPartage';
-import { Runes } from './Runes';
+import { Runes, RUNES } from './Runes';
 import styles from './TitanPersonnage.module.css';
 
 /**
@@ -25,6 +25,12 @@ import styles from './TitanPersonnage.module.css';
  * transform sur le contenu : rien à recalculer, aucun repaint de texte.
  *
  * Sous prefers-reduced-motion, le bras pulse encore mais ne frappe jamais.
+ *
+ * Chaque impact grave une rune de plus sur le bras (voir Runes.tsx),
+ * dans l'ordre du tableau RUNES. Une rune gravée reste ; après la
+ * sixième, les impacts continuent mais ne gravent plus rien. Sous
+ * prefers-reduced-motion, les six sont là dès le départ, sans qu'aucun
+ * impact n'ait eu lieu.
  */
 
 const MIN_ENTRE_COUPS = 11000;
@@ -32,9 +38,16 @@ const MAX_ENTRE_COUPS = 26000;
 
 export function BrasGauche() {
   const [impact, setImpact] = useState(false);
+  const [gravees, setGravees] = useState(0);
 
   useEffect(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      // Défilé via rAF, pas appelé en direct dans le corps de l'effet :
+      // les six runes sont là au chargement, mais l'état se met à jour
+      // comme une réaction à un système externe, pas une synchronisation.
+      const id = window.requestAnimationFrame(() => setGravees(RUNES.length));
+      return () => window.cancelAnimationFrame(id);
+    }
 
     let restant = MIN_ENTRE_COUPS + Math.random() * (MAX_ENTRE_COUPS - MIN_ENTRE_COUPS);
     let finImpact = 0;
@@ -55,6 +68,7 @@ export function BrasGauche() {
         restant = MIN_ENTRE_COUPS + Math.random() * (MAX_ENTRE_COUPS - MIN_ENTRE_COUPS);
         finImpact = 420;
         setImpact(true);
+        setGravees((g) => Math.min(g + 1, RUNES.length));
         document.documentElement.setAttribute('data-impact', '');
       }
     });
@@ -69,7 +83,7 @@ export function BrasGauche() {
     <div className={styles.bras} data-impact={impact ? '' : undefined} aria-hidden="true">
       <span className={styles.brasVeine} />
       <span className={styles.brasRunes}>
-        <Runes />
+        <Runes count={gravees} />
       </span>
     </div>
   );
